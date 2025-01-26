@@ -29,6 +29,7 @@ import ProformaInvoiceForm from './components/invoiceForm';
 import NamibiaAgent from './components/namibiaAgent';
 import CongoAgent from './components/congoAgent';
 import TanzainaAgent from './components/tanzaniaAgent';
+import CarCostCalculator from './components/cuttingCalculator';
 /* src/index.css */
 
 
@@ -98,6 +99,7 @@ function App() {
           <Route path= '/local-services/namibia' element ={<NamibiaAgent />}></Route>
           <Route path= '/local-services/congo' element ={<CongoAgent />}></Route>
           <Route path= '/local-services/tanzania' element ={<TanzainaAgent />}></Route>
+          <Route path ='car-cost-calculator' element= {<CarCostCalculator />}></Route>
           </Routes>
       <Footer />
     </Router>

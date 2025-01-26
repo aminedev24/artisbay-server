@@ -63,7 +63,6 @@ export const fetchModelsForMake = async (make) => {
   }
 };
 
-// ... rest of the file remains the same
 
 export const bodyTypeOptions = [ "Sedan", "Hatchback", "SUV", "Coupe", "Convertible", "Wagon", "Van", "Pickup", "Minivan", "Truck", "Other" ];
 
