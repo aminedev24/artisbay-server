@@ -53,40 +53,40 @@ const CongoAgent = () => {
           Services d'expédition de conteneurs        
         </h1>
         <div class="services">
-          <h2>
+          <h3>
           1. Livraison Fiable et Sécurisée
-          </h2>
+          </h3>
           <p>
             Nous assurons une livraison rapide et sécurisée de vos véhicules à Kinshasa et dans ses 
             environs. Grâce à notre expertise logistique, vos commandes arrivent toujours dans les 
             délais convenus et en parfait état.
           </p> 
-          <h2>
+          <h3>
           2. Dégagement de Conteneurs à Tarifs Compétitifs
-          </h2>
+          </h3>
           <p>
           • Bénéficiez des tarifs les plus compétitifs du marché pour le dégagement de vo
           conteneurs, tout en profitant d’un service de qualité et d’une efficacité optimale.
 
           </p>
-          <h2>
+          <h3>
             3. Dédouanement Efficace et Abordabble
 
-          </h2>
+          </h3>
           <p>
           • Nous proposons un service de dédouanement rapide et conforme aux réglementations 
           locales, au meilleur prix du marché.
           </p>
-          <h2>
+          <h3>
           4. Partage de Conteneur pour Réduire Vos Coûts
-          </h2>
+          </h3>
           <p>
           • Optimisez vos dépenses grâce à notre service de partage de conteneurs, parfaitement 
             adapté aux petites commandes, tout en assurant une gestion Efficace          
           </p>
-          <h2>
+          <h3>
           5. Assistance Personnalisée à Chaque Étape
-          </h2>
+          </h3>
           <p>
           • De l’importation à la livraison, notre équipe vous accompagne avec des solutions sur 
           mesure pour simplifier vos opérations logistiques et garantir une expérience sans souci.        
@@ -138,19 +138,23 @@ const CongoAgent = () => {
 
 
       {/* Automated Invoice System Section */}
+
       <div className="invoice-section">
-        <h2>Générez Vos Factures en Toute Simplicité</h2>
-        <p>
-          Simplifiez vos transactions grâce à notre système automatisé de facturation :
-        </p>
-        <ul>
-          <li>Rapide et Facile : Créez, modifiez et téléchargez vos factures en quelques clics.</li>
-          <li>Multi-Devises : Générez des factures dans la devise de votre choix pour faciliter vos paiements internationaux.</li>
-          <li>Descriptions Claires pour les Banques : Ajustez les descriptions pour répondre aux exigences bancaires, garantissant un traitement fluide de vos paiements.</li>
-        </ul>
-        <a href="#invoice" className="invoice-link">
-          Accédez au Générateur de Factures Automatisées
-        </a>
+        <h1>Générez Vos Factures en Toute Simplicité</h1>
+        <div className="invoice-section-content">
+          <p>
+            Simplifiez vos transactions grâce à notre système automatisé de facturation :
+          </p>
+          <ul>
+            <li>Rapide et Facile : Créez, modifiez et téléchargez vos factures en quelques clics.</li>
+            <li>Multi-Devises : Générez des factures dans la devise de votre choix pour faciliter vos paiements internationaux.</li>
+            <li>Descriptions Claires pour les Banques : Ajustez les descriptions pour répondre aux exigences bancaires, garantissant un traitement fluide de vos paiements.</li>
+          </ul>
+          <a href="#invoice" className="invoice-link">
+            Accédez au Générateur de Factures Automatisées
+          </a>
+        </div>
+        
       </div>
 
       <section className="contact-section-container">
@@ -160,7 +164,9 @@ const CongoAgent = () => {
             Contactez Notre Partenaire Local
           </h2>
           <p>
-            Pour plus de détails sur nos services de partage de conteneur, contactez notre partenaire <strong>Agence R.T.A</strong> au port de Matadi.
+            Pour plus de détails sur nos services de partage de conteneur, contactez notre partenaire <strong>Agence R.T.A</strong> au port de Matadi.<br/>
+            Mr Pascal Masamba<br/>
+            WhatsApp: +243 891 655 033
           </p>
           </div>
           <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`}/>

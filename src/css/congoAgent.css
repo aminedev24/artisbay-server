@@ -74,17 +74,25 @@ width: 48%;
 /* Automated Invoice System Section */
 .invoice-section {
   background: #fff;
+
+
+}
+
+.invoice-section-content {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 40px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
   margin-bottom: 60px;
+}
+
+.invoice-section-content a {
   text-align: center;
 }
 
-.invoice-section h2 {
-  font-size: 2.2rem;
+.invoice-section h1 {
   margin-bottom: 20px;
-  color: #1e3a8a;
+  text-align: center;
 }
 
 .invoice-section p {

@@ -75,31 +75,31 @@ const TanzainaAgent = () => {
           Container shipment services
         </h1>
         <div className="services">
-          <h2>
+          <h3>
           1. Consolidation Service
-          </h2>
+          </h3>
           <p>
           Our Consolidation Service allows vehicles from multiple customers to be combined into a single shared container, ensuring cost-efficient shipping and streamlined handling. This service is made possible through our collaboration with our trusted partner, <strong>StarVoyage Shippers Company Limited.</strong>
           </p>
-          <h2>
+          <h3>
           2. Customs Clearing and Documentation
-          </h2>
+          </h3>
           <p>
           • Hassle-free declaration and customs clearing.
           <br/>
           • Preparation of duty, permits, and all import paperwork for your goods.
           </p>
-          <h2>
+          <h3>
           3. Nationwide Delivery
-          </h2>
+          </h3>
           <p>
           • Efficient delivery to major cities, including Dar Essalam, Arusha and beyond.
           <br/>
           • Border deliveries to DR-Congo, Zambia, Malawi, Uganda, Zimbabwe.
           </p>
-          <h2>
+          <h3>
           4. Consignment Management
-          </h2>
+          </h3>
           <p>
           From unloading at the port to final delivery, we manage your goods every step of the way.
           </p>

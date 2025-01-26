@@ -1,176 +1,148 @@
 import React, { useEffect } from "react";
-import "../css/carDismantling.css"; // Import the CSS file
+import "../css/carDismantling.css";
 import LeftSidebar from "./sidebar";
 import { Link } from "react-router-dom";
+
 const CarDismantling = () => {
   useEffect(() => {
-    // Scroll to the top of the page
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="main-content">
       <section className="carDismantling-container">
-        {/* Image */}
-
+        {/* Hero Images */}
         <div className="image-container">
           <img
-            src={`${process.env.PUBLIC_URL}/images/cutting&dism.jpeg`}
+            src={`${process.env.PUBLIC_URL}/images/dismantlinglp.png`}
             alt="Car dismantling process"
+            className="image"
+          />
+        </div>
+        <div className="image-container cutting">
+          <img
+            src={`${process.env.PUBLIC_URL}/images/dismantling&cutting.png`}
+            alt="Car cutting styles"
             className="image"
           />
         </div>
 
-        <div className="image-container cutting">
-          <img
-            src={`${process.env.PUBLIC_URL}/images/cuttingstyles.jpeg`}
-            alt="Car dismantling process"
-            className="image"
-          />
-        </div>
+        {/* PDF Content Start */}
         <div className="pdf-container">
-          <h1>Car Cutting and Dismantling Styles</h1>
+          <h1>Tailored Car Dismantling and Shipping from Japan</h1>
+          <p>
+            At Artisbay, we provide flexible and customizable dismantling services to meet your unique needs. 
+            Choose vehicles directly from Japan’s auctions, and we’ll handle everything—from dismantling to secure 
+            packing and shipping. Our efficient approach ensures optimal container utilization and the safe 
+            transportation of all parts, with full transparency provided through detailed photo documentation at 
+            every stage.
+          </p>
+
+          <h2>Dismantling Options</h2>
+          <p>We offer multiple dismantling options to suit your specific requirements and container capacity. Each style can be further customized to fit your needs:</p>
+
+          {/* Nose Cut */}
           <div className="cutting-style">
             <h3>1. Nose Cut</h3>
+            <p>The Nose Cut includes the very front portion of the vehicle, making it ideal for customers focused on front-end repairs or replacements. It typically includes:</p>
             <ul>
-              <li>Front bumper</li>
-              <li>Headlights</li>
-              <li>Grille</li>
-              <li>Radiator support</li>
-              <li>Occasionally includes the hood and front fenders</li>
+              <li>Air grille</li>
+              <li>Front bumper (with or without lights)</li>
+              <li>Headlights or fog lights</li>
+              <li>Radiator support (optional)</li>
+              <li>Occasionally the hood and front fenders (if requested)</li>
             </ul>
-            <p className="bold-text">
-              Ideal for customers needing only the front-end body panels and
-              accessories for repairs or replacements.
-            </p>
+            <p className="bold-text">This option is perfect for saving space while shipping essential front-end components.</p>
           </div>
+
+          {/* Half Cut */}
           <div className="cutting-style">
             <h3>2. Half Cut</h3>
-            <ul>
-              <li>
-                Front Half: Includes the engine, transmission, dashboard, and
-                front axle.
-              </li>
-              <li>
-                Rear Half: Includes the rear axle, suspension, and rear body
-                structure.
-              </li>
-            </ul>
-            <p className="bold-text">
-              A cost-efficient method to ship essential components while
-              reducing container space usage.
-            </p>
+            <p>The Half Cut involves dividing the vehicle into two sections and includes everything from the Nose Cut, plus additional components from the front half of the car:</p>
+            <div className="sub-section">
+              <h4>Front Half:</h4>
+              <ul>
+                <li>Entire engine assembly (including harness and brain box)</li>
+                <li>Gearbox/Transmission assembly</li>
+                <li>Front axle and suspension system</li>
+                <li>Cardan shaft (for 4WD or FR vehicles)</li>
+                <li>Steering rack and column assembly</li>
+                <li>Dashboard and pedals</li>
+              </ul>
+            </div>
+            <div className="sub-section">
+              <h4>Rear Half (optional):</h4>
+              <ul>
+                <li>Rear axle</li>
+                <li>Suspension</li>
+                <li>Rear body structure</li>
+              </ul>
+            </div>
+            <p className="bold-text">This cost-effective option maximizes container efficiency while providing all critical components.</p>
           </div>
+
+          {/* Rear Cut */}
           <div className="cutting-style">
             <h3>3. Rear Cut</h3>
+            <p>Focused on the rear portion of the vehicle, this option is ideal for rear-end repairs or spare parts. It includes:</p>
             <ul>
               <li>Rear axle</li>
               <li>Suspension</li>
               <li>Trunk</li>
               <li>Rear bumper and tail lights</li>
             </ul>
-            <p className="bold-text">
-              Suitable for customers focused on rear-end repairs or spare parts
-              needs.
-            </p>
           </div>
+
+          {/* Combination Cuts */}
           <div className="cutting-style">
             <h3>4. Combination Cuts</h3>
-            <p className="bold-text">
-              A mix of different cutting styles tailored to customer needs. For
-              example:
-            </p>
+            <p>We also offer flexible combinations tailored to your needs, such as:</p>
             <ul>
-              <li>
-                Nose Cut + Rear Cut: Shipping the front and rear ends separately
-                while omitting the middle section to save space.
-              </li>
-              <li>
-                Half Cut + Rear Cut: Combining a front half with additional rear
-                components for specific use cases.
-              </li>
+              <li>Nose Cut + Rear Cut: Ships the front and rear ends separately, omitting the middle section to save space.</li>
+              <li>Half Cut + Rear Cut: Combines a front half with additional rear components for specialized use cases.</li>
             </ul>
-            <p className="bold-text">
-              This flexible approach allows customers to optimize costs and
-              container space based on their requirements.
-            </p>
+            <p className="bold-text">This approach helps customers optimize costs and container space based on their requirements.</p>
           </div>
-          <p className="bold-text">
-            Each of these cutting styles can be further customized depending on
-            your needs. Let us know your preferences, and we’ll handle the
-            dismantling and packing process to maximize efficiency and ensure
-            safe shipping.
-          </p>
+
+          {/* Optional Removals */}
+          <div className="cutting-style">
+            <h3>Optional Removals</h3>
+            <p>For additional flexibility, we provide optional component removals for a small fee, including:</p>
+            <ul>
+              <li>Evaporator/AC Blower</li>
+              <li>Dashboard</li>
+            </ul>
+            <p><em>These options can help customize your dismantling package further to meet your needs.</em></p>
+          </div>
+
+          {/* Bonus Service */}
+          <div className="cutting-style">
+            <h3>A Bonus Service You Won’t Find Elsewhere</h3>
+            <p>Most dismantlers crack or discard windshields to save effort, but not at Artisbay. We go the extra mile:</p>
+            <p className="bold-text">The windshield is carefully removed, protected in a custom wooden box, and shipped safely.</p>
+            <p>This unique service saves you hundreds of dollars while ensuring your components arrive intact.</p>
+          </div>
+
+          {/* Why Choose */}
+          <div className="cutting-style">
+            <h3>Why Choose Artisbay?</h3>
+            <ul>
+              <li>Customizable dismantling options to fit your exact needs</li>
+              <li>Efficient packing and cutting styles to save container space</li>
+              <li>Careful handling to ensure secure shipping</li>
+              <li>Full photo documentation for transparency at every stage</li>
+            </ul>
+          </div>
         </div>
 
-        <div className="pdf-container howToOrder">
-          <h1>How to Order Dismantled Cars</h1>
-          <ol>
-            <li>
-              <strong>Submit Your Order Requirements:</strong> Share your
-              detailed requirements for the vehicles, including make, model,
-              year, condition, and any specific preference.
-            </li>
-            <li>
-              <strong>Receive an Estimate and Pay the Initial Deposit:</strong>{" "}
-              We will provide an estimated total cost based on your order. To
-              start the process, a 30% deposit is required.
-              <br />
-              <h3>Payment Methods:</h3>
-              <ul>
-                <li>Telegraphic Transfer (T/T)</li>
-                <li>PayPal</li>
-              </ul>
-              <p>
-                Already know what you want? <Link to='/invoice' className='cta-link'>Request an invoice</Link> now to make a deposit and start your purchase immediately!      
-              </p>
-            </li>
-            <li>
-              <strong>Staged Payments and Vehicle Selection:</strong> We will
-              source vehicles from Japanese auctions that meet your
-              requirements. After purchasing the first batch of vehicles, you
-              will be required to make subsequent payments to continue sourcing
-              additional cars. This process will repeat until the entire
-              container is filled.
-            </li>
-            <li>
-              <strong>Confirm Dismantling Instructions:</strong> Once all
-              vehicles for your order are secured, we’ll finalize dismantling
-              details, including parts to retain, packaging preferences, and any
-              other instructions.
-            </li>
-            <li>
-              <strong>Dismantling and Packing:</strong> Our team professionally
-              dismantles the vehicles and carefully packs the parts to maximize
-              container space while ensuring their safety during transit.
-            </li>
-            <li>
-              <strong>Transparent Documentation:</strong> You will receive
-              detailed photo and video documentation at every stage—vehicle
-              purchase, dismantling, packing, and loading—so you have complete
-              visibility.
-            </li>
-            <li>
-              <strong>Final Payment and Shipment:</strong> Before the shipment
-              is dispatched, the full balance must be paid. Once payment is
-              received, we will ship the container to your specified
-              destination.
-            </li>
-            <li>
-              <strong>Receive Your Order:</strong> Your shipment will arrive
-              securely packed and organized, ready for your use or business
-              needs.
-            </li>
-          </ol>
-        </div>
 
+        {/* Final CTA from PDF */}
         <div className='cta-container'> 
-          <p className='cta-text'>Have any questions? We're here to help!</p> 
+          <p className='cta-text'>Let us know your preferences, and we’ll handle the dismantling and packing process to ensure a cost-effective, secure, and efficient shipment. Contact us today to explore the best solution for your needs.</p> 
           <button className='cta-btn'>
             <Link to='/contact'>Contact Us</Link> 
           </button>
         </div>
-
       </section>
     </div>
   );
