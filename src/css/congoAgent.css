@@ -131,8 +131,7 @@ width: 48%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.contact-section h2 {
-  font-size: 2.2rem;
+.contact-section h1 {
   margin-bottom: 20px;
   color: #1e3a8a;
 }
