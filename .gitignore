@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/server/vendor
 # testing
 /coverage
 
@@ -20,7 +19,7 @@ src/main.py
 .env.development.local
 .env.test.local
 .env.production.local
-
+/server/vendor
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
