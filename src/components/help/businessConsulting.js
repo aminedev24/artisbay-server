@@ -63,19 +63,15 @@ const BusinessConsulting = () => {
       </ol>
 
       <h3>Partner Network</h3>
-      <p>We collaborate with a leading business consulting agency in France, ensuring premium-quality products and innovative solutions for your business, including:</p>
-      <ul>
-        <li>Terrace roof mounts</li>
-        <li>Bulk clothes</li>
-        <li>Wholesale power stands for electric cars</li>
-        <li>Brand-new tires</li>
-        <li>Brand-new cars under factory warranty</li>
-      </ul>
+      <p>We collaborate with a leading business consulting agency in France, ensuring premium-quality products and innovative solutions for your business.</p>
+ 
 
       <h3>How to Get Started?</h3>
       <ol>
-        <li><strong>Submit Your Details:</strong> Provide information about your business and goals</li>
-        <li><strong>Initial Free Consultation:</strong> Schedule a free 2-hour session to explore your objectives</li>
+        <li><strong>Submit Your Details:</strong> Provide information about your business and goals so we can tailor our services to 
+        your needs.</li>
+        <li><strong>Initial Free Consultation:</strong> Schedule a free 2-hour session to explore your objectives  and discuss how we can 
+        assist.</li>
         <li><strong>We Source Customers for You:</strong> Let us connect you with qualified buyers tailored to your business goals</li>
       </ol>
 

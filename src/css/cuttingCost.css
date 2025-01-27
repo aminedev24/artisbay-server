@@ -9,7 +9,7 @@
   }
   
   /* Headings */
-  h2, h3 {
+ .calculator-container h2,.calculator-container h3 {
     text-align: center;
     color: #1e3a8a;
   }

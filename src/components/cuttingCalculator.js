@@ -54,7 +54,7 @@ const CarCostCalculator = () => {
     const initialSelections = {};
     cutItems.forEach((item) => {
       // Set default selection, e.g., "nose" for all items
-      initialSelections[item.id] = "nose"; // Replace "nose" with "half" if needed
+      initialSelections[item.id] = "half"; // Replace "nose" with "half" if needed
     });
     return initialSelections;
   });
@@ -88,11 +88,50 @@ const CarCostCalculator = () => {
     }));
   };
 
+  const apiUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost/artisbay-server/server'
+  : '/server';
+
+
+  const handleSubmit = async () => {
+    const data = {
+      make,
+      model,
+      units,
+      buyingPrice,
+      transportation,
+      cutSelections,
+      optionalRemovals,
+      totalCostPerUnit,
+      grandTotalCost,
+    };
+  
+    try {
+      const response = await fetch(`${apiUrl}/sendCostData.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (response.ok) {
+        alert("Data sent successfully!");
+      } else {
+        alert("Failed to send data.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while sending the data.");
+    }
+  };
+  
+
 
 
   return (
     <div className="calculator-container">
-      <h2>Car Dismantling Cost Calculator</h2>
+      <h2>Cutting & Dismantling Cost Calculator</h2>
 
 
       <div className="cutting-loading-fees">
@@ -150,6 +189,26 @@ const CarCostCalculator = () => {
         </label>
       </div>
 
+        {/* Price Inputs */}
+        <div className="input-section">
+        <label>
+          Buying Price (¥):
+          <input
+            type="number"
+            value={buyingPrice}
+            onChange={(e) => setBuyingPrice(Number(e.target.value))}
+          />
+        </label>
+        <label>
+          Transportation Cost (¥):
+          <input
+            type="number"
+            value={transportation}
+            onChange={(e) => setTransportation(Number(e.target.value))}
+          />
+        </label>
+      </div>
+
 
             {/* Cutting Options Table */}
             <h3>Items</h3>
@@ -157,8 +216,9 @@ const CarCostCalculator = () => {
         <thead>
           <tr>
             <th>Item</th>
-            <th>Nose Cut</th>
             <th>Half Cut</th>
+            <th>Nose Cut</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -168,16 +228,16 @@ const CarCostCalculator = () => {
               <td>
                 <input
                   type="checkbox"
-                  checked={cutSelections[item.id] === "nose"}
-                  onChange={() => handleCutChange(item.id, "nose")}
+                  checked={cutSelections[item.id] === "half"}
+                  onChange={() => handleCutChange(item.id, "half")}
               
                 />
               </td>
               <td>
                 <input
                   type="checkbox"
-                  checked={cutSelections[item.id] === "half"}
-                  onChange={() => handleCutChange(item.id, "half")}
+                  checked={cutSelections[item.id] === "nose"}
+                  onChange={() => handleCutChange(item.id, "nose")}
 
                 />
               </td>
@@ -215,25 +275,7 @@ const CarCostCalculator = () => {
         </table>
       </div>
 
-      {/* Price Inputs */}
-      <div className="input-section">
-        <label>
-          Buying Price (¥):
-          <input
-            type="number"
-            value={buyingPrice}
-            onChange={(e) => setBuyingPrice(Number(e.target.value))}
-          />
-        </label>
-        <label>
-          Transportation Cost (¥):
-          <input
-            type="number"
-            value={transportation}
-            onChange={(e) => setTransportation(Number(e.target.value))}
-          />
-        </label>
-      </div>
+    
 
       {/* Cost Breakdown */}
       <div className="cost-breakdown">
@@ -269,6 +311,9 @@ const CarCostCalculator = () => {
           <span>¥{grandTotalCost.toLocaleString()}</span>
         </div>
       </div>
+
+      {/*<button onClick={handleSubmit}>Send Email</button>*/}
+
     </div>
   );
 };
