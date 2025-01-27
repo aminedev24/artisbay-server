@@ -162,3 +162,6 @@
     padding-left: 8px;
   }
   
+  .collapse-btn {
+    cursor: pointer;
+  }

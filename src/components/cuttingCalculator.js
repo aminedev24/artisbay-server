@@ -5,8 +5,12 @@ const CarCostCalculator = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
   const [units, setUnits] = useState(1);
-  const [buyingPrice, setBuyingPrice] = useState(200000);
-  const [transportation, setTransportation] = useState(25000);
+  const [buyingPrice, setBuyingPrice] = useState(0);
+  const [transportation, setTransportation] = useState(0);
+  const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);
+  const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] =
+    useState(false);
+  const [savedCars, setSavedCars] = useState([]);
 
 
   const [optionalRemovals, setOptionalRemovals] = useState({});
@@ -23,7 +27,10 @@ const CarCostCalculator = () => {
     { id: "front_bumper", name: "Front Bumper (with or without lights)" },
     { id: "headlights", name: "Headlights or Fog Lights" },
     { id: "radiator_support", name: "Radiator Support (optional)" },
-    { id: "engine_assembly", name: "Entire Engine Assembly (including harness and brain box)" },
+    {
+      id: "engine_assembly",
+      name: "Entire Engine Assembly (including harness and brain box)",
+    },
     { id: "gearbox", name: "Gearbox/Transmission assembly" },
     { id: "cardan", name: "Cardan (if the car is 4WD or FR)" },
     { id: "front_axle", name: "Front Axle and Suspension" },
@@ -63,21 +70,22 @@ const CarCostCalculator = () => {
   const serviceFees = 30000;
   const cuttingFee = 30000;
 
-  const subtotalForTax = buyingPrice + auctionFees + transportation;
+  const subtotalForTax =
+    (Number(buyingPrice) || 0) + auctionFees + (Number(transportation) || 0);
   const tax = subtotalForTax * 0.1;
   const optionalTotal = optionalItems.reduce(
     (total, item) => total + (optionalRemovals[item.id] ? item.price : 0),
-    0
+    0,
   );
 
   const totalCostPerUnit =
     subtotalForTax + tax + serviceFees + cuttingFee + optionalTotal;
-  const grandTotalCost = totalCostPerUnit * units;
+  const grandTotalCost = totalCostPerUnit * (Number(units) || 0);
 
   const handleCutChange = (itemId, type) => {
     setCutSelections((prev) => ({
       ...prev,
-      [itemId]: type,
+      [itemId]: prev[itemId] === type ? null : type, // Toggle the selection
     }));
   };
 
@@ -88,10 +96,10 @@ const CarCostCalculator = () => {
     }));
   };
 
-  const apiUrl = process.env.NODE_ENV === 'development'
-  ? 'http://localhost/artisbay-server/server'
-  : '/server';
-
+  const apiUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost/artisbay-server/server"
+      : "/server";
 
   const handleSubmit = async () => {
     const data = {
@@ -105,7 +113,7 @@ const CarCostCalculator = () => {
       totalCostPerUnit,
       grandTotalCost,
     };
-  
+
     try {
       const response = await fetch(`${apiUrl}/sendCostData.php`, {
         method: "POST",
@@ -114,7 +122,7 @@ const CarCostCalculator = () => {
         },
         body: JSON.stringify(data),
       });
-  
+
       if (response.ok) {
         alert("Data sent successfully!");
       } else {
@@ -125,14 +133,28 @@ const CarCostCalculator = () => {
       alert("An error occurred while sending the data.");
     }
   };
-  
 
+  const resetInputs = () => {
+    setMake("");
+    setModel("");
+    setUnits(1);
+    setBuyingPrice(0);
+    setTransportation(0);
 
+    // Reset checkbox selections
+    setOptionalRemovals({});
+    setCutSelections(() => {
+      const initialSelections = {};
+      cutItems.forEach((item) => {
+        initialSelections[item.id] = "half";
+      });
+      return initialSelections;
+    });
+  };
 
   return (
     <div className="calculator-container">
       <h2>Cutting & Dismantling Cost Calculator</h2>
-
 
       <div className="cutting-loading-fees">
         <table>
@@ -154,7 +176,7 @@ const CarCostCalculator = () => {
           </tbody>
         </table>
       </div>
-      {/* Make and Model Inputs */}
+      {/* Inputs Section */}
       <div className="input-section">
         <label>
           Make:
@@ -174,115 +196,133 @@ const CarCostCalculator = () => {
             placeholder="e.g., Corolla"
           />
         </label>
-      </div>
-
-      {/* Units Input */}
-      <div className="input-section">
         <label>
           Units:
           <input
             type="number"
             value={units}
-            onChange={(e) => setUnits(Math.max(1, Number(e.target.value)))}
-            min={1}
+            onChange={(e) => {
+              const value = e.target.value;
+              setUnits(value === "" ? "" : Math.max(0, Number(value)));
+            }}
           />
         </label>
-      </div>
 
-        {/* Price Inputs */}
-        <div className="input-section">
         <label>
           Buying Price (¥):
           <input
             type="number"
             value={buyingPrice}
-            onChange={(e) => setBuyingPrice(Number(e.target.value))}
+            onChange={(e) => {
+              const value = e.target.value;
+              setBuyingPrice(value === "" ? "" : Math.max(0, Number(value)));
+            }}
           />
         </label>
+
         <label>
           Transportation Cost (¥):
           <input
             type="number"
             value={transportation}
-            onChange={(e) => setTransportation(Number(e.target.value))}
+            onChange={(e) => {
+              const value = e.target.value;
+              setTransportation(value === "" ? "" : Math.max(0, Number(value)));
+            }}
           />
         </label>
       </div>
 
+      {/* Reset Button */}
+      <button className="reset-button" onClick={resetInputs}>
+        Reset
+      </button>
 
-            {/* Cutting Options Table */}
-            <h3>Items</h3>
-      <table className="cut-selection-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Half Cut</th>
-            <th>Nose Cut</th>
-          
-          </tr>
-        </thead>
-        <tbody>
-          {cutItems.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={cutSelections[item.id] === "half"}
-                  onChange={() => handleCutChange(item.id, "half")}
-              
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={cutSelections[item.id] === "nose"}
-                  onChange={() => handleCutChange(item.id, "nose")}
-
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Optional Removals Table */}
-      <div className="optional-table">
-        <h3>Optional Removals</h3>
-        <table>
+      {/* Collapsible Items Table */}
+      <h3
+        className="collapse-btn"
+        onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
+      >
+        Items {isItemsTableCollapsed ? "▼" : "▲"}
+      </h3>
+      {!isItemsTableCollapsed && (
+        <table className="cut-selection-table">
           <thead>
             <tr>
               <th>Item</th>
-              <th>Price (¥)</th>
-              <th className="checkbox-cell">Select</th>
+              <th>Half Cut</th>
+              {/*<th>Nose Cut</th>*/}
             </tr>
           </thead>
           <tbody>
-            {optionalItems.map((item) => (
+            {cutItems.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
-                <td>{item.price.toLocaleString()}</td>
-                <td className="checkbox-cell">
+                <td>
                   <input
                     type="checkbox"
-                    checked={optionalRemovals[item.id] || false}
-                    onChange={() => handleOptionalChange(item.id)}
+                    checked={cutSelections[item.id] === "half"}
+                    onChange={() => handleCutChange(item.id, "half")}
                   />
                 </td>
+                {/*
+                        <td>
+                        <input
+                          type="checkbox"
+                          checked={cutSelections[item.id] === "nose"}
+                          onChange={() => handleCutChange(item.id, "nose")}
+                        />
+                      </td>
+                      */}
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      )}
 
-    
+      <div className="optional-table">
+        <h3
+          className="collapse-btn"
+          onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
+        >
+          Optional Removals {isOptionalTableCollapsed ? "▼" : "▲"}
+        </h3>
+        {!isOptionalTableCollapsed && (
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Price (¥)</th>
+                <th className="checkbox-cell">Select</th>
+              </tr>
+            </thead>
+            <tbody>
+              {optionalItems.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.price.toLocaleString()}</td>
+                  <td className="checkbox-cell">
+                    <input
+                      type="checkbox"
+                      checked={optionalRemovals[item.id] || false}
+                      onChange={() => handleOptionalChange(item.id)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
       {/* Cost Breakdown */}
       <div className="cost-breakdown">
         <h3>Cost Breakdown</h3>
         <div className="breakdown-item">
           <span>Base Price + Fees:</span>
-          <span>¥{(buyingPrice + auctionFees + transportation).toLocaleString()}</span>
+          <span>
+            ¥{(buyingPrice + auctionFees + transportation).toLocaleString()}
+          </span>
         </div>
         <div className="breakdown-item">
           <span>Tax (10%):</span>
@@ -313,7 +353,6 @@ const CarCostCalculator = () => {
       </div>
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
-
     </div>
   );
 };
