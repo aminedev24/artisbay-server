@@ -318,7 +318,10 @@ const CarCostCalculator = () => {
           />
         </label>
       </div>
-
+            {/* Reset Button */}
+            <button className="reset-button" onClick={resetInputs}>
+        Reset
+      </button>
       {/* Cost Breakdown */}
       <div className="cost-breakdown">
         <h3>Cost Breakdown</h3>
