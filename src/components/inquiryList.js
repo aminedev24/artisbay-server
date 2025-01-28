@@ -14,7 +14,10 @@ const InquiryList = () => {
       : "/server";
 
   useEffect(() => {
-    fetch(`${apiUrl}/getInqueries.php`)
+    fetch(`${apiUrl}/getInqueries.php`, {
+      method: "GET", // Optional: specify the HTTP method
+      credentials: "include", // Include credentials such as cookies
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

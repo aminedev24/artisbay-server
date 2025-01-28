@@ -214,7 +214,7 @@ const CarCostCalculator = () => {
       <button className="reset-button" onClick={resetInputs}>
         Reset
       </button>
-
+      <br/>
       {/* Collapsible Items Table */}
       <h3
         className="collapse-btn"

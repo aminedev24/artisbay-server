@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
   // API URL setup
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-server-clean/server'
       : '/server';
 
   // Login Function

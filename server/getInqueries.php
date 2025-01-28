@@ -1,16 +1,21 @@
 <?php
 include 'db_connection.php';
 include 'headers.php';
-// SQL query to fetch vehicle information
-
 session_start(); // Ensure the session is started
 
-$user_id = $_SESSION['user_id']; // Ensure session_start() is called earlier in the script
+// Ensure user_id is set in the session
+if (!isset($_SESSION['email'])) {
+    http_response_code(401); // Unauthorized
+    echo json_encode(["error" => "Unauthorized access. User not logged in."]);
+    exit();
+}
+
+$user_email = $_SESSION['email']; // Get user ID from session
 
 // Query to select data from the submitted_inquiries table for the specific user
 $sql = "SELECT make, model, year_from, year_to, price_from, price_to, body_type, mileage_from, mileage_to, transmission, steering, created_at 
         FROM submitted_inquiries 
-        WHERE id = ?";
+        WHERE email = ?";
 
 $stmt = $conn->prepare($sql); // Use prepared statements for security
 
@@ -21,7 +26,7 @@ if ($stmt === false) {
 }
 
 // Bind the user_id parameter to the query
-$stmt->bind_param("i", $user_id); // "i" indicates an integer parameter
+$stmt->bind_param("s", $user_email); // "i" indicates an integer parameter
 
 // Execute the statement
 $stmt->execute();

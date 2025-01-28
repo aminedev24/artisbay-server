@@ -164,4 +164,13 @@
   
   .collapse-btn {
     cursor: pointer;
+    width: fit-content;
+    padding: 10px;
+    border: solid;
+    margin: 0 auto;
+  }
+
+  .collapse-btn:hover {
+    background-color: #f1892b;
+    color: #f9f9f9;
   }

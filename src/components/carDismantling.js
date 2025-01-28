@@ -14,7 +14,7 @@ const CarDismantling = () => {
         {/* Hero Images */}
         <div className="image-container">
           <img
-            src={`${process.env.PUBLIC_URL}/images/dismantlinglp.png`}
+            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping.jpeg`}
             alt="Car dismantling process"
             className="image"
           />
@@ -125,12 +125,18 @@ const CarDismantling = () => {
 
           {/* Why Choose */}
           <div className="cutting-style">
-            <h3>Why Choose Artisbay?</h3>
+            <h3>Exclusive Dismantling Solution – Free Yard Storage for 3 Months!</h3>
+            <p>At Artisbay Inc., we know that flexibility and convenience are key when sourcing an
+                dismantling vehicles. That’s why we’re offering an exclusive benefit to our value
+                customers:
+            </p>
             <ul>
-              <li>Customizable dismantling options to fit your exact needs</li>
-              <li>Efficient packing and cutting styles to save container space</li>
-              <li>Careful handling to ensure secure shipping</li>
-              <li>Full photo documentation for transparency at every stage</li>
+              <li>3 Months of Free Yard Storage while you source vehicles for dismantling in Japan.</li>
+              <li>No rush, no stress—take your time selecting the right cars, and we’ll handle
+                  the storage for you, at no extra cost.
+              </li>
+              <li>This service is designed to give you the peace of mind you need to focus on
+                  maximizing the value of your investment.</li>
             </ul>
           </div>
         </div>

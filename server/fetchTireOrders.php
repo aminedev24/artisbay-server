@@ -18,7 +18,7 @@ $user_id = $_SESSION['user_id']; // Get user ID from session
 // Secure query with a WHERE clause
 $sql = "SELECT make, type, width, aspect_ratio, rim_diameter, quantity, speed_rating, load_index, order_date 
         FROM submittedtireorders
-        WHERE id = ?";
+        WHERE user_id = ?";
 $stmt = $conn->prepare($sql); // Use prepared statements for security
 
 if ($stmt === false) {
