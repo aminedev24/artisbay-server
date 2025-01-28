@@ -102,7 +102,7 @@ const ProformaInvoiceForm = () => {
 
 
     const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-server-clean/server'
     : '/server';
 
     // Fetch user data from the backend and populate form fields

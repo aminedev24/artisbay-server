@@ -4,19 +4,22 @@ include 'headers.php';       // Include headers if needed for CORS, etc.
 
 session_start(); // Ensure the session is started
 
-// Ensure user_id is set in the session
-if (!isset($_SESSION['user_id'])) {
+// Ensure email is set in the session
+if (!isset($_SESSION['email'])) {
     http_response_code(401); // Unauthorized
-    echo json_encode(["error" => "Unauthorized access. User not logged in."]);
+    echo json_encode(["error" => "Unauthorized access. User email not found in session."]);
     exit();
 }
 
-$user_id = $_SESSION['user_id']; // Get user ID from session
+$user_email = $_SESSION['email']; // Get user email from session
 
-// Prepare the SQL query to fetch invoice details
+// Debugging log for session email
+error_log("Fetching invoices for email: " . $user_email);
+
+// Prepare the SQL query to fetch invoice details using email with case sensitivity
 $sql = "SELECT invoice_number, customer_name, email, deposit_amount, description, created_at, deposit_purpose 
         FROM invoices 
-        WHERE id = ?";
+        WHERE BINARY email = ?";
 
 $stmt = $conn->prepare($sql); // Use prepared statements for security
 
@@ -26,13 +29,11 @@ if ($stmt === false) {
     exit();
 }
 
-// Bind the user_id parameter to the query
-$stmt->bind_param("i", $user_id); // "i" indicates an integer parameter
+// Bind the email parameter to the query
+$stmt->bind_param("s", $user_email);
 
 // Execute the statement
 $stmt->execute();
-
-// Get the result
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
@@ -40,10 +41,16 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $invoices[] = $row; // Add each invoice to the array
     }
+    // Log the fetched invoices
+    error_log("Fetched invoices: " . json_encode($invoices));
+
     // Return the data as JSON
     header('Content-Type: application/json');
     echo json_encode($invoices);
 } else {
+    // Log no invoices found
+    error_log("No invoices found for email: " . $user_email);
+
     // Return an empty JSON array if no invoices found
     header('Content-Type: application/json');
     echo json_encode([]);

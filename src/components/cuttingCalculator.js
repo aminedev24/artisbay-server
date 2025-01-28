@@ -208,29 +208,6 @@ const CarCostCalculator = () => {
           />
         </label>
 
-        <label>
-          Buying Price (¥):
-          <input
-            type="number"
-            value={buyingPrice}
-            onChange={(e) => {
-              const value = e.target.value;
-              setBuyingPrice(value === "" ? "" : Math.max(0, Number(value)));
-            }}
-          />
-        </label>
-
-        <label>
-          Transportation Cost (¥):
-          <input
-            type="number"
-            value={transportation}
-            onChange={(e) => {
-              const value = e.target.value;
-              setTransportation(value === "" ? "" : Math.max(0, Number(value)));
-            }}
-          />
-        </label>
       </div>
 
       {/* Reset Button */}
@@ -315,13 +292,52 @@ const CarCostCalculator = () => {
         )}
       </div>
 
+      <div className="input-section">
+        
+        <label>
+          Buying Price (¥):
+          <input
+            type="number"
+            value={buyingPrice}
+            onChange={(e) => {
+              const value = e.target.value;
+              setBuyingPrice(value === "" ? "" : Math.max(0, Number(value)));
+            }}
+          />
+        </label>
+
+        <label>
+          Transportation Fees (¥):
+          <input
+            type="number"
+            value={transportation}
+            onChange={(e) => {
+              const value = e.target.value;
+              setTransportation(value === "" ? "" : Math.max(0, Number(value)));
+            }}
+          />
+        </label>
+      </div>
+
       {/* Cost Breakdown */}
       <div className="cost-breakdown">
         <h3>Cost Breakdown</h3>
         <div className="breakdown-item">
-          <span>Base Price + Fees:</span>
+          <span>Buying Price</span>
           <span>
-            ¥{(buyingPrice + auctionFees + transportation).toLocaleString()}
+            ¥{(buyingPrice).toLocaleString()}
+          </span>
+        </div>
+        <div className="breakdown-item">
+          <span>Auction Fees</span>
+          <span>
+            ¥{(auctionFees).toLocaleString()}
+          </span>
+        </div>
+        <div className="breakdown-item">
+          <span>Transportation Fees</span>
+          <span>
+            ¥{(transportation).toLocaleString()}
           </span>
         </div>
         <div className="breakdown-item">

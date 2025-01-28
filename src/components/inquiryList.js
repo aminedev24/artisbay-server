@@ -10,7 +10,7 @@ const InquiryList = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-server-clean/server"
       : "/server";
 
   useEffect(() => {
