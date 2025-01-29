@@ -42,66 +42,84 @@ const CarDismantling = () => {
           <p>We offer multiple dismantling options to suit your specific requirements and container capacity. Each style can be further customized to fit your needs:</p>
 
           {/* Nose Cut */}
-          <div className="cutting-style">
-            <h3>1. Nose Cut</h3>
-            <p>The Nose Cut includes the very front portion of the vehicle, making it ideal for customers focused on front-end repairs or replacements. It typically includes:</p>
-            <ul>
-              <li>Air grille</li>
-              <li>Front bumper (with or without lights)</li>
-              <li>Headlights or fog lights</li>
-              <li>Radiator support (optional)</li>
-              <li>Occasionally the hood and front fenders (if requested)</li>
-            </ul>
-            <p className="bold-text">This option is perfect for saving space while shipping essential front-end components.</p>
+          <div className="cutting-style nose-cut">
+            <div className="nose-cut-text">
+              <h3>1. Nose Cut</h3>
+              <p>The Nose Cut includes the very front portion of the vehicle, making it ideal for customers focused on front-end repairs or replacements. It typically includes:</p>
+              <ul>
+                <li>Air grille</li>
+                <li>Front bumper (with or without lights)</li>
+                <li>Headlights or fog lights</li>
+                <li>Radiator support (optional)</li>
+                <li>Occasionally the hood and front fenders (if requested)</li>
+              </ul>
+              <p className="bold-text">This option is perfect for saving space while shipping essential front-end components.</p>
+
+            </div>
+            
+            <img src={`${process.env.PUBLIC_URL}/images/nosecut.png`} alt='nose cut' />
           </div>
 
           {/* Half Cut */}
           <div className="cutting-style">
-            <h3>2. Half Cut</h3>
-            <p>The Half Cut involves dividing the vehicle into two sections and includes everything from the Nose Cut, plus additional components from the front half of the car:</p>
-            <div className="sub-section">
-              <h4>Front Half:</h4>
-              <ul>
-                <li>Entire engine assembly (including harness and brain box)</li>
-                <li>Gearbox/Transmission assembly</li>
-                <li>Front axle and suspension system</li>
-                <li>Cardan shaft (for 4WD or FR vehicles)</li>
-                <li>Steering rack and column assembly</li>
-                <li>Dashboard and pedals</li>
-              </ul>
+            <div className="half-cut">
+              <div className="half-cut-text">
+                <h3>2. Half Cut</h3>
+                <p>The Half Cut involves dividing the vehicle into two sections and includes everything from the Nose Cut, plus additional components from the front half of the car:</p>
+                <div className="sub-section front-half">
+                  <h4>Front Half:</h4>
+                  <ul>
+                    <li>Entire engine assembly (including harness and brain box)</li>
+                    <li>Gearbox/Transmission assembly</li>
+                    <li>Front axle and suspension system</li>
+                    <li>Cardan shaft (for 4WD or FR vehicles)</li>
+                    <li>Steering rack and column assembly</li>
+                    <li>Dashboard and pedals</li>
+                  </ul>
+                </div>
+              </div>
+              <img src={`${process.env.PUBLIC_URL}/images/frontcut.png`} alt='half'/>
             </div>
-            <div className="sub-section">
-              <h4>Rear Half (optional):</h4>
-              <ul>
-                <li>Rear axle</li>
-                <li>Suspension</li>
-                <li>Rear body structure</li>
-              </ul>
+            
+              <div className="sub-section rear-half">
+                <div className="rear-half-text">
+
+                <h4>Rear Half (optional):</h4>
+                <ul>
+                  <li>Rear axle</li>
+                  <li>Suspension</li>
+                  <li>Rear body structure</li>
+                </ul>
+                <p className="bold-text">This cost-effective option maximizes container efficiency while providing all critical components.</p>
+
+                </div>
+                <div className="rear-cut-imgs">
+              <img src={`${process.env.PUBLIC_URL}/images/rearsuspension.png`} alt='rearsuspension cut' />
             </div>
-            <p className="bold-text">This cost-effective option maximizes container efficiency while providing all critical components.</p>
+              </div>
+           
+
+           
+
           </div>
 
-          {/* Rear Cut */}
-          <div className="cutting-style">
-            <h3>3. Rear Cut</h3>
-            <p>Focused on the rear portion of the vehicle, this option is ideal for rear-end repairs or spare parts. It includes:</p>
-            <ul>
-              <li>Rear axle</li>
-              <li>Suspension</li>
-              <li>Trunk</li>
-              <li>Rear bumper and tail lights</li>
-            </ul>
-          </div>
+     
 
           {/* Combination Cuts */}
-          <div className="cutting-style">
-            <h3>4. Combination Cuts</h3>
-            <p>We also offer flexible combinations tailored to your needs, such as:</p>
-            <ul>
-              <li>Nose Cut + Rear Cut: Ships the front and rear ends separately, omitting the middle section to save space.</li>
-              <li>Half Cut + Rear Cut: Combines a front half with additional rear components for specialized use cases.</li>
-            </ul>
-            <p className="bold-text">This approach helps customers optimize costs and container space based on their requirements.</p>
+          <div className="cutting-style combination-cut">
+            <div className="combination-cut-text">
+              
+              <h3>4. Combination Cuts</h3>
+              <p>We also offer flexible combinations tailored to your needs, such as:</p>
+              <ul>
+                <li>Nose Cut + Rear Cut: Ships the front and rear ends separately, omitting the middle section to save space.</li>
+                <li>Half Cut + Rear Cut: Combines a front half with additional rear components for specialized use cases.</li>
+              </ul>
+              <p className="bold-text">This approach helps customers optimize costs and container space based on their requirements.</p>
+
+            </div>
+            <img src={`${process.env.PUBLIC_URL}/images/combinationcut.png`} alt='combination cut' />
+
           </div>
 
           {/* Optional Removals */}

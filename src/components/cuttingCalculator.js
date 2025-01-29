@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/cuttingCost.css";
-
+import Tooltip from "./toolTip";
 const CarCostCalculator = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
@@ -71,7 +71,7 @@ const CarCostCalculator = () => {
   const cuttingFee = 30000;
 
   const subtotalForTax =
-    (Number(buyingPrice) || 0) + auctionFees + (Number(transportation) || 0);
+     auctionFees + (Number(transportation) || 0);
   const tax = subtotalForTax * 0.1;
   const optionalTotal = optionalItems.reduce(
     (total, item) => total + (optionalRemovals[item.id] ? item.price : 0),
@@ -151,9 +151,52 @@ const CarCostCalculator = () => {
       return initialSelections;
     });
   };
+  const saveSelection = () => {
+    if (!make || !model) {
+      alert("Please enter make and model before saving.");
+      return;
+    }
+  
+    const includedItems = cutItems
+      .filter((item) => cutSelections[item.id] === "half")
+      .map((item) => item.name)
+      .sort(); // Sorting ensures consistent order for comparison
+  
+    const selectedOptionalItems = optionalItems
+      .filter((item) => optionalRemovals[item.id])
+      .map((item) => item.name)
+      .sort();
+  
+    const existingCar = savedCars.find(
+      (car) =>
+        car.make === make &&
+        car.model === model &&
+        JSON.stringify(car.includedItems) === JSON.stringify(includedItems) &&
+        JSON.stringify(car.selectedOptionalItems) === JSON.stringify(selectedOptionalItems)
+    );
+  
+    if (existingCar) {
+      // Increase unit count if already exists
+      existingCar.units += units;
+      setSavedCars([...savedCars]); // Trigger re-render
+    } else {
+      // Add new entry
+      const newSelection = {
+        id: `${make} ${model} ${savedCars.length + 1}`,
+        make,
+        model,
+        units,
+        includedItems,
+        selectedOptionalItems,
+      };
+      setSavedCars([...savedCars, newSelection]);
+    }
+  };
+  
 
   return (
-    <div className="calculator-container">
+    <div className="calculator-wrapper">
+           <div className="calculator-container">
       <h2>Cutting & Dismantling Cost Calculator</h2>
 
       <div className="cutting-loading-fees">
@@ -216,23 +259,32 @@ const CarCostCalculator = () => {
       </button>
       <br/>
       {/* Collapsible Items Table */}
-      <h3
-        className="collapse-btn"
-        onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
-      >
-        Items {isItemsTableCollapsed ? "▼" : "▲"}
-      </h3>
-      {!isItemsTableCollapsed && (
-        <table className="cut-selection-table">
+      <div className="cutting-section-container">
+      <div className="upper-section">
+        <h3
+          className="collapse-btn"
+          onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
+        >
+          {!isItemsTableCollapsed ? 'Show list': 'Hide list'} {!isItemsTableCollapsed ? "▼" : "▲"}
+        </h3>
+
+        <Tooltip                   
+                    
+          message="Uncheck the item to discard it from the list" />
+      </div>
+
+   
+
+     <table className="cut-selection-table">
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Half Cut</th>
+              <th>Items included in half cut styles</th>
+              <th>Check</th>
               {/*<th>Nose Cut</th>*/}
             </tr>
           </thead>
           <tbody>
-            {cutItems.map((item) => (
+            {isItemsTableCollapsed && cutItems.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>
@@ -255,16 +307,21 @@ const CarCostCalculator = () => {
             ))}
           </tbody>
         </table>
-      )}
+
+     </div>
+
+      
 
       <div className="optional-table">
         <h3
           className="collapse-btn"
           onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
         >
-          Optional Removals {isOptionalTableCollapsed ? "▼" : "▲"}
+          {isOptionalTableCollapsed ? 'Show list': 'Hide list'}  {isOptionalTableCollapsed ? "▼" : "▲"}
         </h3>
+       
         {!isOptionalTableCollapsed && (
+          <div className="optional-removals">
           <table>
             <thead>
               <tr>
@@ -289,6 +346,7 @@ const CarCostCalculator = () => {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
@@ -319,9 +377,54 @@ const CarCostCalculator = () => {
         </label>
       </div>
             {/* Reset Button */}
-            <button className="reset-button" onClick={resetInputs}>
+      <button className="reset-button" onClick={resetInputs}>
         Reset
       </button>
+      <button onClick={saveSelection}>Save Selection</button>
+
+      <div className="saved-cars-panel">
+        <div className="saved-cars-content">
+          <h3>Saved Selections</h3>
+          {savedCars.length > 0 ? (
+            <ul>
+              {savedCars.map((car) => (
+                <li key={car.id}>
+                  <div className="saved-car-details">
+                    <strong>{car.make} {car.model} (x{car.units})</strong>
+                    <div className="saved-car-items">
+                      <strong>Included Items:</strong>
+                      <ul>
+                        {car.includedItems.length > 0 ? (
+                          car.includedItems.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))
+                        ) : (
+                          <li>No items included</li>
+                        )}
+                      </ul>
+                      {car.selectedOptionalItems.length > 0 && (
+                        <>
+                          <strong>Optional Removals:</strong>
+                          <ul>
+                            {car.selectedOptionalItems.map((item, index) => (
+                              <li key={index}>{item}</li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No selections saved yet.</p>
+          )}
+        </div>
+      </div>
+
+
+
       {/* Cost Breakdown */}
       <div className="cost-breakdown">
         <h3>Cost Breakdown</h3>
@@ -373,6 +476,8 @@ const CarCostCalculator = () => {
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
     </div>
+    </div>
+ 
   );
 };
 
