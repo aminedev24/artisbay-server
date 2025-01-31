@@ -392,7 +392,7 @@ const CarCostCalculator = () => {
       </button>
       <button onClick={saveSelection}>Save Selection</button>
 
-      <SavedCarsPanel savedCars={savedCars}/>
+      <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars}/>
 
 
 

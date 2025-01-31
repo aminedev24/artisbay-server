@@ -263,3 +263,18 @@
 .saved-car-button:hover {
   background: #0056b3;
 }
+
+.remove-car-button , .remove-item-button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px !important;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.saved-car-header {
+  display: flex;
+  gap: 5px;
+}
