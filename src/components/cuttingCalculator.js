@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/cuttingCost.css";
 import Tooltip from "./toolTip";
+import SavedCarsPanel from "./savedCarsPanel";
 const CarCostCalculator = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
@@ -67,7 +68,7 @@ const CarCostCalculator = () => {
   });
 
   const auctionFees = 20000;
-  const serviceFees = 30000;
+  const serviceFees = 20000;
   const cuttingFee = 30000;
 
   const subtotalForTax =
@@ -193,6 +194,13 @@ const CarCostCalculator = () => {
     }
   };
   
+  const savedCarsTotalCost = savedCars.reduce((total, car) => {
+    const carTotalPerUnit = totalCostPerUnit; // Assuming same formula for each saved car
+    return total + carTotalPerUnit * car.units;
+  }, 0);
+  
+  
+  
 
   return (
     <div className="calculator-wrapper">
@@ -261,12 +269,12 @@ const CarCostCalculator = () => {
       {/* Collapsible Items Table */}
       <div className="cutting-section-container">
       <div className="upper-section">
-        <h3
+        <h5
           className="collapse-btn"
           onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
         >
           {!isItemsTableCollapsed ? 'Show list': 'Hide list'} {!isItemsTableCollapsed ? "▼" : "▲"}
-        </h3>
+        </h5>
 
         <Tooltip                   
                     
@@ -313,28 +321,30 @@ const CarCostCalculator = () => {
       
 
       <div className="optional-table">
-        <h3
+        <h5
           className="collapse-btn"
           onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
         >
           {isOptionalTableCollapsed ? 'Show list': 'Hide list'}  {isOptionalTableCollapsed ? "▼" : "▲"}
-        </h3>
+        </h5>
        
-        {!isOptionalTableCollapsed && (
+       
           <div className="optional-removals">
           <table>
             <thead>
+        
               <tr>
-                <th>Item</th>
-                <th>Price (¥)</th>
-                <th className="checkbox-cell">Select</th>
+                <th>Items included in optional removals</th>
+                <th>Price</th>
+                <th className="checkbox-cell">Check</th>
               </tr>
+   
             </thead>
             <tbody>
-              {optionalItems.map((item) => (
+              {!isOptionalTableCollapsed && optionalItems.map((item) => (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>{item.price.toLocaleString()}</td>
+                  <td> {`${item.price} ¥`}</td>
                   <td className="checkbox-cell">
                     <input
                       type="checkbox"
@@ -347,7 +357,7 @@ const CarCostCalculator = () => {
             </tbody>
           </table>
           </div>
-        )}
+    
       </div>
 
       <div className="input-section">
@@ -382,46 +392,7 @@ const CarCostCalculator = () => {
       </button>
       <button onClick={saveSelection}>Save Selection</button>
 
-      <div className="saved-cars-panel">
-        <div className="saved-cars-content">
-          <h3>Saved Selections</h3>
-          {savedCars.length > 0 ? (
-            <ul>
-              {savedCars.map((car) => (
-                <li key={car.id}>
-                  <div className="saved-car-details">
-                    <strong>{car.make} {car.model} (x{car.units})</strong>
-                    <div className="saved-car-items">
-                      <strong>Included Items:</strong>
-                      <ul>
-                        {car.includedItems.length > 0 ? (
-                          car.includedItems.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))
-                        ) : (
-                          <li>No items included</li>
-                        )}
-                      </ul>
-                      {car.selectedOptionalItems.length > 0 && (
-                        <>
-                          <strong>Optional Removals:</strong>
-                          <ul>
-                            {car.selectedOptionalItems.map((item, index) => (
-                              <li key={index}>{item}</li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No selections saved yet.</p>
-          )}
-        </div>
-      </div>
+      <SavedCarsPanel savedCars={savedCars}/>
 
 
 
@@ -468,10 +439,13 @@ const CarCostCalculator = () => {
           <span>Total Cost (Per Unit):</span>
           <span>¥{totalCostPerUnit.toLocaleString()}</span>
         </div>
+        
         <div className="total-cost grand-total">
-          <span>Grand Total (All Units):</span>
-          <span>¥{grandTotalCost.toLocaleString()}</span>
+          <span>Grand Total (All Saved Units):</span>
+          <span>¥{savedCarsTotalCost.toLocaleString()}</span>
         </div>
+
+
       </div>
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}

@@ -9,7 +9,7 @@
   }
   
   /* Headings */
- .calculator-container h2,.calculator-container h3 {
+ .calculator-container h2,.calculator-container h5 {
     text-align: center;
     color: #1e3a8a;
   }
@@ -243,4 +243,23 @@
 /* Show/Hide Panel */
 .saved-cars-panel.hidden {
   transform: translateX(100%);
+}
+
+/* Saved car button - Sticky inside its list item */
+.saved-car-button {
+  position: sticky;
+  top: 0;
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  z-index: 10;
+}
+
+.saved-car-button:hover {
+  background: #0056b3;
 }

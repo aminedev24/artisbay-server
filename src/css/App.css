@@ -1,87 +1,91 @@
 /* Force desktop styles for smaller screens */
-p, ul li, ol li, .list-item, .cta-link, .bank-info-table td, .footer-inner a , .grid-item span {
-  font-size: clamp(0.875rem, 1vw, 1rem); /* 14px - 16px */
+p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.bank-info-table td , .footer-inner a {
+  font-size: clamp(1.25rem, 1.75vw, 1.625rem); /* Increased for better readability */
 }
-
-
 
 .intro-content p {
-  font-size: clamp(0.9375rem, 1.125vw, 1.125rem); /* 15px - 18px */
+  font-size: clamp(1.30rem, 2.5vw, 2.30rem);
 }
 
-.logistics-agent-info, .services-text, .logistics-agent-info a, .intro-content p, .contact p {
-  font-size: clamp(1.5rem, 1.25vw, 1.25rem); /* 16px - 20px */
+@media (min-width: 1270px) {
+  .intro-content p {
+    font-size: clamp(1.125rem, 2vw, 1.75rem); /* Adjusted for larger screens */
+  }
+
+}
+
+.logistics-agent-info, .services-text, .logistics-agent-info a {
+  font-size: clamp(0.875rem, 2vw, 2rem) !important; /* As per your original request */
 }
 
 .links a {
-  font-size: clamp(0.8125rem, 0.9375vw, 0.875rem); /* 13px - 14px */
+  font-size: clamp(0.95rem, 1.3vw, 1.35rem); /* Slightly smaller for links */
 }
 
 h1 {
-  font-size: clamp(2rem, 2.25vw, 2rem); /* 32px - 36px */
+  font-size: clamp(2.125rem, 4.15vw, 3.125rem); /* Slightly decreased for balance */
 }
 
 h2 {
-  font-size: clamp(1.5rem, 2vw, 1.5rem); /* 24px - 28px */
+  font-size: clamp(1.75rem, 3.1vw, 2.375rem); /* Slightly smaller for hierarchy */
 }
 
 h3 {
-  font-size: clamp(1.125rem, 1.5vw, 1.125rem); /* 18px - 20px */
+  font-size: clamp(1.5rem, 2.5vw, 2rem); /* Slightly decreased for balance with h2 */
 }
 
-h4 {
-  font-size: clamp(1rem, 1.25vw, 1rem); /* 16px - 18px */
+h4  , .bank-info-table th{
+  font-size: clamp(1.25rem, 2.1vw, 1.5rem); /* Slightly smaller for readability */
 }
 
-h5 {
-  font-size: clamp(0.875rem, 1vw, 0.875rem); /* 14px - 16px */
+h5  {
+  font-size: clamp(1rem, 1.65vw, 1.25rem); /* Decreased for clarity */
 }
 
 h6 {
-  font-size: clamp(0.75rem, 0.9vw, 0.75rem); /* 12px - 14px */
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem); /* Slightly smaller */
 }
 
-
 small, .top-bar span, .profile-sidebar-menus li {
-  font-size: clamp(0.8125rem, 0.9375vw, 0.875rem); /* 13px - 14px */
+  font-size: clamp(0.875rem, 1.25vw, 1.125rem); /* Slightly smaller */
 }
 
 button {
-  font-size: clamp(0.875rem, 1vw, 1rem); /* 14px - 16px */
+  font-size: clamp(0.95rem, 1.25vw, 1.125rem); /* Decreased for clarity */
 }
 
 blockquote {
-  font-size: clamp(1rem, 1.5vw, 1.25rem); /* 16px - 20px */
+  font-size: clamp(1.125rem, 2.25vw, 1.625rem); /* Slightly smaller for distinction */
 }
 
 caption {
-  font-size: clamp(0.8125rem, 0.9375vw, 0.875rem); /* 13px - 14px */
+  font-size: clamp(0.875rem, 1.25vw, 1.125rem); /* Decreased to match */
 }
 
 nav {
-  font-size: clamp(0.875rem, 1vw, 1rem); /* 14px - 16px */
+  font-size: clamp(0.875rem, 1.5vw, 1.25rem); /* Slightly smaller for navigation */
 }
 
 a, .nav-item, i {
-  font-size: clamp(0.875rem, 1vw, 1rem); /* 14px - 16px */
+  font-size: clamp(0.95rem, 1.35vw, 1.125rem); /* Slightly smaller for consistency */
   text-decoration: none;
   color: inherit;
 }
 
 td {
-  font-size: clamp(0.875rem, 1vw, 1rem); /* 14px - 16px */
+  font-size: clamp(0.95rem, 1.35vw, 1.125rem); /* Slightly smaller for table data */
 }
 
 th {
-  font-size: clamp(0.9375rem, 1.125vw, 1.125rem); /* 15px - 18px */
+  font-size: clamp(1rem, 1.65vw, 1.25rem); /* Slightly smaller for table headings */
 }
 
 label {
-  font-size: clamp(0.9375rem, 1.125vw, 1.125rem); /* 15px - 18px */
+  font-size: clamp(0.95rem, 1.35vw, 1.125rem); /* Slightly smaller for form labels */
 }
 
 input {
-  font-size: clamp(0.9375rem, 1.125vw, 1.125rem); /* 15px - 18px */
+  font-size: clamp(0.95rem, 1.35vw, 1.125rem); /* Slightly smaller for form inputs */
 }
 
 @media (min-width: 1400px) {
