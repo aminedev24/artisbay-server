@@ -159,7 +159,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
           <input
             type="checkbox"
             name="terms"
-            checked={alreadyAgreed}
+            checked={alreadyAgreed || formData.terms}
             onChange={handleChange}
             disabled={alreadyAgreed || isSubmitted}
             required
