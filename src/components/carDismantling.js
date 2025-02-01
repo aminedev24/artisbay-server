@@ -78,13 +78,13 @@ const CarDismantling = () => {
                   </ul>
                 </div>
               </div>
-              <img src={`${process.env.PUBLIC_URL}/images/frontcut.png`} alt='half'/>
+              <img src={`${process.env.PUBLIC_URL}/images/combinationcut.png`} alt='half cut'/>
             </div>
             
               <div className="sub-section rear-half">
                 <div className="rear-half-text">
 
-                <h4>Rear Half (optional):</h4>
+                <h4>Rear Half:</h4>
                 <ul>
                   <li>Rear axle</li>
                   <li>Suspension</li>
@@ -118,7 +118,6 @@ const CarDismantling = () => {
               <p className="bold-text">This approach helps customers optimize costs and container space based on their requirements.</p>
 
             </div>
-            <img src={`${process.env.PUBLIC_URL}/images/combinationcut.png`} alt='combination cut' />
 
           </div>
 

@@ -387,12 +387,14 @@ const CarCostCalculator = () => {
         </label>
       </div>
             {/* Reset Button */}
-      <button className="reset-button" onClick={resetInputs}>
-        Reset
-      </button>
-      <button onClick={saveSelection}>Save Selection</button>
+      <div className="button-section">
+        <button className="reset-button" onClick={resetInputs}>
+          Reset
+        </button>
+        <button onClick={saveSelection}>Save Selection</button>
+      </div>
 
-      <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars}/>
+
 
 
 
@@ -450,6 +452,8 @@ const CarCostCalculator = () => {
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
     </div>
+    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={savedCarsTotalCost}/>
+
     </div>
  
   );

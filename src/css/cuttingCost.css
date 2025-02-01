@@ -1,11 +1,24 @@
 /* Container Styling */
+
+/* Calculator Wrapper - New flex layout */
+.calculator-wrapper {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 0 20px;
+
+}
+
+
 .calculator-container {
-    max-width: 1200px;
-    width:50%;
+    flex: 3;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 40%; /* Ensures it doesn’t get too small */
+
   }
   
   /* Headings */
@@ -155,6 +168,12 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    width: fit-content;
+  }
+
+  .button-section {
+    display: flex;
+    gap: 10px;
   }
   
  .calculator-container button:hover {
@@ -190,91 +209,4 @@
   position: relative;
 }
 
-  /* Saved Selections Panel */
-.saved-cars-panel {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 300px;
-  background: #f4f4f4;
-  border-left: 2px solid #ccc;
-  padding: 15px;
-  overflow-y: auto;
-  transition: transform 0.3s ease-in-out;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.saved-cars-panel h3 {
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-.saved-cars-panel ul {
-  list-style: none;
-  padding: 0;
-}
-
-.saved-cars-panel li {
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-.saved-cars-panel li:hover {
-  background: #e0e0e0;
-  cursor: pointer;
-}
-
-.saved-car-details {
-  font-size: 14px;
-  color: #333;
-}
-
-.saved-car-items {
-  font-size: 12px;
-  color: #666;
-  margin-top: 5px;
-}
-
-/* Show/Hide Panel */
-.saved-cars-panel.hidden {
-  transform: translateX(100%);
-}
-
-/* Saved car button - Sticky inside its list item */
-.saved-car-button {
-  position: sticky;
-  top: 0;
-  background: #007bff;
-  color: white;
-  padding: 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  z-index: 10;
-}
-
-.saved-car-button:hover {
-  background: #0056b3;
-}
-
-.remove-car-button , .remove-item-button {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px !important;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.saved-car-header {
-  display: flex;
-  gap: 5px;
-}
+  
