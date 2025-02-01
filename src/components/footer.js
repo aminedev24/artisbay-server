@@ -18,7 +18,7 @@ const Footer = () => {
     >
     <div class="footer-upper">
       <div className='footer-inner'>
-        <Link to='/'><img alt="Autocom Japan logo"  src={ `${process.env.PUBLIC_URL}/images/logo3new.png`} width="130"/></Link>
+        <Link to='/'><img alt="Artisbay Inc. logo"  src={ `${process.env.PUBLIC_URL}/images/logo3new.png`} width="130"/></Link>
         <div class="info">
         <h4>
           Artisbay Inc.
