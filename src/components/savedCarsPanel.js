@@ -6,7 +6,6 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
   const [isTableCollapsed, setIsTableCollapsed] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
 
-  // Initialize checked state for a car
   const initializeCheckedState = useCallback((car) => {
     setCheckedItems((prev) => {
       if (!prev[car.id]) {
@@ -14,7 +13,6 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
           included: new Array(car.includedItems.length).fill(true),
           optional: new Array(car.selectedOptionalItems.length).fill(true),
         };
-        console.log(`Initializing checked state for car: ${car.make} ${car.model}`, initialChecked);
         return { ...prev, [car.id]: initialChecked };
       }
       return prev;
@@ -27,17 +25,14 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
     }
   }, [selectedCar, initializeCheckedState]);
 
-  // Handle checkbox change
   const handleCheckboxChange = (carId, type, index) => {
-    console.log(`Checkbox changed for car: ${carId}, type: ${type}, index: ${index}`);
     setCheckedItems((prev) => {
       const carCheckState = prev[carId];
       if (!carCheckState) return prev;
 
       const updatedArray = [...carCheckState[type]];
       updatedArray[index] = !updatedArray[index];
-      console.log(`Updated ${type} for car ${carId}:`, updatedArray);
-      
+
       return {
         ...prev,
         [carId]: {
@@ -48,11 +43,8 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
     });
   };
 
-  // Handle car removal
   const handleRemoveCar = (carId) => {
-    console.log(`Removing car with ID: ${carId}`);
     const updatedCars = savedCars.filter((car) => car.id !== carId);
-    console.log("Updated car list after removal:", updatedCars);
     setSavedCars(updatedCars);
     if (selectedCar?.id === carId) {
       setSelectedCar(updatedCars[0] || null);
@@ -61,7 +53,6 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
 
   return (
     <div className="saved-cars-container">
-      {/* Tabs Container */}
       <div className="tabs-container">
         <div className="saved-cars-tabs">
           {savedCars.map((car) => (
@@ -79,85 +70,92 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
         </div>
       </div>
 
-      {/* Car details section */}
-      {selectedCar && (
-        <div className="table-car-details">
-          <div className="selected-car">
-            <button
-              className="collapse-button"
-              onClick={() => setIsTableCollapsed(!isTableCollapsed)}
-            >
-              {isTableCollapsed ? "Show List" : "Hide List"}
-            </button>
+      <div className="table-car-details">
+        <div className="selected-car">
+          <button
+            className="collapse-button"
+            onClick={() => setIsTableCollapsed(!isTableCollapsed)}
+          >
+            {isTableCollapsed ? "Show List" : "Hide List"}
+          </button>
 
-            <h3>
-              {selectedCar.make} {selectedCar.model} (x{selectedCar.units})
-            </h3>
-
-            <button
-              className="remove-car-button"
-              onClick={() => handleRemoveCar(selectedCar.id)}
-            >
-              Remove List
-            </button>
-          </div>
-
-          {!isTableCollapsed && checkedItems[selectedCar.id] && (
-            <div className="table-container">
-              <table className="saved-cars-table">
-                <thead>
-                  <tr>
-                    <th>Items</th>
-                    <th>Check</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* Included Items */}
-                  {selectedCar.includedItems.map((item, index) => {
-                    const isChecked = checkedItems[selectedCar.id].included[index];
-                    return (
-                      <tr
-                        key={`included-${index}`}
-                        className={isChecked ? "" : "unchecked-item"}
-                      >
-                        <td>{item}</td>
-                        <td>
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => handleCheckboxChange(selectedCar.id, "included", index)}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-
-                  {/* Optional Removals */}
-                  {selectedCar.selectedOptionalItems.map((item, index) => {
-                    const isChecked = checkedItems[selectedCar.id].optional[index];
-                    return (
-                      <tr
-                        key={`optional-${index}`}
-                        className={isChecked ? "" : "unchecked-item"}
-                      >
-                      
-                        <td>{item}</td>
-                        <td>
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => handleCheckboxChange(selectedCar.id, "optional", index)}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+          {selectedCar ? (
+            <>
+              <h3>
+                {selectedCar.make} {selectedCar.model} (x{selectedCar.units})
+              </h3>
+              <button
+                className="remove-car-button"
+                onClick={() => handleRemoveCar(selectedCar.id)}
+              >
+                Remove List
+              </button>
+            </>
+          ) : (
+            <h3>No car selected </h3>
           )}
         </div>
-      )}
+
+        {!isTableCollapsed && (
+          <div className="table-container">
+            <table className="saved-cars-table">
+              <thead>
+                <tr>
+                  <th>Items</th>
+                  <th>Check</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedCar ? (
+                  <>
+                    {selectedCar.includedItems.map((item, index) => {
+                      const isChecked = checkedItems[selectedCar.id]?.included[index] ?? true;
+                      return (
+                        <tr key={`included-${index}`} className={isChecked ? "" : "unchecked-item"}>
+                          <td>{item}</td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => handleCheckboxChange(selectedCar.id, "included", index)}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
+
+                    {selectedCar.selectedOptionalItems.length > 0 && (
+                      <tr className="optional-separator">
+                        <td colSpan="2"><strong>Optional Items</strong></td>
+                      </tr>
+                    )}
+
+                    {selectedCar.selectedOptionalItems.map((item, index) => {
+                      const isChecked = checkedItems[selectedCar.id]?.optional[index] ?? true;
+                      return (
+                        <tr key={`optional-${index}`} className={isChecked ? "" : "unchecked-item"}>
+                          <td>{item}</td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => handleCheckboxChange(selectedCar.id, "optional", index)}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <tr>
+                    <td colSpan="2" style={{ textAlign: "center" }}>No car selected</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
 
       <div className="summary-section">
         <table>

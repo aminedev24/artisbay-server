@@ -114,6 +114,14 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     }
   };
 
+  useEffect(() => {
+    setAlreadyAgreed(false);
+    setIsFetched(false);
+    setLoading(true);
+    fetchUserData();
+  }, [agreementType]);
+  
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -151,7 +159,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
           <input
             type="checkbox"
             name="terms"
-            checked={formData.terms}
+            checked={alreadyAgreed}
             onChange={handleChange}
             disabled={alreadyAgreed || isSubmitted}
             required

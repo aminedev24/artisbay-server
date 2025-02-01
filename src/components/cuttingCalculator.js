@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../css/cuttingCost.css";
 import Tooltip from "./toolTip";
 import SavedCarsPanel from "./savedCarsPanel";
+import Modal from "./alertModal";
+
 const CarCostCalculator = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
@@ -12,6 +14,9 @@ const CarCostCalculator = () => {
   const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] =
     useState(false);
   const [savedCars, setSavedCars] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
 
 
   const [optionalRemovals, setOptionalRemovals] = useState({});
@@ -152,9 +157,30 @@ const CarCostCalculator = () => {
       return initialSelections;
     });
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const showAlert = (message, type = "alert") => {
+    setTimeout(() => {
+      setModalMessage(message);
+      setModalType(type);
+      setShowModal(true);
+    }, 1000); // Delay for 1 second
+  };
+
   const saveSelection = () => {
     if (!make || !model) {
-      alert("Please enter make and model before saving.");
+      //alert("Please enter make and model before saving.");
+      showAlert("Please enter make and model before saving.")
+      return;
+    }
+
+    if (units <= 0 || buyingPrice <= 0 || transportation <= 0) {
+      //alert("Units, Buying Price, and Transportation Fees must be greater than 0 before saving.");
+      showAlert("Units, Buying Price, and Transportation Fees must be greater than 0 before saving.");
+
       return;
     }
   
@@ -204,7 +230,14 @@ const CarCostCalculator = () => {
 
   return (
     <div className="calculator-wrapper">
-           <div className="calculator-container">
+      {showModal && (
+      <Modal
+        message={modalMessage}
+        onClose={handleCloseModal}
+        type={modalType}
+      />
+    )}
+    <div className="calculator-container">
       <h2>Cutting & Dismantling Cost Calculator</h2>
 
       <div className="cutting-loading-fees">
