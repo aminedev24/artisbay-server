@@ -77,7 +77,7 @@ const CarCostCalculator = () => {
   const cuttingFee = 30000;
 
   const subtotalForTax =
-     auctionFees + (Number(transportation) || 0);
+    buyingPrice +  auctionFees + (Number(transportation) || 0);
   const tax = subtotalForTax * 0.1;
   const optionalTotal = optionalItems.reduce(
     (total, item) => total + (optionalRemovals[item.id] ? item.price : 0),
@@ -319,7 +319,7 @@ const CarCostCalculator = () => {
      <table className="cut-selection-table">
           <thead>
             <tr>
-              <th>Items included in half cut styles</th>
+              <th>Items in half cut styles</th>
               <th>Check</th>
               {/*<th>Nose Cut</th>*/}
             </tr>
@@ -367,8 +367,8 @@ const CarCostCalculator = () => {
             <thead>
         
               <tr>
-                <th>Items included in optional removals</th>
-                <th>Price</th>
+                <th>Items in optional removals</th>
+                <th>Fees</th>
                 <th className="checkbox-cell">Check</th>
               </tr>
    
@@ -396,7 +396,7 @@ const CarCostCalculator = () => {
       <div className="input-section">
         
         <label>
-          Buying Price (¥):
+          Buying Fee (¥):
           <input
             type="number"
             value={buyingPrice}
@@ -435,7 +435,7 @@ const CarCostCalculator = () => {
       <div className="cost-breakdown">
         <h3>Cost Breakdown</h3>
         <div className="breakdown-item">
-          <span>Buying Price</span>
+          <span>Buying Fee</span>
           <span>
             ¥{(buyingPrice).toLocaleString()}
           </span>
@@ -476,8 +476,8 @@ const CarCostCalculator = () => {
         </div>
         
         <div className="total-cost grand-total">
-          <span>Grand Total (All Saved Units):</span>
-          <span>¥{savedCarsTotalCost.toLocaleString()}</span>
+          <span>Total Cost (All Units):</span>
+          <span>¥{(totalCostPerUnit * units).toLocaleString()}</span>
         </div>
 
 

@@ -98,7 +98,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     try {
       const response = await fetch(`${apiUrl}/submitAgreement.php`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify(submissionData),
         credentials: 'include',
       });
