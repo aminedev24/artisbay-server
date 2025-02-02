@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "../css/cuttingCost.css";
 import Tooltip from "./toolTip";
 import SavedCarsPanel from "./savedCarsPanel";
 import Modal from "./alertModal";
+import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "./vehicleData";
 
 const CarCostCalculator = () => {
   const [make, setMake] = useState("");
@@ -17,6 +18,29 @@ const CarCostCalculator = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
     const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
+    const [selectedMake, setSelectedMake] = useState("");
+    const [makes, setMakes] = useState([]);
+    const [models, setModels] = useState([]);
+
+      useEffect(() => {
+        const loadMakes = async () => {
+          const fetchedMakes = await fetchMakes();
+          setMakes(fetchedMakes);
+        };
+        loadMakes();
+      }, []);
+
+    const handleMakeChange = async (event) => {
+      const make = event.target.value;
+      setSelectedMake(make);
+  
+      if (make) {
+        const fetchedModels = await fetchModelsForMake(make);
+        setModels(fetchedModels);
+      } else {
+        setModels([]);
+      }
+    };
 
 
   const [optionalRemovals, setOptionalRemovals] = useState({});
@@ -264,21 +288,41 @@ const CarCostCalculator = () => {
       <div className="input-section">
         <label>
           Make:
+        {/*
           <input
             type="text"
             value={make}
             onChange={(e) => setMake(e.target.value)}
             placeholder="e.g., Toyota"
           />
+          */}
+          <select id="make" name="make" onChange={handleMakeChange}>
+                  <option value='any'>Make (any)</option>
+                  {makes.map((make, index) => (
+                    <option key={index} value={make}>
+                      {make.charAt(0).toUpperCase() + make.slice(1)}
+                    </option>
+                  ))}
+          </select>
         </label>
         <label>
           Model:
+        {/*
           <input
             type="text"
             value={model}
             onChange={(e) => setModel(e.target.value)}
             placeholder="e.g., Corolla"
           />
+        */}
+          <select id="model" name="model">
+                  <option value='any'>Model (any)</option>
+                  {models.map((model, index) => (
+                    <option key={index} value={model}>
+                      {model}
+                    </option>
+                  ))}
+          </select>
         </label>
         <label>
           Units:
