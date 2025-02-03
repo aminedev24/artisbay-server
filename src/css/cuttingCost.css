@@ -17,7 +17,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    min-width: 50%; /* Ensures it doesn’t get too small */
+    min-width: 55%; /* Ensures it doesn’t get too small */
 
   }
   
@@ -101,11 +101,10 @@
     gap: 20px;
   }
   
-  /* Optional Table */
-  .optional-table {
+
+  .cost-breakdown {
     flex: 2;
   }
-  
   .optional-table table {
     background-color: white;
     border-radius: 6px;

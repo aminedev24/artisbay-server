@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "../css/carDismantling.css";
 import LeftSidebar from "./sidebar";
 import { Link } from "react-router-dom";
-
+import StaticCostList from "./cuttingCostList";
 const CarDismantling = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -140,7 +140,6 @@ const CarDismantling = () => {
             <p>This unique service saves you hundreds of dollars while ensuring your components arrive intact.</p>
           </div>
 
-          {/* Why Choose */}
           <div className="cutting-style">
             <h3>Exclusive Dismantling Solution – Free Yard Storage for 3 Months!</h3>
             <p>At Artisbay Inc., we know that flexibility and convenience are key when sourcing an
@@ -158,7 +157,7 @@ const CarDismantling = () => {
           </div>
         </div>
 
-
+        
         {/* Final CTA from PDF */}
         <div className='cta-container'> 
           <p className='cta-text'>Let us know your preferences, and we’ll handle the dismantling and packing process to ensure a cost-effective, secure, and efficient shipment. Contact us today to explore the best solution for your needs.</p> 

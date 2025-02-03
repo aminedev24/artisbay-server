@@ -12,8 +12,7 @@ const CarCostCalculator = () => {
   const [buyingPrice, setBuyingPrice] = useState(0);
   const [transportation, setTransportation] = useState(0);
   const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);
-  const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] =
-    useState(false);
+  const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] = useState(false);
   const [savedCars, setSavedCars] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
@@ -32,7 +31,7 @@ const CarCostCalculator = () => {
 
     const handleMakeChange = async (event) => {
       const make = event.target.value;
-      setSelectedMake(make);
+      setMake(make);
   
       if (make) {
         const fetchedModels = await fetchModelsForMake(make);
@@ -100,17 +99,21 @@ const CarCostCalculator = () => {
   const serviceFees = 20000;
   const cuttingFee = 30000;
 
-  const subtotalForTax =
-    buyingPrice +  auctionFees + (Number(transportation) || 0);
+  const subtotalForTax = (Number(buyingPrice) || 0) + auctionFees + (Number(transportation) || 0);
+
   const tax = subtotalForTax * 0.1;
   const optionalTotal = optionalItems.reduce(
     (total, item) => total + (optionalRemovals[item.id] ? item.price : 0),
     0,
   );
 
-  const totalCostPerUnit =
-    subtotalForTax + tax + serviceFees + cuttingFee + optionalTotal;
+  const totalCostPerUnit = subtotalForTax + tax + serviceFees + cuttingFee + optionalTotal;
+
   const grandTotalCost = totalCostPerUnit * (Number(units) || 0);
+
+  const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + optionalTotal;
+  const vehicleCost = Number(buyingPrice) + auctionFees + tax + cuttingFee + serviceFees + optionalTotal + Number(transportation);
+  const totalFeesAllVehicles = feesPerVehicle * units;
 
   const handleCutChange = (itemId, type) => {
     setCutSelections((prev) => ({
@@ -241,6 +244,7 @@ const CarCostCalculator = () => {
         selectedOptionalItems,
       };
       setSavedCars([...savedCars, newSelection]);
+      resetInputs();
     }
   };
   
@@ -249,8 +253,35 @@ const CarCostCalculator = () => {
     return total + carTotalPerUnit * car.units;
   }, 0);
   
+  const handleModelChange = (event) => {
+    setModel(event.target.value);
+  };
+  
+  const handleInputChange = (event, setState) => {
+    let value = event.target.value;
+  
+    // Remove any non-digit characters except the comma (for formatting)
+    value = value.replace(/[^0-9,]/g, '');
+  
+    // Remove commas for proper numeric calculations
+    const numericValue = value.replace(/,/g, '');
+  
+    // Apply formatting with commas
+    const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  
+    setState(formattedValue);
+  };
+  
+  const handleBlur = (value, setState) => {
+    // Convert the formatted value back to number without commas
+    const numericValue = value.replace(/,/g, '');
+    setState(numericValue);
+  };
   
   
+
+
+
 
   return (
     <div className="calculator-wrapper">
@@ -315,13 +346,13 @@ const CarCostCalculator = () => {
             placeholder="e.g., Corolla"
           />
         */}
-          <select id="model" name="model">
+          <select id="model" name="model" onChange={handleModelChange}>
                   <option value='any'>Model (any)</option>
                   {models.map((model, index) => (
                     <option key={index} value={model}>
                       {model}
                     </option>
-                  ))}
+          ))}
           </select>
         </label>
         <label>
@@ -402,7 +433,7 @@ const CarCostCalculator = () => {
           className="collapse-btn"
           onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
         >
-          {isOptionalTableCollapsed ? 'Show list': 'Hide list'}  {isOptionalTableCollapsed ? "▼" : "▲"}
+          {!isOptionalTableCollapsed ? 'Show list': 'Hide list'}  {!isOptionalTableCollapsed ? "▼" : "▲"}
         </h5>
        
        
@@ -418,7 +449,7 @@ const CarCostCalculator = () => {
    
             </thead>
             <tbody>
-              {!isOptionalTableCollapsed && optionalItems.map((item) => (
+              {isOptionalTableCollapsed && optionalItems.map((item) => (
                 <tr key={item.id}>
                   <td>{item.name}</td>
                   <td> {`${item.price} ¥`}</td>
@@ -438,7 +469,6 @@ const CarCostCalculator = () => {
       </div>
 
       <div className="input-section">
-        
         <label>
           Buying Fee (¥):
           <input
@@ -446,9 +476,18 @@ const CarCostCalculator = () => {
             value={buyingPrice}
             onChange={(e) => {
               const value = e.target.value;
-              setBuyingPrice(value === "" ? "" : Math.max(0, Number(value)));
+              
+              // If input is not empty and starts with '0', strip leading zero
+              if (value && value.startsWith('0') && value.length > 1) {
+                setBuyingPrice(value.replace(/^0+/, ''));
+              } else {
+                // Ensure that it's a valid number or allow empty input
+                setBuyingPrice(value === "" ? "" : Math.max(0, Number(value)));
+              }
             }}
+   
           />
+
         </label>
 
         <label>
@@ -458,11 +497,18 @@ const CarCostCalculator = () => {
             value={transportation}
             onChange={(e) => {
               const value = e.target.value;
-              setTransportation(value === "" ? "" : Math.max(0, Number(value)));
+
+              if (value && value.startsWith('0') && value.length > 1) {
+                setTransportation(value.replace(/^0+/, ''));
+              } else {
+                setTransportation(value === "" ? "" : Math.max(0, Number(value)));
+              }
             }}
+      
           />
         </label>
       </div>
+
             {/* Reset Button */}
       <div className="button-section">
         <button className="reset-button" onClick={resetInputs}>
@@ -481,7 +527,7 @@ const CarCostCalculator = () => {
         <div className="breakdown-item">
           <span>Buying Fee</span>
           <span>
-            ¥{(buyingPrice).toLocaleString()}
+            ¥{(buyingPrice).toLocaleString() || 0}
           </span>
         </div>
         <div className="breakdown-item">
@@ -493,7 +539,7 @@ const CarCostCalculator = () => {
         <div className="breakdown-item">
           <span>Transportation Fees</span>
           <span>
-            ¥{(transportation).toLocaleString()}
+            ¥{(transportation).toLocaleString() || 0}
           </span>
         </div>
         <div className="breakdown-item">
@@ -514,15 +560,59 @@ const CarCostCalculator = () => {
           <span>Service Fees:</span>
           <span>¥{serviceFees.toLocaleString()}</span>
         </div>
+
         <div className="total-cost">
-          <span>Total Cost (Per Unit):</span>
-          <span>¥{totalCostPerUnit.toLocaleString()}</span>
+          <span>
+            Fees per vehicle
+            <Tooltip message="Includes auction fees, transportation, tax, cutting fee, service fees, and optional removals" />
+          </span>
+          <span>¥{feesPerVehicle.toLocaleString()}</span>
         </div>
-        
+        {
+          /*
+          <div className="total-cost">
+            <span>Total Cost (Per Unit):</span>
+            <span>¥{totalCostPerUnit.toLocaleString()}</span>
+          </div>
+          */
+        }
+
+
+        <div className="total-cost">
+          <span>
+            Vehicle cost
+            <Tooltip message="Vehicle price plus all fees except freight" />
+          </span>
+          <span>¥{vehicleCost.toLocaleString()}</span>
+        </div>
+
+        <div className="total-cost">
+          <span>
+            Total fees (all vehicles)
+            <Tooltip message="Sum of all fees per vehicle multiplied by units" />
+          </span>
+          <span>¥{totalFeesAllVehicles.toLocaleString()}</span>
+        </div>
+
+        <div className="total-cost grand-total">
+          <span>
+            Total cost (all vehicles)
+            <Tooltip message="Total cost including all fees and vehicle price multiplied by units" />
+          </span>
+          <span>¥{grandTotalCost.toLocaleString()}</span>
+        </div>
+
+
+      {
+        /*
         <div className="total-cost grand-total">
           <span>Total Cost (All Units):</span>
           <span>¥{(totalCostPerUnit * units).toLocaleString()}</span>
         </div>
+        */
+      }
+        
+
 
 
       </div>

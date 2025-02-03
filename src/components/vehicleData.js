@@ -5,12 +5,12 @@ let modelsData = {};
 
 export const popularMakes = [
     "toyota", "honda", "ford", "nissan", "bmw", "mercedes-benz",
-    "chevrolet", "audi", "volkswagen", "hyundai", "kia", "lexus",
-    "mazda", "subaru", "tesla", "jeep", "land rover", "volvo",
+    "chevrolet", "audi", "volkswagen", "lexus",
+    "mazda", "subaru", "jeep", "land rover", "volvo",
     "jaguar", "porsche", "mitsubishi", "suzuki", "peugeot", "renault",
-    "fiat", "chrysler", "dodge", "gmc", "cadillac", "infiniti",
-    "acura", "buick", "lincoln", "bentley", "rolls-royce", "ferrari",
-    "lamborghini", "aston martin", "maserati", "alfa romeo", "mini",
+    "fiat", "chrysler", "infiniti",
+    "lincoln", "bentley",
+    "maserati", "alfa romeo", "mini",
     "skoda", "citroën", "opel", "saab",
   ];
 
