@@ -21,10 +21,9 @@
   
   .saved-cars-tabs {
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll;
     gap: 8px;
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #ccc transparent; /* Custom scrollbar */
+    scrollbar-color: #e67e22 transparent; /* Custom scrollbar */
   }
   
   /* Tab Buttons */
@@ -74,7 +73,7 @@
   }
   
   /* Collapsible Table Button */
-  .collapse-button {
+  .collapse-button, .edit-button {
     display: block;
     padding: 8px 12px;
     background-color: #1e3a8a;
@@ -85,7 +84,7 @@
     transition: 0.3s;
   }
   
-  .collapse-button:hover {
+  .collapse-button:hover , .edit-button:hover {
     background-color: #0056b3;
   }
   

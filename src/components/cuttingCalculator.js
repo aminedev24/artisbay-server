@@ -6,20 +6,22 @@ import Modal from "./alertModal";
 import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "./vehicleData";
 
 const CarCostCalculator = () => {
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
-  const [units, setUnits] = useState(1);
+  const [make, setMake] = useState("any");
+  const [model, setModel] = useState("any");
+  const [units, setUnits] = useState(0);
   const [buyingPrice, setBuyingPrice] = useState(0);
   const [transportation, setTransportation] = useState(0);
   const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);
   const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] = useState(false);
   const [savedCars, setSavedCars] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [modalMessage, setModalMessage] = useState("");
-    const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
-    const [selectedMake, setSelectedMake] = useState("");
-    const [makes, setMakes] = useState([]);
-    const [models, setModels] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
+  const [selectedMake, setSelectedMake] = useState("");
+  const [makes, setMakes] = useState([]);
+  const [models, setModels] = useState([]);
+  const [editingCarIndex, setEditingCarIndex] = useState(null);
+
 
       useEffect(() => {
         const loadMakes = async () => {
@@ -109,11 +111,11 @@ const CarCostCalculator = () => {
 
   const totalCostPerUnit = subtotalForTax + tax + serviceFees + cuttingFee + optionalTotal;
 
-  const grandTotalCost = totalCostPerUnit * (Number(units) || 0);
+  const grandTotalCost = totalCostPerUnit * (Number(units) || 1);
 
   const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + optionalTotal;
   const vehicleCost = Number(buyingPrice) + auctionFees + tax + cuttingFee + serviceFees + optionalTotal + Number(transportation);
-  const totalFeesAllVehicles = feesPerVehicle * units;
+  const totalFeesAllVehicles = feesPerVehicle * (units || 1);
 
   const handleCutChange = (itemId, type) => {
     setCutSelections((prev) => ({
@@ -167,23 +169,22 @@ const CarCostCalculator = () => {
     }
   };
 
-  const resetInputs = () => {
-    setMake("");
-    setModel("");
-    setUnits(1);
-    setBuyingPrice(0);
-    setTransportation(0);
-
-    // Reset checkbox selections
-    setOptionalRemovals({});
-    setCutSelections(() => {
-      const initialSelections = {};
-      cutItems.forEach((item) => {
-        initialSelections[item.id] = "half";
-      });
-      return initialSelections;
+const resetInputs = () => {
+  setMake("");  // Reset Make
+  setModel(""); // Reset Model
+  setUnits(0);
+  setBuyingPrice(0);
+  setTransportation(0);
+  setOptionalRemovals({});
+  setCutSelections(() => {
+    const initialSelections = {};
+    cutItems.forEach((item) => {
+      initialSelections[item.id] = "half";
     });
-  };
+    return initialSelections;
+  });
+};
+
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -198,55 +199,117 @@ const CarCostCalculator = () => {
   };
 
   const saveSelection = () => {
-    if (!make || !model) {
-      //alert("Please enter make and model before saving.");
-      showAlert("Please enter make and model before saving.")
+    const trimmedMake = make.trim().toLowerCase();
+    const trimmedModel = model.trim().toLowerCase();
+  
+    if ((!trimmedMake || !trimmedModel) || 
+        (trimmedMake !== "any" && trimmedModel !== "any" && (!make.trim() || !model.trim()))) {
+      showAlert("Please enter make and model before saving.");
       return;
     }
-
-    if (units <= 0 || buyingPrice <= 0 || transportation <= 0) {
-      //alert("Units, Buying Price, and Transportation Fees must be greater than 0 before saving.");
-      showAlert("Units, Buying Price, and Transportation Fees must be greater than 0 before saving.");
-
+  
+    if (units <= 0) {
+      showAlert("Please enter units number");
+      return;
+    }
+    if (buyingPrice <= 0) {
+      showAlert("Please enter buying price");
+      return;
+    }
+    if (transportation <= 0) {
+      showAlert("Please enter transportation fees");
       return;
     }
   
     const includedItems = cutItems
       .filter((item) => cutSelections[item.id] === "half")
       .map((item) => item.name)
-      .sort(); // Sorting ensures consistent order for comparison
+      .sort();
   
     const selectedOptionalItems = optionalItems
-      .filter((item) => optionalRemovals[item.id])
+      .filter((item) => optionalRemovals[item.id]) // Get selected items
       .map((item) => item.name)
       .sort();
   
-    const existingCar = savedCars.find(
-      (car) =>
-        car.make === make &&
-        car.model === model &&
-        JSON.stringify(car.includedItems) === JSON.stringify(includedItems) &&
-        JSON.stringify(car.selectedOptionalItems) === JSON.stringify(selectedOptionalItems)
-    );
+    if (editingCarIndex !== null) {
+      // Editing an existing car
+      const updatedCars = [...savedCars];
   
-    if (existingCar) {
-      // Increase unit count if already exists
-      existingCar.units += units;
-      setSavedCars([...savedCars]); // Trigger re-render
+      updatedCars[editingCarIndex] = {
+        ...updatedCars[editingCarIndex], // Preserve other properties
+        make,
+        model,
+        transportation,
+        buyingPrice,
+        units: Number(units),
+        includedItems,
+        selectedOptionalItems, // Completely replace with new selection
+      };
+  
+      setSavedCars(updatedCars);
+      setEditingCarIndex(null); // Reset editing mode
     } else {
-      // Add new entry
+      // Adding a new car
       const newSelection = {
         id: `${make} ${model} ${savedCars.length + 1}`,
         make,
         model,
-        units,
+        buyingPrice,
+        transportation,
+        units: Number(units),
         includedItems,
         selectedOptionalItems,
       };
+  
       setSavedCars([...savedCars, newSelection]);
-      resetInputs();
     }
+  
+    resetInputs();
   };
+  
+  const editCar = (index) => {
+    if (index === -1) {
+      console.warn("Invalid car index received in editCar.");
+      return;
+    }
+  
+    console.log("Editing car at index:", index);
+  
+    const car = savedCars[index];
+    if (!car) {
+      console.warn("No car found at the provided index.");
+      return;
+    }
+  
+    console.log("Car Data:", car);
+  
+    setMake(car.make);
+    setModel(car.model);
+    setUnits(car.units);
+    setBuyingPrice(car.buyingPrice || "");  
+    setTransportation(car.transportation || "");  
+  
+    // Rebuild selections
+    const newCutSelections = {};
+    cutItems.forEach((item) => {
+      newCutSelections[item.id] = car.includedItems.includes(item.name) ? "half" : null;
+    });
+    setCutSelections(newCutSelections);
+  
+    // Ensure optional items exist (in case they were empty)
+    const newOptionalRemovals = {};
+    optionalItems.forEach((item) => {
+      // Ensure removed items are not added back
+      newOptionalRemovals[item.id] = car.selectedOptionalItems?.includes(item.name) ?? false;
+    });
+    setOptionalRemovals(newOptionalRemovals);
+    
+  
+    setEditingCarIndex(index);
+  };
+  
+  
+  
   
   const savedCarsTotalCost = savedCars.reduce((total, car) => {
     const carTotalPerUnit = totalCostPerUnit; // Assuming same formula for each saved car
@@ -271,19 +334,19 @@ const CarCostCalculator = () => {
   
     setState(formattedValue);
   };
-  
-  const handleBlur = (value, setState) => {
-    // Convert the formatted value back to number without commas
-    const numericValue = value.replace(/,/g, '');
-    setState(numericValue);
+
+  const cancelEdit = () => {
+    console.log("Editing cancelled");
+    setMake("");
+    setModel("");
+    setUnits(0);
+    setBuyingPrice(0);
+    setTransportation(0);
+    setEditingCarIndex(null);
   };
   
   
-
-
-
-
-  return (
+return (
     <div className="calculator-wrapper">
       {showModal && (
       <Modal
@@ -327,8 +390,8 @@ const CarCostCalculator = () => {
             placeholder="e.g., Toyota"
           />
           */}
-          <select id="make" name="make" onChange={handleMakeChange}>
-                  <option value='any'>Make (any)</option>
+          <select id="make" name="make" value={make}  onChange={handleMakeChange}>
+                  <option name='any' value='any'>Make (any)</option>
                   {makes.map((make, index) => (
                     <option key={index} value={make}>
                       {make.charAt(0).toUpperCase() + make.slice(1)}
@@ -346,8 +409,8 @@ const CarCostCalculator = () => {
             placeholder="e.g., Corolla"
           />
         */}
-          <select id="model" name="model" onChange={handleModelChange}>
-                  <option value='any'>Model (any)</option>
+          <select id="model" name="model" value={model}  onChange={handleModelChange}>
+                  <option name='any' value='any'>Model (any)</option>
                   {models.map((model, index) => (
                     <option key={index} value={model}>
                       {model}
@@ -362,7 +425,12 @@ const CarCostCalculator = () => {
             value={units}
             onChange={(e) => {
               const value = e.target.value;
-              setUnits(value === "" ? "" : Math.max(0, Number(value)));
+
+              if (value && value.startsWith('0') && value.length > 1) {
+                setUnits(value.replace(/^0+/, ''));
+              } else {
+                setUnits(value === "" ? "" : Math.max(0, Number(value)));
+              }
             }}
           />
         </label>
@@ -370,9 +438,18 @@ const CarCostCalculator = () => {
       </div>
 
       {/* Reset Button */}
-      <button className="reset-button" onClick={resetInputs}>
-        Reset
-      </button>
+      <div className="button-section">
+        <button className="reset-button" onClick={resetInputs}>
+          Reset
+        </button>
+
+        {editingCarIndex !== null && (
+          <button onClick={cancelEdit}>Cancel Edit</button>
+        )}
+
+      </div>
+  
+
       <br/>
       {/* Collapsible Items Table */}
       <div className="cutting-section-container">
@@ -422,7 +499,7 @@ const CarCostCalculator = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+      </table>
 
      </div>
 
@@ -469,45 +546,39 @@ const CarCostCalculator = () => {
       </div>
 
       <div className="input-section">
-        <label>
-          Buying Fee (¥):
-          <input
-            type="number"
-            value={buyingPrice}
-            onChange={(e) => {
-              const value = e.target.value;
-              
-              // If input is not empty and starts with '0', strip leading zero
-              if (value && value.startsWith('0') && value.length > 1) {
-                setBuyingPrice(value.replace(/^0+/, ''));
-              } else {
-                // Ensure that it's a valid number or allow empty input
-                setBuyingPrice(value === "" ? "" : Math.max(0, Number(value)));
-              }
-            }}
-   
-          />
+          <label>
+            Buying Price (¥):
+            <input
+              type="text"
+              value={buyingPrice.toLocaleString()} // Format with commas
+              onChange={(e) => {
+                const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
+                if (rawValue === "" || isNaN(rawValue)) {
+                  setBuyingPrice(""); // Allow empty input
+                } else {
+                  setBuyingPrice(Number(rawValue)); // Store as number
+                }
+              }}
+            />
+          </label>
 
-        </label>
+          <label>
+            Transportation Fees (¥):
+            <input
+              type="text"
+              value={transportation.toLocaleString()}
+              onChange={(e) => {
+                const rawValue = e.target.value.replace(/,/g, "");
+                if (rawValue === "" || isNaN(rawValue)) {
+                  setTransportation("");
+                } else {
+                  setTransportation(Number(rawValue));
+                }
+              }}
+            />
+          </label>
+        </div>
 
-        <label>
-          Transportation Fees (¥):
-          <input
-            type="number"
-            value={transportation}
-            onChange={(e) => {
-              const value = e.target.value;
-
-              if (value && value.startsWith('0') && value.length > 1) {
-                setTransportation(value.replace(/^0+/, ''));
-              } else {
-                setTransportation(value === "" ? "" : Math.max(0, Number(value)));
-              }
-            }}
-      
-          />
-        </label>
-      </div>
 
             {/* Reset Button */}
       <div className="button-section">
@@ -525,7 +596,7 @@ const CarCostCalculator = () => {
       <div className="cost-breakdown">
         <h3>Cost Breakdown</h3>
         <div className="breakdown-item">
-          <span>Buying Fee</span>
+          <span>Buying Price</span>
           <span>
             ¥{(buyingPrice).toLocaleString() || 0}
           </span>
@@ -619,7 +690,7 @@ const CarCostCalculator = () => {
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
     </div>
-    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={savedCarsTotalCost}/>
+    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={savedCarsTotalCost} editCar={editCar}/>
 
     </div>
  

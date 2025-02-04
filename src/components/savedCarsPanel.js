@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "../css/savedCarsPanel.css";
 
-const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
+const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }) => {
   const [selectedCar, setSelectedCar] = useState(savedCars[0] || null);
   const [isTableCollapsed, setIsTableCollapsed] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
@@ -24,6 +24,16 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
       initializeCheckedState(selectedCar);
     }
   }, [selectedCar, initializeCheckedState]);
+
+  useEffect(() => {
+    if (selectedCar) {
+      const updatedCar = savedCars.find(car => car.id === selectedCar.id);
+      if (updatedCar) {
+        setSelectedCar(updatedCar); // Update the selected car when `savedCars` changes
+      }
+    }
+  }, [savedCars]); // Re-run effect when `savedCars` changes
+  
 
   const handleCheckboxChange = (carId, type, index) => {
     setCheckedItems((prev) => {
@@ -55,7 +65,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
     <div className="saved-cars-container">
       <div className="tabs-container">
         <div className="saved-cars-tabs">
-          {savedCars.map((car) => (
+          {savedCars.map((car, index) => (
             <button
               key={car.id}
               className={`tab-button ${selectedCar?.id === car.id ? "active" : ""}`}
@@ -84,6 +94,21 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
               <h3>
                 {selectedCar.make} {selectedCar.model} (x{selectedCar.units})
               </h3>
+              <button
+                  className="edit-button"
+                  onClick={() => {
+                    const carIndex = savedCars.findIndex((car) => car.id === selectedCar.id);
+                    console.log("Edit button clicked. Car Index:", carIndex, "Car Data:", selectedCar);
+                    if (carIndex !== -1) {
+                      editCar(carIndex);
+                    } else {
+                      console.warn("Selected car not found in savedCars.");
+                    }
+                  }}
+                >
+                  Edit List
+                </button>
+
               <button
                 className="remove-car-button"
                 onClick={() => handleRemoveCar(selectedCar.id)}
@@ -162,11 +187,11 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost }) => {
           <tbody>
             <tr>
               <th>Total cars</th>
-              <td>{savedCars.length}</td>
+              <td>{savedCars.reduce((acc, car) => acc + car.units, 0)}</td>
             </tr>
             <tr>
               <th>Total Lists</th>
-              <td>{savedCars.reduce((acc, car) => acc + car.units, 0)}</td>
+              <td>{savedCars.length}</td>
             </tr>
             <tr>
               <th>Total Investment</th>

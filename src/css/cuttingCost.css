@@ -150,14 +150,16 @@
   .total-cost {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #f1892b;
+    color: #2d9cdb; /* Strong blue for high contrast */
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     padding: 10px;
-    background-color: rgba(241, 137, 43, 0.1);
+    background-color: rgba(45, 156, 219, 0.1); /* Lighter blue background */
     border-radius: 6px;
-  }
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow for depth */
+}
+
   
   /* Button Styling */
  .calculator-container button {
