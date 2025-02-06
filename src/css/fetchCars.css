@@ -1,0 +1,26 @@
+
+  .saved-car-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .car-info {
+    margin-bottom: 30px;
+  }
+  
+  .car-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .car-info p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #555;
+  }
+
+  
+  

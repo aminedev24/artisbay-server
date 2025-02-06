@@ -11,6 +11,7 @@ import SalesAgreement from './salesAgreement';
 import InquiryList from './inquiryList';
 import TireOrderList from './submittedTireOrders';
 import InvoiceList from './invoicesList';
+import FetchSavedCars from './fetchSavedCars';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -48,6 +49,7 @@ const ProfilePage = () => {
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
+    { key: 'saved expense estimator', label: 'Expense Estimator', component: FetchSavedCars },
   ];
 
   // Determine active content based on URL or default to settings

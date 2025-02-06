@@ -73,7 +73,7 @@
   }
   
   /* Collapsible Table Button */
-  .collapse-button, .edit-button {
+  .collapse-button, .edit-button , .submit-button{
     display: block;
     padding: 8px 12px;
     background-color: #1e3a8a;
@@ -84,7 +84,7 @@
     transition: 0.3s;
   }
   
-  .collapse-button:hover , .edit-button:hover {
+  .collapse-button:hover , .edit-button:hover, .submit-button:hover {
     background-color: #0056b3;
   }
   

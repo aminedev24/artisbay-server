@@ -97,7 +97,7 @@ const CarCostCalculator = () => {
     return initialSelections;
   });
 
-  const auctionFees = 20000;
+  const auctionFees = 25000;
   const serviceFees = 20000;
   const cuttingFee = 30000;
 

@@ -5,6 +5,11 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }
   const [selectedCar, setSelectedCar] = useState(savedCars[0] || null);
   const [isTableCollapsed, setIsTableCollapsed] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
+    // API URL setup
+  const apiUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost/artisbay-server-clean/server'
+      : '/server';
 
   const initializeCheckedState = useCallback((car) => {
     setCheckedItems((prev) => {
@@ -60,6 +65,53 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }
       setSelectedCar(updatedCars[0] || null);
     }
   };
+
+  const handleSubmit = async () => {
+    const formattedData = savedCars.map((car) => {
+      const carCheckedState = checkedItems[car.id] || { included: [], optional: [] };
+  
+      return {
+        carId: car.id,
+        make: car.make,
+        model: car.model,
+        buyingPrice: car.buyingPrice,
+        transportation: car.transportation,
+        units: car.units,
+        includedItems: car.includedItems.filter((_, index) => carCheckedState.included?.[index] ?? true),
+        selectedOptionalItems: car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true),
+      };
+    });
+  
+    try {
+      const response = await fetch(`${apiUrl}/saveCars.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+         
+        },
+        credentials: 'include', // Send cookies with request
+        body: JSON.stringify({ cars: formattedData }),
+      });
+  
+      // Debugging: Log the raw response and status code
+      console.log("Response Status:", response.status);
+      const result = await response.json();
+      console.log("Server Response:", result);
+      
+      // Handle different response statuses
+      if (!response.ok) {
+        console.error("Error response from server:", result.message);
+      } else {
+        // Handle successful submission
+        console.log("Cars saved successfully", result);
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
+  
+  
+  
 
   return (
     <div className="saved-cars-container">
@@ -200,6 +252,11 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }
           </tbody>
         </table>
       </div>
+
+      <button className="submit-button" onClick={handleSubmit}>
+        Submit Selection
+      </button>
+
     </div>
   );
 };
