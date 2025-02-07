@@ -266,7 +266,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
       </div>
 
       <button className="submit-button" onClick={handleSubmit}>
-        Submit Selection
+        Submit Order
       </button>
 
     </div>
