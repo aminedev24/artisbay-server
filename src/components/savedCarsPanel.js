@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "../css/savedCarsPanel.css";
 
-const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }) => {
+const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, showAlert }) => {
   const [selectedCar, setSelectedCar] = useState(savedCars[0] || null);
   const [isTableCollapsed, setIsTableCollapsed] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
@@ -77,7 +77,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }
         buyingPrice: car.buyingPrice,
         transportation: car.transportation,
         units: car.units,
-        tax:car.tax,
+        tax: car.tax,
         includedItems: car.includedItems.filter((_, index) => carCheckedState.included?.[index] ?? true),
         selectedOptionalItems: car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true),
       };
@@ -88,28 +88,33 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-         
         },
-        credentials: 'include', // Send cookies with request
+        credentials: "include", // Send cookies with request
         body: JSON.stringify({ cars: formattedData }),
       });
   
-      // Debugging: Log the raw response and status code
       console.log("Response Status:", response.status);
       const result = await response.json();
       console.log("Server Response:", result);
-      
-      // Handle different response statuses
+  
       if (!response.ok) {
         console.error("Error response from server:", result.message);
+        showAlert("There was an error while saving the cars. Please try again.");
       } else {
-        // Handle successful submission
         console.log("Cars saved successfully", result);
+        showAlert("Data saved successfully.");
+  
+        // Wait for 2 seconds before refreshing the page
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); // Adjust time as needed (2000ms = 2 seconds)
       }
     } catch (error) {
       console.error("Error submitting data:", error);
+      showAlert("Error submitting data.");
     }
   };
+  
   
   
   

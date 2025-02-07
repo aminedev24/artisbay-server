@@ -750,7 +750,7 @@ return (
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
     </div>
-    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={totalCostForAllCars} editCar={editCar}/>
+    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={totalCostForAllCars} showAlert={showAlert} editCar={editCar}/>
 
     </div>
  
