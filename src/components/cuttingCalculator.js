@@ -21,6 +21,8 @@ const CarCostCalculator = () => {
   const [makes, setMakes] = useState([]);
   const [models, setModels] = useState([]);
   const [editingCarIndex, setEditingCarIndex] = useState(null);
+  const [savedCarsTotalCost, setSavedCarsTotalCost] = useState(0);
+
 
 
       useEffect(() => {
@@ -111,11 +113,75 @@ const CarCostCalculator = () => {
 
   const totalCostPerUnit = subtotalForTax + tax + serviceFees + cuttingFee + optionalTotal;
 
-  const grandTotalCost = totalCostPerUnit * (Number(units) || 1);
+
 
   const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + optionalTotal;
-  const vehicleCost = Number(buyingPrice) + auctionFees + tax + cuttingFee + serviceFees + optionalTotal + Number(transportation);
+  const vehicleCost = Number(buyingPrice) + feesPerVehicle
   const totalFeesAllVehicles = feesPerVehicle * (units || 1);
+  const grandTotalCost = vehicleCost * (Number(units) || 1);
+
+  // Calculate total cost for all cars
+const totalCostForAllCars = savedCars.reduce((total, car, index) => {
+  const {
+    buyingPrice,
+    transportation,
+    units,
+    tax
+  } = car;
+
+  console.log(car)
+
+  // Convert values to numbers to avoid NaN issues
+  const numBuyingPrice = Number(buyingPrice) || 0;
+  const numTransportation = Number(transportation) || 0;
+  console.log(`num transportation: ${numTransportation}`)
+  const numUnits = Number(units) || 1; // Default to 1 if missing
+
+  const carOptionalTotal = car.selectedOptionalItems.reduce((carTotal, selectedItem) => {
+    // Find item by exact match with the selected item name
+    const item = optionalItems.find(opt => opt.name === selectedItem);
+  
+    console.log(`Selected item: ${selectedItem}`);
+    console.log('item found: ', item);
+  
+    return item ? carTotal + item.price : carTotal; // Add price if item found
+  }, 0);
+  
+  
+  
+  
+
+    console.log(`optional total ${carOptionalTotal}`)
+
+  const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + carOptionalTotal;
+
+  const vehicleCost = numBuyingPrice + feesPerVehicle;
+
+  // Total cost for all units of this vehicle
+  const grandTotalCost = vehicleCost * numUnits;
+
+  // Debugging output for each car
+  console.log(
+    `Car ${index + 1}:`,
+    `Buying Price: ¥${numBuyingPrice.toLocaleString()},`,
+    `Fees Per Vehicle: ¥${feesPerVehicle.toLocaleString()},`,
+    `Transportation: ¥${numTransportation.toLocaleString()},`,
+    `Vehicle Cost (1 unit): ¥${vehicleCost.toLocaleString()},`,
+    `Units: ${numUnits},`,
+    `Grand Total Cost: ¥${grandTotalCost.toLocaleString()}`
+  );
+
+  // Add to total
+  return total + grandTotalCost;
+}, 0);
+
+// Final total
+console.log(`Total cost for all cars: ¥${totalCostForAllCars.toLocaleString()}`);
+
+useEffect(() => {
+  console.log("Updating fees:", { auctionFees, tax, cuttingFee, serviceFees, optionalTotal });
+}, [auctionFees, tax, cuttingFee, serviceFees, optionalTotal]);
+
 
   const handleCutChange = (itemId, type) => {
     setCutSelections((prev) => ({
@@ -258,6 +324,7 @@ const resetInputs = () => {
         transportation,
         units: Number(units),
         includedItems,
+        tax,
         selectedOptionalItems,
       };
   
@@ -308,14 +375,7 @@ const resetInputs = () => {
     setEditingCarIndex(index);
   };
   
-  
-  
-  
-  const savedCarsTotalCost = savedCars.reduce((total, car) => {
-    const carTotalPerUnit = totalCostPerUnit; // Assuming same formula for each saved car
-    return total + carTotalPerUnit * car.units;
-  }, 0);
-  
+    
   const handleModelChange = (event) => {
     setModel(event.target.value);
   };
@@ -345,7 +405,7 @@ const resetInputs = () => {
     setEditingCarIndex(null);
   };
   
-  
+//console.log(savedCarsTotalCost)
 return (
     <div className="calculator-wrapper">
       {showModal && (
@@ -659,7 +719,7 @@ return (
 
         <div className="total-cost">
           <span>
-            Total fees (all vehicles)
+            Total fees (all units)
             <Tooltip message="Sum of all fees per vehicle multiplied by units" />
           </span>
           <span>¥{totalFeesAllVehicles.toLocaleString()}</span>
@@ -667,7 +727,7 @@ return (
 
         <div className="total-cost grand-total">
           <span>
-            Total cost (all vehicles)
+            Total cost (all units)
             <Tooltip message="Total cost including all fees and vehicle price multiplied by units" />
           </span>
           <span>¥{grandTotalCost.toLocaleString()}</span>
@@ -690,7 +750,7 @@ return (
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
     </div>
-    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={savedCarsTotalCost} editCar={editCar}/>
+    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={totalCostForAllCars} editCar={editCar}/>
 
     </div>
  

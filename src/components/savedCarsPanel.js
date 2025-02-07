@@ -77,6 +77,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar }
         buyingPrice: car.buyingPrice,
         transportation: car.transportation,
         units: car.units,
+        tax:car.tax,
         includedItems: car.includedItems.filter((_, index) => carCheckedState.included?.[index] ?? true),
         selectedOptionalItems: car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true),
       };
