@@ -68,53 +68,59 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
 
   const handleSubmit = async () => {
     const formattedData = savedCars.map((car) => {
-      const carCheckedState = checkedItems[car.id] || { included: [], optional: [] };
-  
-      return {
-        carId: car.id,
-        make: car.make,
-        model: car.model,
-        buyingPrice: car.buyingPrice,
-        transportation: car.transportation,
-        units: car.units,
-        tax: car.tax,
-        includedItems: car.includedItems.filter((_, index) => carCheckedState.included?.[index] ?? true),
-        selectedOptionalItems: car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true),
-      };
+        const carCheckedState = checkedItems[car.id] || { included: [], optional: [] };
+
+        return {
+            carId: car.id,
+            make: car.make,
+            model: car.model,
+            buyingPrice: car.buyingPrice,
+            transportation: car.transportation,
+            units: car.units,
+            tax: car.tax,
+            includedItems: car.includedItems.filter((_, index) => carCheckedState.included?.[index] ?? true),
+            selectedOptionalItems: car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true),
+        };
     });
-  
+
     try {
-      const response = await fetch(`${apiUrl}/saveCars.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Send cookies with request
-        body: JSON.stringify({ cars: formattedData }),
-      });
-  
-      console.log("Response Status:", response.status);
-      const result = await response.json();
-      console.log("Server Response:", result);
-  
-      if (!response.ok) {
-        console.error("Error response from server:", result.message);
-        showAlert("There was an error while saving the Data. Please try again.");
-      } else {
-        console.log("Data saved successfully", result);
-        showAlert("Data saved successfully.");
-  
-        // Wait for 2 seconds before refreshing the page
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000); // Adjust time as needed (2000ms = 2 seconds)
-      }
+        const response = await fetch(`${apiUrl}/saveCars.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include", // Send cookies with request
+            body: JSON.stringify({ cars: formattedData }),
+        });
+
+        //console.log("Response Status:", response.status);
+        const result = await response.json();
+        //console.log("Server Response:", result);
+
+        if (!response.ok || !result.success) {
+            //console.error("Error response from server:", result.message);
+            // Check if the error message indicates the user is not logged in
+            if (result.message.includes("not logged in")) {
+                showAlert("You are not logged in. Please log in to save your data.");
+            } else {
+                showAlert("There was an error while saving the data. Please try again.");
+            }
+        } else {
+            //console.log("Data saved successfully", result);
+            showAlert("Data saved successfully.");
+
+            // Optionally refresh the page or perform other actions
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000); // Adjust time as needed (2000ms = 2 seconds)
+            
+        }
     } catch (error) {
-      console.error("Error submitting data:", error);
-      showAlert("Error submitting data.");
+        console.error("Error submitting data:", error);
+        showAlert("Error submitting data.");
     }
-  };
-  
+};
   
   
   
