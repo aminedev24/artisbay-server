@@ -99,9 +99,9 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
   
       if (!response.ok) {
         console.error("Error response from server:", result.message);
-        showAlert("There was an error while saving the cars. Please try again.");
+        showAlert("There was an error while saving the Data. Please try again.");
       } else {
-        console.log("Cars saved successfully", result);
+        console.log("Data saved successfully", result);
         showAlert("Data saved successfully.");
   
         // Wait for 2 seconds before refreshing the page
