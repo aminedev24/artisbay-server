@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import "../css/savedCarsPanel.css";
+import { v4 as uuidv4 } from 'uuid'; // Install: npm install uuid
 
 const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, showAlert }) => {
   const [selectedCar, setSelectedCar] = useState(savedCars[0] || null);
@@ -67,10 +68,13 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
   };
 
   const handleSubmit = async () => {
+    const orderId = uuidv4(); // Generate unique order ID
+
     const formattedData = savedCars.map((car) => {
         const carCheckedState = checkedItems[car.id] || { included: [], optional: [] };
 
         return {
+            orderId,
             carId: car.id,
             make: car.make,
             model: car.model,
@@ -90,7 +94,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
                 "Content-Type": "application/json",
             },
             credentials: "include", // Send cookies with request
-            body: JSON.stringify({ cars: formattedData }),
+            body: JSON.stringify({ cars: formattedData, orderId }),
         });
 
         //console.log("Response Status:", response.status);
@@ -143,6 +147,8 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
           ))}
         </div>
       </div>
+      <p className="scroll-hint left">&lt; Scroll to see more &gt;</p>
+
 
       <div className="table-car-details">
         <div className="selected-car">

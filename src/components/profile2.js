@@ -49,7 +49,7 @@ const ProfilePage = () => {
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
-    { key: 'saved expense estimator', label: 'Expense Estimator', component: FetchSavedCars },
+    { key: 'Cutting & Dismantling logs', label: 'cutting & dismantling logs', component: FetchSavedCars },
   ];
 
   // Determine active content based on URL or default to settings

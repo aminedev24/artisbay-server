@@ -4,6 +4,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
   }
   
   .car-info {
@@ -25,4 +26,19 @@
   
   .items-table th {
       text-align: left;
+  }
+
+  .scroll-hint {
+    color: #1e3a8a;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .order-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
   }
