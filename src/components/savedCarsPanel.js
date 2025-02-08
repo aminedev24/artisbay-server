@@ -1,11 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 import "../css/savedCarsPanel.css";
 import { v4 as uuidv4 } from 'uuid'; // Install: npm install uuid
+import { useUser  } from './userContext';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, showAlert }) => {
   const [selectedCar, setSelectedCar] = useState(savedCars[0] || null);
   const [isTableCollapsed, setIsTableCollapsed] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
+  const { user, loading, login } = useUser ();
+  const navigate = useNavigate();
+  const location = useLocation();
+
     // API URL setup
   const apiUrl =
     process.env.NODE_ENV === 'development'
@@ -148,6 +154,13 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
         </div>
       </div>
       <p className="scroll-hint left">&lt; Scroll to see more &gt;</p>
+      {user ? null : (
+              <div className="login-note">
+                Log in to be able to submit the order.
+                <button type="button" onClick={() => {navigate('/login', { state: { from: location.pathname } })}}>Log In</button>
+                <button type="button" onClick={() => {navigate('/register', { state: { from: location.pathname } })}}>Register</button>
+              </div>
+      )}
 
 
       <div className="table-car-details">

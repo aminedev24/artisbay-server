@@ -5,6 +5,7 @@ import SavedCarsPanel from "./savedCarsPanel";
 import Modal from "./alertModal";
 import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "./vehicleData";
 
+
 const CarCostCalculator = () => {
   const [make, setMake] = useState("any");
   const [model, setModel] = useState("any");
@@ -22,6 +23,7 @@ const CarCostCalculator = () => {
   const [models, setModels] = useState([]);
   const [editingCarIndex, setEditingCarIndex] = useState(null);
   const [savedCarsTotalCost, setSavedCarsTotalCost] = useState(0);
+
 
 
 

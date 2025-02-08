@@ -137,6 +137,7 @@ textarea {
     padding: 7px 12px; /* Padding for the button */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
+    text-transform: lowercase;
 }
 
 .login-note button:hover {
