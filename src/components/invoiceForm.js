@@ -25,6 +25,7 @@ const calculateExpiryDate = (invoiceDate) => {
 const ProformaInvoiceForm = () => {
     // Predefined Bank Details
     const bankDetails = {
+      USD : {
         beneficiaryName: 'Artisbay Inc',
         bankName: 'SUMISHIN SBI NET BANK',
         branchName: 'HOJIN DAI ICHI (BRANCH SORT CODE:106)',
@@ -32,7 +33,25 @@ const ProformaInvoiceForm = () => {
         swiftCode: 'NTSSJPJT',
         accountNumber: '2628940',
         beneficiaryAddress: '5-10-44, Kasagami, Tagajyo, Miyagi, Japan',
+      },
+
+      JPY: {
+        beneficiaryName: 'Artisbay Inc',
+        iban: 'GB80 TRWI 2308 0126 4624 61',
+        "swift/bic": 'TRWIGB2LXXX',
+        "bank name and address" : 'Wise Payments Limited, 56 Shoreditch High Street, London, E1 6JJ, United Kingdom'
+
+      },
+      EUR : {
+        beneficiaryName: 'Artisbay Inc',
+        iban: 'BE47 9052 3539 7280',
+        "swift/bic": 'TRWIBEB1XXX',
+        "bank name and address": 'Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium'
+      }
+       
     };
+
+    //console.log(bankDetails.JPY['swift/bic'])
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -41,9 +60,9 @@ const ProformaInvoiceForm = () => {
         phone: '',
         email: '',
         depositAmount: '',
-        depositCurrency: 'USD',
-        depositDescription: '',
-        depositPurpose: '',
+        depositCurrency: 'JPY',
+        depositDescription: 'This payment is to order cars from the auctions in Japan',
+        depositPurpose: 'Vehicule Purchase',
         expiryDate: '',
         bankNote: 'Car details, including chassis numbers, will be provided by the remitter upon completion of the car purchase.',
         chasisNumber: '', 
@@ -63,6 +82,9 @@ const ProformaInvoiceForm = () => {
     const location = useLocation();
     const { user, loading, login } = useUser ();
     const [isTyping, setIsTyping] = useState(false); // Track typing state
+    const [currency, setCurrency] = useState('JPY');
+    const [selectedBankDetails, setSelectedBankDetails] = useState(bankDetails.JPY);
+
 
     // Function to get the next invoice number from the backend
   const fetchInvoiceNumber = async () => {
@@ -220,8 +242,16 @@ const ProformaInvoiceForm = () => {
               [name]: value,
           }));
       }
+
+      if(name == 'depositCurrency'){
+        setCurrency(value);
+        setSelectedBankDetails(bankDetails[value] || bankDetails.JPY);
+
+      }
   };
 
+  console.log(currency)
+  console.log(selectedBankDetails)
 
     function generateSerialNumber() {
         // Get the current date and time
@@ -257,7 +287,7 @@ const ProformaInvoiceForm = () => {
             ];
     
             const isFormValid = requiredFields.every(field => formData[field]);
-    
+            console.log(formData)
             if (isFormValid) {
                 // Combine the phone code and phone number
                 const fullPhoneNumber = phoneCode + formData.phone;
@@ -284,7 +314,7 @@ const ProformaInvoiceForm = () => {
                     chasisNumber: formData.chasisNumber,
                     serialNumber: generateSerialNumber(),
                     expiryDate: expiryDate,
-                    ...bankDetails,
+                    ...selectedBankDetails,
                 };
                   setTimeout(() => {
                     setSubmittedInvoiceData(newInvoiceData);
@@ -608,7 +638,7 @@ const ProformaInvoiceForm = () => {
             </div>
 
             <div className="input-group">
-             <label htmlFor='bankNote'>Note for bank (By The Remitter) 
+             <label id='bankNoteLabel' htmlFor='bankNote'>Note for bank (By The Remitter) 
               {/*<span className="required-star">*</span>*/}
               <button
                 type="button"
@@ -624,6 +654,7 @@ const ProformaInvoiceForm = () => {
                     value={formData.bankNote || ''}
                     onChange={handleChange}
                     placeholder="Leave Blank if not applicable"
+                    id='bankNoteInput'
                     rows="4"
                   ></textarea>
                 ) : (

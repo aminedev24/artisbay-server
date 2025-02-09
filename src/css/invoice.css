@@ -400,11 +400,14 @@
     border-left-color: #1da1f2;
     border-left-width:5px ;
     padding: 10px;
-
+    
   }
+
+
 
   .warning-notice p {
     margin: 0;
+    font-size: 14px;
   }
 
   /* Edit Button Styles */
@@ -436,4 +439,12 @@
 
   .bank-note-wrapper {
   padding-top: 5px; /* Add margin to the wrapper */
+}
+
+#bankNoteLabel {
+    background-color: unset;
+}
+
+#bankNoteInput {
+    padding: 20px 10px;
 }

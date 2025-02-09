@@ -27,3 +27,8 @@
   color: red;
   margin: 0;
 }
+
+.wise-info-container {
+  display: flex;
+  gap:20px;
+}

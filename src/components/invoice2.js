@@ -314,28 +314,43 @@ const handleSendEmail = async () => {
           </div>
 
           <div className="invoice-bank-info">
-            <p>
-              <strong>Beneficiary Name: </strong>{invoiceData.beneficiaryName}
-            </p>
-            <p>
-              <strong>Bank Name:</strong> {invoiceData.bankName}
-            </p>
-            <p>
-              <strong>Branch Name:</strong> {invoiceData.branchName}
-            </p>
-            <p>
-              <strong>Bank Address:</strong> {invoiceData.bankAddress}
-            </p>
-            <p>
-              <strong>Swift Code:</strong> {invoiceData.swiftCode}
-            </p>
-            <p>
-              <strong>Account Number:</strong> {invoiceData.accountNumber}
-            </p>
-            <p>
-              <strong>Beneficiary Address:</strong> {invoiceData.beneficiaryAddress}
-            </p>
+            {invoiceData.depositCurrency === "USD" ? (
+              <>
+                <p>
+                  <strong>Beneficiary Name: </strong>{invoiceData.beneficiaryName}
+                </p>
+                <p>
+                  <strong>Bank Name:</strong> {invoiceData.bankName}
+                </p>
+                <p>
+                  <strong>Branch Name:</strong> {invoiceData.branchName}
+                </p>
+                <p>
+                  <strong>Bank Address:</strong> {invoiceData.bankAddress}
+                </p>
+                <p>
+                  <strong>Swift Code:</strong> {invoiceData.swiftCode}
+                </p>
+                <p>
+                  <strong>Account Number:</strong> {invoiceData.accountNumber}
+                </p>
+                <p>
+                  <strong>Beneficiary Address:</strong> {invoiceData.beneficiaryAddress}
+                </p>
+              </>
+            ) :(
+              <>
+                {/* Add EUR-specific details here */}
+                <p>
+                  <strong>Beneficiary Name:</strong> {invoiceData.beneficiaryName}
+                </p>
+                <p><strong>IBAN: </strong> {invoiceData.iban} </p>
+                <p><strong>SWift/BIC:</strong> {invoiceData['swift/bic']} </p>
+                <p><strong>Bank name and address</strong> {invoiceData['bank name and address']} </p>
+              </>
+          )}
           </div>
+
 
           <div className="important">
             <span className="notice">Important</span>

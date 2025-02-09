@@ -156,7 +156,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
       <p className="scroll-hint left">&lt; Scroll to see more &gt;</p>
       {user ? null : (
               <div className="login-note">
-                Log in to be able to submit the order.
+                Log in to submit the order.
                 <button type="button" onClick={() => {navigate('/login', { state: { from: location.pathname } })}}>Log In</button>
                 <button type="button" onClick={() => {navigate('/register', { state: { from: location.pathname } })}}>Register</button>
               </div>

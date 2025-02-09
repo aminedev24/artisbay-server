@@ -20,6 +20,9 @@ const CarDismantlingService = () => {
       <p>
         We provide photo options at every stage—before, during, and after loading—so you have complete visibility. With us, you get a fully customized, secure, and cost-effective car dismantling and shipping service that meets your needs.
       </p>
+      
+      <p>Get an instant cost estimate for your custom dismantling needs! Use our<Link className="cta-link" target="_blank" to ='/car-cost-calculator'>calculator</Link>now and plan your shipment with confidence.</p>
+      
       <p>For more information visit our dedicated <Link className='cta-link' to='/car-dismantling'>Dismantling cars</Link> page.</p>
     </div>
   );
