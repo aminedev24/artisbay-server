@@ -531,10 +531,10 @@ const handleSendEmail = async () => {
             {/*
                         <button className='no-print' onClick={handlePrint}>Print</button>
                         <button className='no-print' onClick={handleSaveAsPDF}>Save as PDF</button>
+                            <GeneratePdfButton invoiceData={invoiceData} />
 
 
                         */}
-            <GeneratePdfButton invoiceData={invoiceData} />
 
             <button
               className="no-print"
