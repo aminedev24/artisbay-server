@@ -30,7 +30,7 @@ const BankInformation = () => {
         <table className="bank-info-table wise-info-table">
             <tbody>
                 <tr>
-                    <th colSpan='2'>To pay in JPY (Japanese Yen):</th>
+                    <th style={{padding: '16px'}} colSpan='2'>To pay in JPY (Japanese Yen):</th>
                 </tr>
                 <tr>
                     <th>Beneficiary Name</th>
@@ -76,7 +76,7 @@ const BankInformation = () => {
                 </tr>
             </tbody>
         </table>
-        
+
         </div>
      
 
