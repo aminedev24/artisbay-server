@@ -405,9 +405,15 @@ const styles = StyleSheet.create({
               <Text style={styles.contactInfoText}>
                 <Text style={{ fontWeight: 'bold' }}>SWIFT/BIC:</Text> {invoiceData['swift/bic']}
               </Text>
-              <Text style={styles.contactInfoText}>
+              <Text 
+                style={[
+                  styles.contactInfoText, 
+                  { maxWidth: invoiceData.depositCurrency !== 'USD' ? '65%' : '' }
+                ]}
+              >
                 <Text style={{ fontWeight: 'bold' }}>Bank Name and Address:</Text> {invoiceData['bank name and address']}
               </Text>
+
             </>
           )}
         </View>

@@ -346,7 +346,7 @@ const handleSendEmail = async () => {
                 </p>
                 <p><strong>IBAN: </strong> {invoiceData.iban} </p>
                 <p><strong>SWift/BIC:</strong> {invoiceData['swift/bic']} </p>
-                <p><strong>Bank name and address</strong> {invoiceData['bank name and address']} </p>
+                <p style={{maxWidth: '70%'}}><strong>Bank name and address</strong> {invoiceData['bank name and address']} </p>
               </>
           )}
           </div>
@@ -531,10 +531,10 @@ const handleSendEmail = async () => {
             {/*
                         <button className='no-print' onClick={handlePrint}>Print</button>
                         <button className='no-print' onClick={handleSaveAsPDF}>Save as PDF</button>
-                                                                          <GeneratePdfButton invoiceData={invoiceData} />
 
 
                         */}
+            <GeneratePdfButton invoiceData={invoiceData} />
 
             <button
               className="no-print"
