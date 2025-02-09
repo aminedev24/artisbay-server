@@ -369,16 +369,49 @@ const styles = StyleSheet.create({
           </View>
         </View>
   
-        {/* Bank Info */}
         <View style={styles.invoiceBankInfo}>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Beneficiary Name:</Text> {invoiceData.beneficiaryName}</Text>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Bank Name:</Text> {invoiceData.bankName}</Text>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Branch Name:</Text> {invoiceData.branchName}</Text>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Bank Address:</Text> {invoiceData.bankAddress}</Text>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Swift Code:</Text> {invoiceData.swiftCode}</Text>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Account Number:</Text> {invoiceData.accountNumber}</Text>
-          <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Beneficiary Address:</Text> {invoiceData.beneficiaryAddress}</Text>
+          {invoiceData.depositCurrency === "USD" ? (
+            <>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Beneficiary Name:</Text> {invoiceData.beneficiaryName}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Bank Name:</Text> {invoiceData.bankName}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Branch Name:</Text> {invoiceData.branchName}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Bank Address:</Text> {invoiceData.bankAddress}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Swift Code:</Text> {invoiceData.swiftCode}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Account Number:</Text> {invoiceData.accountNumber}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Beneficiary Address:</Text> {invoiceData.beneficiaryAddress}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Beneficiary Name:</Text> {invoiceData.beneficiaryName}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>IBAN:</Text> {invoiceData.iban}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>SWIFT/BIC:</Text> {invoiceData['swift/bic']}
+              </Text>
+              <Text style={styles.contactInfoText}>
+                <Text style={{ fontWeight: 'bold' }}>Bank Name and Address:</Text> {invoiceData['bank name and address']}
+              </Text>
+            </>
+          )}
         </View>
+
   
         {/* Important Section */}
         <View style={styles.important}>
