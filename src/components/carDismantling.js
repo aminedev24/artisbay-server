@@ -18,7 +18,7 @@ const CarDismantling = () => {
             alt="Car dismantling process"
             className="image"
           />
-          <button className="dismantling-shipping-btn">Click here</button>
+          <button className="dismantling-shipping-btn"><Link to='/car-cost-calculator'>Click here</Link></button>
         </div>
         <div className="image-container cutting">
           <img

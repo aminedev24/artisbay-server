@@ -49,7 +49,7 @@ export default function DepositsTable() {
 
     return (
         <div className="p-4">
-            <h1 className="text-xl font-bold mb-4">Deposit Records</h1>
+            <h1 className="text-xl font-bold mb-4">Account</h1>
 
             {/* Filter Inputs */}
             <div className="filter-container">

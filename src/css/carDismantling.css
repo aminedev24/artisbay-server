@@ -196,9 +196,11 @@
   background-color: #465b9e;
   border-radius: 33px;
   box-shadow: -12px 13px 1px #333;
-  font-size: 45px;
+ }
 
-}
+ .dismantling-shipping-btn a {
+  font-size: 35px !important;
+ }
 
 .dismantling-shipping-btn:hover {
   background-color: #596db0;
