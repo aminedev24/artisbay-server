@@ -34,8 +34,8 @@ const TopBar = () => {
       process.env.NODE_ENV === 'development'
         ? 'http://localhost/artisbay-server/server'
         : '/server';
-
-        const fetchExchangeRate = async () => {
+    /*
+      const fetchExchangeRate = async () => {
           try {
             const response = await fetch(`${apiUrl}/scrap.php`);
             const data = await response.json();
@@ -53,7 +53,7 @@ const TopBar = () => {
     const interval = setInterval(fetchExchangeRate, 60000); // Fetch every 60 seconds
     return () => clearInterval(interval);
   }, []);
-
+*/
 
   return (
     <div className='top-bar-wrapper'>

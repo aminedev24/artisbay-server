@@ -181,3 +181,25 @@
   text-align: left;
 }
 
+.image-container {
+  position: relative;
+}
+
+.dismantling-shipping-btn {
+  position: absolute;
+  top: 69%;
+  right: 16%;
+  width: 37%;
+  height: 9%;
+  color: #fff;
+  border: none;
+  background-color: #465b9e;
+  border-radius: 33px;
+  box-shadow: -12px 13px 1px #333;
+  font-size: 45px;
+
+}
+
+.dismantling-shipping-btn:hover {
+  background-color: #596db0;
+}

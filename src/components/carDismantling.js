@@ -14,10 +14,11 @@ const CarDismantling = () => {
         {/* Hero Images */}
         <div className="image-container">
           <img
-            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping.jpeg`}
+            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping2.jpeg`}
             alt="Car dismantling process"
             className="image"
           />
+          <button className="dismantling-shipping-btn">Click here</button>
         </div>
         <div className="image-container cutting">
           <img

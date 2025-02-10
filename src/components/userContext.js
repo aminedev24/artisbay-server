@@ -112,6 +112,7 @@ export const UserProvider = ({ children }) => {
   }
 };
 
+//console.log(user)
 // Initial session check on component mount
 useEffect(() => {
   checkSession();

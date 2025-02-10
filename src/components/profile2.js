@@ -12,6 +12,7 @@ import InquiryList from './inquiryList';
 import TireOrderList from './submittedTireOrders';
 import InvoiceList from './invoicesList';
 import FetchSavedCars from './fetchSavedCars';
+import DepositsTable from './fetchDeposits';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -45,11 +46,13 @@ const ProfilePage = () => {
     { key: 'inquiries', label: 'Inquiries', component: InquiryList },
     { key: 'submitted tire orders', label: 'submitted tire orders', component: TireOrderList },
     { key: 'Invoices List', label: 'Invoices List', component: InvoiceList },
+    { key: 'Account', label: 'Account', component: DepositsTable},
     { key: 'privacy', label: 'Privacy', component: Privacy },
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
     { key: 'Cutting & Dismantling logs', label: 'cutting & dismantling logs', component: FetchSavedCars },
+
   ];
 
   // Determine active content based on URL or default to settings
@@ -159,8 +162,17 @@ const ProfilePage = () => {
     activeContent === 'anti-social-policy'
   );
 
+  const isSpecialContent2 = (
+    activeContent === 'terms' ||
+    activeContent === 'privacy' ||
+    activeContent === 'sales-contract' ||
+    activeContent === 'anti-social-policy'
+);
+
+  
   const style = {
-    height: isSpecialContent ? '70vh' : '90vh',
+    height: isSpecialContent ? '70vh' : '118vh',
+    padding: isSpecialContent2 ? '0' : '',
   };
 
   return (

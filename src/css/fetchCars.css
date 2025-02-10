@@ -47,3 +47,49 @@
     display: flex;
     gap: 10px;
   }
+
+  .p-4 th, .p-4 td {
+    text-align: center;
+  }
+
+  .filter-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search {
+    background-color: #007bff;
+    color: white;
+}
+
+.clear {
+    background-color: #6c757d;
+    color: white;
+}
+
+.filter-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}

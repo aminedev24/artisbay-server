@@ -109,10 +109,17 @@
 /* Content Styles */
 .profile-content {
     flex: 1;
-    padding: 40px;
+    padding: 25px 35px;
     overflow-y: auto;
     background-color: var(--white);
 }
+
+
+.profile-container .terms-container {
+    margin: 0;
+    padding: 20px;
+}
+
 
 .profile-content h1 {
     font-size: 28px;
