@@ -54,7 +54,7 @@ const BankInformation = () => {
         <table className="bank-info-table wise-info-table">
             <tbody>
                 <tr>
-                    <th colSpan='2'>To pay in EUR (Euros):</th>
+                    <th colSpan='2'>To pay in EUR:</th>
                 </tr>
                 <tr>
                     <th>Beneficiary Name</th>
