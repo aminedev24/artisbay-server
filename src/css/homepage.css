@@ -285,6 +285,7 @@ option {
 
 .main-container {
     display: flex; /* Aligns the containers side by side */
+    flex-wrap: wrap; /* this gonna fix the width issue for devices like ipad air */
     justify-content: space-between; /* Ensures equal spacing between them */
     gap: 10px;
 }
@@ -293,6 +294,7 @@ option {
     flex: 1; /* Allows both containers to take equal space */
     box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
+
 
 
 .title {
