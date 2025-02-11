@@ -187,9 +187,9 @@ const links2 = [
 
           <div className="ad-header-container">
           <picture className="ad-banner">
-            <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome.webp`} type="image/webp" />
-            <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome.png`} type="image/jpeg" /> 
-            <img className="ad-banner" src={`${process.env.PUBLIC_URL}/images/dismantlinghome.png`} alt="dismantling banner" />
+            <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome2.webp`} type="image/webp" />
+            <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} type="image/jpeg" /> 
+            <img className="ad-banner" src={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} alt="dismantling banner" />
           </picture>
 
             <Link to="/car-dismantling">
