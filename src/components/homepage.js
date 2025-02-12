@@ -165,9 +165,9 @@ const links2 = [
           <div className="ad-header-container">
 
           <picture className="ad-banner">
-            <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome.webp`} type="image/webp" />
-            <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome.jpeg`} type="image/jpeg" /> 
-            <img className="ad-banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome.jpeg`} alt="Tires banner" />
+            <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.webp`} type="image/webp" />
+            <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} type="image/jpeg" /> 
+            <img className="ad-banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} alt="Tires banner" />
           </picture>
 
           <Link to="/help?topic=about%20used%20Tires">

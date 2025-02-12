@@ -31,49 +31,87 @@ const FetchSavedCars = () => {
       ? 'http://localhost/artisbay-server-clean/server'
       : '/server';
 
-  useEffect(() => {
-    const fetchSavedCars = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/fetchCarsEstimation.php`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        const data = await response.json();
-        if (data.success) {
-          setSavedCars(data.cars);
-
-          const orderIds = [...new Set(data.cars.map(car => car.order_id))]; // Unique order IDs
-
-          const grouped = data.cars.reduce((acc, car) => {
-            const orderIndex = orderIds.indexOf(car.order_id) + 1; // Get order position
-            const displayOrderId = `Order #${orderIndex}`;
-          
-            if (!acc[displayOrderId]) {
-              acc[displayOrderId] = [];
+      useEffect(() => {
+        const fetchSavedCars = async () => {
+          try {
+            const response = await fetch(`${apiUrl}/fetchCarsEstimation.php`, {
+              method: "GET",
+              credentials: "include",
+            });
+      
+            const data = await response.json();
+            if (data.success) {
+              setSavedCars(data.cars);
+      
+              const orderIds = [...new Set(data.cars.map(car => car.order_id))]; // Unique order IDs
+              const grouped = data.cars.reduce((acc, car) => {
+                const orderIndex = orderIds.indexOf(car.order_id) + 1;
+                const displayOrderId = `Order #${orderIndex}`;
+      
+                if (!acc[displayOrderId]) {
+                  acc[displayOrderId] = [];
+                }
+      
+                acc[displayOrderId].push(car);
+                return acc;
+              }, {});
+      
+              setGroupedOrders(grouped);
+              
+              // Set the first order as active
+              const firstOrder = Object.keys(grouped)[0] || null;
+              setActiveOrder(firstOrder);
+      
+              // Set the first car of the first order as the active tab
+              if (firstOrder && grouped[firstOrder].length > 0) {
+                setActiveTab(grouped[firstOrder][0].id);
+              }
+            } else {
+              console.error("Error fetching saved cars:", data.message);
             }
-          
-            acc[displayOrderId].push(car);
-            return acc;
-          }, {});
-          
-          
-          
-
-          setGroupedOrders(grouped);
-          setActiveOrder(Object.keys(grouped)[0] || null);
-          //setActiveTab(data.cars.length > 0 ? data.cars[0].id : null);
-        } else {
-          console.error("Error fetching saved cars:", data.message);
+          } catch (error) {
+            console.error("Error fetching saved cars:", error);
+          }
+        };
+      
+        fetchSavedCars();
+      }, []);
+      
+      // When changing orders, reset the activeTab to the first car in that order
+      useEffect(() => {
+        if (activeOrder && groupedOrders[activeOrder]?.length > 0) {
+          setActiveTab(groupedOrders[activeOrder][0].id);
         }
-      } catch (error) {
-        console.error("Error fetching saved cars:", error);
-      }
-    };
+      }, [activeOrder, groupedOrders]);
 
-    fetchSavedCars();
-  }, []);
-
+      const calculateOrderSummary = (orderCars) => {
+        let totalCars = 0;
+        let totalInvestment = 0;
+        let totalLists = orderCars.length; // Each car in the array is a separate list
+      
+        orderCars.forEach((car) => {
+          const numBuyingPrice = Number(car.buying_price) || 0;
+          const numTransportation = Number(car.transportation) || 0;
+          const numUnits = Number(car.units) || 1;
+          const tax = Number(car.tax) || 0;
+      
+          const carOptionalTotal = car.selectedOptionalItems.reduce((carTotal, selectedItem) => {
+            const item = optionalItems.find(opt => opt.id === selectedItem);
+            return item ? carTotal + item.price : carTotal;
+          }, 0);
+      
+          const feesPerVehicle = auctionFees + numTransportation + tax + cuttingFee + serviceFees + carOptionalTotal;
+          const vehicleCost = numBuyingPrice + feesPerVehicle;
+          const grandTotalCost = vehicleCost * numUnits;
+      
+          totalCars += numUnits;
+          totalInvestment += grandTotalCost;
+        });
+      
+        return { totalCars, totalInvestment, totalLists };
+      };
+      
+      
  
   const handleCloseModal = () => {
     setShowModal(false);
@@ -152,76 +190,116 @@ const FetchSavedCars = () => {
       </div>
       {/* Orders Displayed as Cards */}
       {activeOrder && groupedOrders[activeOrder] && (
-              <div className="order-card">
-                <h2>{activeOrder}</h2>
+        <div className="order-card">
+          <h2>{activeOrder}</h2>
 
-                {groupedOrders[activeOrder].map((car) => (
-                  <div key={car.id} className="saved-car-details">
-                    <h3>{car.make} {car.model}</h3>
+          {/* Car Tabs inside Order */}
+          <div className="saved-orders-tabs">
+            {groupedOrders[activeOrder].map((car) => (
+              <button
+                key={car.id}
+                className={`tab-button ${activeTab === car.id ? "active" : ""}`}
+                onClick={() => setActiveTab(car.id)}
+              >
+                {car.make} {car.model}
+              </button>
+            ))}
+          </div>
 
-                    <p><strong>Buying Price:</strong> ¥{new Intl.NumberFormat().format(car.buying_price)}</p>
-                    <p><strong>Transportation:</strong> ¥{new Intl.NumberFormat().format(car.transportation)}</p>
-                    <p><strong>Units:</strong> {car.units}</p>
+          {/* Display Selected Car Details */}
+          {groupedOrders[activeOrder].map((car) =>
+            activeTab === car.id ? (
+              <div key={car.id} className="saved-car-details">
+                <h3>{car.make} {car.model}</h3>
 
-                    {/* Included & Optional Items as Tables */}
+                <p><strong>Buying Price:</strong> ¥{new Intl.NumberFormat().format(car.buying_price)}</p>
+                <p><strong>Transportation:</strong> ¥{new Intl.NumberFormat().format(car.transportation)}</p>
+                <p><strong>Units:</strong> {car.units}</p>
 
-                    <div className="items-section">
-                      <h5
-                        className="collapse-btn"
-                        onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
-                      >
-                        {!isItemsTableCollapsed ? 'Show list': 'Hide list'} {!isItemsTableCollapsed ? "▼" : "▲"}
-                      </h5>
-                      <table className="items-table">
-                        <thead>
-                          <tr>
-                            <th>Included Items</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {isItemsTableCollapsed && car.includedItems.length > 0 ? (
-                            car.includedItems.map((item, index) => (
-                              <tr key={index}><td>{item}</td></tr>
-                            ))
-                          ) : (
-                          ''
-                          )}
-                        </tbody>
-                      </table>
+           <div className="items-section">
+            {/* Included Items Table */}
+            <h5
+              className="collapse-btn"
+              onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
+            >
+              {isItemsTableCollapsed ? "Show list" : "Hide list"} {isItemsTableCollapsed ? "▼" : "▲"}
+            </h5>
+            <table className="items-table">
+              <thead>
+                <tr>
+                  <th>Included Items</th>
+                </tr>
+              </thead>
+              <tbody style={{ display: isItemsTableCollapsed ? "none" : "table-row-group" }}>
+                {car.includedItems.length > 0 ? (
+                  car.includedItems.map((item, index) => (
+                    <tr key={index}><td>{item}</td></tr>
+                  ))
+                ) : (
+                  <tr><td>No items</td></tr>
+                )}
+              </tbody>
+            </table>
 
+            {/* Optional Items Table */}
+            <h5
+              className="collapse-btn"
+              onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
+            >
+              {isOptionalTableCollapsed ? "Show list" : "Hide list"} {isOptionalTableCollapsed ? "▼" : "▲"}
+            </h5>
+            <table className="items-table">
+              <thead>
+                <tr>
+                  <th>Optional Items</th>
+                </tr>
+              </thead>
+              <tbody style={{ display: isOptionalTableCollapsed ? "none" : "table-row-group" }}>
+                {car.selectedOptionalItems.length > 0 ? (
+                  car.selectedOptionalItems.map((item, index) => (
+                    <tr key={index}><td>{item}</td></tr>
+                  ))
+                ) : (
+                  <tr><td>No optional items</td></tr>
+                )}
+              </tbody>
+            </table>
 
-                      <h5
-                        className="collapse-btn"
-                        onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
-                      >
-                        {!isOptionalTableCollapsed ? 'Show list': 'Hide list'} {!isOptionalTableCollapsed ? "▼" : "▲"}
-                      </h5>
-
-                      <table className="items-table">
-                   
-                        <thead>
-                          <tr>
-                            <th>Optional Items</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {isOptionalTableCollapsed && car.selectedOptionalItems.length > 0 ? (
-                            car.selectedOptionalItems.map((item, index) => (
-                              <tr key={index}><td>{item}</td></tr>
-                            ))
-                          ) : (
-                            ''
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                ))}
+            {/* Order Summary */}
+            <div className="summary-section">
+              <h3>Order Summary</h3>
+              {(() => {
+                const { totalCars, totalInvestment } = calculateOrderSummary(groupedOrders[activeOrder]);
+                return (
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Total Cars</th>
+                        <td>{totalCars}</td>
+                      </tr>
+                  
+                      <tr>
+                        <th>Total Investment</th>
+                        <td>¥{totalInvestment.toLocaleString()}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                );
+              })()}
               </div>
-            )}
+                  </div>
+
+                      </div>
+                    ) : null
+                  )}
+            </div>
+      )}
+
     
       {/* Summary Section */}
       <div className="summary-section">
+        <h3>Total Orders Summary
+        </h3>
         <table>
           <tbody>
             <tr>

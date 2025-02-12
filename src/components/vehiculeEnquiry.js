@@ -173,7 +173,7 @@ const InquiryForm = () => {
           )}
 
           <div className="form-section">
-            <h2>Your Information</h2>
+            <h3>Your Information</h3>
             {user ? null : (
               <div className="login-note">
                 Log in for a quick auto-fill.
@@ -282,7 +282,7 @@ const InquiryForm = () => {
           </div>
 
           <div className="form-section">
-            <h2>Vehicle Information</h2>
+            <h3>Vehicle Information</h3>
             <div className="form-group">
               <div className="quarter-width">
                 <label htmlFor="make">Make</label>

@@ -137,6 +137,10 @@ option {
     grid-template-columns: repeat(8, 1fr); /* Keep five columns */
     gap: 30px; /* Increased space between cards */
     padding: 20px; /* Padding around the container */
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #fe9900;
+    margin: 20px;
+    
 }
 
 @media (max-width: 1000px){
@@ -146,7 +150,6 @@ option {
 }
 
 .info-card {
-    background-color: #ffffff; /* Lighter background for contrast */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Deeper shadow for more depth */
     text-align: center; /* Center align text */
     transition: transform 0.2s ease; /* Smooth scaling effect */
@@ -425,9 +428,9 @@ option {
 }
 .order-now {
     position: absolute;
-    bottom: 30%;
-    width: 12%;
-    left: 61%;
+    bottom: 26%;
+    width: 16%;
+    left: 74%;
     height: 8%;
     
 }
