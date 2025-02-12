@@ -339,7 +339,7 @@ const handleSendEmail = async () => {
                 </p>
               </>
             ) :(
-              <>
+              <div>
                 {/* Add EUR-specific details here */}
                 <p>
                   <strong>Beneficiary Name:</strong> {invoiceData.beneficiaryName}
@@ -347,7 +347,7 @@ const handleSendEmail = async () => {
                 <p><strong>IBAN: </strong> {invoiceData.iban} </p>
                 <p><strong>SWift/BIC:</strong> {invoiceData['swift/bic']} </p>
                 <p style={{maxWidth: '70%'}}><strong>Bank name and address</strong> {invoiceData['bank name and address']} </p>
-              </>
+              </div>
           )}
           </div>
 
