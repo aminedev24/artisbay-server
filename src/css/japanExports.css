@@ -2,7 +2,7 @@
 .japan-exports {
     color: #333;
     line-height: 1.6;
-    padding: 20px;
+    padding: 30px;
   }
   
   /* Headings */
@@ -15,7 +15,7 @@
   /* Paragraphs */
   .pdf-content-container p {
     font-size: 16px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
   
   /* Lists */
@@ -25,7 +25,7 @@
   }
   
   .pdf-content-container ul li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   
   /* Links */
