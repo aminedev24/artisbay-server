@@ -4,6 +4,7 @@ import { useUser } from './userContext'; // Import useUser hook
 import '../css/header.css';
 import TopBar from './topbar';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import ReactCountryFlag from "react-country-flag";
 
 const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -121,6 +122,17 @@ const Header = () => {
           </div>
 
           <div className="right-links">
+            <ReactCountryFlag
+              countryCode={"JP"}
+              svg
+              style={{
+                  width: '1.5em',
+                  height: '1.5em',
+                  marginRight: '-10px',
+              }}
+              title={"Japan"}
+            />
+            <Link to={'/help?topic=For%20Dealers%20in%20Japan'}>日本の輸出</Link>
             <div
               className="nav-item dropdown"
               ref={(el) => (dropdownRefs.current['localServices'] = el)}

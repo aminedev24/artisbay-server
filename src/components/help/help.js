@@ -23,6 +23,8 @@ import FAQComponent from './faq';
 import AutomatedInvoice from './automatedInvoice';
 import WisePaymentInstructions from './wise';
 import BusinessConsulting from './businessConsulting';
+import PdfContent from './japanDealers';
+
 // Define the topics
 const topics = {
   help: [
@@ -32,6 +34,7 @@ const topics = {
     { name: "Bank Information", content: <BankInformation/>, image: `${process.env.PUBLIC_URL}/images/bankinfo.png`},
     { name: "F&Q", content: <FAQComponent/>, image: `${process.env.PUBLIC_URL}/images/FAQ.png`},
     { name: "Automated Invoice", content: <AutomatedInvoice/>, image: `${process.env.PUBLIC_URL}/images/invoicegenerator.png`},
+    { name: "For Dealers in Japan", content: <PdfContent/>, image: `${process.env.PUBLIC_URL}/images/consultwithabhelp.png`},
 
     { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
     { name: "Artisbay Consulting", content: <BusinessConsulting />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },

@@ -120,7 +120,6 @@
 .left-links, .right-links {
   display: flex;
   gap: 20px;
-  align-items: end;
 }
 
 .dropdown-content::after {

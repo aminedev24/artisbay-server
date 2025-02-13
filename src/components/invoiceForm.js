@@ -84,7 +84,7 @@ const ProformaInvoiceForm = () => {
     const [isTyping, setIsTyping] = useState(false); // Track typing state
     const [currency, setCurrency] = useState('JPY');
     const [selectedBankDetails, setSelectedBankDetails] = useState(bankDetails.JPY);
-
+    const [depositAmount, setDepositAmount] = useState('')
 
     // Function to get the next invoice number from the backend
   const fetchInvoiceNumber = async () => {
@@ -248,6 +248,16 @@ const ProformaInvoiceForm = () => {
         setSelectedBankDetails(bankDetails[value] || bankDetails.JPY);
 
       }
+
+      if (name == 'depositAmount') {
+        const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
+        if (rawValue === "" || isNaN(rawValue)) {
+          setDepositAmount(""); // Allow empty input
+        } else {
+          setDepositAmount(Number(rawValue)); // Store as number
+        }
+      }
+      
   };
 
   console.log(currency)
@@ -305,7 +315,7 @@ const ProformaInvoiceForm = () => {
                     country: formData.country, // Include the country field
                     invoiceNumber: `AB-${invoiceCounter}`, // Use updated invoiceCounter
                     invoiceDate:invoiceDate,
-                    depositAmount: formattedDepositAmount, // Store formatted deposit amount
+                    depositAmount: depositAmount.toLocaleString(), // Store formatted deposit amount
                     depositCurrency: formData.depositCurrency,
                     depositDescription: formData.depositDescription,
                     depositPurpose: formData.depositPurpose,
@@ -547,10 +557,10 @@ const ProformaInvoiceForm = () => {
                       Payment Amount<span className="required-star">*</span>
                   </label>
                     <input
-                      type="number"
+                      type="text"
                       id="depositAmount"
                       name="depositAmount"
-                      value={formData.depositAmount}
+                      value={depositAmount.toLocaleString()}
                       onChange={handleChange}
                       placeholder="Payment amount"
                       required

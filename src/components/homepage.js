@@ -113,7 +113,7 @@ const links2 = [
 
         <div className="ad-header-container">
             <img
-              src={`${process.env.PUBLIC_URL}/images/consultwithartisbayhome.jpeg`}
+              src={`${process.env.PUBLIC_URL}/images/consultwithabhomejp.jpeg`}
               className="ad-banner"
               alt="sell banner"
             />
