@@ -30,6 +30,8 @@ import NamibiaAgent from './components/namibiaAgent';
 import CongoAgent from './components/congoAgent';
 import TanzainaAgent from './components/tanzaniaAgent';
 import CarCostCalculator from './components/cuttingCalculator';
+import PdfContent from './components/help/japanDealers';
+
 /* src/index.css */
 
 
@@ -100,6 +102,7 @@ function App() {
           <Route path= '/local-services/congo' element ={<CongoAgent />}></Route>
           <Route path= '/local-services/tanzania' element ={<TanzainaAgent />}></Route>
           <Route path ='car-cost-calculator' element= {<CarCostCalculator />}></Route>
+          <Route path ='/japan-exports' element= {<PdfContent />}></Route>
           </Routes>
       <Footer />
     </Router>

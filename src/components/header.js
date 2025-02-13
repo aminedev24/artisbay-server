@@ -132,7 +132,7 @@ const Header = () => {
               }}
               title={"Japan"}
             />
-            <Link to={'/help?topic=For%20Dealers%20in%20Japan'}>日本の輸出</Link>
+            <Link to={'/japan-exports'}>日本の輸出</Link>
             <div
               className="nav-item dropdown"
               ref={(el) => (dropdownRefs.current['localServices'] = el)}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../../css/japanExports.css'; // Import the CSS file
 
 const PdfContent = () => {
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('ja');
 
   const buttonStyle = {
     padding: '10px 20px',
@@ -13,7 +14,7 @@ const PdfContent = () => {
     borderRadius: '5px',
     cursor: 'pointer',
     fontSize: '16px'
-  }
+  };
 
   const content = {
     en: `
@@ -43,10 +44,15 @@ const PdfContent = () => {
       </div>
     `,
     ja: `
-      <h4>アーティスベイ株式会社と共に海外市場を開拓しましょう</h4>
+    <div class="banner">
+        <img src='${process.env.PUBLIC_URL}/images/consultwithabhelp.png' alt='Consult with Artisbay' />
+    </div>
+    <div class='japan-exports'>
+    
+      <h3>アーティスベイ株式会社と共に海外市場を開拓しましょう</h3>
       <p>日本のスポーツカーは、クラシックなJDMモデルから最新のハイパフォーマンス車まで、 世界中で高い需要があります。しかし、海外の購入者に販売するには、物流、規制、市場 参入の壁など、さまざまな課題があります。</p>
       <p>アーティスベイ株式会社は、輸出入ビジネスコンサルティングを専門とし、日本の企業が海外市場に進出するサポートを提供します。私たちは、日本のスポーツカー、スポーツバイク、ソーラーパネル、テラスなどの住宅構造拡張を取り扱い、物流、信頼できるバイヤー、オークションでの仕入れなど、あらゆるニーズに対応いたします。</p>
-      <h4>アーティスベイ株式会社を選ぶ理由</h4>
+      <h3>アーティスベイ株式会社を選ぶ理由</h3>
       <ul>
         <li>スムーズな海外輸出と物流サポート</li>
         <li>輸送、通関、各国の規制対応をすべて管理し、手間のかからない輸出プロセスを実現します。</li>
@@ -59,7 +65,7 @@ const PdfContent = () => {
         <li>在庫の最適化を行い、海外市場での販売効率を向上させます。</li>
         <li>在庫を売りたい場合でも、新しく車両を仕入れたい場合でも、最適なバイヤーや仕入先を紹介し、事業拡大をサポートします。</li>
       </ul>
-      <h4>こんな方におすすめ</h4>
+      <h3>こんな方におすすめ</h3>
       <ul>
         <li>海外市場に進出したい日本のスポーツカーディーラー</li>
         <li>オークションを活用し、海外のバイヤーへ直接販売したい方</li>
@@ -70,6 +76,7 @@ const PdfContent = () => {
       <div class='image-container'>
         <img src='${process.env.PUBLIC_URL}/images/consultwithabchartjp.png' alt='Consult with Artisbay' />
       </div>
+    </div>
     `
   };
 
@@ -78,10 +85,12 @@ const PdfContent = () => {
   };
 
   return (
-    <div className='terms-container'>
+    <div className='pdf-content-container'>
+      {/*
       <button style={buttonStyle} onClick={toggleLanguage}>
         {language === 'en' ? '日本語に切り替え' : 'Switch to English'}
       </button>
+      */}
       <div dangerouslySetInnerHTML={{ __html: content[language] }} />
     </div>
   );

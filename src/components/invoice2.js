@@ -339,7 +339,7 @@ const handleSendEmail = async () => {
                 </p>
               </>
             ) :(
-              <div>
+              <div className="invoice-bank-info">
                 {/* Add EUR-specific details here */}
                 <p>
                   <strong>Beneficiary Name:</strong> {invoiceData.beneficiaryName}
@@ -444,13 +444,13 @@ const handleSendEmail = async () => {
                   <tr>
                     <th>Payment amount</th>
                     <td>
-                      {invoiceData.depositAmount}
+                      {invoiceData.depositAmount} {invoiceData.depositCurrency}
                     </td>
                   </tr>
                   <tr>
                     <th>Grand Total</th>
                     <td>
-                      {invoiceData.depositAmount} 
+                      {invoiceData.depositAmount}  {invoiceData.depositCurrency}
                     </td>
                   </tr>
                 </tbody>

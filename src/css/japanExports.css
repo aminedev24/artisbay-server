@@ -1,0 +1,81 @@
+/* General container styling */
+.japan-exports {
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  
+  /* Headings */
+  .pdf-content-container h4 {
+    color: #f1892b;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Paragraphs */
+  .pdf-content-container p {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  /* Lists */
+  .pdf-content-container ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  .pdf-content-container ul li {
+    margin-bottom: 10px;
+  }
+  
+  /* Links */
+  .pdf-content-container .cta-link {
+    color: #1da1f2;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .pdf-content-container .cta-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Image container */
+  .pdf-content-container .image-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .pdf-content-container .image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Banner styling */
+  .pdf-content-container .banner {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pdf-content-container .banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Button styling (if you decide to use the button later) */
+  .pdf-content-container button {
+    padding: 10px 20px;
+    margin: 20px 0;
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .pdf-content-container button:hover {
+    background-color: #1991db;
+  }
+  

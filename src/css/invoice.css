@@ -102,7 +102,7 @@
 
 
 
-.invoice-info p {
+.invoice-info p , .invoice-bank-info p {
     margin: 0;
     font-size: 14px !important;
 }
@@ -115,6 +115,8 @@
     margin: 0;
     font-size: 13px;
 }
+
+
 
 .note p {
     font-size: clamp(0.875rem, 1.3vw, 1.25rem);
@@ -457,4 +459,10 @@
 
 #bankNoteInput {
     padding: 20px 10px;
+}
+
+@media screen and (max-width:920px) {
+    .invoice-bank-info p {
+        font-size: 11px;
+    }
 }
