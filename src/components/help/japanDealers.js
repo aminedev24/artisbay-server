@@ -38,6 +38,9 @@ const PdfContent = () => {
       </ul>
       <p>Expand beyond Japan. Sell your sports cars to a worldwide audience. Join forces with Artisbay Inc. and unlock your global potential today.</p>
       <p><a class='cta-link' href='#/contact'> Contact us </a> now to explore international opportunities!</p>
+      <div class='image-container'>
+        <img src='${process.env.PUBLIC_URL}/images/consultwithabchart.png' alt='Consult with Artisbay' />
+      </div>
     `,
     ja: `
       <h4>アーティスベイ株式会社と共に海外市場を開拓しましょう</h4>
@@ -64,6 +67,9 @@ const PdfContent = () => {
       </ul>
       <p>日本国内だけでなく、世界中のバイヤーへスポーツカーを販売しませんか？アーティスベイ株式会社と共に、新たな市場を開拓しましょう！</p>
       <p><a class='cta-link' href='#/contact'>今すぐお問い合わせください！</a></p>
+      <div class='image-container'>
+        <img src='${process.env.PUBLIC_URL}/images/consultwithabchartjp.png' alt='Consult with Artisbay' />
+      </div>
     `
   };
 
