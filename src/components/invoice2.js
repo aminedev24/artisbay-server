@@ -152,7 +152,7 @@ const handleSendEmail = async () => {
               <li><strong>Invoice Number:</strong> ${invoiceData.invoiceNumber}</li>
               <li><strong>Invoice Date:</strong> ${invoiceData.invoiceDate}</li>
               <li><strong>Payment Description:</strong> ${invoiceData.depositDescription}</li>
-              <li><strong>Payment Amount:</strong> ${invoiceData.depositAmount}</li>
+              <li><strong>Payment Amount:</strong> ${invoiceData.depositAmount} ${invoiceData.depositCurrency}</li>
               <li><strong>Due Date:</strong> Due immediately</li>
               <li><strong>Expiry Date:</strong> ${invoiceData.expiryDate}</li>
               <li><strong>Serial Number:</strong> ${invoiceData.serialNumber}</li>
