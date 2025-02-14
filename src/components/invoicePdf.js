@@ -484,12 +484,12 @@ const styles = StyleSheet.create({
                     {/* Deposit Amount Row */}
                     <View style={styles.amountTableRow}>
                         <Text style={styles.amountTableHeader}>Deposit amount</Text>
-                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount}</Text>
+                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount} {invoiceData.depositCurrency}</Text>
                     </View>
                     {/* Grand Total Row */}
                     <View style={styles.amountTableRow}>
                         <Text style={styles.amountTableHeader}>Grand Total</Text>
-                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount}</Text>
+                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount} {invoiceData.depositCurrency}</Text>
                     </View>
                 </View>
             </View>
