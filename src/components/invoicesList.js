@@ -58,10 +58,10 @@ const InvoiceList = () => {
             <th>Invoice Number</th>
             <th>Customer Name</th>
             <th>Email</th>
-            <th>Deposit Amount</th>
+            <th>Payment Amount</th>
             <th>Description</th>
             <th>Created At</th>
-            <th>Deposit Purpose</th>
+            <th>Payment Purpose</th>
           </tr>
         </thead>
         <tbody>

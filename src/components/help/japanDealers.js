@@ -53,7 +53,7 @@ const PdfContent = () => {
       <p>日本のスポーツカーは、クラシックなJDMモデルから最新のハイパフォーマンス車まで、 世界中で高い需要があります。しかし、海外の購入者に販売するには、物流、規制、市場 参入の壁など、さまざまな課題があります。</p>
       <p>アーティスベイ株式会社は、輸出入ビジネスコンサルティングを専門とし、日本の企業が海外市場に進出するサポートを提供します。私たちは、日本のスポーツカー、スポーツバイク、ソーラーパネル、テラスなどの住宅構造拡張を取り扱い、物流、信頼できるバイヤー、オークションでの仕入れなど、あらゆるニーズに対応いたします。</p>
       <h3>アーティスベイ株式会社を選ぶ理由</h3>
-      <ol>
+      <ol class='ordered-list'>
        <li><strong>スムーズな海外輸出と物流サポート</strong></li>
       <ul>
        
@@ -73,16 +73,17 @@ const PdfContent = () => {
         <li>在庫を売りたい場合でも、新しく車両を仕入れたい場合でも、最適なバイヤーや仕入先を紹介し、事業拡大をサポートします。</li>
       </ul>
       </ol>
+      <div class='image-container'>
+        <img src='${process.env.PUBLIC_URL}/images/consultwithabchartjp.png' alt='Consult with Artisbay' />
+      </div>
       <h3>こんな方におすすめ</h3>
-      <ul>
+      <ul class='check-list'>
         <li>✅海外市場に進出したい日本のスポーツカーディーラー</li>
         <li>✅オークションを活用し、海外のバイヤーへ直接販売したい方</li>
         <li>✅コレクターや特殊車両を扱うビジネスオーナー</li>
       </ul>
       <p>日本国内だけでなく、世界中のバイヤーへスポーツカーを販売しませんか？アーティスベイ株式会社と共に、新たな市場を開拓しましょう！</p>
-      <div class='image-container'>
-        <img src='${process.env.PUBLIC_URL}/images/consultwithabchartjp.png' alt='Consult with Artisbay' />
-      </div>
+    
       <p><a class='cta-link' href='#/contact'>今すぐお問い合わせください！</a></p>
     
     </div>

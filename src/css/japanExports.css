@@ -4,6 +4,14 @@
     line-height: 1.6;
     padding: 30px;
   }
+
+.check-list li {
+  list-style: none;
+} 
+
+.ordered-list li::marker {
+  font-weight: bold;
+}
   
   /* Headings */
   .pdf-content-container h4 {
