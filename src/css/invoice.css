@@ -1,7 +1,11 @@
 .invoice-container {
     padding: 5px 20px;
-    font-size: 14px !important;
+   
 
+}
+
+.invoice-container p {
+    font-size: 14px;
 }
 
 .invoice-container strong {
@@ -102,9 +106,9 @@
 
 
 
-.invoice-info p , .invoice-bank-info p {
+.invoice-info p {
     margin: 0;
-    font-size: 14px !important;
+    font-size: 13px;
 }
 
 .invoice-bank-info {
@@ -461,7 +465,7 @@
     padding: 20px 10px;
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-device-width: 900px) {
     .invoice-bank-info p {
         font-size: 11px;
     }
