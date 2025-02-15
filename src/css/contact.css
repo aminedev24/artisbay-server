@@ -13,6 +13,10 @@
   background-color: #fff;
   width: 80%;
 }
+
+.contact-container .phone-code {
+  top: unset !important;
+}
 .contact-container label {
   display: block;
   margin-bottom: 5px;

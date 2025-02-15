@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/japanExports.css'; // Import the CSS file
+import Contact from '../contact';
 
 const PdfContent = () => {
   const [language, setLanguage] = useState('ja');
-
-  const buttonStyle = {
-    padding: '10px 20px',
-    margin: '20px 0',
-    backgroundColor: '#1da1f2',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    fontSize: '16px'
-  };
+  const [japanExports,setJapanExports] = useState(true);
 
   const content = {
     en: `
@@ -102,6 +93,7 @@ const PdfContent = () => {
       </button>
       */}
       <div dangerouslySetInnerHTML={{ __html: content[language] }} />
+      <Contact japanExports={japanExports} />
     </div>
   );
 };

@@ -4,14 +4,17 @@ import CountryList from './countryList';
 import useCheckScreenSize from './screenSize';
 import { useLocation } from 'react-router-dom';
 
-const Contact = ({ sell }) => {
+const Contact = ({ sell, japanExports }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     country: sell ? 'Japan' : '',
     phone: '',
     enquiry: sell ? 'sell on Artisbay' : '',
-    message: ''
+    message: '',
+    prefecture: '',
+    city: '',
+    address: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [phoneCode, setPhoneCode] = useState("");
@@ -21,7 +24,9 @@ const Contact = ({ sell }) => {
     fullName: '',
     email: '',
     phone: '',
-    country: sell ? 'Japan' : ''
+    country: sell ? 'Japan' : '',
+    city: '',
+    address: ''
   });
 
   const [messageInfo, setMessageInfo] = useState(null); // For message type and content
@@ -35,7 +40,7 @@ const Contact = ({ sell }) => {
   const { isSmallScreen, isPortrait } = useCheckScreenSize();
 
   const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-server-clean/server'
     : '/server';
 
     useEffect(() => {
@@ -94,6 +99,9 @@ const Contact = ({ sell }) => {
     console.log(name)
     // Update form data first
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    console.log(`Updating field: ${name} = ${value}`);
+
     
     // Handle phone code for country selection
     if (name === 'country') {
@@ -119,6 +127,7 @@ const Contact = ({ sell }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    console.log(formData)
 
     try {
       const response = await fetch(`${apiUrl}/send_email.php`, {
@@ -169,11 +178,13 @@ const Contact = ({ sell }) => {
       }
      
 
-      {!sell && <h2>We like to hear from you!</h2>}
+      {!sell && !japanExports && <h2>We like to hear from you!</h2>}
       <h3>Contact Us</h3>
+      {!japanExports &&
       <p className='contact-prompt'>
-      If you have any questions or would like to learn more about our offerings, please don’t hesitate to reach out using the form below. We’re always eager to connect with our customers and will respond as promptly as possible.
+       If you have any questions or would like to learn more about our offerings, please don’t hesitate to reach out using the form below. We’re always eager to connect with our customers and will respond as promptly as possible.
       </p>
+      }
 
       <div className="input-group">
         <input
@@ -181,10 +192,10 @@ const Contact = ({ sell }) => {
           value={formData.name}
           onChange={handleChange}
           name="name"
-          placeholder='your name'
+          placeholder={japanExports ? '名前': 'your name'}
           required
         />
-        <label>Your Name <span className="required">*</span></label>
+        <label> {japanExports ? '名前' : `Your Name ` } <span className="required">*</span></label>
       </div>
 
       <div className="input-group">
@@ -193,10 +204,10 @@ const Contact = ({ sell }) => {
           value={formData.email}
           onChange={handleChange}
           name="email"
-          placeholder='email'
+          placeholder={japanExports ? 'メールアドレス' : 'your email'}
           required
         />
-        <label>E-mail<span className="required">*</span></label>
+        <label>{japanExports ? 'メールアドレス' : 'Email' } <span className="required">*</span></label>
       </div>
 
       <div className="input-group">
@@ -209,8 +220,8 @@ const Contact = ({ sell }) => {
           className={formData.country ? "not-empty" : ""}
           required
         >
-          <option value="">Select Country</option>
-          {sell ? (
+          <option value={""}>{japanExports ? "国":  'Select Country'}</option>
+          {sell || japanExports ? (
             <option value="Japan">Japan</option>
           ) : (
             CountryList().sort((a, b) => a.label.localeCompare(b.label)).map((country) => (
@@ -220,8 +231,34 @@ const Contact = ({ sell }) => {
             ))
           )}
         </select>
-        <label>Country<span className="required">*</span></label>
+        <label>{japanExports ? '国' : 'Country'}<span className="required">*</span></label>
       </div>
+
+      {japanExports &&
+      <div className="input-group">
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            placeholder={'市区町村'}
+            onChange={handleChange}
+          />
+          <label>市区町村<span className="required">*</span></label>
+      </div>
+      }
+
+      {japanExports &&
+            <div className="input-group">
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  placeholder={'住所'}
+                  onChange={handleChange}
+                />
+                <label>住所（初回のお問い合わせでは不要)<span className="required">*</span></label>
+            </div>
+            }
 
       <div className="input-group phone-number-group">
       {phoneCode && <span className="phone-code">{phoneCode}</span>}
@@ -232,12 +269,27 @@ const Contact = ({ sell }) => {
           className={phoneCode ? "shrink" : ''}
           value={formData.phone}
           onChange={handleChange}
-          placeholder="phone number"
+          placeholder={japanExports ? "電話番号":  "phone number"}
           readOnly={!!userData.phone}
           required
         />
-        <label>Phone<span className="required">*</span></label>
+        <label>{japanExports ? '電話番号' : `Phone`}<span className="required">*</span></label>
       </div>
+      
+
+      {japanExports &&
+      <div className="input-group">
+          <input
+            type="text"
+            name="prefecture"
+            value={formData.prefecture}
+            placeholder={'都道府県'}
+            onChange={handleChange}
+          />
+          <label>都道府県<span className="required">*</span></label>
+      </div>
+      }
+        
 
       {!sell && (
         <div className="input-group">
@@ -248,33 +300,46 @@ const Contact = ({ sell }) => {
             className={formData.enquiry ? "not-empty" : ""}
             required
           >
-            <option value="">Select Enquiry Type</option>
-            <option value="General">General Inquiry</option>
-            <option value="Support">Support</option>
-            <option value="Sales">Sales</option>
+            {!japanExports ? ( 
+              <>
+              <option value="">Select Enquiry Type</option>
+              <option value="General">General Inquiry</option>
+              <option value="Support">Support</option>
+              <option value="Sales">Sales</option>
+            </>
+            ): (
+              <>
+                <option value={''}>件名</option>
+                <option value={'Looking for overseas customers'}>海外の顧客を探しています</option>
+                <option value={'I want to Invest'}>投資したい</option>
+                <option value={'others'}>その他</option>
+              </>
+
+            )
+            }
           </select>
-          <label>Enquiry type<span className="required">*</span></label>
+          <label>{japanExports ? '件名' : 'Enquiry type'}<span className="required">*</span></label>
         </div>
       )}
 
-      {sell && (
+      {sell || japanExports && (
         <div className="input-group">
           <input
             type="text"
             name="company"
             value={formData.company}
-            placeholder='company'
+            placeholder={japanExports ? '会社名（任意)' : 'company'}
             onChange={handleChange}
           />
-          <label>Company</label>
+          <label>{japanExports ? "会社名（任意)" : "Company"}</label>
         </div>
       )}
 
       <div className="input-group">
-      <label>Message<span className="required">*</span></label>
+      <label>{japanExports ? 'メッセージ' : 'Message'}<span className="required">*</span></label>
         <textarea
           name="message"
-          placeholder='your message'
+          placeholder={japanExports ? "メッセージ" : 'your message'}
           value={formData.message}
           onChange={handleChange}
           required
