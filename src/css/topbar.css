@@ -14,17 +14,19 @@
   /* Smaller font size */
     font-weight: bold;
     color: #fff;
-    font-size: 12px;
+    font-size: 12px;    
   }
   
   .app-info .app-name {
     font-weight: bold;
     color: #fff;
   /* Reduced font size */
+  font-size: inherit;
     margin-right: 20px;  /* Space between app name and other elements */
   }
   
   .extra-info {
+
     display: flex;
     align-items: center;  /* Align items vertically centered */
     gap: 15px;  /* Adjust gap for a tighter layout */
@@ -33,6 +35,8 @@
   .extra-info .time,
   .extra-info .exchange-rate {
     color: #fff;
+    font-size: inherit;
+
   /* Smaller font size */
   }
   
@@ -41,9 +45,11 @@
     padding: 5px; /* Padding for select boxes */
     border-radius: 4px; /* Rounded corners for select boxes */
     border: 1px solid #ccc; /* Border style */
+
  /* Match font size */
   }
   
 .app-info span {
+
     margin: 20px;
 }

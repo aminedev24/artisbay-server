@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/namibiaAgent.css"; // Import the CSS file
+import "../css/tanzaniaAgent.css"
 
 const TanzainaAgent = () => {
 
@@ -10,7 +10,7 @@ const TanzainaAgent = () => {
   return (
     <div className="namibia-agent-container">
       <div className="banner">
-        <img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniabanner.png`}/>
+        <img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniaBanner.png`}/>
       </div>
       <h1 className="main-title">
         Streamlined Logistics, Trusted Expertise
@@ -51,11 +51,11 @@ const TanzainaAgent = () => {
       
       </div>
 
-       {/* 
-      <div className="banner why-choose-agent-section">
-        <img className="banner-image" alt="namibia-agent-banner" src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniaagent.png`}/>
-      </div>
-      */}
+       
+      {/* <div className="banner why-choose-agent-section">
+        <img className="banner-image" alt="namibia-agent-banner" src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniaAgent.png`}/>
+      </div> */}
+     
 
 
     

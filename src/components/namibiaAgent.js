@@ -1,6 +1,5 @@
 import React from "react";
-import "../css/tanzaniaAgent.css"; // Import the CSS file
-
+import "../css/namibiaAgent.css"
 const NamibiaAgent = () => {
 
   const scrollToSection = (id) => {
@@ -10,7 +9,7 @@ const NamibiaAgent = () => {
   return (
     <div className="namibia-agent-container">
       <div class="banner">
-        <img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/namibiabanner.png`}/>
+        <img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/namibiaBanner.png`}/>
       </div>
       <h1 class="main-title">
         Streamlined Logistics, Trusted Expertise

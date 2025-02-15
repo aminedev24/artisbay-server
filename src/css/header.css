@@ -5,6 +5,7 @@
   background-color: #1e3a8a;
   padding: 10px 30px;
   color: white;
+  
 }
 
 .header-item a {
@@ -19,6 +20,7 @@
 .used-cars , .used-tires {
   cursor: pointer;
   position: relative;
+  
 }
 
 /* General styling for the links container */
@@ -37,6 +39,8 @@
   color: #fff; /* Adjust link color */
   font-weight: bold;
   text-decoration: none;
+  font-size: .79rem; 
+
 }
 
 .used-cars a:hover, .used-tires a:hover {
@@ -108,6 +112,11 @@
 .header-item i {
   margin-right: 5px;
 }
+.header-item a {
+  font-size: .79rem;
+  font-weight: bold;
+}
+
 
 /* Left and right links styling */
 .header-bottom {
