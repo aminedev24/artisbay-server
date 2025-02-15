@@ -41,7 +41,7 @@ const PaypalInfo = () => {
       </p>
       <h4>How to Register for PayPal?</h4>
       <ol>
-        <li>Click <a href="https://www.paypal.com/ca/for-you/account/create-account">Sign up for a PayPal account</a>.</li>
+        <li>Click <a className='cta-link paypal-link' target='_blank' href="https://www.paypal.com/ca/for-you/account/create-account">Sign up for a PayPal account</a>.</li>
         <li>Select the type of account you would like to create, and click Get Started.</li>
         <li>Enter the required information and click Continue.</li>
         <li>Follow the instructions to complete your account sign-up.</li>
