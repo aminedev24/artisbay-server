@@ -256,7 +256,7 @@ const Contact = ({ sell, japanExports }) => {
                   placeholder={'住所'}
                   onChange={handleChange}
                 />
-                <label>住所（初回のお問い合わせでは不要)<span className="required">*</span></label>
+                <label>住所（初回のお問い合わせでは不要)</label>
             </div>
             }
 
