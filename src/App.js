@@ -31,6 +31,8 @@ import CongoAgent from './components/congoAgent';
 import TanzainaAgent from './components/tanzaniaAgent';
 import CarCostCalculator from './components/cuttingCalculator';
 import PdfContent from './components/help/japanDealers';
+import SendEmailVerification from './components/SendEmailVerification';
+import VerifyEmail from './components/verifyEmail';
 
 /* src/index.css */
 
@@ -103,6 +105,8 @@ function App() {
           <Route path= '/local-services/tanzania' element ={<TanzainaAgent />}></Route>
           <Route path ='car-cost-calculator' element= {<CarCostCalculator />}></Route>
           <Route path ='/japan-exports' element= {<PdfContent />}></Route>
+          <Route path = '/send-email-verification' element = {<SendEmailVerification />}></Route>
+          <Route path='/get-email-verification' element={<VerifyEmail />} />
           </Routes>
       <Footer />
     </Router>

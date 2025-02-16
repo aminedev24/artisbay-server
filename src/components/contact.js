@@ -179,7 +179,7 @@ const Contact = ({ sell, japanExports }) => {
      
 
       {!sell && !japanExports && <h2>We like to hear from you!</h2>}
-      <h3>Contact Us</h3>
+      <h3>{japanExports ? " お問い合わせ" :  'Contact Us'}</h3>
       {!japanExports &&
       <p className='contact-prompt'>
        If you have any questions or would like to learn more about our offerings, please don’t hesitate to reach out using the form below. We’re always eager to connect with our customers and will respond as promptly as possible.
@@ -358,7 +358,7 @@ const Contact = ({ sell, japanExports }) => {
         type="submit" 
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Submitting...' : 'SUBMIT'}
+        {isSubmitting ? 'Submitting...' : japanExports ? "送信" : 'SUBMIT'}
       </button>
     </form>
   </div>
