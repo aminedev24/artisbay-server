@@ -86,7 +86,7 @@ const PdfContent = () => {
   };
 
   return (
-    <div className='pdf-content-container'>
+    <div className='japan-exports'>
       {/*
       <button style={buttonStyle} onClick={toggleLanguage}>
         {language === 'en' ? '日本語に切り替え' : 'Switch to English'}
