@@ -143,7 +143,7 @@ const CongoAgent = () => {
         <h1>Générez Vos Factures en Toute Simplicité</h1>
         <div className="invoice-section-content">
           <p>
-            Simplifiez vos transactions grâce à notre système automatisé de facturation :
+           <strong> Simplifiez vos transactions grâce à notre système automatisé de facturation :</strong>
           </p>
           <ul>
             <li>Rapide et Facile : Créez, modifiez et téléchargez vos factures en quelques clics.</li>

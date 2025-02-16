@@ -88,6 +88,9 @@ export default function DepositsTable() {
                     <tr className="bg-gray-200">
                         <th className="border p-2">Date</th>
                         <th className="border p-2">Amount</th>
+                        <th className="border p-2">Guaranty</th>
+                        <th className="border p-2">Extra Guaranty</th>
+                        <th className="border p-2">Balance</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,6 +99,12 @@ export default function DepositsTable() {
                             <tr key={deposit.id} className="border">
                                 <td className="border p-2">{deposit.date}</td>
                                 <td className="border p-2">{deposit.amount.toLocaleString()} {deposit.currency}</td>
+                                <td className="border p-2">{deposit.guaranty.toLocaleString()} {deposit.currency}</td>
+                                <td className="border p-2">{deposit.extra_guaranty.toLocaleString()} {deposit.currency}</td>
+                                <td className="border p-2">{deposit.leftover.toLocaleString()} {deposit.currency}</td>
+
+
+
                             </tr>
                         ))
                     ) : (
