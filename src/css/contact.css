@@ -5,13 +5,13 @@
 }
 
 .contact-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: #fff;
-  width: 80%;
+  width: 50%;
 }
 
 .contact-container .phone-code {

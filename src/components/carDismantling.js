@@ -12,13 +12,13 @@ const CarDismantling = () => {
     <div className="main-content">
       <section className="carDismantling-container">
         {/* Hero Images */}
-        <div className="image-container">
+        <div className="image-container dismantling-banner">
           <img
-            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping2.jpeg`}
+            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping.jpeg`}
             alt="Car dismantling process"
             className="image"
           />
-          <button className="dismantling-shipping-btn"><Link to='/car-cost-calculator'>Click here</Link></button>
+          <Link to='/car-cost-calculator'><button className="dismantling-shipping-btn">Click here</button></Link>
         </div>
         <div className="image-container cutting">
           <img

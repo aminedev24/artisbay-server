@@ -183,17 +183,20 @@
   position: relative;
 }
 
+.dismantling-banner {
+  padding: 20px;
+}
 .dismantling-shipping-btn {
   position: absolute;
-  top: 69%;
-  right: 16%;
-  width: 37%;
-  height: 9%;
+  top: 70%;
+  right: 24%;
+  width: 23%;
+  height: 6%;
   color: #fff;
   border: none;
   background-color: #465b9e;
   border-radius: 33px;
-  box-shadow: -12px 13px 1px #333;
+  box-shadow: -12px 5px 1px #333;
  }
 
  .dismantling-shipping-btn a {

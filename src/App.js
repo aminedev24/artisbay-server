@@ -40,6 +40,8 @@ import VerifyEmail from './components/verifyEmail';
 function App() {
   
   const [bodyWidth, setBodyWidth] = useState(window.screen.width);
+  
+
 
 
   /*
@@ -67,7 +69,6 @@ function App() {
     searchTerm: '',
   });
 
-  
 
   useEffect(() => {
     setCars(carData); // Use the imported carData
