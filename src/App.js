@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Header from './components/header';
 import Footer from './components/footer';
 import CarDetails from './components/carDetails';
@@ -34,85 +34,87 @@ import PdfContent from './components/help/japanDealers';
 import SendEmailVerification from './components/SendEmailVerification';
 import VerifyEmail from './components/verifyEmail';
 
-/* src/index.css */
-
-
 function App() {
   
   const [bodyWidth, setBodyWidth] = useState(window.screen.width);
+  const location = useLocation();
   
-
-
-
-  /*
   useEffect(() => {
-    const updateWidth = () => setBodyWidth(window.screen.width);
-
-    window.addEventListener("resize", updateWidth);
-
-    // Cleanup listener on component unmount
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.minWidth = `${bodyWidth -30}px`;
-    console.log(bodyWidth)
-  }, [bodyWidth]);
-*/
+    const pathname = location.pathname;
+  
+    // If the path is '/' (homepage), set the default title
+    if (pathname === '/') {
+      document.title = "Artisbay Inc. | Used cars and used tires for sale";
+      return;
+    }
+  
+    // Otherwise, extract and format the path
+    const pathSegments = pathname
+      .replace(/^\/|\/$/g, "") // Remove leading/trailing slashes
+      .split("/") // Split into segments
+      .map(segment => segment.replace(/-/g, " ")) // Replace dashes with spaces
+      .map(segment => segment.charAt(0).toUpperCase() + segment.slice(1)); // Capitalize first letter
+  
+    const formattedTitle = `Artisbay Inc. | ${pathSegments.join(" ")}`;
+    console.log("Updated Path:", formattedTitle); // Debugging
+  
+    document.title = formattedTitle;
+  }, [location.pathname]); // Runs every time the path changes
+  
   const [cars, setCars] = useState([]);
-  const [filters, setFilters] = useState({
-    make: '',
-    model: '',
-    year: '',
-    price: '',
-    location: '',
-    searchTerm: '',
-  });
-
-
+  
   useEffect(() => {
     setCars(carData); // Use the imported carData
   }, []);
-
-  useEffect(() => { const images = document.querySelectorAll('img'); images.forEach(img => { img.setAttribute('loading', 'lazy'); }); }, []);
-
   
   return (
     <UserProvider>
-    <Router>
       <Header />
-
+      <Routes>
+        <Route path="/" element={<HomePage cars={cars} />} />
+        <Route path="/cars/:id" element={<CarDetails cars={cars} />} />
+        <Route path="/stocklist" element={<Stocklist cars={cars} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        {/* More routes here */}
+        <Route path="/car-dismantling" element={<CarDismantling />} />
+        <Route path="/used-tires" element={<UsedTires />} />
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/vehicleInquiry" element={<InquiryForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/profile/:section?" element={<ProfilePage />} />
+        <Route path='/shipping' element={<Shipping />} />
+        <Route path='/invoice' element={<ProformaInvoiceForm />} />
+        <Route path='/local-services/namibia' element={<NamibiaAgent />} />
+        <Route path='/local-services/congo' element={<CongoAgent />} />
+        <Route path='/local-services/tanzania' element={<TanzainaAgent />} />
+        <Route path='/car-cost-calculator' element={<CarCostCalculator />} />
+        <Route path='/japan-exports' element={<PdfContent />} />
+        <Route path='/send-email-verification' element={<SendEmailVerification />} />
+        <Route path='/get-email-verification' element={<VerifyEmail />} />
         
-        <Routes>
-          <Route path="/" element={<HomePage cars={cars} />} />
-          <Route path="/cars/:id" element={<CarDetails cars={cars} />} />
-          <Route path="/stocklist" element={<Stocklist cars={cars} filters={filters} />} /> {/* Pass filters to Stocklist */}
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          {/*<Route path="/howtobuy" element={<HowToBuy />} />*/}
-          <Route path="/car-dismantling" element={<CarDismantling />} />
-          <Route path="/used-tires" element={<UsedTires />} />
-          <Route path="/help" element={<HelpPage />} />
-          <Route path="/vehicleInquiry" element={<InquiryForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} /> {/* Token in URL */}
-          <Route path="/profile/:section?" element={<ProfilePage />} />
-          <Route path='/shipping' element={<Shipping />}></Route>
-          <Route path = '/invoice' element = {<ProformaInvoiceForm />}></Route>
-          <Route path= '/local-services/namibia' element ={<NamibiaAgent />}></Route>
-          <Route path= '/local-services/congo' element ={<CongoAgent />}></Route>
-          <Route path= '/local-services/tanzania' element ={<TanzainaAgent />}></Route>
-          <Route path ='car-cost-calculator' element= {<CarCostCalculator />}></Route>
-          <Route path ='/japan-exports' element= {<PdfContent />}></Route>
-          <Route path = '/send-email-verification' element = {<SendEmailVerification />}></Route>
-          <Route path='/get-email-verification' element={<VerifyEmail />} />
-          </Routes>
+        {/* Catch-all route for undefined paths */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
       <Footer />
-    </Router>
     </UserProvider>
   );
+
+  
 }
+
+const NotFoundPage = () => {
+  return (
+    <div className="not-found-container">
+      <h1 className="not-found-heading">404 - Page Not Found</h1>
+      <p className="not-found-description">
+        Sorry, the page you're looking for doesn't exist. Check the URL or return to the <Link to="/">homepage</Link>.
+      </p>
+    </div>
+  );
+};
 
 export default App;

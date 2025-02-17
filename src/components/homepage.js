@@ -24,30 +24,6 @@ function HomePage() {
   const isSmallScreen = useCheckScreenSize();
 
   const location = useLocation();
-
-  useEffect(() => {
-    // Function to change the title based on the hash
-    const changeTitle = () => {
-      const hash = window.location.hash.slice(2); // Remove '#/' instead of just '#'
-      console.log(hash);
-      if (hash) {
-        document.title = `Website | ${hash.replace('-', ' ')}`;
-      } else {
-        document.title = 'Artisbay Inc.';
-      }
-    };
-  
-    // Call changeTitle on initial render
-    changeTitle();
-  
-    // Listen for hash changes
-    window.addEventListener('hashchange', changeTitle);
-  
-    // Cleanup event listener
-    return () => {
-      window.removeEventListener('hashchange', changeTitle);
-    };
-  }, []); // No dependencies needed
   
 
   useEffect(() => {
