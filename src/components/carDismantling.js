@@ -14,7 +14,7 @@ const CarDismantling = () => {
         {/* Hero Images */}
         <div className="image-container dismantling-banner">
           <img
-            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping.jpeg`}
+            src={`${process.env.PUBLIC_URL}/images/dismantling&shipping3.jpeg`}
             alt="Car dismantling process"
             className="image"
           />

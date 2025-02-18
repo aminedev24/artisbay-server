@@ -194,9 +194,10 @@
   height: 6%;
   color: #fff;
   border: none;
-  background-color: #465b9e;
-  border-radius: 33px;
-  box-shadow: -12px 5px 1px #333;
+  background-color: transparent;
+ /* background-color: #465b9e;*/
+  border-radius: 25px;
+  /*box-shadow: -12px 5px 1px #333;*/
  }
 
  .dismantling-shipping-btn a {
