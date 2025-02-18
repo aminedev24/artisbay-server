@@ -26,6 +26,7 @@ const About = () => {
           Our experienced team is dedicated to providing the best customer service, ensuring a seamless car-buying
           experience.
         </p>
+        {/* i didn't found this image in our public folder */}
         <img src="/images/team.jpg" alt="Our Team" className="team-image" />
       </section>
 

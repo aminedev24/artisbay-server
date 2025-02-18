@@ -7,7 +7,7 @@ const CarDetails = ({ cars }) => {
   const car = cars.find((car) => car.id === parseInt(id)); // Find the car by id
 
   if (!car) {
-    return <div>Car not found!</div>;
+    return <section className='not-foundSection'>Car not found!</section>;
   }
 
   return (

@@ -4,6 +4,7 @@ p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.
   /* Increased for better readability */
 }
 
+
 .intro-content p {
   font-size: clamp(1.30rem, 2.5vw, 2.30rem);
 }
@@ -16,35 +17,35 @@ p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.
 }
 
 .logistics-agent-info, .services-text, .logistics-agent-info a {
-  font-size: clamp(0.875rem, 2vw, 1.3rem) !important; /* As per your original request */
+  font-size: clamp(0.95rem, 2vw, 1rem) !important; /* As per your original request */
 }
 
 .links a {
-  font-size: clamp(0.95rem, 1.3vw, 1.35rem); /* Slightly smaller for links */
+  font-size: clamp(0.95rem, 1.3vw, 1rem); /* Slightly smaller for links */
 }
 
 h1 {
-  font-size: clamp(2.125rem, 4.15vw, 3.125rem); /* Slightly decreased for balance */
+  font-size: clamp(1.5rem, 4.15vw, 1.7rem); /* Slightly decreased for balance */
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.1vw, 2.375rem); /* Slightly smaller for hierarchy */
+  font-size: clamp(1.3rem, 3.1vw, 1.5rem); /* Slightly smaller for hierarchy */
 }
 
 h3 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem); /* Slightly decreased for balance with h2 */
+  font-size: clamp(1rem, 2.5vw, 1.3rem); /* Slightly decreased for balance with h2 */
 }
 
 h4  , .bank-info-table th{
-  font-size: clamp(1.25rem, 2.1vw, 1.5rem); /* Slightly smaller for readability */
+  font-size: clamp(0.7rem, 2.1vw, 1rem); /* Slightly smaller for readability */
 }
 
 h5  {
-  font-size: clamp(1rem, 1.65vw, 1.25rem); /* Decreased for clarity */
+  font-size: clamp(.5rem, 1.65vw, .7rem); /* Decreased for clarity */
 }
 
 h6 {
-  font-size: clamp(0.875rem, 1.5vw, 1.125rem); /* Slightly smaller */
+  font-size: clamp(0.35rem, 1.5vw, 0.5rem); /* Slightly smaller */
 }
 
 small, .top-bar span, .profile-sidebar-menus li {

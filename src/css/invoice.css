@@ -19,7 +19,7 @@
 
 .invoice-modal-overlay .modal-content {
     background-color: #fff;
-    width: 50%;
+    width: 90%;
     padding: 0;
     max-width: 800px;
     font-family: Arial, sans-serif;
@@ -118,6 +118,7 @@
 
 .amount-table th , .amount-table td , .items th , .items td {
     font-size: clamp(0.875rem, 1.3vw, 1.125rem);
+    max-width: 200px;
 }
 
 .important {
@@ -199,6 +200,7 @@
 }
 
 .instructions {
+    padding: 10px;
     margin-bottom: 20px;
     max-width: 50%;
     border: solid;
@@ -259,6 +261,7 @@
 }
 
 .note-amount-container p {
+    padding: 20px;
     margin: 0;
     line-height: 1.2;
 }

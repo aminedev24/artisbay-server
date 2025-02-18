@@ -53,7 +53,6 @@ const SearchForm = () => {
     <div className="right-image register-banner">
       <img src={`${process.env.PUBLIC_URL}/images/homepage/shipping.png`} alt="shipping banner" />
       <Link to='shipping'><button className="shipping-btn">learn more</button></Link>
-      
     </div>
     </div>
 
