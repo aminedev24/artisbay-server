@@ -1,6 +1,7 @@
 /* Force desktop styles for smaller screens */
 p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.bank-info-table td , .footer-inner a {
-  font-size: clamp(1.25rem, 1.75vw, 1.625rem); /* Increased for better readability */
+  /* font-size: clamp(1.25rem, 1.75vw, 1.625rem);  */
+  /* Increased for better readability */
 }
 
 .intro-content p {
@@ -15,7 +16,7 @@ p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.
 }
 
 .logistics-agent-info, .services-text, .logistics-agent-info a {
-  font-size: clamp(0.875rem, 2vw, 2rem) !important; /* As per your original request */
+  font-size: clamp(0.875rem, 2vw, 1.3rem) !important; /* As per your original request */
 }
 
 .links a {
@@ -88,12 +89,46 @@ input {
   font-size: clamp(0.95rem, 1.35vw, 1.125rem); /* Slightly smaller for form inputs */
 }
 
+/* new */
+@media (min-width: 1400px) {
+  .intro-content p,
+  .logistics-agent-info,
+  .services-text,
+  .logistics-agent-info a {
+    /* Reduced font size: minimum 0.75rem, preferred 1vw, maximum 1rem */
+    font-size: clamp(0.75rem, 1vw, 1rem);
+  }
+  
+  p,
+  ul li,
+  ol li,
+  .list-item,
+  .cta-link,
+  .bank-info-table td,
+  .footer-inner a,
+  .grid-item span {
+    /* Reduced font size: minimum 0.75rem, preferred 1vw, maximum 1rem */
+    font-size: clamp(0.75rem, 1vw, 1rem);
+  }
+
+  .links a {
+    /* Slightly smaller font size for links */
+    font-size: clamp(0.85rem, 0.8vw, 1rem);
+  }
+
+  .congo-agent-container .intro-content p {
+    /* Adjusted so it remains consistent when scaled */
+    font-size: clamp(1rem, 1.5vw, 1rem);
+  }
+}
+/* old */
+/* 
 @media (min-width: 1400px) {
   .intro-content p, .logistics-agent-info, .services-text, .logistics-agent-info a {
-    font-size: clamp(1rem, 1.5vw, 1.5rem); /* 16px - 24px */
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
   }
-  p, ul li, ol li, .list-item, .cta-link, .bank-info-table td, .footer-inner a , .grid-item span {
-    font-size: clamp(1rem, 1.5vw, 1.5rem); /* 16px - 24px */
+  p, ul li, ol li, .list-item, .cta-link, .bank-info-table td, .footer-inner a, .grid-item span {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
   }
 
   .links a {
@@ -101,9 +136,10 @@ input {
   }
 
   .congo-agent-container .intro-content p {
-    font-size: clamp(2rem, 2.25vw, 1.25rem) ;
+    font-size: clamp(2rem, 2.25vw, 1.25rem);
   }
 }
+*/
 
 
 

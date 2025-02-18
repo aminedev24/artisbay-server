@@ -16,6 +16,7 @@
 
 .main-title {
   font-weight: bold;
+  font-size: 1.4rem;
   color: #333;
   margin: 20px 0;
   text-align: center;
@@ -31,6 +32,7 @@
 .intro-content {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 20px;
   margin: 40px 0;
   gap: 20px;
@@ -40,6 +42,7 @@
   color: #333;
   line-height: 1.6;
   padding: 50px 20px;
+  font-size: .9rem;
   border: 1px solid #ccc;
   flex: 1;
   margin: 1px 0;
@@ -81,6 +84,7 @@
   padding: 5px 40px; /* Adjust horizontal padding */
   text-align: center;
   font-weight: bold;
+  font-size: 1.4rem;  
   z-index: 1; /* Ensure the text is above the pseudo-elements */
   margin: 0;
 }
@@ -121,8 +125,9 @@
 .services h3 {
   font-weight: bold;
   color: #333;
+  font-size: 1.4rem;
   margin: 10px 0;
-}
+} 
 
 .services p {
   color: #333;
@@ -183,8 +188,7 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
-  margin: 0;
-  padding: 0;
+  /* margin: 0 !important ; */
 }
 
 .title h2 {
@@ -247,8 +251,10 @@
 .namibia-agent {
   background-image: url('../../public/images/localServices/namibiaagentnew.png'); /* Replace with your image path */
   margin: 40px 0;
-  background-position: top center;
+  background-position: center center;
   height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 
@@ -271,6 +277,7 @@
   left: 45px;
   top: 20px;
 }
+
 
 
 .logistics-agent-info {
