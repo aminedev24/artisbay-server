@@ -302,7 +302,7 @@
 @media (min-width: 1400px) {
   .background {
     background-position: top center; /* Adjust the position as needed */
-    min-height: 512px; /* Optional: Increase the height if needed */
+    min-height: 450px; /* Optional: Increase the height if needed */
   }
 
   .services-text , .logistics-agent-info {
