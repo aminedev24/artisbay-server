@@ -109,10 +109,10 @@ const links2 = [
           ))}
         </div>
 
-        <div className="ad-header-container">
+        <div className="banner-header-container">
             <img
               src={`${process.env.PUBLIC_URL}/images/consultwithabhomejp.jpeg`}
-              className="ad-banner"
+              className="banner"
               alt="sell banner"
             />
             <Link to="/japan-exports">
@@ -160,12 +160,12 @@ const links2 = [
 
 
         <div>
-          <div className="ad-header-container">
+          <div className="banner-header-container">
 
-          <picture className="ad-banner">
+          <picture className="banner">
             <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.webp`} type="image/webp" />
             <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} type="image/jpeg" /> 
-            <img className="ad-banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} alt="Tires banner" />
+            <img className="banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} alt="Tires banner" />
           </picture>
 
           <Link to="/help?topic=about%20used%20Tires">
@@ -183,11 +183,11 @@ const links2 = [
            
           </div>
 
-          <div className="ad-header-container">
-          <picture className="ad-banner">
+          <div className="banner-header-container">
+          <picture className="banner">
             <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome2.webp`} type="image/webp" />
             <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} type="image/jpeg" /> 
-            <img className="ad-banner" src={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} alt="dismantling banner" />
+            <img className="banner" src={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} alt="dismantling banner" />
           </picture>
 
             <Link to="/car-dismantling">
@@ -195,11 +195,11 @@ const links2 = [
             </Link>
           </div>
 
-          <div className="ad-header-container">
+          <div className="banner-header-container">
             <div className='bordered'>
             <img
               src={`${process.env.PUBLIC_URL}/images/paymentmethodshome.png`}
-              className="ad-banner"
+              className="banner"
             />
             <Link to="/help?topic=security">
               <button className="security-btn">read more</button>
@@ -242,10 +242,10 @@ const links2 = [
            
         </div>
 
-        <div className="ad-header-container">
+        <div className="banner-header-container">
             <img
               src={`${process.env.PUBLIC_URL}/images/ecohome2.jpeg`}
-              className="ad-banner"
+              className="banner"
               alt="eco friendly banner"
             />
             <Link to="/help?topic=Sustainability">
