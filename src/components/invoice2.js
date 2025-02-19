@@ -31,7 +31,7 @@ const calculateExpiryDate = (invoiceDate) => {
 };
 
 // Modal Component
-const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
+const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit,setIsModalOpen }) => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false); // Loading state
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -97,6 +97,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
 
 
 const handleCloseModal = () => {
+  console.log("ererjjaf")
   setShowModal(false);
 };
 
@@ -215,7 +216,7 @@ const handleSendEmail = async () => {
   };
 
   return (
-    <div className="invoice-modal-overlay">
+    <div className="invoice-modal-overlay" onClick={() => setIsModalOpen(false)}>
         {isGeneratingPdf && (
       <div className="spinner-overlay">
         <Spinner />
@@ -229,7 +230,7 @@ const handleSendEmail = async () => {
       />
     )}
 
-      <div className="modal-content">
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn no-print" onClick={onClose}>
           ×
         </button>
@@ -411,9 +412,7 @@ const handleSendEmail = async () => {
             : (
 
               <div className="instructions">
-              <p>
-                <strong>Instructions:</strong>
-              </p>
+       
               <ul>
                 <li>
                   Please ensure all transfer fees are covered by the sender to
@@ -448,7 +447,7 @@ const handleSendEmail = async () => {
                     </td>
                   </tr>
                   <tr>
-                    <th>Grand Total</th>
+                    <th className="Grand-Total">Grand Total</th>
                     <td>
                       {invoiceData.depositAmount}  {invoiceData.depositCurrency}
                     </td>
@@ -502,13 +501,13 @@ const handleSendEmail = async () => {
                 <img
                     className="signature"
                     alt="Artisbay signature"
-                    src={`${process.env.PUBLIC_URL}/images/absignature.png`}
+                    src={`${process.env.PUBLIC_URL}/images/signature/absignature.png`}
                     width="130"
                 />
 
                 <img
                     alt="Artisbay stamp"
-                    src={`${process.env.PUBLIC_URL}/images/abstamp.png`}
+                    src={`${process.env.PUBLIC_URL}/images/signature/abstamp.png`}
                     width="70"
                 />
 

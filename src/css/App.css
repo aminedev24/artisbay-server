@@ -1,38 +1,58 @@
 /* Force desktop styles for smaller screens */
+<<<<<<< HEAD
 p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.bank-info-table td , .footer-inner a , .paypay-link{
   font-size: clamp(1.25rem, 1.75vw, 1.625rem); /* Increased for better readability */
 }
 
+=======
+p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link ,.bank-info-table td , .footer-inner a {
+  /* font-size: clamp(1.25rem, 1.75vw, 1.625rem);  */
+  /* Increased for better readability */
+}
+
+
+.intro-content p {
+  font-size: clamp(1.30rem, 2.5vw, 2.30rem);
+}
+
+@media (min-width: 1270px) {
+  .intro-content p {
+    font-size: clamp(1.125rem, 2vw, 1.75rem); /* Adjusted for larger screens */
+  }
+
+}
+
+>>>>>>> 60398b7530a31b1a2eb6590442a9540c116e8090
 .logistics-agent-info, .services-text, .logistics-agent-info a {
-  font-size: clamp(0.875rem, 2vw, 2rem) !important; /* As per your original request */
+  font-size: clamp(0.95rem, 2vw, 1rem) !important; /* As per your original request */
 }
 
 .links a {
-  font-size: clamp(0.95rem, 1.3vw, 1.35rem); /* Slightly smaller for links */
+  font-size: clamp(0.95rem, 1.3vw, 1rem); /* Slightly smaller for links */
 }
 
 h1 {
-  font-size: clamp(2.125rem, 4.15vw, 3.125rem); /* Slightly decreased for balance */
+  font-size: clamp(1.5rem, 4.15vw, 1.7rem); /* Slightly decreased for balance */
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.1vw, 2.375rem); /* Slightly smaller for hierarchy */
+  font-size: clamp(1.3rem, 3.1vw, 1.5rem); /* Slightly smaller for hierarchy */
 }
 
 h3 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem); /* Slightly decreased for balance with h2 */
+  font-size: clamp(1rem, 2.5vw, 1.3rem); /* Slightly decreased for balance with h2 */
 }
 
 h4  , .bank-info-table th{
-  font-size: clamp(1.25rem, 2.1vw, 1.5rem); /* Slightly smaller for readability */
+  font-size: clamp(0.7rem, 2.1vw, 1rem); /* Slightly smaller for readability */
 }
 
 h5  {
-  font-size: clamp(1rem, 1.65vw, 1.25rem); /* Decreased for clarity */
+  font-size: clamp(.5rem, 1.65vw, .7rem); /* Decreased for clarity */
 }
 
 h6 {
-  font-size: clamp(0.875rem, 1.5vw, 1.125rem); /* Slightly smaller */
+  font-size: clamp(0.35rem, 1.5vw, 0.5rem); /* Slightly smaller */
 }
 
 small, .top-bar span, .profile-sidebar-menus li {
@@ -77,12 +97,46 @@ input {
   font-size: clamp(0.95rem, 1.35vw, 1.125rem); /* Slightly smaller for form inputs */
 }
 
+/* new */
+@media (min-width: 1400px) {
+  .intro-content p,
+  .logistics-agent-info,
+  .services-text,
+  .logistics-agent-info a {
+    /* Reduced font size: minimum 0.75rem, preferred 1vw, maximum 1rem */
+    font-size: clamp(0.75rem, 1vw, 1rem);
+  }
+  
+  p,
+  ul li,
+  ol li,
+  .list-item,
+  .cta-link,
+  .bank-info-table td,
+  .footer-inner a,
+  .grid-item span {
+    /* Reduced font size: minimum 0.75rem, preferred 1vw, maximum 1rem */
+    font-size: clamp(0.75rem, 1vw, 1rem);
+  }
+
+  .links a {
+    /* Slightly smaller font size for links */
+    font-size: clamp(0.85rem, 0.8vw, 1rem);
+  }
+
+  .congo-agent-container .intro-content p {
+    /* Adjusted so it remains consistent when scaled */
+    font-size: clamp(1rem, 1.5vw, 1rem);
+  }
+}
+/* old */
+/* 
 @media (min-width: 1400px) {
   .intro-content p, .logistics-agent-info, .services-text, .logistics-agent-info a {
-    font-size: clamp(1rem, 1.5vw, 1.5rem); /* 16px - 24px */
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
   }
-  p, ul li, ol li, .list-item, .cta-link, .bank-info-table td, .footer-inner a , .grid-item span {
-    font-size: clamp(1rem, 1.5vw, 1.5rem); /* 16px - 24px */
+  p, ul li, ol li, .list-item, .cta-link, .bank-info-table td, .footer-inner a, .grid-item span {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
   }
 
   .links a {
@@ -90,9 +144,10 @@ input {
   }
 
   .congo-agent-container .intro-content p {
-    font-size: clamp(2rem, 2.25vw, 1.25rem) ;
+    font-size: clamp(2rem, 2.25vw, 1.25rem);
   }
 }
+*/
 
 
 

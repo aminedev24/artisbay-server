@@ -94,10 +94,15 @@
 
 .nose-cut , .half-cut, .combination-cut , .rear-half{
   display: flex;
-
-  justify-content: space-between;
   gap: 20px; /* Controls the space between text and image */
   flex-direction: row;
+}
+@media (max-width: 768px) {
+  .nose-cut , .half-cut, .combination-cut , .rear-half{
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
 }
 
 .rear-cut-imgs img {

@@ -151,6 +151,7 @@ const InquiryForm = () => {
   }, [notification]);
 
   const handleInputChange = (event) => {
+    
     const { name, value } = event.target;
     setUserData((prevData) => ({
       ...prevData,
@@ -189,7 +190,7 @@ const InquiryForm = () => {
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="fullName"
                   value={userData.fullName}
                   onChange={handleInputChange}
                   required
@@ -250,7 +251,7 @@ const InquiryForm = () => {
                 <input
                   type="tel"
                   id="tel"
-                  name="tel"
+                  name="phone"
                   value={userData.phone}
                   onChange={handleInputChange}
                   required

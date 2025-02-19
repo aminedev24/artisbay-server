@@ -79,7 +79,7 @@
 }
 
 /* Heading styling */
-.order-steps-container h1 , .reasons-wrapper h1, .tireRating-title, .tire-width-container h1 , .tire-depth h2 {
+.order-steps-container h2 , .reasons-wrapper h2, .tireRating-title, .tire-width-container h2 , .tire-depth h3 {
 
   color: #1e377f;
   margin-bottom: 40px;
@@ -233,7 +233,7 @@
 }
 
 /* Text Styles */
-.reason h2 {
+.reason h3 {
   color: #f1892b;
   font-size: clamp(1.75rem, 2vw, 2.375rem);
   font-weight: bold;
@@ -418,13 +418,7 @@ ul li {
     margin-bottom: 15px;
   }
 
-  h2 {
 
-  }
-
-  h3 {
-
-  }
 }
 
 .tables {
