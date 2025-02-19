@@ -265,19 +265,19 @@ const handleSendEmail = async () => {
               </div>
               <div className="header-right">
                <p className="company-name">
-                  <strong>Artisbay Inc</strong>
+                  Artisbay Inc
                 </p>
                 <p>
-                  <strong>Date:</strong> {invoiceData.invoiceDate}
+                  Date: {invoiceData.invoiceDate}
                 </p>
                 <p>
-                  <strong>Invoice:</strong> {invoiceData.invoiceNumber}
+                  Invoice: {invoiceData.invoiceNumber}
                 </p>
                 <p>
-                  <strong>Expiry Date:</strong> {invoiceData.expiryDate}
+                  Expiry Date: {invoiceData.expiryDate}
                 </p>
                 <p>
-                  <strong>Purpose:</strong> {invoiceData.depositPurpose}
+                  Purpose: {invoiceData.depositPurpose}
                 </p>
                
               </div>
