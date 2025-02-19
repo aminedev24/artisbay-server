@@ -138,12 +138,15 @@
 
 .contact {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 40px 0;
   gap: 20px;
 }
+
 
 .contact p {
   color: #333;
@@ -151,7 +154,7 @@
 }
 
 .contact img {
-  width: 100%;
+  /* width: 100%; */
   height: auto;
 }
 
@@ -168,6 +171,7 @@
 .contact-text {
   border: 1px solid #ccc;
   padding: 30px 45px;
+  flex: 1;
 }
 
 .nav-icon {
@@ -193,8 +197,6 @@
 
 .title h2 {
   margin: 0;
-  font-size: 2.5rem;
-
 }
 .title span {
   flex: 1;
@@ -313,9 +315,7 @@
     max-width: 700px;
   }
 
- .title h2 {
-  font-size: clamp(1.75rem, 3.5vw, 2.95rem);
- }
+
 
  .title img {
   width: 85%;
