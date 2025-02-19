@@ -224,9 +224,9 @@ const NamibiaAgent = () => {
     <section className="contact-section-container">
         <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
         <div className="contact-text-container">
-          <p><strong>Efficient Consolidation & Freight Services for the Best </strong></p>
+          <p style={{maxWidth : '26%', position :'relative' , left : '1%'}}><strong>Efficient Consolidation & Freight Services for the Best </strong></p>
           <p><strong>Secure Bonded Warehousing & Flexible Consignment Solutions  </strong></p>
-          <p><strong>Seamless Customs & Duty Handling Stress-Free Import & Export</strong></p>
+          <p  style={{maxWidth : '26%'}}><strong>Seamless Customs & Duty Handling Stress-Free Import & Export</strong></p>
         </div>        
     </section>
     

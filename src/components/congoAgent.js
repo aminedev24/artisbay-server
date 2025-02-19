@@ -164,7 +164,7 @@ const CongoAgent = () => {
         <div className="contact-text-container">
           <p><strong>Services de consolidation et de fret efficaces pour une valeur optimale</strong></p>
           <p><strong>Entrepôt sous douane sécurisé et solutions de consignation flexibles</strong></p>
-          <p><strong>Gestion fluide des douanes et des droits – Importation et exportation sans stress</strong></p>
+          <p style={{maxWidth : '26%'}}><strong>Gestion fluide des douanes et des droits – Importation et exportation sans stress</strong></p>
         </div>        
     </section>
     
