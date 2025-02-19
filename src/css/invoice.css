@@ -27,7 +27,7 @@
 
 .invoice-modal-overlay .modal-content {
     background-color: #fff;
-    width: 50%;
+    width: 90%;
     padding: 0;
     max-width: 800px;
     font-family: Arial, sans-serif;
@@ -69,6 +69,7 @@
     font-size: 14px;
     line-height: 1.4;
     max-width: 90%;
+    width: 240px;
 }
 
 .signature {
@@ -79,10 +80,22 @@
     width: 100%;
 }
 
+
 .header-right p {
     margin: 0;
     line-height: 1.9;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: bolder;
+    letter-spacing: -.5px;
+    font-family: "Poppins", serif;
+    font-weight: 800;
+    font-style: normal;
+}
+.header-right p:nth-child(3){
+    margin: -10px 0;
+}
+.header-right p:nth-child(4){
+    margin: -10px 0;
 }
 
 .invoice-title {
@@ -129,6 +142,7 @@
 
 .amount-table th , .amount-table td , .items th , .items td {
     font-size: clamp(0.875rem, 1.3vw, 1.125rem);
+    max-width: 200px;
 }
 
 .important {
@@ -210,6 +224,7 @@
 }
 
 .instructions {
+    padding: 10px;
     margin-bottom: 20px;
     max-width: 50%;
     border: solid;
@@ -258,6 +273,7 @@
     flex: 2;
 }
 
+
 .header-right {
     flex: 1;
 }
@@ -280,6 +296,7 @@
     font-size: 16px;
 }
 .note-amount-container .note {
+    padding: 10px;
     max-width: 50%;
     border: solid;
 }

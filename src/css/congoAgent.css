@@ -155,6 +155,10 @@ width: 48%;
 
 .congo-agent {
   background: url('../../public/images/localServices/congoagentbanner.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: fit-content;
 }
 
 .congo-agent .services-text {

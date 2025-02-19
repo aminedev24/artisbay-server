@@ -10,6 +10,7 @@ import { localServicesCountries } from './localServicesCountries';
 const Stocklist = ({ cars }) => {
     const history = useNavigate();
     const location = useLocation();
+    
     const [sortOption, setSortOption] = useState('newest');
     const [viewOption, setViewOption] = useState('grid');
 
@@ -71,7 +72,7 @@ const Stocklist = ({ cars }) => {
         if (make) params.set('make', make);
         if (bodyType) params.set('bodyType', bodyType);
         if (searchKeyword) params.set('search', searchKeyword); // Include search keyword in params
-        history.push(`/stocklist?${params.toString()}`); // Navigate with updated params
+        history(`/stocklist?${params.toString()}`)
     };
 
     return (

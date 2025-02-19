@@ -693,6 +693,7 @@ const ProformaInvoiceForm = () => {
                     onClose={handleCloseModal} 
                     invoiceData={submittedInvoiceData}
                     onEdit={handleEditInvoice} // Pass the onEdit callback
+                    setIsModalOpen={setIsModalOpen}
                 />
         )}
       </div>

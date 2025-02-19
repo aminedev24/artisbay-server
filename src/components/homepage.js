@@ -145,7 +145,7 @@ const links2 = [
             <div class="image-usefulLinks_container">
               <img
                 alt="A large signboard with the ARTISBAY logo and the text 'ARTISBAY INC. DESIGNED TO SERVE YOU' in front of a modern building with glass windows."
-                src={`${process.env.PUBLIC_URL}/images/companyprofile.jpg`}
+                src={`${process.env.PUBLIC_URL}/images/companyProfile.jpg`}
               />
             </div>
            
@@ -228,7 +228,7 @@ const links2 = [
 
 
         <div className="newsupdates">
-          <img className="title-img" src={`${process.env.PUBLIC_URL}/images/news&updatestitle.png`} alt="usefullLinks" />
+          <img className="title-img" src={`${process.env.PUBLIC_URL}/images/news&updatesTitle.png`} alt="usefullLinks" />
           <div className="news-item-container">
             <div className="news-items">
             <p className="news-item">2024/11/15 Artisbay Inc was born</p>

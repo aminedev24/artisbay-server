@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
-import '../css/slider.css'
+import '../css/slider.css';
 import { useUser } from "./userContext"; // Import useUser hook
 
 const MediaSlider = () => {
@@ -39,7 +39,14 @@ const MediaSlider = () => {
           {mediaItems.map((item, index) => (
             <div key={index}>
               <Link to={item.link}>
-                <img src={item.src} alt={`Slide ${index + 1}`} />
+                <img 
+                  src={item.src} 
+                  alt={`Slide ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: 'auto'
+                  }}
+                />
               </Link>
             </div>
           ))}
@@ -47,21 +54,31 @@ const MediaSlider = () => {
       </div>
       <div className="right-image register-banner">
         {!user ? (
-          <>
-            <div className="register-banner">
-              <img src={`${process.env.PUBLIC_URL}/images/homepage/register0b.png`} />
-              <Link to='/login'><button className="sign-in-btn">sign in</button></Link>
-              <Link to='/register'><button className="register-btn">register</button></Link>
-            </div>
-          </>
+          <div className="register-banner">
+            <img 
+              src={`${process.env.PUBLIC_URL}/images/homepage/register0b.png`} 
+              alt="Register Banner"
+              style={{
+                width: '100%',
+                height: 'auto'
+              }}
+            />
+            <Link to='/login'><button className="sign-in-btn">sign in</button></Link>
+            <Link to='/register'><button className="  register-btn">register</button></Link>
+          </div>
         ) : (
-          <>
-            <div className="welcome-banner">
-              <img src={`${process.env.PUBLIC_URL}/images/homepage/register1.png`} />
-              <Link onClick={logoutHandler}><button className="contact-btn">contact</button></Link>
-              <Link to='/profile'><button className="profile-btn">profile</button></Link>
-            </div>
-          </>
+          <div className="welcome-banner">
+            <img 
+              src={`${process.env.PUBLIC_URL}/images/homepage/register1.png`} 
+              alt="Welcome Banner"
+              style={{
+                width: '100%',
+                height: 'auto'
+              }}
+            />
+            <Link onClick={logoutHandler}><button className="contact-btn">contact</button></Link>
+            <Link to='/profile'><button className="profile-btn">profile</button></Link>
+          </div>
         )}
       </div>
     </div>

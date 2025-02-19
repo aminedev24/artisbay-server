@@ -92,11 +92,11 @@ const Makestypes = () => {
         </div>
       </div>
 
-      <div className="make-container">
+      <div className="type-container">
             <h2 className="title">Makes</h2>
-            <div className="brands">
+            <div className="brands grid">
                 {makes.map((make, index) => (
-                    <div className="brand" key={index} onClick={() => handleFilterChange(make.name, null)}>
+                    <div className="brand grid-item" key={index} onClick={() => handleFilterChange(make.name, null)}>
                         <img 
                             src={`${process.env.PUBLIC_URL}/images/makes/${make.name.toLowerCase()}-logo.png`} 
                             alt={make.name} 
