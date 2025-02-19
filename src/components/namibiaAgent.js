@@ -232,7 +232,7 @@ const NamibiaAgent = () => {
     
     <section className="contact-cta-section">
           <p>For any inquiries about our services from Japan or locally in Namibia, feel free to contact us at <a className="cta-link" href="mailto:sales@artisbay.com">sales@artisbay.com</a>
-          Our team is ready to assist you." </p>
+          Our team is ready to assist you. </p>
     </section>
     </section>
     <div className="faq-list">

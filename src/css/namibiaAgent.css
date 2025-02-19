@@ -336,7 +336,7 @@
   justify-content: space-around;
   position: absolute;
   top: 60%;
-  width: 90%;
+  width: 88%;
 }
 
 .contact-text-container p {
@@ -356,4 +356,5 @@
 
 .namibia-agent-container .faq-list h1 {
   text-align: center;
+  margin: 20px;
 }
