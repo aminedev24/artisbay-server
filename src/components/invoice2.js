@@ -412,9 +412,7 @@ const handleSendEmail = async () => {
             : (
 
               <div className="instructions">
-              <p>
-                <strong>Instructions:</strong>
-              </p>
+       
               <ul>
                 <li>
                   Please ensure all transfer fees are covered by the sender to

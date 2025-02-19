@@ -261,12 +261,12 @@
 }
 
 .note-amount-container p {
-    padding: 20px;
     margin: 0;
     line-height: 1.2;
 }
 
 .note-amount-container .note {
+    padding: 10px;
     max-width: 50%;
     border: solid;
 }
