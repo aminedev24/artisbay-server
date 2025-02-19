@@ -99,7 +99,7 @@ const NamibiaAgent = () => {
           <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/auctionicon.png`} alt='services icon'/>
 
         </a>
-        <a href='#/help?topic=F%26Q'>
+        <a onClick={() => scrollToSection('faq-list')}>
           <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/faqicon.png`} alt='services icon'/>
 
         </a>
@@ -235,7 +235,7 @@ const NamibiaAgent = () => {
           Our team is ready to assist you. </p>
     </section>
     </section>
-    <div className="faq-list">
+    <div id="faq-list" className="faq-list">
       <button className="btn show-faq-btn" type="button" onClick={handleShowFaq}>{showFaq ? "Hide FAQ" : "Show faq"}</button>
 
       <h1>Frequently Asked Questions (FAQ)</h1>
