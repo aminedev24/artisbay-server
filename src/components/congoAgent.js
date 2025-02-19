@@ -93,7 +93,8 @@ const CongoAgent = () => {
           </p>
         </div>
       </section>
-     {/* 
+     {
+     /* 
               <div className="services">
             <div className="service">
                 <i className="fas fa-shield-alt"></i>
@@ -157,6 +158,24 @@ const CongoAgent = () => {
         
       </div>
 
+      <section className="contact-section-wrapper">
+    <section className="contact-section-container">
+        <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
+        <div className="contact-text-container">
+          <p><strong>Services de consolidation et de fret efficaces pour une valeur optimale</strong></p>
+          <p><strong>Entrepôt sous douane sécurisé et solutions de consignation flexibles</strong></p>
+          <p style={{maxWidth : '26%'}}><strong>Gestion fluide des douanes et des droits – Importation et exportation sans stress</strong></p>
+        </div>        
+    </section>
+    
+    <section className="contact-cta-section">
+          <p>Pour toute question sur nos services depuis le Japon ou localement en Namibie, n’hésitez pas à nous contacter à <a className="cta-link" href="mailto:sales@artisbay.com">sales@artisbay.com</a>
+            Notre équipe est à votre disposition.
+           </p>
+    </section>
+    </section>
+    {
+      /*
       <section className="contact-section-container">
         <div class="contact">
           <div className='contact-text'>
@@ -172,6 +191,9 @@ const CongoAgent = () => {
           <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`}/>
         </div>
       </section>
+      */
+    }
+
 
     </div>
   );

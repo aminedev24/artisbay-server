@@ -62,7 +62,7 @@ const ProformaInvoiceForm = () => {
         depositAmount: '',
         depositCurrency: 'JPY',
         depositDescription: 'This payment is to order cars from the auctions in Japan',
-        depositPurpose: 'Vehicule Purchase',
+        depositPurpose: 'Vehicle Purchase',
         expiryDate: '',
         bankNote: 'Car details, including chassis numbers, will be provided by the remitter upon completion of the car purchase.',
         chasisNumber: '', 

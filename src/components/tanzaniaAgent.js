@@ -26,7 +26,7 @@ const TanzainaAgent = () => {
       
       <div className="nav">
 
-        <a onClick={() => scrollToSection('agent')}>
+        <a onClick={() => scrollToSection('contact-section')}>
         <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/agenticon.png`} alt='services icon'/>
 
         </a>
@@ -158,8 +158,25 @@ const TanzainaAgent = () => {
       </section>
       
 
-     
-      <div className="banner logistics-banner">
+    <section id="contact-section" className="contact-section-wrapper">
+    <section className="contact-section-container">
+        <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
+        <div className="contact-text-container">
+          <p style={{maxWidth : '26%', position :'relative' , left : '1%'}} ><strong>Efficient Consolidation & Freight Services for the Best </strong></p>
+          <p><strong>Secure Bonded Warehousing & Flexible Consignment Solutions  </strong></p>
+          <p  style={{maxWidth : '26%'}}><strong>Seamless Customs & Duty Handling Stress-Free Import & Export</strong></p>
+        </div>        
+    </section>
+    
+    <section className="contact-cta-section">
+          <p>For any inquiries about our services from Japan or locally in Namibia, feel free to contact us at <a className="cta-link" href="mailto:sales@artisbay.com">sales@artisbay.com</a>
+          Our team is ready to assist you." </p>
+    </section>
+    </section>
+  
+    {
+      /*
+        <div className="banner logistics-banner">
           <img
             src={`${process.env.PUBLIC_URL}/images/localServices/simplifylogisticsTitle.png`}
             className="banner"
@@ -210,6 +227,9 @@ const TanzainaAgent = () => {
             </div>
         </div>
       </div>
+      */
+    }
+
 
     
     </div>

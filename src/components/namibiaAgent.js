@@ -1,6 +1,64 @@
 import React from "react";
 import "../css/namibiaAgent.css"
+
 const NamibiaAgent = () => {
+
+  const faqs = [
+    {
+      question: "What local services are available in Namibia?",
+      answer: "Our local partners provide container clearance, customs handling, bonded warehouse storage, and local delivery services to ensure a smooth process for your shipments."
+    },
+    {
+      question: "Can you assist with clearing my container at the port?",
+      answer: "Yes, customs and duty services are handled by our local partners, ensuring smooth clearance and avoiding unnecessary delays."
+    },
+    {
+      question: "Do you provide bonded warehouse storage?",
+      answer: "Yes, our local partners offer bonded warehouse storage, allowing you to store goods securely while deferring duty payments until they are ready for sale or delivery."
+    },
+    {
+      question: "Can you deliver my goods after customs clearance?",
+      answer: "Yes, local delivery services are available to transport your goods from the port or warehouse to your preferred location."
+    },
+    {
+      question: "How can I track my shipment?",
+      answer: "We provide shipment tracking, keeping you updated on your container’s status. Once it arrives, clearance and delivery are handled by the clearing agent."
+    },
+    {
+      question: "Do you handle all types of shipments?",
+      answer: "We specialize in used cars, used and new tires, and used and new vehicle parts. We also select the best shipping options to ensure the cheapest and most efficient transport solutions for your needs."
+    },
+    {
+      question: "How much do these services cost?",
+      answer: "Pricing depends on the type of service, shipment size, and customs requirements. We can connect you with the right providers, who will give you a detailed cost estimate."
+    },
+    {
+      question: "How do I get started?",
+      answer: "Simply contact us, and we will connect you with our trusted local partners who specialize in customs clearance, bonded storage, and local delivery."
+    },
+    {
+      question: "What is the import permit?",
+      answer: "An import permit is an official authorization required by Namibian customs to allow vehicles to be imported. It ensures compliance with local import regulations and is necessary for customs clearance."
+    },
+    {
+      question: "Is the import permit required per car, or does one permit cover multiple vehicles?",
+      answer: "Each imported car requires a separate import permit. One permit cannot be used for multiple vehicles."
+    },
+    {
+      question: "Can you help me get the import permit?",
+      answer: "Yes, our local partners can assist with the import permit process, guiding you through the necessary steps and documentation required for approval."
+    },
+    {
+      question: "What are the year restrictions for cars imported into Namibia?",
+      answer: "Currently, used cars must not be older than 12 years at the time of import. However, buses and trucks do not have age restrictions."
+    }
+  ];
+
+  const [showFaq, setShowFaq ] = useState(false);
+
+  const handleShowFaq = () => {
+    setShowFaq(!showFaq);
+  }
 
   const scrollToSection = (id) => {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
@@ -25,7 +83,7 @@ const NamibiaAgent = () => {
       
       <div class="nav">
 
-        <a onClick={() => scrollToSection('agent')}>
+        <a onClick={() => scrollToSection('contact-section')}>
         <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/agenticon.png`} alt='services icon'/>
 
         </a>
@@ -41,7 +99,7 @@ const NamibiaAgent = () => {
           <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/auctionicon.png`} alt='services icon'/>
 
         </a>
-        <a href='#/help?topic=F%26Q'>
+        <a onClick={() => scrollToSection('faq-list')}>
           <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/faqicon.png`} alt='services icon'/>
 
         </a>
@@ -132,10 +190,8 @@ const NamibiaAgent = () => {
           </div>
         </div>
       </section>
-   
-     
 
-      <section className="contact-section-container">
+      <section id="contact-section" className="contact-section-container">
         <div class="contact">
           <div className='contact-text'>
           <h2>
@@ -164,8 +220,36 @@ const NamibiaAgent = () => {
       
       </div>
       */}
+    <section className="contact-section-wrapper">
+    <section className="contact-section-container">
+        <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
+        <div className="contact-text-container">
+          <p style={{maxWidth : '26%', position :'relative' , left : '1%'}}><strong>Efficient Consolidation & Freight Services for the Best </strong></p>
+          <p><strong>Secure Bonded Warehousing & Flexible Consignment Solutions  </strong></p>
+          <p  style={{maxWidth : '26%'}}><strong>Seamless Customs & Duty Handling Stress-Free Import & Export</strong></p>
+        </div>        
+    </section>
     
+    <section className="contact-cta-section">
+          <p>For any inquiries about our services from Japan or locally in Namibia, feel free to contact us at <a className="cta-link" href="mailto:sales@artisbay.com">sales@artisbay.com</a>
+          Our team is ready to assist you. </p>
+    </section>
+    </section>
+    <div id="faq-list" className="faq-list">
+      <button className="btn show-faq-btn" type="button" onClick={handleShowFaq}>{showFaq ? "Hide FAQ" : "Show faq"}</button>
 
+      <h1>Frequently Asked Questions (FAQ)</h1>
+      {showFaq && faqs.map((faq, index) => (
+        <div key={index}>
+          <h4>{faq.question}</h4>
+          <p>{faq.answer}</p>
+        </div>
+      ))}
+    </div>
+    
+    
+      {
+      /*
       <div id="agent" className="logistics background">
            
             <div className="logistics-agent-info">
@@ -177,7 +261,11 @@ const NamibiaAgent = () => {
                 Phone/WhatsApp: 264 812 294 597<br />
                 Address: CORNER OFFICE, SAM NUYOMA STREET, OPPOSITE KFC, WALVIS BAY, NAMIBIA
             </div>
-        </div>
+      </div>
+      */
+
+      }
+
 
     </div>
   );
