@@ -69,6 +69,7 @@
     font-size: 14px;
     line-height: 1.4;
     max-width: 90%;
+    width: 240px;
 }
 
 .signature {
@@ -78,6 +79,7 @@
 .header-right {
     width: 100%;
 }
+
 
 .header-right p {
     margin: 0;
@@ -270,6 +272,7 @@
 .header-left {
     flex: 2;
 }
+
 
 .header-right {
     flex: 1;
