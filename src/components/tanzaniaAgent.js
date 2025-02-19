@@ -26,7 +26,7 @@ const TanzainaAgent = () => {
       
       <div className="nav">
 
-        <a onClick={() => scrollToSection('agent')}>
+        <a onClick={() => scrollToSection('contact-section')}>
         <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/agenticon.png`} alt='services icon'/>
 
         </a>
@@ -158,7 +158,7 @@ const TanzainaAgent = () => {
       </section>
       
 
-      <section className="contact-section-wrapper">
+    <section id="contact-section" className="contact-section-wrapper">
     <section className="contact-section-container">
         <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
         <div className="contact-text-container">
