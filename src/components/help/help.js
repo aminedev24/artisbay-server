@@ -39,7 +39,7 @@ const topics = {
     { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
     { name: "Artisbay Consulting", content: <BusinessConsulting />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
 
-    { name: "sell on artisbay Inc.", component: <SellInArtisbay />, image:`${process.env.PUBLIC_URL}/images/sellonab.png` },
+    /*{ name: "sell on artisbay Inc.", component: <SellInArtisbay />, image:`${process.env.PUBLIC_URL}/images/sellonab.png` },*/
     { name: "Terms & Conditions", content: <TermsAndConditions />, image:  `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
     { name: "Anti-Social Force Policy", content: <AntiSocialForcesPolicy />, image: `${process.env.PUBLIC_URL}/images/asf.png` },
     { name: "How to Buy used cars", component: <HowToBuy /> ,image:`${process.env.PUBLIC_URL}/images/howtobuyrecent2.jpeg`},

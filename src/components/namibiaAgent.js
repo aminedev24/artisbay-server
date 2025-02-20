@@ -251,7 +251,7 @@ const NamibiaAgent = () => {
     <div id="faq-list" className="faq-list">
       <button className="btn show-faq-btn" type="button" onClick={handleShowFaq}>{showFaq ? "Hide FAQ" : "Show faq"}</button>
 
-      <h1>Frequently Asked Questions (FAQ)</h1>
+      <h3>Frequently Asked Questions (FAQ)</h3>
       {showFaq && faqs.map((faq, index) => (
         <div key={index}>
           <h4>{faq.question}</h4>
