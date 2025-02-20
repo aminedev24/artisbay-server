@@ -87,7 +87,7 @@ function App() {
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/profile/:section?" element={<ProfilePage />} />
         <Route path='/shipping' element={<Shipping />} />
-        <Route path='/invoice' element={<ProformaInvoiceForm />} />
+        <Route path='/invoice-generator' element={<ProformaInvoiceForm />} />
         <Route path='/local-services/namibia' element={<NamibiaAgent />} />
         <Route path='/local-services/congo' element={<CongoAgent />} />
         <Route path='/local-services/tanzania' element={<TanzainaAgent />} />

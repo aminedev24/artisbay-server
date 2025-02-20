@@ -14,7 +14,7 @@ const WisePaymentInstructions = () => {
         <li>Make the Payment: Fund the transfer using your bank account, debit card, or other available payment methods.</li>
         <li>Confirm and Track: Review all details before confirming. Once sent, you can track the status of your transfer online or through the Wise app.</li>
       </ol>
-      <p>Ready to get an invoice? <a className='cta-link' href="#/invoice">Click here</a>.</p>
+      <p>Ready to get an invoice? <a className='cta-link' href="#/invoice-generator">Click here</a>.</p>
       <p>Need more help from us? <a className='cta-link' href="#/contact">Contact us</a>.</p>
     </div>
   );

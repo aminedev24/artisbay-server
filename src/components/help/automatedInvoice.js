@@ -38,7 +38,7 @@ const AutomatedInvoice = () => {
 
       <h4>Get Started Now</h4>
       <p>
-        Take control of your invoicing today. Visit our<a className='cta-link' href="#/invoice">Invoice Generator form</a> and experience
+        Take control of your invoicing today. Visit our<a className='cta-link' href="#/invoice-generator">Invoice Generator form</a> and experience
         the convenience, accuracy, and efficiency firsthand.
       </p>
     </div>

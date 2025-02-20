@@ -352,9 +352,12 @@
   color: #ffff;
   background-color: #e67e22;
   font-size: 25px;
+  margin: 0 auto;
+  display: block;
 }
 
 .namibia-agent-container .faq-list h1 {
   text-align: center;
-  margin: 20px;
+  margin-bottom: 20px;
+  margin-top: 0;
 }

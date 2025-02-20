@@ -51,10 +51,23 @@ const NamibiaAgent = () => {
     {
       question: "What are the year restrictions for cars imported into Namibia?",
       answer: "Currently, used cars must not be older than 12 years at the time of import. However, buses and trucks do not have age restrictions."
+    },
+    {
+      question: "What if my question isn’t answered here?",
+      answer: "If you have any questions that were not answered here, feel free to <a href='#/contact' class='cta-link'> contact us</a> we’ll be happy to assist you!",
+      containsHtml: true
     }
   ];
 
   const [showFaq, setShowFaq ] = useState(false);
+
+  const renderAnswer = (answer, containsHtml) => {
+      if (containsHtml) {
+        return <p dangerouslySetInnerHTML={{ __html: answer }} />;
+      } else {
+        return <p>{answer}</p>;
+      }
+    }  
 
   const handleShowFaq = () => {
     setShowFaq(!showFaq);
@@ -242,7 +255,7 @@ const NamibiaAgent = () => {
       {showFaq && faqs.map((faq, index) => (
         <div key={index}>
           <h4>{faq.question}</h4>
-          <p>{faq.answer}</p>
+          {renderAnswer(faq.answer, faq.containsHtml)}
         </div>
       ))}
     </div>

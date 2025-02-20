@@ -70,7 +70,7 @@ const InvoiceList = () => {
               <td>{invoice.invoice_number}</td>
               <td>{invoice.customer_name}</td>
               <td>{invoice.email}</td>
-              <td>{invoice.deposit_amount}</td>
+              <td>{invoice.deposit_amount} {invoice.deposit_currency}</td>
               <td>{invoice.description}</td>
               <td>{invoice.created_at}</td>
               <td>{invoice.deposit_purpose}</td>

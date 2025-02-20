@@ -43,15 +43,15 @@ const ProfilePage = () => {
   // Menu items configuration
   const menuItems = [
     { key: 'settings', label: 'Settings', component: Settings },
-    { key: 'inquiries', label: 'Inquiries', component: InquiryList },
-    { key: 'submitted tire orders', label: 'submitted tire orders', component: TireOrderList },
+    { key: 'Inquiries', label: 'Inquiries', component: InquiryList },
+    { key: 'Submitted tire orders', label: 'Submitted tire orders', component: TireOrderList },
     { key: 'Invoices List', label: 'Invoices List', component: InvoiceList },
-    { key: 'Account', label: 'Account', component: DepositsTable},
+    { key: 'Accountancy', label: 'Accountancy', component: DepositsTable},
     { key: 'privacy', label: 'Privacy', component: Privacy },
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
-    { key: 'Cutting & Dismantling logs', label: 'cutting & dismantling logs', component: FetchSavedCars },
+    { key: 'Cutting & Dismantling logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
 
   ];
 

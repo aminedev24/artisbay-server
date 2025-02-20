@@ -132,7 +132,7 @@ const Modal = ({ isOpen, onClose, orders, setIsModalOpen }) => {
         </div>
         <div className='action-btns'>
           <button className="print-button" onClick={handlePrint}>Print Orders</button>
-          <Link to='/invoice' className='print-button'>Generate Invoice</Link>
+          <Link to='/invoice-generator' className='print-button'>Generate Invoice</Link>
         </div>
        
       </div>
