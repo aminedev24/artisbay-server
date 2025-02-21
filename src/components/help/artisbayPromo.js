@@ -200,7 +200,7 @@ const ArtisbayPromo = () => {
       Your success is our motivation, and we are honored to be a part of your journey towards growth
       and transformation.
     </p>
-    <button>Contact us now</button>
+    <a href='#/contact' className='cta-link'> <button>Contact us now</button></a>
   </div>
 </div>
 

@@ -213,7 +213,6 @@
 
 .network-icons img {
   width: 100%;
-  max-width: 350px;
   height: auto;
   object-fit: cover;
 }
@@ -237,13 +236,13 @@
 .content-section {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem; /* Adjust spacing as needed */
+  justify-content: flex-start;
+  margin-bottom: 2rem;
 }
 
 .text-content {
   flex: 1;
-  padding-right: 1rem;
+  margin-right: 0.25rem; /* Minimal gap from text side */
 }
 
 .heading-tertiary {
@@ -255,6 +254,7 @@
 .image-content {
   text-align: center;
   flex-shrink: 0;
+  margin-left: 0.25rem; /* Minimal gap from image side */
 }
 
 .image-content img {
@@ -263,6 +263,7 @@
   height: auto;
   margin-bottom: 0.5rem;
 }
+
 
 .footer-section {
   border-top: 1px solid #f1892b; /* Equivalent to border-yellow-600 */
