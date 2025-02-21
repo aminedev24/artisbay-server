@@ -5,7 +5,6 @@ import Footer from './components/footer';
 import CarDetails from './components/carDetails';
 import Stocklist from './components/stockList';
 import carData from './components/carData'; // Import car data
-import About from './components/about';
 import HomePage from './components/homepage';
 import Contact from './components/contact';
 //import HowToBuy from './components/howtobuy';
@@ -74,7 +73,6 @@ function App() {
         <Route path="/" element={<HomePage cars={cars} />} />
         <Route path="/cars/:id" element={<CarDetails cars={cars} />} />
         <Route path="/stocklist" element={<Stocklist cars={cars} />} />
-        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         {/* More routes here */}
         <Route path="/car-dismantling" element={<CarDismantling />} />

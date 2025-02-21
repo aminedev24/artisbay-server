@@ -24,6 +24,7 @@ import AutomatedInvoice from './automatedInvoice';
 import WisePaymentInstructions from './wise';
 import BusinessConsulting from './businessConsulting';
 import PdfContent from './japanDealers';
+import ArtisbayPromo from './artisbayPromo';
 
 // Define the topics
 const topics = {
@@ -37,7 +38,8 @@ const topics = {
     /*{ name: "For Dealers in Japan", content: <PdfContent/>, image: `${process.env.PUBLIC_URL}/images/consultwithabhelp.png`},*/
 
     { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
-    { name: "Artisbay Consulting", content: <BusinessConsulting />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
+    /*{ name: "Artisbay Consulting", content: <BusinessConsulting />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },*/
+    { name: "Artisbay Consulting", content: <ArtisbayPromo />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
 
     /*{ name: "sell on artisbay Inc.", component: <SellInArtisbay />, image:`${process.env.PUBLIC_URL}/images/sellonab.png` },*/
     { name: "Terms & Conditions", content: <TermsAndConditions />, image:  `${process.env.PUBLIC_URL}/images/terms&conditions.png` },

@@ -113,18 +113,18 @@ body {
     min-height: 100vh;
 }
 
-    
+
 @media screen and (max-width: 9999px) {
     .layout, .usedTiresForm-container, .car-details, .help-page , .footer-inner, .shipping-container , 
     .top-bar, .profile-wrapper ,.namibia-agent-container, .congo-agent-container, .japan-exports  {
         margin: 0 auto;
-        width: 90%; /* Use percentage */
-        max-width: 1540px; /* Set a max-width */
+        width: 90%; 
+        max-width: 1540px; 
     }
     .header-bottom, .header-top, .local-services-banner {
         margin: 0 auto;
-        width: 90%; /* Use percentage */
-        max-width: 1480px; /* Set a max-width */
+        width: 90%;
+        max-width: 1480px;
     }
 
     .top-bar {
@@ -144,12 +144,12 @@ body {
     .layout, .usedTiresForm-container, .car-details, .help-page , .footer-inner, .shipping-container ,
     .top-bar ,.profile-wrapper, .namibia-agent-container, .congo-agent-container , .japan-exports  {
         margin: 0 auto;
-        width: 90%; /* Use percentage */
-        max-width: 1438px; /* Set a max-width */
+        width: 90%;
+        max-width: 1438px; 
     }
     .header-top, .header-bottom {
-        width: 90%; /* Use percentage */
-        max-width: 1460px; /* Set a max-width */
+        width: 90%; 
+        max-width: 1460px; 
     }
 }
 
@@ -158,12 +158,12 @@ body {
     .footer-inner, .shipping-container ,.top-bar , .profile-wrapper , 
     .namibia-agent-container ,.congo-agent-container, .japan-exports  {
         margin: 0 auto;
-        width: 90%; /* Use percentage */
-        max-width: 1330px; /* Set a max-width */
+        width: 90%; 
+        max-width: 1330px; 
     }
     .header-bottom {
-        width: 90%; /* Use percentage */
-        max-width: 1330px; /* Set a max-width */
+        width: 90%; 
+        max-width: 1330px; 
     }
 }
 
@@ -172,12 +172,12 @@ body {
   .footer-inner, .shipping-container , .top-bar ,.profile-wrapper , .namibia-agent-container, 
   .congo-agent-container, .japan-exports {
       margin: 0 auto;
-      width: 100%; /* Use percentage */
+      width: 100%; 
       max-width: 100%;
   }
   .header-bottom {
-      width: 90%; /* Use percentage */
-      max-width: 1330px; /* Set a max-width */
+      width: 90%;
+      max-width: 1330px; 
   }
 
 
@@ -197,6 +197,8 @@ body {
       }
     
 }
+
+
 
 
 
