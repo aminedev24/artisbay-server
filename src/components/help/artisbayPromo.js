@@ -3,7 +3,7 @@ import '../../css/artisbayPromo.css'; // Corresponding CSS file for styling
 
 const ArtisbayPromo = () => {
   return (
-  <div class="max-w-4xl mx-auto p-6">
+  <div class="ab-consulting max-w-4xl mx-auto p-6">
    <h1 class="text-3xl font-bold text-center text-yellow-600 mb-6">
     Consult with Artisbay
    </h1>
@@ -138,14 +138,11 @@ const ArtisbayPromo = () => {
             <p>With trusted guidance, we help you unlock opportunities, streamline operations, and achieve measurable growth.</p>
         </div>
         <div class="our-network">
-            <h3>Our network</h3>
             <div class="network-icons">
             <img src={`${process.env.PUBLIC_URL}/images/consulting/network.png`} alt="an image showing a highlight of business network" />
 
             </div>
-            <div class="marketplace">
-                <div class="icon">Artisbay Inc Market place</div>
-            </div>
+          
         </div>
     </div>
 
@@ -207,6 +204,19 @@ const ArtisbayPromo = () => {
   </div>
 </div>
 
+{/* part 5 */}
+<h3>Ready to Diversify Your Business?</h3>
+      <p>Partner with Artisbay to access tailored consulting services and innovative solutions including:</p>
+      <ul>
+        <li>Solar panels</li>
+        <li>Brand-new tires</li>
+        <li>Brand-new cars</li>
+        <li>Home appliances</li>
+        <li>Terrace roof mounts</li>
+        <li>EV charging stations</li>
+      </ul>
+
+      <p className="cta"><a className='cta-link' href='#/contact'>Contact Us today</a> to schedule your free consultation and discover how we can help your business grow!</p>
     </div>
   );
 };
