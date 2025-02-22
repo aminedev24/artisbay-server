@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
       fontFamily: 'Roboto',
     },
     headerText: {
-      fontSize: '12px',
+      fontSize: '10px',
     },  
     description : {
-        fontSize: '12px',
-        maxWidth: '97%',
+        fontSize: '10px',
+        maxWidth: '98%',
     },
     invoiceHeader: {
       display: 'flex',
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     headerFullWidthText: {
       margin: 0,
-      fontSize: '13px',
+      fontSize: '11px',
       marginRight: '15px',
       alignSelf: 'flex-end',
     },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
       width: '150px',
     },
     contactInfo: {
-      maxWidth: '70%',
+      maxWidth: '54%',
     },
     contactInfoText: {
       margin: 0,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     iconParagraph: {
       display: 'flex',
       flexDirection: 'row',
-      fontSize: '12px',
+      fontSize: '10px',
       alignItems: 'center',
     },
     icon: {
@@ -274,8 +274,8 @@ const styles = StyleSheet.create({
       width: '50px',
     },
     rightText : {
-      marginBottom: '3px',
-      fontSize: '12px',
+      marginBottom: '5px',
+      fontSize: '10px',
     },
     tableRows : {
       display : 'flex',
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
                 <Text style={styles.description}>
                   An online platform for the sale and export of used vehicles and auto parts
                 </Text>
-                <Text style={styles.headerText}>Registered in Japan | License No.7370001051924</Text>
+                <Text style={styles.headerText}>Registered in Japan | Registered with the Miyagi Ken Legal Affairs Bureau</Text>
                 <Text style={styles.iconParagraph}>
                   <Text style={styles.icon}><FaEnvelope /></Text>
                   <Text>Email: contact@artisbay.com</Text>
@@ -565,7 +565,7 @@ export const generatePdfBlob = async (invoiceData) => {
 const GeneratePdfButton = ({ invoiceData }) => {
   const handleGeneratePdf = async () => {
     const blob = await pdf(<MyPdfDocument invoiceData={invoiceData} />).toBlob();
-    saveAs(blob, 'invoice.pdf');
+    saveAs(blob, 'AB-invoice.pdf');
   };
 
   return (

@@ -251,7 +251,7 @@ const handleSendEmail = async () => {
                     An online platform for the sale and export of used vehicles
                     and auto parts
                   </p>
-                  <p>Registered in Japan | License No. 7370001051924</p>
+                  <p>Registered in Japan | Registered with the Miyagi Ken Legal Affairs Bureau</p>
                   <p className='icon-paragraph'>
                     <FaEnvelope className="icon" />
                     Email: contact@artisbay.com
@@ -529,12 +529,10 @@ const handleSendEmail = async () => {
           {/* Action Buttons */}
           <div className="action-buttons">
             {/*
-                        <button className='no-print' onClick={handlePrint}>Print</button>
-                        <button className='no-print' onClick={handleSaveAsPDF}>Save as PDF</button>
-                            <GeneratePdfButton invoiceData={invoiceData} />
-
-
-                        */}
+              <button className='no-print' onClick={handlePrint}>Print</button>
+              <button className='no-print' onClick={handleSaveAsPDF}>Save as PDF</button>
+              <GeneratePdfButton invoiceData={invoiceData} />
+            */}
 
             <button
               className="no-print"

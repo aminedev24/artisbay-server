@@ -66,9 +66,9 @@
 
 .contact-info p {
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.4;
-    max-width: 90%;
+    max-width: 57%;
 }
 
 .signature {
@@ -82,7 +82,7 @@
 .header-right p {
     margin: 0;
     line-height: 1.9;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .invoice-title {
@@ -109,7 +109,7 @@
 
 .invoice-info p {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .invoice-bank-info {
@@ -118,7 +118,7 @@
 
 .invoice-bank-info p {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 
@@ -174,7 +174,7 @@
     margin-left: 0;
     font-weight: bold;
     flex: 6;
-    font-size: 12px;
+    font-size: 13px;
     align-self: center;
 }
 
@@ -312,7 +312,7 @@
 }
 
 .header-right .company-name {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .action-buttons {

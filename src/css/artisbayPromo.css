@@ -231,37 +231,44 @@
 .heading-secondary {
   font-weight: bold;
   margin-bottom: 0.5rem; /* Equivalent to mb-2 */
+  padding: 0 !important;
 }
 
 .content-section {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Optional section spacing */
+}
+
+.text-content,
+.image-content {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default margins on headings and paragraphs inside */
+.text-content h3,
+.text-content p,
+.image-content p {
+  margin: 0;
+  padding: 0;
 }
 
 .text-content {
   flex: 1;
-  margin-right: 0.25rem; /* Minimal gap from text side */
-}
-
-.heading-tertiary {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  text-decoration: underline;
 }
 
 .image-content {
   text-align: center;
   flex-shrink: 0;
-  margin-left: 0.25rem; /* Minimal gap from image side */
 }
 
 .image-content img {
   display: block;
   max-width: 150px;
   height: auto;
-  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
 
@@ -275,7 +282,7 @@
 }
 
 .footer-section button {
-  background-color: #2563eb; /* bg-blue-600 */
+  background-color: #1da1f2; /* bg-blue-600 */
   color: #fff;
   padding: 0.5rem 1rem; /* px-4 py-2 */
   border: none;
