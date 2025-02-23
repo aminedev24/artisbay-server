@@ -1,7 +1,66 @@
-import React from "react";
+import React, {useState} from "react";
 import "../css/congoAgent.css"; // Import the CSS file
 
 const CongoAgent = () => {
+
+
+const faqs = [
+  {
+    question: 'Puis-je acheter une seule voiture et dois-je payer pour un conteneur complet ?',
+    answer: 'Oui, vous pouvez acheter une seule voiture sans payer un conteneur entier, car nous offrons un service de consolidation. Cela signifie que votre véhicule sera chargé avec d’autres voitures dans un conteneur, ce qui réduit les frais d’expédition.'
+  },
+  {
+    question: 'Ai-je besoin d’un permis d’importation pour importer une voiture en RDC ?',
+    answer: 'Non, un permis d’importation n’est pas requis pour importer des voitures d’occasion en RDC.'
+  },
+  {
+    question: 'Quelle est la limite d’âge pour les véhicules importés ?',
+    answer: 'Les véhicules importés peuvent avoir jusqu’à 20 ans.'
+  },
+  {
+    question: 'Quels sont les documents nécessaires pour l’importation ?',
+    answer: 'Pour importer une voiture en RDC, les documents suivants sont généralement requis : Connaissement maritime (Bill of Lading - BL), Facture commerciale, Certificat d’exportation (annulation d’immatriculation du pays d’origine).'
+  },
+  {
+    question: 'Combien de temps faut-il pour recevoir mon véhicule ?',
+    answer: 'Le délai de livraison dépend du calendrier des navires et des itinéraires empruntés. En général, le temps de transit maritime entre le Japon et la RDC est de 50 à 60 jours.'
+  },
+  {
+    question: 'Quels sont les droits de douane et taxes applicables ?',
+    answer: 'Les droits et taxes d’importation varient en fonction du type de véhicule, de la cylindrée du moteur et de la valeur en douane. Nous recommandons de consulter un agent de dédouanement local pour obtenir une estimation précise des coûts.'
+  },
+  {
+    question: 'Peut-on importer des véhicules avec conduite à droite (volant à droite) ?',
+    answer: 'Oui, l’importation de véhicules avec volant à droite est autorisée en RDC.'
+  },
+  {
+    question: 'Proposez-vous des inspections avant l’expédition ?',
+    answer: 'Oui, nous inspectons tous les véhicules avant expédition. Nous fournissons des photos détaillées, mais nous ne proposons pas de vidéos.'
+  },
+  {
+    question: 'Offrez-vous des services de transport en conteneur et de consolidation ?',
+    answer: 'Oui, nous proposons des expéditions en conteneur et des services de consolidation pour optimiser l’espace et réduire les coûts de transport.'
+  },
+  {
+    question: 'Quels sont les modes de paiement disponibles ?',
+    answer: 'Nous acceptons les paiements via virement bancaire international (T/T) et PayPal. Le paiement doit être effectué en totalité avant l’expédition.'
+  },
+  {
+    question: 'Comment puis-je suivre mon expédition ?',
+    answer: 'Nous fournissons un suivi d’expédition, mais nous ne garantissons pas l’obtention d’une copie du Bill of Lading (BL).'
+  },
+  {
+    question: 'Pouvez-vous aider avec le dédouanement et l’immatriculation locale ?',
+    answer: 'Nous ne nous occupons pas directement du dédouanement, mais nous avons un agent de dédouanement de confiance qui peut vous assister.'
+  }
+]
+
+    const [showFaq, setShowFaq ] = useState(false);
+  
+    const handleShowFaq = () => {
+      setShowFaq(!showFaq);
+    }
+
   return (
     <div className="congo-agent-container">
       
@@ -173,6 +232,18 @@ const CongoAgent = () => {
            </p>
     </section>
     </section>
+
+    <div id="faq-list" className="faq-list">
+    <button className="btn show-faq-btn" type="button" onClick={handleShowFaq}>{showFaq ? "Hide FAQ" : "Show faq"}</button>
+
+      <h1>FAQ – Foire aux Questions</h1>
+      {showFaq && faqs.map((faq, index) => (
+        <div key={index}>
+          <h4>{faq.question}</h4>
+          <p>{faq.answer}</p>
+        </div>
+      ))}
+    </div>
     {
       /*
       <section className="contact-section-container">
