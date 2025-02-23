@@ -59,7 +59,7 @@ const ArtisbayPromo = () => {
           </div>
         </div>
       </div>
-      <hr class="border-yellow-600 mb-6" />
+      <hr class="divider" />
       <div className="section-container">
         <div className="section-text">
           <p>
@@ -154,10 +154,7 @@ const ArtisbayPromo = () => {
             honored to be a part of your journey towards growth and
             transformation.
           </p>
-          <a href="#/contact" className="cta-link">
-            {" "}
-            <button>Contact us now</button>
-          </a>
+         
         </div>
       </div>
 
@@ -228,7 +225,7 @@ const ArtisbayPromo = () => {
             bulk.
           </p>
           <li>Specialized Products from France</li>
-          <ul>
+          <ul class='special-products-list'>
             <li>Wholesale EV charging stands</li>
             <li>Terrace roof mounts</li>
             <li>Factory-fresh tires</li>
@@ -289,9 +286,10 @@ const ArtisbayPromo = () => {
       </ul>
 
       <p className="cta">
-        <a className="cta-link" href="#/contact">
-          Contact Us today
-        </a>{" "}
+          <a href="#/contact" className="cta-link">
+            {" "}
+            <button>Contact us now</button>
+          </a>
         to schedule your free consultation and discover how we can help your
         business grow!
       </p>

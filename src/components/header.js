@@ -104,6 +104,11 @@ const Header = () => {
                   <button onClick={logoutHandler} className="logout-btn">
                     Logout
                   </button>
+                  {
+                    user && user.role === 'admin' && (
+                      <p>Admin panel</p>
+                    )
+                  }
                 </div>
               </div>
             )}

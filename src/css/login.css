@@ -134,3 +134,28 @@
   .login-container .logo-form {
     width: 25%;
   }
+
+  .logout-btn {
+    background-color: #1da1f2; /* Red color */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: #007bff; /* Darker red */
+  }
+  
+  .logout-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #e67e22; /* Light red glow */
+  }
+  
+  .profile a {
+    text-align: left;
+    padding: 8px 24px;
+  }

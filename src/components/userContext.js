@@ -54,6 +54,8 @@ export const UserProvider = ({ children }) => {
       setIsSubmitting(false);
     }
   };
+
+  console.log(user)
   
 
   // Logout Function

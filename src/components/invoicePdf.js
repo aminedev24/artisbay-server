@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     headerFullWidthText: {
       margin: 0,
       fontSize: '11px',
-      marginRight: '15px',
+      marginRight: '8px',
       alignSelf: 'flex-end',
     },
     headers: {
@@ -56,18 +56,12 @@ const styles = StyleSheet.create({
       alignItems: 'center', // Ensure vertical alignment
       width: '100%',
     },
-    headerLeft: {
-      flex: 2,
-      textAlign: 'left', // Ensure alignment with right header
-    },
-    headerRight: {
-      flex: 1,
-    },
+
     logo: {
-      width: '150px',
+      width: '160px',
     },
     contactInfo: {
-      maxWidth: '54%',
+      maxWidth: '32%',
     },
     contactInfoText: {
       margin: 0,
@@ -90,6 +84,7 @@ const styles = StyleSheet.create({
       fontSize: '15px',
       fontWeight: 'bold',
       marginBottom: '3px',
+      paddingBottom: '10px',
     },
     invoiceTitle: {
       textAlign: 'center',
