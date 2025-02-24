@@ -52,3 +52,8 @@
         max-width: 570px;
     }
 }
+
+.faq-list h3 , .faq-list button {
+    display: inline-block;
+    margin: 0 10px;
+}
