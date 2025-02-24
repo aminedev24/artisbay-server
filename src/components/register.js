@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { countries } from './countries';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import useCheckScreenSize from './screenSize';
-import SignupForm from './registerForm';
+/*import SignupForm from './registerForm';*/
 import TermsAndConditions from "./help/terms";
 import PrivacyPolicy from './help/privacy'; // Import the PrivacyPolicy component
 import '../css/register.css';
+import SignupForm from './registerForm';
 
 const RegisterForm = () => {
   const [modalType, setModalType] = useState(null); // State to manage which modal is open

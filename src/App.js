@@ -32,6 +32,7 @@ import CarCostCalculator from './components/cuttingCalculator';
 import PdfContent from './components/help/japanDealers';
 import SendEmailVerification from './components/SendEmailVerification';
 import VerifyEmail from './components/verifyEmail';
+import SignupForm from './components/registerForm2';
 
 function App() {
   
