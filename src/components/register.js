@@ -6,7 +6,7 @@ import useCheckScreenSize from './screenSize';
 import TermsAndConditions from "./help/terms";
 import PrivacyPolicy from './help/privacy'; // Import the PrivacyPolicy component
 import '../css/register.css';
-import SignupForm from './registerForm';
+import SignupForm from './registerForm2';
 
 const RegisterForm = () => {
   const [modalType, setModalType] = useState(null); // State to manage which modal is open

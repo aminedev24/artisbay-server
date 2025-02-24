@@ -39,6 +39,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
       const response = await fetch(`${apiUrl}/send-verification.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: 'include',
         body: JSON.stringify({ email, fullName })
       });
       const data = await response.json();
@@ -213,6 +214,11 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
             <button type="button" onClick={sendEmailConfirmation}>
               Send Confirmation Email
             </button>
+            {message && (
+              <div className={`message ${isError ? "error" : "success"}`}>
+            {message}
+              </div>
+            )}
           </div>
         )}
 
@@ -236,7 +242,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
             </button>
             {message && (
               <div className={`message ${isError ? "error" : "success"}`}>
-                {message}
+            {message}
               </div>
             )}
           </div>
