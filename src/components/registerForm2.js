@@ -3,17 +3,14 @@ import CountryList from "./countryList";
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = ({ setIsModalOpen, setModalType }) => {
-  // Track the current step: 1 = name/email, 2 = verification, 3 = full form
+  // Steps: 1 = initial form (name & email), 2 = email verification, 3 = full signup form
   const [step, setStep] = useState(1);
-  
   // Step 1 states
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  
-  // Step 2: Verification code state
+  // Step 2: verification code input
   const [verificationCode, setVerificationCode] = useState("");
-
-  // Step 3: Additional form fields
+  // Step 3: Additional fields
   const [company, setCompany] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,40 +20,65 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [address, setAddress] = useState("");
 
-  // General message and error handling
+  // General messages
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-
-  // Password strength handling
   const [passwordStrength, setPasswordStrength] = useState("");
   const [passwordCriteriaMet, setPasswordCriteriaMet] = useState({ criteriaMet: 0, totalCriteria: 5 });
 
   const navigate = useNavigate();
-  
-  // Set your API URL (for demo purposes)
   const apiUrl =
     process.env.NODE_ENV === "development"
       ? "http://localhost/artisbay-server-clean/server"
       : "/server";
 
-  // --- Step 1: Send confirmation email ---
+  // --- Step 1: Send Verification Email ---
   const sendEmailConfirmation = async () => {
-    // In a real-world scenario, you would call an API to send a confirmation email.
-    // For this demo, we simulate the process.
-    setMessage("Confirmation email sent. Please check your email for your code.");
-    setIsError(false);
-    setStep(2);
+    try {
+      // Call backend API to send a verification email with a unique code
+      const response = await fetch(`${apiUrl}/send-verification.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, fullName })
+      });
+      const data = await response.json();
+      if (data.success) {
+        setMessage("Verification email sent. Please check your email for the code.");
+        setIsError(false);
+        setStep(2);
+      } else {
+        setMessage("Error sending verification email: " + data.error);
+        setIsError(true);
+      }
+    } catch (error) {
+      console.error("Error sending email verification", error);
+      setMessage("Error sending email verification.");
+      setIsError(true);
+    }
   };
 
-  // --- Step 2: Verify the email code ---
+  // --- Step 2: Verify the Email Code ---
   const verifyEmail = async () => {
-    // For demonstration, assume the correct code is "123456"
-    if (verificationCode === "123456") {
-      setMessage("Email verified successfully!");
-      setIsError(false);
-      setStep(3);
-    } else {
-      setMessage("Invalid verification code. Please try again.");
+    try {
+      // Call backend API to verify the code
+      const response = await fetch(`${apiUrl}/verify-email.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, verificationCode })
+      });
+      const data = await response.json();
+      if (data.success) {
+        setMessage("Email verified successfully!");
+        setIsError(false);
+        setStep(3);
+      } else {
+        setMessage("Verification failed: " + data.error);
+        setIsError(true);
+      }
+    } catch (error) {
+      console.error("Error verifying email", error);
+      setMessage("Error verifying email.");
       setIsError(true);
     }
   };
@@ -72,7 +94,6 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
     setter(event.target.value);
   };
 
-  // Evaluate password strength
   const evaluatePasswordStrength = (password) => {
     let strength = "Weak";
     const lengthCriteria = password.length >= 8;
@@ -100,23 +121,20 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
     setPasswordCriteriaMet({ criteriaMet, totalCriteria });
   };
 
-  // --- Final Signup Submission (Step 3) ---
+  // --- Step 3: Final Signup Submission ---
   const handleSignup = async (event) => {
     event.preventDefault();
 
-    // Basic validations for password and terms acceptance
     if (passwordStrength === "Weak") {
       setMessage("Your password is too weak. Please choose a stronger password.");
       setIsError(true);
       return;
     }
-
     if (!agreeToTerms) {
       setMessage("You must agree to the terms and conditions.");
       setIsError(true);
       return;
     }
-
     if (password !== confirmPassword) {
       setMessage("Passwords do not match.");
       setIsError(true);
@@ -126,7 +144,6 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
     setMessage("Signing up...");
     setIsError(false);
 
-    // Include phone code if needed
     let fullPhoneNumber = phone;
     if (!fullPhoneNumber.startsWith(phoneCode)) {
       fullPhoneNumber = `${phoneCode} ${phone}`.trim();
@@ -148,7 +165,6 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
       });
-
       const result = await response.json();
       if (result.success) {
         setMessage("Signup successful! Redirecting...");
@@ -167,7 +183,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={step === 3 ? handleSignup : undefined}>
-        {/* Step 1: Name & Email */}
+        {/* Step 1: Enter Name and Email */}
         {step === 1 && (
           <div className="step1">
             <div className="input-group">
@@ -200,7 +216,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
           </div>
         )}
 
-        {/* Step 2: Email Verification */}
+        {/* Step 2: Verify the Email */}
         {step === 2 && (
           <div className="step2">
             <div className="input-group">
@@ -226,7 +242,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
           </div>
         )}
 
-        {/* Step 3: Complete Form */}
+        {/* Step 3: Complete the Signup Form */}
         {step === 3 && (
           <>
             <div className="input-group phone-number-group">
