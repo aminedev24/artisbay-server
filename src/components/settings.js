@@ -158,14 +158,18 @@ const Settings = ({ user, setUser }) => {
                 ) : (
                   <div className="view-mode">
                     {detail.value}
-                    {detail.editable && (
+                    {detail.editable ? (
                       <button 
                         className="btn btn-edit"
                         onClick={() => handleEditToggle(detail.key)}
                       >
                         Edit
                       </button>
-                    )}
+                    ): (
+                      <button className='btn btn-hidden'>Edit</button>
+                    )
+                    
+                    }
                   </div>
                 )}
               </td>

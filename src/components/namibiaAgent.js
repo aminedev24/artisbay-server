@@ -127,12 +127,14 @@ const NamibiaAgent = () => {
       <section className="agent-section">
         <div className="background namibia-agent">
               <div className="services-text">
-                  <span><strong>RELIABLE CLEARING AND IMPORT SERVICES IN WALVIS BAY<br /></strong></span>
-                  <span><strong>Nationwide Delivery<br /></strong></span>
-                  <span>Efficient delivery to major cities<br /> </span>
-                  <span>including Swakopmund, Windhoek, and beyond.<br /></span>
-                  <span><strong>Border deliveries</strong> <br/></span>
-                  <span>to Botswana, Angola, and Zambia</span>
+                  <span className='main-titile'><strong>RELIABLE CLEARING AND IMPORT SERVICES IN WALVIS BAY<br /></strong></span>
+                  <div className="sub-text">                  <span><strong>Nationwide Delivery<br /></strong></span>
+                    <span>Efficient delivery to major cities<br /> </span>
+                    <span>including Swakopmund, Windhoek, and beyond.<br /></span>
+                    <span><strong>Border deliveries</strong> <br/></span>
+                    <span>to Botswana, Angola, and Zambia</span>
+                  </div>
+
               </div>
         </div>
 

@@ -100,7 +100,7 @@ const Header = () => {
                     activeDropdown === 'profile' ? 'show' : ''
                   }`}
                 >
-                  <Link to="/profile">Profile</Link>
+                  <Link to="/profile">My Account</Link>
                   <button onClick={logoutHandler} className="logout-btn">
                     Logout
                   </button>

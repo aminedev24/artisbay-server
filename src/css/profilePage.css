@@ -190,7 +190,7 @@
 
 /* Button Styles */
 .btn {
-    padding: 8px 15px;
+    padding: 5px 10px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -260,3 +260,6 @@
     border-color: #007bff;
   }
   
+  .btn-hidden {
+    visibility: hidden;
+  }

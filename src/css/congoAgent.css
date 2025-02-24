@@ -154,11 +154,15 @@ width: 48%;
 }
 
 .congo-agent {
-  background: url('../../public/images/localServices/congoagentbanner.png');
+  background: url('../../public/images/localServices/congoagentrecent.png');
 }
 
 .congo-agent .services-text {
   left:60px;
+  max-width: 600px;
 }
 
+.congo-agent .sub-text {
+  right: 0;
+}
 

@@ -245,29 +245,25 @@ const ArtisbayPromo = () => {
 
       {/* part 4 */}
 
-      <div class="flex-container">
+      <div>
+        <div class="image-container">
+          <img
+            src={`${process.env.PUBLIC_URL}/images/consulting/abbridge.png`}
+            alt="an image showcasing network graph"
+          />
+
+          {/*<img src="https://placehold.co/800x400" alt="A man and a woman having a discussion in a professional setting" />*/}
+        </div>
         <div class="why-artisbay">
-          <h3>Our network</h3>
-          <p>Artisbay empowers businesses to grow by offering:</p>
-          <ul>
-            <li>Strategic consulting</li>
-            <li>Logistics optimization</li>
-            <li>Renewable energy solutions</li>
-            <li>One-on-one export training</li>
-          </ul>
-          <p>
-            With trusted guidance, we help you unlock opportunities, streamline
-            operations, and achieve measurable growth.
-          </p>
+          <h3>Artisbay Inc. Bridging Japanese Businesses with Overseas Markets</h3>
+            Artisbay Inc. serves as a crucial link between Japanese businesses and international buyers, 
+            streamlining exports and ensuring seamless transactions. With deep expertise in Japan’s 
+            automotive and used parts industries, Artisbay Inc. connects local suppliers—ranging from 
+            auction-sourced vehicle providers to dismantlers and tire wholesalers—with overseas businesses 
+            seeking high-quality Japanese products. By handling sourcing, logistics, and compliance, 
+            Artisbay Inc. simplifies access to Japan’s trusted market, making global trade more efficient and reliable
         </div>
-        <div class="our-network">
-          <div class="network-icons">
-            <img
-              src={`${process.env.PUBLIC_URL}/images/consulting/network.png`}
-              alt="an image showing a highlight of business network"
-            />
-          </div>
-        </div>
+     
       </div>
 
       {/* part 5 */}

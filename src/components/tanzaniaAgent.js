@@ -130,16 +130,20 @@ const TanzainaAgent = () => {
 
 
     
-
-      <div className="background tanzania-agent">
+      <section>
+        <div className="background tanzania-agent">
             <div className="services-text">
-                <strong>RELIABLE CLEARING AND IMPORT SERVICES IN DAR ESSALAM<br /></strong>
-                <strong>Nationwide Delivery<br /></strong>
-                Efficient delivery to major cities, including Dar es Salaam, Arusha, and beyond.<br />
-                <strong>Border deliveries</strong> <br />
-                 to DR-Congo, Zambia , Zimbabwe , Malawi, Uganda
+                <strong className="main-title">RELIABLE CLEARING AND IMPORT SERVICES IN DAR ESSALAM<br /></strong>
+                <div className="sub-text">
+                    <strong >Nationwide Delivery<br /></strong>
+                    Efficient delivery to major cities, including Dar es Salaam, Arusha, and beyond.<br />
+                    <strong>Border deliveries</strong> <br />
+                    to DR-Congo, Zambia , Zimbabwe , Malawi, Uganda
+                </div>
+            
             </div>
         </div>
+      </section>
       
       <section id="services" className="section-container">
         <h1 className="section-title">

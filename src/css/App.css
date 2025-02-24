@@ -77,14 +77,14 @@ label {
 input {
   font-size: clamp(0.95rem, 1.2vw, 1.15rem); 
 }
-
+/*
 .logistics-agent-info, .services-text, .logistics-agent-info a {
-  font-size: clamp(0.875rem, 1.8vw, 2rem) !important; /* As per your original request */
+  font-size: clamp(0.875rem, 1.8vw, 2rem) !important;
 }
-
+*/
 @media (min-width: 1400px) {
   .intro-content p, .logistics-agent-info, .services-text, .logistics-agent-info a {
-    font-size: clamp(1rem, 1.5vw, 1.5rem); /* 16px - 24px */
+    font-size: clamp(1rem, 1.5vw, 1.5rem); 
   }
   p, ul li, ol li, .list-item, .cta-link, .bank-info-table td, .footer-inner a , .grid-item span {
     font-size: clamp(1rem, 2vw, 1.3rem); /* 16px - 24px */

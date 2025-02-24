@@ -94,11 +94,13 @@ const faqs = [
               <div className="services-text">
                   <span><strong>SERVICES FIABLES DE DÉDOUANEMENT ET
                                 D'IMPORTATION AU PORT DE MATADI<br /></strong></span>
-                  <span>Dégagement de conteneur<br /></span>
-                  <span>Dédouanement Immatriculation<br /> </span>
-                  <span>et même une consultation gratuite<br /></span>
-                  <span>avec un expert dans l'importation <br/></span>
-                  <span>de véhicule et les pièces de rechange</span>
+                  <div className="sub-text">                  <span>Dégagement de conteneur<br /></span>
+                    <span>Dédouanement Immatriculation<br /> </span>
+                    <span>et même une consultation gratuite<br /></span>
+                    <span>avec un expert dans l'importation <br/></span>
+                    <span>de véhicule et les pièces de rechange</span>
+                  </div>
+
               </div>
         </div>
 
@@ -216,7 +218,7 @@ const faqs = [
         
       </div>
 
-      <section className="contact-section-wrapper">
+    <section className="contact-section-wrapper">
     <section className="contact-section-container">
         <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
         <div className="contact-text-container">

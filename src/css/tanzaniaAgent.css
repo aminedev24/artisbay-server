@@ -24,13 +24,31 @@
 }
 
 .tanzania-agent {
-    background-image: url('../../public/images/localServices/tanzaniaagentnew.png'); /* Replace with your image path */
+    background-image: url('../../public/images/localServices/tanzaniaagentrecent2.png'); 
     margin: 40px 0;
-    background-position: top center;
-    height: auto;
+    background-position: center center;
+
 }   
 
+.tanzania-agent .sub-text {
+    top: 13%;
+    right: 10%;
+}
+
+.tanzania-agent .main-title {
+    position: relative;
+    top:-1%;
+    right: 13px;
+}
 
 .tanzania-agent .services-text {
-    left: 20px;
+    left: 20px; 
+    max-width: 500px;
+
+}
+
+@media (min-width: 1400px) {
+    .tanzania-agent .services-text {
+        max-width: 570px;
+    }
 }
