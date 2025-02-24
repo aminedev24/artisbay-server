@@ -215,7 +215,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
               Send Confirmation Email
             </button>
             {message && (
-              <div className={`message ${isError ? "error" : "success"}`}>
+              <div className={`message ${isError ? "error" : "success" }`}>
             {message}
               </div>
             )}
