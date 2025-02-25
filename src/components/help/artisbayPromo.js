@@ -154,7 +154,12 @@ const ArtisbayPromo = () => {
             honored to be a part of your journey towards growth and
             transformation.
           </p>
-         
+          <div className="cta">
+            <a href="#/contact" className="cta-link">
+              {" "}
+              <button>Contact us now</button>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -256,12 +261,14 @@ const ArtisbayPromo = () => {
         </div>
         <div class="why-artisbay">
           <h3>Artisbay Inc. Bridging Japanese Businesses with Overseas Markets</h3>
+          <p>
             Artisbay Inc. serves as a crucial link between Japanese businesses and international buyers, 
             streamlining exports and ensuring seamless transactions. With deep expertise in Japan’s 
             automotive and used parts industries, Artisbay Inc. connects local suppliers—ranging from 
             auction-sourced vehicle providers to dismantlers and tire wholesalers—with overseas businesses 
             seeking high-quality Japanese products. By handling sourcing, logistics, and compliance, 
             Artisbay Inc. simplifies access to Japan’s trusted market, making global trade more efficient and reliable
+          </p>
         </div>
      
       </div>
