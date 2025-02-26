@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../css/namibiaAgent.css"; // Import the CSS file
-
+import ImageWithLoader from "./imageWithLoader";
 const TanzainaAgent = () => {
 
 
@@ -81,7 +81,11 @@ const TanzainaAgent = () => {
   return (
     <div className="namibia-agent-container">
       <div className="banner">
-        <img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniabanner.png`}/>
+        <ImageWithLoader
+            src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniabanner.png`} 
+            className="banner-image"
+            alt="Header image with containers and trucks"
+          />
       </div>
       <h1 className="main-title">
         Streamlined Logistics, Trusted Expertise
@@ -91,7 +95,11 @@ const TanzainaAgent = () => {
           <p>
           At Artisbay Inc., we understand that importing vehicles, tires, or parts into Tanzaina requires efficient and reliable clearing services. That’s why we’ve partnered with <strong>star Voyage Shippers Company Limited</strong>, a trusted clearing agent with over 10 years of experience, to offer you hassle-free logistics solutions in Dar Essalam.
           </p>
-          <img alt="Image of a ship and containers" src={`${process.env.PUBLIC_URL}/images/localServices/smallbanner2.png`}/>
+            <ImageWithLoader
+             src={`${process.env.PUBLIC_URL}/images/localServices/smallbanner2.png`} 
+             alt="Image of a ship and containers"
+          />
+
         </div>
       </section>
       
@@ -228,14 +236,24 @@ const TanzainaAgent = () => {
             </strong>
           </p>
           </div>
-          <img alt="Image of a handshake and a ship with containers" height="200" src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`} width="300"/>
+          <ImageWithLoader
+            src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`} 
+            className="banner-image"
+            alt="Image of a handshake and a ship with containers"
+            height="200"
+        />
+
         </div>
       </section>
       
 
     <section id="contact-section" className="contact-section-wrapper">
     <section className="contact-section-container">
-        <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
+        <ImageWithLoader
+          src={`${process.env.PUBLIC_URL}/images/contactusblank.png`} 
+          alt="Image of a handshake and a ship with containers" 
+        />
+
         <div className="contact-text-container">
           <p style={{maxWidth : '26%', position :'relative' , left : '1%'}} ><strong>Efficient Consolidation & Freight Services for the Best value </strong></p>
           <p><strong>Secure Bonded Warehousing & Flexible Consignment Solutions  </strong></p>
@@ -252,7 +270,7 @@ const TanzainaAgent = () => {
     <div id="faq-list" className="faq-list">
       <button className="btn show-faq-btn" type="button" onClick={handleShowFaq}>{showFaq ? "Hide FAQ" : "Show faq"}</button>
 
-      <h3>Frequently Asked Questions (FAQ)</h3>
+      <h1>Frequently Asked Questions (FAQ)</h1>
         {showFaq && faqs.map((faq, index)=>(
           <div key={index}>
             <h4>{faq.question}</h4>

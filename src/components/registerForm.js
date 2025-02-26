@@ -22,7 +22,7 @@ const SignupForm = ({ setIsModalOpen , setModalType ,modalType }) => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server-clean/server"
+      ? "http://localhost/artisbay-server/server"
       : "/server";
 
   const handleCountryChange = (event) => {

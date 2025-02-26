@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
   // API URL setup
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server-clean/server'
+      ? 'http://localhost/artisbay-server/server'
       : '/server';
 
   // Login Function
@@ -27,7 +27,7 @@ export const UserProvider = ({ children }) => {
       formData.append("email", email);
       formData.append("password", password);
   
-      const response = await fetch(`${apiUrl}/login.php`, {
+      const response = await fetch(`${apiUrl}/login2.php`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formData.toString(),

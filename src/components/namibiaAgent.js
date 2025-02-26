@@ -1,6 +1,6 @@
 import React , {useState} from "react";
 import "../css/tanzaniaAgent.css"; // Import the CSS file
-
+import ImageWithLoader from "./imageWithLoader";
 const NamibiaAgent = () => {
 
   const faqs = [
@@ -80,7 +80,12 @@ const NamibiaAgent = () => {
   return (
     <div className="namibia-agent-container">
       <div class="banner">
-        <img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/namibiabanner.png`}/>
+        <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/localServices/namibiabanner.png`} 
+              className="banner-image"
+              alt="Header image with containers and trucks"
+        />
+        {/*<img className="banner-image" alt="Header image with containers and trucks" src={`${process.env.PUBLIC_URL}/images/localServices/namibiabanner.png`}/>*/}
       </div>
       <h1 class="main-title">
         Streamlined Logistics, Trusted Expertise
@@ -90,7 +95,11 @@ const NamibiaAgent = () => {
           <p>
           At Artisbay Inc., we understand that importing vehicles, tires, or parts into Namibia requires efficient and reliable clearing services. That’s why we’ve partnered with <strong>IT Import and Export CC</strong>, a trusted clearing agent with over 10 years of experience, to offer you hassle-free logistics solutions in Walvis Bay.
           </p>
-          <img alt="Image of a ship and containers" src={`${process.env.PUBLIC_URL}/images/localServices/smallBanner.png`} />
+          <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/localServices/smallBanner.png`} 
+              alt="Image of a ship and containers"        
+          />
+          {/*<img alt="Image of a ship and containers" src={`${process.env.PUBLIC_URL}/images/localServices/smallBanner.png`} />*/}
         </div>
       </section>
       
@@ -185,7 +194,7 @@ const NamibiaAgent = () => {
         <div className="package-container">
           <div className="title">
             <h2>A Whole Package of Premium Services!</h2> 
-    
+
               <img 
                 alt="Decorative chevrons" 
                 src={`${process.env.PUBLIC_URL}/images/localServices/arrowscopy.png`} 
@@ -221,7 +230,12 @@ const NamibiaAgent = () => {
           </p>
          
           </div>
-          <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`}/>
+
+            <ImageWithLoader
+                src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`}
+                alt="Image of a handshake and a ship with containers"
+          />
+          {/*<img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/localServices/partner.png`}/>*/}
         </div>
       </section>
       
@@ -237,7 +251,11 @@ const NamibiaAgent = () => {
       */}
     <section className="contact-section-wrapper">
     <section className="contact-section-container">
-        <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
+        <ImageWithLoader
+          src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}
+          alt="Image of a handshake and a ship with containers"
+        />
+        {/*<img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>*/}
         <div className="contact-text-container">
           <p style={{maxWidth : '26%', position :'relative' , left : '1%'}}><strong>Efficient Consolidation & Freight Services for the Best value </strong></p>
           <p><strong>Secure Bonded Warehousing & Flexible Consignment Solutions  </strong></p>
@@ -253,7 +271,7 @@ const NamibiaAgent = () => {
     <div id="faq-list" className="faq-list">
       <button className="btn show-faq-btn" type="button" onClick={handleShowFaq}>{showFaq ? "Hide FAQ" : "Show faq"}</button>
 
-      <h3>Frequently Asked Questions (FAQ)</h3>
+      <h1>Frequently Asked Questions (FAQ)</h1>
       {showFaq && faqs.map((faq, index) => (
         <div key={index}>
           <h4>{faq.question}</h4>

@@ -459,7 +459,7 @@ const styles = StyleSheet.create({
         ]}>
             {invoiceData.bankNote ? (
                 <View style={styles.note}>
-                    <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Note for bank (By the Remitter):</Text></Text>
+                    <Text style={styles.contactInfoText}><Text style={{ fontWeight: 'bold' }}>Note (By the Remitter):</Text></Text>
                     <Text style={styles.contactInfoText}>{invoiceData.bankNote}</Text>
                 </View>
             ) : (

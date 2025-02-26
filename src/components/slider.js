@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
 import '../css/slider.css'
 import { useUser } from "./userContext"; // Import useUser hook
-
+import ImageWithLoader from './imageWithLoader';
 const MediaSlider = () => {
   const settings = {
     dots: true,
@@ -39,7 +39,12 @@ const MediaSlider = () => {
           {mediaItems.map((item, index) => (
             <div key={index}>
               <Link to={item.link}>
-                <img src={item.src} alt={`Slide ${index + 1}`} />
+              <ImageWithLoader
+                  src={item.src}
+                  alt={`Slide ${index + 1}`}
+                  //className="info-card-image"
+                />
+                {/*<img src={item.src} alt={`Slide ${index + 1}`} />*/}
               </Link>
             </div>
           ))}

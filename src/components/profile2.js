@@ -13,9 +13,19 @@ import TireOrderList from './submittedTireOrders';
 import InvoiceList from './invoicesList';
 import FetchSavedCars from './fetchSavedCars';
 import DepositsTable from './fetchDeposits';
+import AdminUserList from './getUsers';
+import { useUser } from "./userContext"; // Importing the useUser hook to access user data
+
+const LoadingSpinner = () => (
+  <div className="spinner-container">
+    <div className="spinner"></div>
+  </div>
+);
 
 const ProfilePage = () => {
-  const [user, setUser] = useState(null);
+  const [userr, setUserr] = useState(null);
+  const { user } = useUser(); // Accessing the user from context
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -37,9 +47,10 @@ const ProfilePage = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server-clean/server"
+      ? "http://localhost/artisbay-server/server"
       : "/server";
 
+  console.log(user.role)
   // Menu items configuration
   const menuItems = [
     { key: 'settings', label: 'Settings', component: Settings },
@@ -52,6 +63,9 @@ const ProfilePage = () => {
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
     { key: 'Cutting & Dismantling logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
+    user.role && user.role == 'admin' ?
+    { key: 'Users', label: 'Users list', component: AdminUserList }
+    :''
 
   ];
 
@@ -97,7 +111,7 @@ const ProfilePage = () => {
         if (data.error) {
           throw new Error(data.error);
         }
-        setUser(data);
+        setUserr(data);
         setFormData({
           name: data.full_name,
           country: data.country,
@@ -116,10 +130,10 @@ const ProfilePage = () => {
 
   // Redirect if not logged in
   useEffect(() => {
-    if (!loading && !user) {
+    if (!loading && !userr) {
       navigate("/login");
     }
-  }, [loading, user, navigate]);
+  }, [loading, userr, navigate]);
 
   // Handle URL and invalid sections
   useEffect(() => {
@@ -137,16 +151,18 @@ const ProfilePage = () => {
   };
 
   // Render loading state
+
   if (loading) {
     return (
-      <div className="profile-wrapper">
-        <div className="profile-container">Loading...</div>
+      <div style={{alignItems : loading ? 'center' : '' }} className="profile-wrapper">
+        <LoadingSpinner />      
       </div>
-    );
+    )
   }
 
+
   // If user is not logged in, return null
-  if (!user) {
+  if (!userr) {
     return null;
   }
 
@@ -202,8 +218,8 @@ const ProfilePage = () => {
         </div>
         <div className="profile-content" style={style}>
           <ActiveComponent
-            user={user}
-            setUser={setUser}
+            user={userr}
+            setUser={setUserr}
             formData={formData}
             setFormData={setFormData}
             isEditing={isEditing}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const AgreementForm = ({ agreementType, agreementContent }) => {
-  const apiUrl = process.env.NODE_ENV === "development" ? "http://localhost/artisbay-server-clean/server" : "/server";
+  const apiUrl = process.env.NODE_ENV === "development" ? "http://localhost/artisbay-server/server" : "/server";
 
   const [formData, setFormData] = useState({
     fullName: '',

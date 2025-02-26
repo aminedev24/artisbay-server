@@ -33,6 +33,7 @@ import PdfContent from './components/help/japanDealers';
 import SendEmailVerification from './components/SendEmailVerification';
 import VerifyEmail from './components/verifyEmail';
 import SignupForm from './components/registerForm2';
+import AdminVerifyEmail from './components/adminVerifyEmail';
 
 function App() {
   
@@ -94,6 +95,8 @@ function App() {
         <Route path='/japan-exports' element={<PdfContent />} />
         <Route path='/send-email-verification' element={<SendEmailVerification />} />
         <Route path='/get-email-verification' element={<VerifyEmail />} />
+        <Route path="/verify_email" element={<AdminVerifyEmail />}/>
+
         
         {/* Catch-all route for undefined paths */}
         <Route path="*" element={<NotFoundPage />} />

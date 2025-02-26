@@ -3,12 +3,13 @@ import os
 def list_directories_in_current_location():
     current_directory = os.getcwd()
     print(f"Current directory: {current_directory}")
-    
+    return
     print("Listing directories and subdirectories:")
     for foldername, subfolders, filenames in os.walk(current_directory):
         print(f"Directory: {foldername}")
         for subfolder in subfolders:
             print(f"  Subdirectory: {os.path.join(foldername, subfolder)}")
+    
 
 def search_in_files(directory, search_terms):
     if not os.path.exists(directory):
@@ -31,10 +32,10 @@ def search_in_files(directory, search_terms):
             except Exception as e:
                 print(f"Error opening {filepath}: {e}")
 
-directory_to_search = os.getcwd()  # Using the current working directory
-search_terms = ['#/invoice', "to='/invoice"]
+directory_to_search = os.getcwd() + '/components'  # Using the current working directory
+search_terms = ['#/invoice', "to='/invoice", "apiUrl"]
 
 # List directories first
-#list_directories_in_current_location()
+list_directories_in_current_location()
 # Search for the terms in files
 search_in_files(directory_to_search, search_terms)

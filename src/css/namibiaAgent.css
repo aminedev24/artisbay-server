@@ -41,14 +41,12 @@
   line-height: 1.6;
   padding: 50px 20px;
   border: 1px solid #ccc;
-  flex: 1;
   margin: 1px 0;
 }
 
 .intro-content img {
-  width: 100%;
   height: auto;
-  flex: 1;
+
 }
 
 .nav {

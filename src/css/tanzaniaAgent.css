@@ -53,7 +53,7 @@
     }
 }
 
-.faq-list h3 , .faq-list button {
+.faq-list h1 , .faq-list button {
     display: inline-block;
     margin: 0 10px;
 }

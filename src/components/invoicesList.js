@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 //import "./InvoiceList.css"; // Import CSS file for styling
 
+const LoadingSpinner = () => (
+  <div className="spinner-container">
+    <div className="spinner"></div>
+  </div>
+);
+
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +17,7 @@ const InvoiceList = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server-clean/server"
+      ? "http://localhost/artisbay-server/server"
       : "/server";
 
   useEffect(() => {
@@ -46,7 +52,13 @@ const InvoiceList = () => {
     setCurrentPage(pageNumber);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div style={{alignItems : loading ? 'center' : '' }} className="profile-wrapper">
+        <LoadingSpinner />      
+      </div>
+    )
+  }
   if (error) return <p>Error: {error}</p>;
 
   return (

@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import '../css/fetchCars.css';
+import { use } from "react";
+const LoadingSpinner = () => (
+  <div className="spinner-container">
+    <div className="spinner"></div>
+  </div>
+);
 
 const FetchSavedCars = () => {
   const [savedCars, setSavedCars] = useState([]);
@@ -10,6 +16,7 @@ const FetchSavedCars = () => {
   const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);
   const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   const auctionFees = 25000;
   const serviceFees = 20000;
@@ -28,7 +35,7 @@ const FetchSavedCars = () => {
 
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server-clean/server'
+      ? 'http://localhost/artisbay-server/server'
       : '/server';
 
       useEffect(() => {
@@ -71,6 +78,8 @@ const FetchSavedCars = () => {
             }
           } catch (error) {
             console.error("Error fetching saved cars:", error);
+          }finally {
+            setLoading(false)
           }
         };
       
@@ -112,7 +121,13 @@ const FetchSavedCars = () => {
       };
       
       
- 
+  if (loading) {
+    return (
+      <div style={{alignItems : loading ? 'center' : '' }} className="profile-wrapper">
+        <LoadingSpinner />      
+      </div>
+    )
+  }
   const handleCloseModal = () => {
     setShowModal(false);
   };

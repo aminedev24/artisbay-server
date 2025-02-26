@@ -3,6 +3,7 @@ import "../css/carDismantling.css";
 import LeftSidebar from "./sidebar";
 import { Link } from "react-router-dom";
 import StaticCostList from "./cuttingCostList";
+import ImageWithLoader from "./imageWithLoader";
 const CarDismantling = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -13,19 +14,33 @@ const CarDismantling = () => {
       <section className="carDismantling-container">
         {/* Hero Images */}
         <div className="image-container dismantling-banner">
+          <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/dismantling&shipping3.jpeg`}  
+              className="image"
+              alt="Car dismantling process"
+            />
+          {/*
           <img
             src={`${process.env.PUBLIC_URL}/images/dismantling&shipping3.jpeg`}
             alt="Car dismantling process"
             className="image"
           />
+          */}
           <Link to='/car-cost-calculator'><button className="dismantling-shipping-btn">Click here</button></Link>
         </div>
         <div className="image-container cutting">
+          <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/cuttingstyles2.jpeg`}  
+              className="image"
+              alt="Car cutting styles"
+          />
+          {/*
           <img
             src={`${process.env.PUBLIC_URL}/images/cuttingstyles2.jpeg`}
             alt="Car cutting styles"
             className="image"
           />
+          */}
         </div>
 
         {/* PDF Content Start */}

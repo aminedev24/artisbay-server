@@ -29,7 +29,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
   const navigate = useNavigate();
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server-clean/server"
+      ? "http://localhost/artisbay-server/server"
       : "/server";
 
   // --- Step 1: Send Verification Email ---

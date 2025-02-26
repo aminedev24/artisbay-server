@@ -25,7 +25,7 @@ import WisePaymentInstructions from './wise';
 import BusinessConsulting from './businessConsulting';
 import PdfContent from './japanDealers';
 import ArtisbayPromo from './artisbayPromo';
-
+import ImageWithLoader from '../imageWithLoader';
 // Define the topics
 const topics = {
   help: [
@@ -92,14 +92,17 @@ const HelpPage = () => {
 
 
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Show loading state
-  }
 
   return (
     <div className="help-page">
       {selectedTopic.image && (
-        <img src={selectedTopic.image} alt={selectedTopic.name} className="topic-image" />
+
+        <ImageWithLoader
+          src={selectedTopic.image}
+          className="topic-image"
+          alt={selectedTopic.name}
+      />
+    
       )}
       <div className={`help-main-content ${
             selectedTopic.name === 'help' ? 'help-lp' : 

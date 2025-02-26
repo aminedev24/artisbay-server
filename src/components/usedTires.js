@@ -3,7 +3,7 @@ import "../css/usedTires.css";
 import LeftSidebar from "./sidebar";
 import OrderForm from "./usedTiresForm";
 import { useLocation } from "react-router-dom";
-
+import ImageWithLoader from "./imageWithLoader";
 const UsedTires = () => {
   const ratings = [
     {

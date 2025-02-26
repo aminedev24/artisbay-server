@@ -124,7 +124,7 @@ const ProformaInvoiceForm = () => {
 
 
     const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server-clean/server'
+    ? 'http://localhost/artisbay-server/server'
     : '/server';
 
     // Fetch user data from the backend and populate form fields
@@ -496,7 +496,7 @@ const ProformaInvoiceForm = () => {
                       onChange={handleChange}
                       placeholder="Phone number"
                       required
-                      readOnly={isDataLoaded} // Set as read-only if data is loaded
+                      readOnly={isDataLoaded && user.role != 'admin'} // Set as read-only if data is loaded
 
                     />
                   </div>
@@ -529,7 +529,7 @@ const ProformaInvoiceForm = () => {
                     onChange={handleChange}
                     placeholder="E-mail"
                     required
-                    readOnly={isDataLoaded} // Set as read-only if data is loaded
+                    readOnly={isDataLoaded && user.role != 'admin'} // Set as read-only if data is loaded
                   />
                 </div>
               </div>
@@ -648,7 +648,7 @@ const ProformaInvoiceForm = () => {
             </div>
 
             <div className="input-group">
-             <label id='bankNoteLabel' htmlFor='bankNote'>Note for bank (By The Remitter) 
+             <label id='bankNoteLabel' htmlFor='bankNote'>Note (By The Remitter) 
               {/*<span className="required-star">*</span>*/}
               <button
                 type="button"

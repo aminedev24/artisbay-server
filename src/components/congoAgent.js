@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../css/congoAgent.css"; // Import the CSS file
-
+import ImageWithLoader from "./imageWithLoader";
 const CongoAgent = () => {
 
 
@@ -66,11 +66,18 @@ const faqs = [
       
       {/* Banner Section */}
       <div className="banner">
+      <ImageWithLoader
+          src={`${process.env.PUBLIC_URL}/images/localServices/congoBanner.png`}
+          className="banner-image"
+          alt="Congo Agent Banner"
+        />
+        {/*
         <img
           src={`${process.env.PUBLIC_URL}/images/localServices/congoBanner.png`}
           alt="Congo Agent Banner"
           className="banner-image"
         />
+        */}
       </div>
 
       <h1 class="main-title">
@@ -84,7 +91,10 @@ const faqs = [
         <div class="intro-content">
           <p>
           Depuis plus de 7 ans, nous avons bâti un partenariat fondé sur la confiance mutuelle et une expertise reconnue, offrant à nos clients de Kinshasa et ses environs un service fiable et de haute qualité. Grâce à notre engagement envers l’excellence, nous garantissons des prestations adaptées aux besoins spécifiques de chaque client, avec un souci constant de professionnalisme et d’efficacité.          </p>
-          <img alt="Image of a ship and containers" src={`${process.env.PUBLIC_URL}/images/localServices/smallbanner2.png`} />
+          <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/localServices/smallbanner2.png`}
+              alt="Image of a ship and containers"
+        />
         </div>
       </section>
 
@@ -220,7 +230,10 @@ const faqs = [
 
     <section className="contact-section-wrapper">
     <section className="contact-section-container">
-        <img alt="Image of a handshake and a ship with containers"  src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}/>
+        <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/contactusblank.png`}              className="banner-image"
+              alt="Image of a handshake and a ship with containers" 
+        />
         <div className="contact-text-container">
           <p><strong>Services de consolidation et de fret efficaces pour une valeur optimale</strong></p>
           <p><strong>Entrepôt sous douane sécurisé et solutions de consignation flexibles</strong></p>

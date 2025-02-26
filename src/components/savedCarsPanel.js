@@ -15,7 +15,7 @@ const SavedCarsPanel = ({ savedCars, setSavedCars, savedCarsTotalCost, editCar, 
     // API URL setup
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server-clean/server'
+      ? 'http://localhost/artisbay-server/server'
       : '/server';
 
   const initializeCheckedState = useCallback((car) => {

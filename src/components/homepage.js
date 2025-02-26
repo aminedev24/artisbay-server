@@ -10,6 +10,15 @@ import Makestypes from "./makestypes";
 import { FaHandPointer } from "react-icons/fa";
 import useCheckScreenSize from "./screenSize";
 import { useLocation } from "react-router-dom";
+import ImageWithLoader from "./imageWithLoader"; // import your new component
+
+// A simple spinner component (you can also extract this to its own file)
+const LoadingSpinner = () => (
+  <div className="spinner-container">
+    <div className="spinner"></div>
+  </div>
+);
+
 function HomePage() {
   const [cars, setCars] = useState([]);
   const [filters, setFilters] = useState({
@@ -20,15 +29,31 @@ function HomePage() {
     location: "",
     searchTerm: "",
   });
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+
+
+  
 
   const isSmallScreen = useCheckScreenSize();
 
   const location = useLocation();
+/*
+  useEffect(() => {
+    // Simulate async loading
+    setTimeout(() => {
+      setCars(carData);
+      setIsLoading(false); // Data has loaded
+    }, 2000); // Adjust the delay as needed or replace with actual async call
+  }, []);
+
+  // While data is loading, display the spinner
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  */
   
 
-  useEffect(() => {
-    setCars(carData);
-  }, []);
+
 
   const cards = [
     {
@@ -99,9 +124,9 @@ const links2 = [
           {cards.map((card, index) => (
             <Link to={card.link} className="info-card-link" key={index}>
               <div className="info-card">
-                <img
+              <ImageWithLoader
                   src={card.imgSrc}
-                  alt={card.title}
+                  alt={`Card ${index}`}
                   className="info-card-image"
                 />
               </div>
@@ -110,10 +135,10 @@ const links2 = [
         </div>
 
         <div className="banner-header-container">
-            <img
-              src={`${process.env.PUBLIC_URL}/images/consultwithabhomejp.jpeg`}
-              className="banner"
-              alt="sell banner"
+            <ImageWithLoader
+                  src={`${process.env.PUBLIC_URL}/images/consultwithabhomejp.jpeg`}
+                  className="banner"
+                  alt="sell banner"
             />
             <Link to="/japan-exports">
               <button className="sell-btn">Read more</button>
@@ -124,7 +149,13 @@ const links2 = [
         <div className="usefulLinks_wrapper">
           
           <div class="usefulLinks_container">
-            <img className="title-img" src={`${process.env.PUBLIC_URL}/images/usefullLinksTitle.png`} alt="usefullLinks" />
+            <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/usefullLinksTitle.png`} 
+              alt="usefullLinks" 
+              className="title-img"
+         
+            />
+            {/*<img className="title-img" src={`${process.env.PUBLIC_URL}/images/usefullLinksTitle.png`} alt="usefullLinks" />*/}
             
             <div className="links">
             <ul>
@@ -143,10 +174,13 @@ const links2 = [
             </ul>
         </div>
             <div class="image-usefulLinks_container">
+              
+              
               <img
                 alt="A large signboard with the ARTISBAY logo and the text 'ARTISBAY INC. DESIGNED TO SERVE YOU' in front of a modern building with glass windows."
                 src={`${process.env.PUBLIC_URL}/images/companyprofile.jpg`}
               />
+              
             </div>
            
           </div>
@@ -165,7 +199,12 @@ const links2 = [
           <picture className="banner">
             <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.webp`} type="image/webp" />
             <source srcset={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} type="image/jpeg" /> 
-            <img className="banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} alt="Tires banner" />
+            <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`}   
+              className="banner"   
+              alt="Tires banner"
+            />
+            {/*<img className="banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} alt="Tires banner" />*/}
           </picture>
 
           <Link to="/help?topic=about%20used%20Tires">
@@ -187,7 +226,12 @@ const links2 = [
           <picture className="banner">
             <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome2.webp`} type="image/webp" />
             <source srcset={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} type="image/jpeg" /> 
-            <img className="banner" src={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} alt="dismantling banner" />
+            <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`}   
+              className="banner"   
+              alt="dismantling banner"
+            />
+            {/*<img className="banner" src={`${process.env.PUBLIC_URL}/images/dismantlinghome2.jpeg`} alt="dismantling banner" />*/}
           </picture>
 
             <Link to="/car-dismantling">
@@ -197,10 +241,17 @@ const links2 = [
 
           <div className="banner-header-container">
             <div className='bordered'>
+            <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/paymentmethodshome.png`}   
+              className="banner"   
+              
+            />
+            {/*
             <img
               src={`${process.env.PUBLIC_URL}/images/paymentmethodshome.png`}
               className="banner"
             />
+            */}
             <Link to="/help?topic=security">
               <button className="security-btn">read more</button>
             </Link>
@@ -228,7 +279,13 @@ const links2 = [
 
 
         <div className="newsupdates">
-          <img className="title-img" src={`${process.env.PUBLIC_URL}/images/news&updatestitle.png`} alt="usefullLinks" />
+          <ImageWithLoader
+            src={`${process.env.PUBLIC_URL}/images/news&updatestitle.png`} 
+            className="banner"   
+            alt="usefullLinks"
+
+            />
+          {/*<img className="title-img" src={`${process.env.PUBLIC_URL}/images/news&updatestitle.png`} alt="usefullLinks" />*/}
           <div className="news-item-container">
             <div className="news-items">
             <p className="news-item">2024/11/15 Artisbay Inc was born</p>
@@ -236,18 +293,28 @@ const links2 = [
             <p className="news-item">Holidays from 28 December to 5 January </p>
 
             </div>
-           
-            <img src={ `${process.env.PUBLIC_URL}/images/homepage/companynewsicon.png`} />
+            <ImageWithLoader
+              src={ `${process.env.PUBLIC_URL}/images/homepage/companynewsicon.png`}    
+              
+            />
+            {/*<img src={ `${process.env.PUBLIC_URL}/images/homepage/companynewsicon.png`} />*/}
           </div>
            
         </div>
 
         <div className="banner-header-container">
+            <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/ecohome2.jpeg`}  
+              className="banner"   
+              alt="eco friendly banner"
+            />
+            {/*
             <img
               src={`${process.env.PUBLIC_URL}/images/ecohome2.jpeg`}
               className="banner"
               alt="eco friendly banner"
             />
+            */}
             <Link to="/help?topic=Sustainability">
               <button className="small-banner-btn eco-btn">Read more</button>
             </Link>
@@ -256,11 +323,17 @@ const links2 = [
         {/* Why Choose Us Section */}
         <section className="why-choose-us">
           <h2>Why Choose Us?</h2>
-         
+          <ImageWithLoader
+              src={`${process.env.PUBLIC_URL}/images/whychooseushome.png`} 
+              className="banner"   
+               alt="Why Choose Us"
+          />
+          {/*
           <img
             src={`${process.env.PUBLIC_URL}/images/whychooseushome.png`}
             alt="Why Choose Us"
           />
+          */}
 
           <p className="bold-text">
             With over 40 years of experience and a passion for quality, we
