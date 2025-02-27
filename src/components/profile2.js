@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useCheckScreenSize from './screenSize';
 import Settings from './settings';
@@ -14,27 +14,21 @@ import InvoiceList from './invoicesList';
 import FetchSavedCars from './fetchSavedCars';
 import DepositsTable from './fetchDeposits';
 import AdminUserList from './getUsers';
-import { useUser } from "./userContext"; // Importing the useUser hook to access user data
-
-const LoadingSpinner = () => (
-  <div className="spinner-container">
-    <div className="spinner"></div>
-  </div>
-);
+import { useUser } from "./userContext";
+import { Link } from 'react-router-dom';
 
 const ProfilePage = () => {
   const [userr, setUserr] = useState(null);
   const { user } = useUser(); // Accessing the user from context
-  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [userProfile, setUserProfile] = useState(true);
-  const [agreementType, setAgreementType] = useState(''); // State for agreement type
+  const [agreementType, setAgreementType] = useState('');
 
   const navigate = useNavigate();
-  const { section } = useParams(); // Get URL param
-  const { isSmallScreen, isPortrait } = useCheckScreenSize();
+  const { section } = useParams();
+  const { isSmallScreen } = useCheckScreenSize();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -50,33 +44,32 @@ const ProfilePage = () => {
       ? "http://localhost/artisbay-server/server"
       : "/server";
 
-  console.log(user.role)
-  // Menu items configuration
-  const menuItems = [
+  // Build the menuItems array using useMemo so it recalculates when user changes.
+  const menuItems = useMemo(() => [
     { key: 'settings', label: 'Settings', component: Settings },
-    { key: 'Inquiries', label: 'Inquiries', component: InquiryList },
-    { key: 'Submitted tire orders', label: 'Submitted tire orders', component: TireOrderList },
-    { key: 'Invoices List', label: 'Invoices List', component: InvoiceList },
-    { key: 'Accountancy', label: 'Accountancy', component: DepositsTable},
+    { key: 'inquiries', label: 'Inquiries', component: InquiryList },
+    { key: 'submitted tire orders', label: 'Submitted tire orders', component: TireOrderList },
+    { key: 'invoices list', label: 'Invoices List', component: InvoiceList },
+    { key: 'accountancy', label: 'Accountancy', component: DepositsTable },
     { key: 'privacy', label: 'Privacy', component: Privacy },
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
-    { key: 'Cutting & Dismantling logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
-    user.role && user.role == 'admin' ?
-    { key: 'Users', label: 'Users list', component: AdminUserList }
-    :''
+    { key: 'cutting & dismantling logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
+    // Only include admin item if user is loaded and is admin
+    ...(user && user.role === 'admin'
+      ? [{ key: 'users', label: 'Users list', component: AdminUserList }]
+      : [])
+  ], [user]);
 
-  ];
+  // Determine active content based on URL or default to settings.
+  // Use lowercase for comparison.
+  const initialActive = section && menuItems.some(item => item.key === section.toLowerCase())
+    ? section.toLowerCase()
+    : 'settings';
+  const [activeContent, setActiveContent] = useState(initialActive);
 
-  // Determine active content based on URL or default to settings
-  const [activeContent, setActiveContent] = useState(
-    section && menuItems.some(item => item.key === section)
-      ? section
-      : 'settings'
-  );
-
-  // Set agreement type based on active content
+  // Set agreement type based on active content.
   useEffect(() => {
     switch (activeContent) {
       case 'terms':
@@ -96,7 +89,7 @@ const ProfilePage = () => {
     }
   }, [activeContent]);
 
-  // Fetch user data
+  // Fetch user data.
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -126,47 +119,47 @@ const ProfilePage = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [apiUrl]);
 
-  // Redirect if not logged in
+  // Redirect if not logged in.
   useEffect(() => {
     if (!loading && !userr) {
       navigate("/login");
     }
   }, [loading, userr, navigate]);
 
-  // Handle URL and invalid sections
   useEffect(() => {
-    // If section is in URL but not valid, redirect to settings
-    if (section && !menuItems.some(item => item.key === section)) {
-      navigate('/profile/settings', { replace: true });
-      setActiveContent('settings');
+    if (user && section) {
+      if (!menuItems.some(item => item.key === section.toLowerCase())) {
+        navigate('/profile/settings', { replace: true });
+        setActiveContent('settings');
+      } else {
+        setActiveContent(section.toLowerCase());
+      }
     }
-  }, [section, navigate]);
+  }, [section, navigate, user, menuItems]);
+  
 
-  // Handle menu item selection
+  // Handle menu item selection.
   const handleMenuClick = (item) => {
     setActiveContent(item.key);
     navigate(`/profile/${item.key}`, { replace: true });
   };
 
-  // Render loading state
-
   if (loading) {
     return (
-      <div style={{alignItems : loading ? 'center' : '' }} className="profile-wrapper">
-        <LoadingSpinner />      
+      <div className="profile-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div className="spinner-container">
+          <div className="spinner"></div>
+        </div>      
       </div>
-    )
+    );
   }
 
-
-  // If user is not logged in, return null
   if (!userr) {
     return null;
   }
 
-  // Find the active component
   const ActiveComponent = menuItems.find(
     item => item.key === activeContent
   )?.component || Settings;
@@ -183,9 +176,8 @@ const ProfilePage = () => {
     activeContent === 'privacy' ||
     activeContent === 'sales-contract' ||
     activeContent === 'anti-social-policy'
-);
+  );
 
-  
   const style = {
     height: isSpecialContent ? '70vh' : '118vh',
     padding: isSpecialContent2 ? '0' : '',
@@ -195,7 +187,7 @@ const ProfilePage = () => {
     <div className="profile-wrapper">
       <div className="profile-container">
         <div className="profile-sidebar">
-          <div className='profile-sidebar-menus'>
+          <div className="profile-sidebar-menus">
             <h2>MENU</h2>
             <ul>
               {menuItems.map((item) => (
@@ -225,7 +217,7 @@ const ProfilePage = () => {
             isEditing={isEditing}
             setIsEditing={setIsEditing}
             userProfile={userProfile}
-            agreementType={agreementType} // Pass agreementType as a prop
+            agreementType={agreementType}
           />
         </div>
       </div>

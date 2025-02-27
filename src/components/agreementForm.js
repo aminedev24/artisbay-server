@@ -9,12 +9,11 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     terms: false,
     agreementType: agreementType,
   });
-
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [alreadyAgreed, setAlreadyAgreed] = useState(false);
-  const [isFetched, setIsFetched] = useState(false); // New state variable for fetched status
+  const [isFetched, setIsFetched] = useState(false);
 
   const isMountedRef = useRef(true);
 
@@ -22,37 +21,34 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     try {
       console.log('Fetching user data and agreement status for:', agreementType);
 
+      // Fetch user profile data
       const response = await fetch(`${apiUrl}/profile.php`, {
         method: 'GET',
         credentials: 'include',
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const data = await response.json();
       if (data.error) {
         throw new Error(data.error);
       }
-
       if (isMountedRef.current) {
         setFormData((prevFormData) => ({
           ...prevFormData,
           fullName: data.full_name,
           email: data.email,
         }));
-        setIsFetched(true); // Set fetched status to true
+        setIsFetched(true);
       }
 
-      const agreementResponse = await fetch(`${apiUrl}/checkAgreement.php?agreementType=${encodeURIComponent(agreementType)}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-
+      // Fetch agreement status
+      const agreementResponse = await fetch(
+        `${apiUrl}/checkAgreement.php?agreementType=${encodeURIComponent(agreementType)}`,
+        { method: 'GET', credentials: 'include' }
+      );
       const agreementData = await agreementResponse.json();
       console.log('Agreement API response:', agreementData);
-
       if (isMountedRef.current) {
         setAlreadyAgreed(agreementData.already_agreed || false);
       }
@@ -72,7 +68,6 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     isMountedRef.current = true;
     setLoading(true);
     fetchUserData();
-
     return () => {
       isMountedRef.current = false;
     };
@@ -88,7 +83,6 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const submissionData = {
       ...formData,
       agreementType: agreementType,
@@ -102,7 +96,6 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
         body: JSON.stringify(submissionData),
         credentials: 'include',
       });
-
       if (response.ok) {
         setIsSubmitted(true);
       } else {
@@ -114,18 +107,9 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     }
   };
 
-  useEffect(() => {
-    setAlreadyAgreed(false);
-    setIsFetched(false);
-    setLoading(true);
-    fetchUserData();
-  }, [agreementType]);
-  
-
   if (loading) {
     return <p>Loading...</p>;
   }
-
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -140,7 +124,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
-            readOnly={isFetched} // Make read-only based on fetched status
+            readOnly={isFetched}
             required
           />
         </label>
@@ -151,7 +135,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            readOnly={isFetched} // Make read-only based on fetched status
+            readOnly={isFetched}
             required
           />
         </label>
@@ -170,9 +154,16 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
           <button type="submit" disabled={isSubmitted}>Submit</button>
         )}
       </form>
-
-      {alreadyAgreed && <p className="success">You have already agreed to the {agreementType}.</p>}
-      {isSubmitted && !alreadyAgreed && <p className="success">Thank you for agreeing to the {agreementType}.</p>}
+      {alreadyAgreed && (
+        <p className="success">
+          You have already agreed to the {agreementType}.
+        </p>
+      )}
+      {isSubmitted && !alreadyAgreed && (
+        <p className="success">
+          Thank you for agreeing to the {agreementType}.
+        </p>
+      )}
     </div>
   );
 };

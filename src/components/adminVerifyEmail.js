@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Helper to get query parameters from the URL
 function useQuery() {
@@ -7,36 +7,39 @@ function useQuery() {
 }
 
 const AdminVerifyEmail = () => {
+  const [user, setUser] = useState(null); // No user data in cookies
   const query = useQuery();
+  const navigate = useNavigate();
   const [message, setMessage] = useState('Verifying your email, please wait...');
-  // Define your API URL (adjust as needed)
   const apiUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost/artisbay-server/server'
       : '/server';
 
   useEffect(() => {
-    // Get the token from the URL query parameters
     const token = query.get('token');
     if (!token) {
       setMessage('Invalid verification link.');
       return;
     }
 
-    // Call your backend endpoint to verify the token
     fetch(`${apiUrl}/adminVerifyEmail.php?token=${token}`, {
       method: 'GET',
-      credentials: 'include', // if you need cookies
+      credentials: 'include', // Use this if your session is cookie-based
     })
       .then((response) => response.json())
       .then((data) => {
-        // Assuming your PHP endpoint returns a JSON response with a status and message
         if (data.status === 'success') {
-          setMessage('Your email has been successfully verified! You can now log in.');
-          // Redirect after a delay using window.location.href
+          setMessage('Your email has been verified!');
+          // Optionally, update your user context here with data.user
+          // For example: setUser(data.user);
+          // Redirect to a protected page (e.g., dashboard) after a short delay:
           setTimeout(() => {
-            window.location.href = '/#/login';
+            navigate('/');
+            window.location.reload(); // Reload the page
+
           }, 3000);
+         
         } else {
           setMessage(data.message || 'Verification failed. Please try again.');
         }
@@ -45,7 +48,7 @@ const AdminVerifyEmail = () => {
         console.error('Verification error:', error);
         setMessage('An error occurred during verification. Please try again later.');
       });
-  }, [query, apiUrl]);
+  }, [query, apiUrl, navigate]);
 
   return (
     <div style={{ textAlign: 'center', padding: '2rem' }}>

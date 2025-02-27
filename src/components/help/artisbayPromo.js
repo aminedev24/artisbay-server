@@ -32,7 +32,7 @@ const ArtisbayPromo = () => {
           <p class="mt-2 font-bold">
             - Niaz Q.
             <br />
-            Dragzine LLC (Namibia)
+            Dragzine Motors CC (Namibia)
           </p>
         </div>
         <div class="md:col-span-2 space-y-6">
