@@ -8,7 +8,7 @@ import AntiSocialPolicy from './help/asf';
 import '../css/profilePage.css';
 import BankInformation from './help/bankInfo';
 import SalesAgreement from './salesAgreement';
-import InquiryList from './inquiryList';
+import InquiryList from './fetchIquiries';
 import TireOrderList from './submittedTireOrders';
 import InvoiceList from './invoicesList';
 import FetchSavedCars from './fetchSavedCars';
@@ -47,7 +47,7 @@ const ProfilePage = () => {
   // Build the menuItems array using useMemo so it recalculates when user changes.
   const menuItems = useMemo(() => [
     { key: 'settings', label: 'Settings', component: Settings },
-    { key: 'inquiries', label: 'Inquiries', component: InquiryList },
+    { key: 'vehicle inquiries', label: 'Vehice Inquiries', component: InquiryList },
     { key: 'submitted tire orders', label: 'Submitted tire orders', component: TireOrderList },
     { key: 'invoices list', label: 'Invoices List', component: InvoiceList },
     { key: 'accountancy', label: 'Accountancy', component: DepositsTable },

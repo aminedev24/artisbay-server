@@ -22,18 +22,18 @@ const CarCostCalculator = () => {
   const [makes, setMakes] = useState([]);
   const [models, setModels] = useState([]);
   const [editingCarIndex, setEditingCarIndex] = useState(null);
-  const [savedCarsTotalCost, setSavedCarsTotalCost] = useState(0);
 
 
 
 
-      useEffect(() => {
-        const loadMakes = async () => {
-          const fetchedMakes = await fetchMakes();
-          setMakes(fetchedMakes);
-        };
-        loadMakes();
-      }, []);
+
+    useEffect(() => {
+      const loadMakes = async () => {
+        const fetchedMakes = await fetchMakes();
+        setMakes(fetchedMakes);
+      };
+      loadMakes();
+    }, []);
 
     const handleMakeChange = async (event) => {
       const make = event.target.value;
@@ -131,29 +131,21 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
     tax
   } = car;
 
-  console.log(car)
+ // console.log(car)
 
   // Convert values to numbers to avoid NaN issues
   const numBuyingPrice = Number(buyingPrice) || 0;
   const numTransportation = Number(transportation) || 0;
-  console.log(`num transportation: ${numTransportation}`)
+  //console.log(`num transportation: ${numTransportation}`)
   const numUnits = Number(units) || 1; // Default to 1 if missing
-
-  const carOptionalTotal = car.selectedOptionalItems.reduce((carTotal, selectedItem) => {
-    // Find item by exact match with the selected item name
-    const item = optionalItems.find(opt => opt.name === selectedItem);
-  
-    console.log(`Selected item: ${selectedItem}`);
-    console.log('item found: ', item);
-  
-    return item ? carTotal + item.price : carTotal; // Add price if item found
-  }, 0);
+  const carOptionalTotal = car.selectedOptionalItems.reduce((total, item) => total + (item.price || 0), 0);
+  //console.log('car ')
   
   
   
   
 
-    console.log(`optional total ${carOptionalTotal}`)
+  //console.log(`optional total ${carOptionalTotal}`)
 
   const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + carOptionalTotal;
 
@@ -163,6 +155,7 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
   const grandTotalCost = vehicleCost * numUnits;
 
   // Debugging output for each car
+  /*
   console.log(
     `Car ${index + 1}:`,
     `Buying Price: ¥${numBuyingPrice.toLocaleString()},`,
@@ -172,7 +165,7 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
     `Units: ${numUnits},`,
     `Grand Total Cost: ¥${grandTotalCost.toLocaleString()}`
   );
-
+*/
   // Add to total
   return total + grandTotalCost;
 }, 0);
@@ -294,10 +287,9 @@ const resetInputs = () => {
       .map((item) => item.name)
       .sort();
   
-    const selectedOptionalItems = optionalItems
-      .filter((item) => optionalRemovals[item.id]) // Get selected items
-      .map((item) => item.name)
-      .sort();
+      const selectedOptionalItems = optionalItems
+      .filter((item) => optionalRemovals[item.id])
+      .map((item) => ({ name: item.name, price: item.price })); // Include both name and price
   
     if (editingCarIndex !== null) {
       // Editing an existing car
@@ -328,6 +320,7 @@ const resetInputs = () => {
         includedItems,
         tax,
         selectedOptionalItems,
+        vehicleCost
       };
   
       setSavedCars([...savedCars, newSelection]);
@@ -752,7 +745,7 @@ return (
 
       {/*<button onClick={handleSubmit}>Send Email</button>*/}
     </div>
-    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} savedCarsTotalCost={totalCostForAllCars} showAlert={showAlert} editCar={editCar}/>
+    <SavedCarsPanel savedCars={savedCars} setSavedCars={setSavedCars} showAlert={showAlert} editCar={editCar}/>
 
     </div>
  

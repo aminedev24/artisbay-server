@@ -24,7 +24,6 @@
   /* Headings */
  .calculator-container h2,.calculator-container h5 {
     text-align: center;
-    color: #1e3a8a;
   }
   
   h3 {
@@ -192,6 +191,8 @@
     padding: 10px;
     border: solid;
     margin: 0;
+    color: #1e3a8a;
+    margin: 10px 0;
   }
 
   .collapse-btn:hover {

@@ -50,7 +50,7 @@ const InquiryList = () => {
 
   return (
     <div className="order-list">
-      <h1>Inquiries Information</h1>
+      <h1>Vehice Inquiries</h1>
       <table border="1">
         <thead>
           <tr>

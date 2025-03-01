@@ -91,13 +91,14 @@
   /* Table */
   .table-container {
     overflow-x: auto;
-    margin-top: 16px;
+    
   }
   
   .saved-cars-table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
+    margin-top:0;
   }
   
   .saved-cars-table th,

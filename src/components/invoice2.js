@@ -395,6 +395,29 @@ const handleSendEmail = async () => {
          </div>
           }
 
+          {invoiceData.depositPurpose == 'vehicle purchase' && 
+                  <div className="car-items items">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Engine Capacity</th>
+                          <th>Mileage</th>
+                          <th>Chassis Number</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{invoiceData.engineCapacity || 'not specified'}</td>
+                          <td>{invoiceData.mileage || 'not specified'}</td>
+                          <td>{invoiceData.chasisNumber || 'not specified'}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            }
+
+          
+
           <div className="note-amount-container">
             {invoiceData.bankNote ? (
 

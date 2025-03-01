@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     invoiceContainer: {
       padding: '10px',
       fontFamily: 'Roboto',
+      
     },
     headerText: {
       fontSize: '10px',
@@ -194,6 +195,7 @@ const styles = StyleSheet.create({
       border: '1px solid #000',
       hyphenationCallback: null, // Prevents hyphenation
       wordBreak: 'break-word', // Ensures words break naturally
+      padding: '5px',
     },
     amountContainer: {
       width: '40%',
@@ -436,6 +438,24 @@ const styles = StyleSheet.create({
             <Text style={styles.tableCell}>{invoiceData.depositDescription}</Text>
           </View>
         </View>
+
+         {/* Vehicle Details Table (Conditional) */}
+         {invoiceData.depositPurpose === 'vehicle purchase' && (
+          <View style={styles.itemsTable}>
+            {/* Table Header Row */}
+            <View style={styles.tableRows}>
+              <Text style={styles.tableHeaders}>Engine Capacity</Text>
+              <Text style={styles.tableHeaders}>Mileage</Text>
+              <Text style={styles.tableHeaders}>Chassis Number</Text>
+            </View>
+            {/* Table Data Row */}
+            <View style={styles.tableRows}>
+              <Text style={styles.tableCells}>{invoiceData.engineCapacity || 'not specified'}</Text>
+              <Text style={styles.tableCells}>{invoiceData.mileage || 'not specified'}</Text>
+              <Text style={styles.tableCells}>{invoiceData.chasisNumber || 'not specified'}</Text>
+            </View>
+          </View>
+        )}
   
         {/* Vehicle Details Table (Conditional) */}
         {invoiceData.depositPurpose === 'order vehicle' && (

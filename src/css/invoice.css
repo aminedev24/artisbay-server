@@ -271,6 +271,8 @@
 .note-amount-container .note {
     max-width: 50%;
     border: solid;
+    min-width: 50%;
+    padding: 5px;
 }
 
 .right img {
@@ -344,7 +346,7 @@
 }
 
 .note p:last-child {
-    padding: 0 20px;
+    padding: 5px 20px;
 }
 
 
@@ -460,4 +462,8 @@
     .invoice-bank-info p {
         font-size: 11px;
     }
+}
+
+.car-items td, .car-items th {
+    text-align: center;
 }

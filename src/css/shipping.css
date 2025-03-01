@@ -85,9 +85,13 @@
   }
   
   .content button.active {
-    background-color: #1da1f2; /* Example active state color */
+    background-color: #f1892b; /* Example active state color */
     color: white;
     font-weight: bold;
+  }
+
+  .content button.active:hover {
+    background-color: #f2a15a;
   }
 
   .con td , .con th {
