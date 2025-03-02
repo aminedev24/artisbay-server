@@ -219,12 +219,15 @@ const handleCheckboxChange = (carId, type, index) => {
             <h3>No car selected</h3>
           )}
         </div>
-        <h5
-          className="collapse-btn"
-          onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
-        >
-          {!isItemsTableCollapsed ? 'Show list': 'Hide list'} {!isItemsTableCollapsed ? "▼" : "▲"}
-        </h5>
+        {selectedCar && 
+              <h5
+              className="collapse-btn"
+              onClick={() => setIsItemsTableCollapsed(!isItemsTableCollapsed)}
+            >
+              {!isItemsTableCollapsed ? 'Show list': 'Hide list'} {!isItemsTableCollapsed ? "▼" : "▲"}
+            </h5>
+        }
+    
         {!isTableCollapsed && (
           <div className="table-container">
             <table className="saved-cars-table">
@@ -256,7 +259,7 @@ const handleCheckboxChange = (carId, type, index) => {
                       className="collapse-btn"
                       onClick={() => setIsOptionalTableCollapsed(!isOptionalTableCollapsed)}
                     >
-                      {!isOptionalTableCollapsed ? 'Show list': 'Hide list'}  {!isOptionalTableCollapsed ? "▼" : "▲"}
+                      { selectedCar.selectedOptionalItems.length > 0 && !isOptionalTableCollapsed ? 'Show list': 'Hide list'}  {!isOptionalTableCollapsed ? "▼" : "▲"}
                     </h5>
                     {selectedCar.selectedOptionalItems.length > 0 && (
                       <tr className="optional-separator">
@@ -313,14 +316,17 @@ const handleCheckboxChange = (carId, type, index) => {
             </td>
           </tr>
           <tr>
-            <th>Total items (optional)</th>
+            <th>Total optional items</th>
             <td>
-              {savedCars.reduce(
-                (acc, car) =>
-                  acc +
-                  (car.selectedOptionalItems ? car.selectedOptionalItems.length : 0),
-                0
-              )}
+            {savedCars.reduce(
+              (acc, car) =>
+                acc +
+                (car.selectedOptionalItems
+                  ? car.selectedOptionalItems.length * car.units
+                  : 0),
+              0
+            )}
+
             </td>
           </tr>
           <tr>
