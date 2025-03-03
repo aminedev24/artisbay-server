@@ -637,7 +637,7 @@ const ProformaInvoiceForm = () => {
                   <>
                     <label htmlFor="engineCapacity">
                       Engine Capacity{" "}
-                      {/*<span className="required-star">*</span>*/}
+                      {<span className="required-star">*</span>}
                     </label>
                     <input
                       type="text"
@@ -647,6 +647,7 @@ const ProformaInvoiceForm = () => {
                       onChange={handleChange}
                       max={6000}
                       placeholder="Engine Capacity"
+                      required
                     />
                   </>
                 )}
@@ -659,7 +660,7 @@ const ProformaInvoiceForm = () => {
               <div className="form-group">
                 <div className="half-width">
                   <label htmlFor="mileage">
-                    Mileage {/*<span className="required-star">*</span>*/}
+                    Mileage {<span className="required-star">*</span>}
                   </label>
                   <input
                     type="text"
@@ -668,12 +669,13 @@ const ProformaInvoiceForm = () => {
                     value={formData.mileage.toLocaleString()}
                     onChange={handleChange}
                     placeholder="Mileage"
+                    required
                   />
                 </div>
 
                 <div className="half-width">
                   <label htmlFor="chasisNumber">
-                    Chassis Number{/*<span className="required-star">*</span>*/}
+                    Chassis Number{<span className="required-star">*</span>}
                   </label>
                   <input
                     type="text"
@@ -682,6 +684,7 @@ const ProformaInvoiceForm = () => {
                     value={formData.chasisNumber}
                     onChange={handleChange}
                     placeholder="Chassis Number"
+                    required
                   />
                 </div>
               </div>
