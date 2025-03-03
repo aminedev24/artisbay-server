@@ -69,7 +69,7 @@ const ProformaInvoiceForm = () => {
       "Car details, including chassis numbers, will be provided by the remitter upon completion of the car purchase.",
     chasisNumber: "",
     vehicleRef: "",
-    carDescription: "", // New field
+    vehicleDescription: "", // New field
     engineCapacity: "", // New field
     mileage: "", // New field
   });
@@ -92,7 +92,8 @@ const ProformaInvoiceForm = () => {
     bankDetails.JPY,
   );
   const [depositAmount, setDepositAmount] = useState("");
-
+  const [engineCapacity, setEngineCapacity] = useState("");
+  const [amount, setAmount] = useState("")
   // Function to get the next invoice number from the backend
   const fetchInvoiceNumber = async () => {
     setIsLoading(true);
@@ -212,53 +213,70 @@ const ProformaInvoiceForm = () => {
     window.scrollTo(0, 0); // Scroll to the top whenever the location changes
   }, [location]);
 
+  const [savedBankNote, setSavedBankNote] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Handle phone code for country selection
-    if (name === "country") {
+    const numericFields = ["depositAmount", "engineCapacity", 'mileage'];
+  
+    // Process numeric fields by stripping commas and converting to a number
+    if (numericFields.includes(name)) {
+      const rawValue = value.replace(/,/g, ""); // Remove commas
+      const valueToSet = rawValue === "" || isNaN(rawValue) ? "" : Number(rawValue);
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: valueToSet,
+      }));
+    }
+    // Process country field for phone code update
+    else if (name === "country") {
       const selectedCountry = CountryList().find(
-        (country) => country.label === value,
+        (country) => country.label === value
       );
-
-      if (selectedCountry?.countryCode) {
-        setPhoneCode(selectedCountry.countryCode);
-      } else {
-        setPhoneCode("");
-      }
+      setPhoneCode(selectedCountry?.countryCode || "");
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-
-    // Update the description when the purpose changes
-    if (name === "depositPurpose") {
+    // Process deposit purpose with special bankNote logic
+    else if (name === "depositPurpose") {
       const description = purposeDescriptions[value] || "";
-      setFormData((prevState) => ({
-        ...prevState,
-        depositDescription: description, // Always update the description when the purpose changes
-        [name]: value,
-        bankNote:
-          value === "order vehicle" || "tires order" ? "" : prevState.bankNote, // Clear bankNote if deposit purpose is "order vehicle"
-      }));
-    } else {
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      setFormData((prevState) => {
+        const updated = {
+          ...prevState,
+          depositPurpose: value,
+          depositDescription: description,
+        };
+  
+        // Clear bankNote if depositPurpose is "order vehicle" or "tires order"
+        updated.bankNote =
+          value === "order vehicle" || value === "tires order"
+            ? ""
+            : prevState.bankNote;
+  
+        return updated;
+      });
     }
-
-    if (name == "depositCurrency") {
+    // Process deposit currency for currency update and bank details
+    else if (name === "depositCurrency") {
       setCurrency(value);
       setSelectedBankDetails(bankDetails[value] || bankDetails.JPY);
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-
-    if (name == "depositAmount") {
-      const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
-      if (rawValue === "" || isNaN(rawValue)) {
-        setDepositAmount(""); // Allow empty input
-      } else {
-        setDepositAmount(Number(rawValue)); // Store as number
-      }
+    // Default handling for all other fields
+    else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
   };
+  
+
+  
 
   console.log(currency);
   console.log(selectedBankDetails);
@@ -324,14 +342,14 @@ const ProformaInvoiceForm = () => {
           country: formData.country, // Include the country field
           invoiceNumber: `AB-${invoiceCounter}`, // Use updated invoiceCounter
           invoiceDate: invoiceDate,
-          depositAmount: depositAmount.toLocaleString(), // Store formatted deposit amount
+          depositAmount: formData.depositAmount.toLocaleString(), // Store formatted deposit amount
           depositCurrency: formData.depositCurrency,
           depositDescription: formData.depositDescription,
           depositPurpose: formData.depositPurpose,
           bankNote: formData.bankNote,
           vehicleRef: formData.vehicleRef,
           chasisNumber: formData.chasisNumber,
-          carDescription: formData.carDescription, // New field
+          vehicleDescription: formData.vehicleDescription, // New field
           engineCapacity: formData.engineCapacity, // New field
           mileage: formData.mileage,
           serialNumber: generateSerialNumber(),
@@ -384,7 +402,7 @@ const ProformaInvoiceForm = () => {
       country: invoiceData.country || "", // Set the country if available
       phone: phoneWithoutCode, // Set the phone number without the code
       email: invoiceData.customerEmail,
-      depositAmount: depositAmount || "", // Set the parsed deposit amount
+      depositAmount: invoiceData.depositAmount || "", // Set the parsed deposit amount
       depositCurrency: invoiceData.depositCurrency,
       depositDescription: invoiceData.depositDescription,
       depositPurpose: invoiceData.depositPurpose,
@@ -586,7 +604,7 @@ const ProformaInvoiceForm = () => {
                     type="text"
                     id="depositAmount"
                     name="depositAmount"
-                    value={depositAmount.toLocaleString()}
+                    value={formData.depositAmount.toLocaleString()}
                     onChange={handleChange}
                     placeholder="Payment amount"
                     required
@@ -610,12 +628,12 @@ const ProformaInvoiceForm = () => {
                 >
                   <option value="vehicle purchase">Vehicle Purchase</option>
                   <option value="auto parts order">Auto Parts Order</option>
-                  <option value="order vehicle">Pay My Vehicle</option>
+                  <option value="order vehicle">Paying My Vehicle</option>
                   <option value="dismantling">Dismantling</option>
                   <option value="tires order">Tires Order</option>
                 </select>
 
-                {formData.depositPurpose == "vehicle purchase" && (
+                {formData.depositPurpose == "order vehicle" && (
                   <>
                     <label htmlFor="engineCapacity">
                       Engine Capacity{" "}
@@ -625,49 +643,19 @@ const ProformaInvoiceForm = () => {
                       type="text"
                       id="engineCapacity"
                       name="engineCapacity"
-                      value={formData.engineCapacity}
+                      value={formData.engineCapacity.toLocaleString()}
                       onChange={handleChange}
+                      max={6000}
                       placeholder="Engine Capacity"
                     />
                   </>
                 )}
 
-                {formData.depositPurpose === "order vehicle" && (
-                  <div className="form-group">
-                    <div className="half-width">
-                      <label htmlFor="vehicleRef">
-                        Vehicle Reference{" "}
-                        {/*<span className="required-star">*</span>*/}
-                      </label>
-                      <input
-                        type="text"
-                        id="vehicleRef"
-                        name="vehicleRef"
-                        value={formData.vehicleRef}
-                        onChange={handleChange}
-                        placeholder="Vehicle Reference"
-                      />
-                    </div>
-                    <div className="half-width">
-                      <label htmlFor="chasisNumber">
-                        Chassis Number
-                        {/*<span className="required-star">*</span>*/}
-                      </label>
-                      <input
-                        type="text"
-                        id="chasisNumber"
-                        name="chasisNumber"
-                        value={formData.chasisNumber}
-                        onChange={handleChange}
-                        placeholder="Chassis Number"
-                      />
-                    </div>
-                  </div>
-                )}
+              
               </div>
             </div>
 
-            {formData.depositPurpose === "vehicle purchase" && (
+            {formData.depositPurpose === "order vehicle" && (
               <div className="form-group">
                 <div className="half-width">
                   <label htmlFor="mileage">
@@ -677,7 +665,7 @@ const ProformaInvoiceForm = () => {
                     type="text"
                     id="mileage"
                     name="mileage"
-                    value={formData.mileage}
+                    value={formData.mileage.toLocaleString()}
                     onChange={handleChange}
                     placeholder="Mileage"
                   />
@@ -698,6 +686,27 @@ const ProformaInvoiceForm = () => {
                 </div>
               </div>
             )}
+
+            {formData.depositPurpose === 'order vehicle' &&
+            
+            <div className="form-group" style={{ flexDirection: "column" }}>
+            <label htmlFor="vehicleDescription">
+              Vehicle Description<span className="required-star">*</span>
+              <Tooltip
+                onTypingStart={handleTypingStart}
+                message="Please describe what you are paying for, e.g., Toyota Land Cruiser 2013"
+              />
+            </label>
+            <textarea
+              id="vehicleDescription"
+              name="vehicleDescription"
+              value={formData.vehicleDescription}
+              onChange={handleChange}
+              placeholder="Vehicle description"
+              required
+              rows="5"
+            ></textarea>
+          </div>}
 
             <div className="form-group" style={{ flexDirection: "column" }}>
               <label htmlFor="depositDescription">

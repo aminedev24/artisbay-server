@@ -180,6 +180,15 @@ const handleSendEmail = async () => {
         depositPurpose: invoiceData.depositPurpose,
         depositDescription: invoiceData.depositDescription,
         serialNumber: invoiceData.serialNumber,
+        // Conditionally add these properties if depositPurpose is 'order vehicle'
+        ...(invoiceData.depositPurpose === 'order vehicle'
+          ? {
+              vehicleDescription: invoiceData.vehicleDescription,
+              mileage: invoiceData.mileage,
+              chasisNumber: invoiceData.chasisNumber,
+              engineCapacity: invoiceData.engineCapacity,
+            }
+          : {})
       }),
       credentials: "include",
     });
@@ -213,7 +222,12 @@ const handleSendEmail = async () => {
     onClose(); // Close the modal
     onEdit(invoiceData); // Pass the invoice data to the parent component for editing
   };
-
+  function formatStringWithNumber(input) {
+    // Convert the input to a string (handles numbers or other types)
+    const str = input != null ? input.toString() : "";
+    return str.replace(/\d+/g, (match) => Number(match).toLocaleString());
+  }
+  
   return (
     <div className="invoice-modal-overlay">
         {isGeneratingPdf && (
@@ -283,7 +297,7 @@ const handleSendEmail = async () => {
             </div>
           </div>
 
-          <div className="invoice-title">Deposit Invoice</div>
+          <div className="invoice-title">{invoiceData.depositPurpose == 'order vehicle' ? '' : 'Deposit' } Invoice</div>
 
           <div className="invoice-info">
             <div className="left">
@@ -365,7 +379,7 @@ const handleSendEmail = async () => {
             <table>
               <thead>
                 <tr>
-                  <th>DESCRIPTION</th>
+                  <th>Payment Description</th>
                 </tr>
               </thead>
               <tbody>
@@ -377,44 +391,32 @@ const handleSendEmail = async () => {
           </div>
           {invoiceData.depositPurpose == 'order vehicle' && 
            <div className="items">
-           <table>
-             <thead>
-               <tr>
-                 <th>Vehicle Reference</th>
-                 <th>Chassis Number</th>
+               <table>
+               <thead>
+                 <tr>
+                   <th colSpan='4'>Vehicle Description</th>
+                 </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                    <td>{invoiceData.vehicleDescription}</td>
+                  </tr>
+                  <tr>
+                    <td>Engine Capacity {formatStringWithNumber(invoiceData.engineCapacity)|| 'not specified'}</td>
+                  </tr>
+                  <tr>
+                    <td>Mileage {formatStringWithNumber(invoiceData.mileage) || 'not specified'}</td>
+                  </tr>
+                  <tr>
+                    <td>Chassis No {invoiceData.chasisNumber || 'not specified'}</td>
 
-               </tr>
-             </thead>
-             <tbody>
-               <tr>
-                <td>{invoiceData.vehicleRef || 'not specified'}</td>
-                 <td>{invoiceData.chasisNumber || 'not specified'}</td>
-               </tr>
-             </tbody>
-           </table>
-         </div>
-          }
-
-          {invoiceData.depositPurpose == 'vehicle purchase' && 
-                  <div className="car-items items">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Engine Capacity</th>
-                          <th>Mileage</th>
-                          <th>Chassis Number</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>{invoiceData.engineCapacity || 'not specified'}</td>
-                          <td>{invoiceData.mileage || 'not specified'}</td>
-                          <td>{invoiceData.chasisNumber || 'not specified'}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-            }
+                  </tr>
+               </tbody>
+             </table>
+             </div>
+          
+          } 
+        
 
           
 
@@ -556,6 +558,7 @@ const handleSendEmail = async () => {
               <button className='no-print' onClick={handleSaveAsPDF}>Save as PDF</button>
               <GeneratePdfButton invoiceData={invoiceData} />
             */}
+            <GeneratePdfButton invoiceData={invoiceData} />
             <button
               className="no-print"
               onClick={handleSendEmail}

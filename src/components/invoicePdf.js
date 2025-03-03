@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: '10px',
+      marginBottom: '5px',
       position: 'relative',
     },
     left: {
@@ -312,6 +312,11 @@ const styles = StyleSheet.create({
     },
 
   });
+  function formatStringWithNumber(input) {
+    // Convert the input to a string (handles numbers or other types)
+    const str = input != null ? input.toString() : "";
+    return str.replace(/\d+/g, (match) => Number(match).toLocaleString());
+  }
 
   const MyPdfDocument = ({ invoiceData }) => (
     <Document>
@@ -350,7 +355,7 @@ const styles = StyleSheet.create({
         </View>
   
         {/* Title */}
-        <Text style={styles.invoiceTitle}>Deposit Invoice</Text>
+        <Text style={styles.invoiceTitle}>{invoiceData.depositPurpose == 'order vehicle' ? '' : 'Deposit'} Invoice</Text>
   
         {/* Invoice Info */}
         <View style={styles.invoiceInfo}>
@@ -432,46 +437,47 @@ const styles = StyleSheet.create({
         {/* Description Table */}
         <View style={styles.itemsTable}>
           <View style={styles.tableRow}>
-            <Text style={styles.tableHeader}>DESCRIPTION</Text>
+            <Text style={styles.tableHeader}>Payment Description</Text>
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableCell}>{invoiceData.depositDescription}</Text>
           </View>
         </View>
 
-         {/* Vehicle Details Table (Conditional) */}
-         {invoiceData.depositPurpose === 'vehicle purchase' && (
-          <View style={styles.itemsTable}>
-            {/* Table Header Row */}
-            <View style={styles.tableRows}>
-              <Text style={styles.tableHeaders}>Engine Capacity</Text>
-              <Text style={styles.tableHeaders}>Mileage</Text>
-              <Text style={styles.tableHeaders}>Chassis Number</Text>
+   
+
+        {
+          invoiceData.depositPurpose === 'order vehicle' && (
+            <View style={styles.itemsTable}>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableHeader}>Vehicle Description</Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCell}>
+                  {invoiceData.vehicleDescription || 'not specified'}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCell}>
+                  Engine Capacity {formatStringWithNumber(invoiceData.engineCapacity) || 'not specified'}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCell}>
+                  Mileage {formatStringWithNumber(invoiceData.mileage) || 'not specified'}
+                </Text>
+              </View>
+              <View style={styles.tableRow}>
+                <Text style={styles.tableCell}>
+                  Chassis No {invoiceData.chasisNumber || 'not specified'}
+                </Text>
+              </View>
             </View>
-            {/* Table Data Row */}
-            <View style={styles.tableRows}>
-              <Text style={styles.tableCells}>{invoiceData.engineCapacity || 'not specified'}</Text>
-              <Text style={styles.tableCells}>{invoiceData.mileage || 'not specified'}</Text>
-              <Text style={styles.tableCells}>{invoiceData.chasisNumber || 'not specified'}</Text>
-            </View>
-          </View>
-        )}
+          )
+        
+        }
   
-        {/* Vehicle Details Table (Conditional) */}
-        {invoiceData.depositPurpose === 'order vehicle' && (
-          <View style={styles.itemsTable}>
-            {/* Table Header Row */}
-            <View style={styles.tableRows}>
-              <Text style={styles.tableHeaders}>Vehicle Ref</Text>
-              <Text style={styles.tableHeaders}>Chasis Number</Text>
-            </View>
-            {/* Table Data Row */}
-            <View style={styles.tableRows}>
-              <Text style={styles.tableCells}>{invoiceData.vehicleRef}</Text>
-              <Text style={styles.tableCells}>{invoiceData.chasisNumber}</Text>
-            </View>
-          </View>
-        )}
+   
   
         {/* Note and Amount Section */}
         <View style={[

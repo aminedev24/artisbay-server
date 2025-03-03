@@ -10,7 +10,7 @@ import BankInformation from './help/bankInfo';
 import SalesAgreement from './salesAgreement';
 import InquiryList from './fetchIquiries';
 import TireOrderList from './submittedTireOrders';
-import InvoiceList from './invoicesList';
+import InvoiceList from './fetchInvoices';
 import FetchSavedCars from './fetchSavedCars';
 import DepositsTable from './fetchDeposits';
 import AdminUserList from './getUsers';

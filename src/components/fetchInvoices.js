@@ -62,48 +62,64 @@ const InvoiceList = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="order-list">
-      <h1>Invoices List</h1>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Invoice Number</th>
-            <th>Customer Name</th>
-            <th>Email</th>
-            <th>Payment Amount</th>
-            <th>Description</th>
-            <th>Created At</th>
-            <th>Payment Purpose</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentInvoices.map((invoice) => (
-            <tr key={invoice.id}>
-              <td>{invoice.invoice_number}</td>
-              <td>{invoice.customer_name}</td>
-              <td>{invoice.email}</td>
-              <td>{invoice.deposit_amount} {invoice.deposit_currency}</td>
-              <td>{invoice.description}</td>
-              <td>{invoice.created_at}</td>
-              <td>{invoice.deposit_purpose}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`pagination-button ${
-              currentPage === index + 1 ? "active" : ""
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
-    </div>
+<div className="order-list">
+  <h1>Invoices List</h1>
+  <table className="invoice-table" border="1">
+    <thead>
+      <tr>
+        <th>Invoice Number</th>
+        <th>Customer Name</th>
+        <th>Email</th>
+        <th>Payment Amount</th>
+        <th>Description</th>
+        <th>Created At</th>
+        <th>Payment Purpose</th>
+        <th>Vehicle Description</th>
+        <th>Mileage</th>
+        <th>Chassis Number</th>
+        <th>Engine Capacity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {currentInvoices.map((invoice) => (
+        <tr key={invoice.id}>
+          <td>{invoice.invoice_number}</td>
+          <td>{invoice.customer_name}</td>
+          <td>{invoice.email}</td>
+          <td>
+            {invoice.deposit_amount} {invoice.deposit_currency}
+          </td>
+          <td>{invoice.description}</td>
+          <td>{invoice.created_at}</td>
+          <td>{invoice.deposit_purpose}</td>
+          
+          <td>{invoice.vehicle_description || 'not specified'}</td>
+          <td>{invoice.mileage || 'not specified'}</td>
+          <td>{invoice.chasis_number || 'not specified'}</td>
+          <td>{invoice.engine_capacity || 'not specified'}</td>
+          
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+
+
+  <div className="pagination">
+    {Array.from({ length: totalPages }, (_, index) => (
+      <button
+        key={index + 1}
+        onClick={() => handlePageChange(index + 1)}
+        className={`pagination-button ${
+          currentPage === index + 1 ? "active" : ""
+        }`}
+      >
+        {index + 1}
+      </button>
+    ))}
+  </div>
+</div>
+
   );
 };
 
