@@ -109,7 +109,7 @@ export default function DepositsTable() {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="3" className="text-center p-4">
+                            <td colSpan="5" className="text-center p-4">
                                 No records found.
                             </td>
                         </tr>
