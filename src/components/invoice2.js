@@ -178,6 +178,7 @@ const handleSendEmail = async () => {
         customerFullName: invoiceData.customerFullName,
         depositAmount: invoiceData.depositAmount,
         depositPurpose: invoiceData.depositPurpose,
+        depositCurrency:invoiceData.depositCurrency,
         depositDescription: invoiceData.depositDescription,
         serialNumber: invoiceData.serialNumber,
         // Conditionally add these properties if depositPurpose is 'order vehicle'
