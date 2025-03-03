@@ -541,7 +541,7 @@ const ProformaInvoiceForm = () => {
                     onChange={handleChange}
                     placeholder="Phone number"
                     required
-                    readOnly={isDataLoaded && user.role != "admin"} // Set as read-only if data is loaded
+                    readOnly={isDataLoaded &&user && user.role != "admin"} // Set as read-only if data is loaded
                   />
                 </div>
               </div>
@@ -573,7 +573,7 @@ const ProformaInvoiceForm = () => {
                   onChange={handleChange}
                   placeholder="E-mail"
                   required
-                  readOnly={isDataLoaded && user.role != "admin"} // Set as read-only if data is loaded
+                  readOnly={isDataLoaded && user && user.role != "admin"} // Set as read-only if data is loaded
                 />
               </div>
             </div>
