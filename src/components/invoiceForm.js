@@ -216,12 +216,18 @@ const ProformaInvoiceForm = () => {
   const [savedBankNote, setSavedBankNote] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const numericFields = ["depositAmount", "engineCapacity", 'mileage'];
+    const numericFields = ["depositAmount", "engineCapacity", "mileage"];
   
     // Process numeric fields by stripping commas and converting to a number
     if (numericFields.includes(name)) {
       const rawValue = value.replace(/,/g, ""); // Remove commas
-      const valueToSet = rawValue === "" || isNaN(rawValue) ? "" : Number(rawValue);
+      let valueToSet = rawValue === "" || isNaN(rawValue) ? "" : Number(rawValue);
+  
+      // Only for engineCapacity, prevent exceeding 6000
+      if (name === "engineCapacity" && valueToSet !== "" && valueToSet > 6000) {
+        valueToSet = 6000;
+      }
+  
       setFormData((prevState) => ({
         ...prevState,
         [name]: valueToSet,
@@ -274,6 +280,7 @@ const ProformaInvoiceForm = () => {
       }));
     }
   };
+  
   
 
   

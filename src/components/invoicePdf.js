@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
       wordBreak: 'break-word', // Ensures words break naturally
     },
     invoiceContainer: {
-      padding: '10px',
+      padding: '5px 10px',
       fontFamily: 'Roboto',
       
     },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       borderBottom: '2px solid #000',
-      marginBottom: '5px',
+      marginBottom: '3px',
     },
     headerFullWidth: {
       display: 'flex',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     headerFullWidthText: {
       margin: 0,
       fontSize: '11px',
-      marginRight: '8px',
+      marginRight: '6px',
       alignSelf: 'flex-end',
     },
     headers: {
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: '20px',
       fontWeight: 'bold',
-      margin: '5px 0',
     },
     invoiceInfo: {
       display: 'flex',
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
       display: 'table',
       width: '100%',
       borderCollapse: 'collapse',
-      marginBottom: '5px',
+      marginBottom: '3px',
     },
     tableRow: {
       display: 'table-row',
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
       fontSize: '12px',
     },
     instructions: {
-      marginBottom: '5px',
+      marginBottom: '3px',
       maxWidth: '57%',
       border: ' 1px solid #000',
       hyphenationCallback: null, // Prevents hyphenation
@@ -297,8 +296,7 @@ const styles = StyleSheet.create({
       fontSize: '12px',
     },
     noticeContainer: {
-      marginVertical: '5px',
-      padding: '15px',
+      padding: '10px',
       backgroundColor: '#f9f9f9',
       borderLeftWidth: '5px',
       borderLeftColor: '#1da1f2',
@@ -549,7 +547,12 @@ const styles = StyleSheet.create({
                     </Text>
                   </View>
                 )}
-                <View style={styles.invoiceFooter}>
+                <View
+                  style={[
+                    styles.invoiceFooter,
+                    { marginTop: invoiceData.depositPurpose === 'order vehicle' && !invoiceData.bankNote ? '-50px' : '5px' }
+                  ]}
+>
                   <Text style={styles.contactInfoText}>Authorised Sales Signature</Text>
                   <View style={styles.signatureContainer}>
                       <Image style={styles.signature} src={`${process.env.PUBLIC_URL}/images/absignature.png`} />
