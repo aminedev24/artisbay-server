@@ -17,7 +17,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    min-width: 55%; /* Ensures it doesn’t get too small */
+    min-width: 600px; /* Ensures it doesn’t get too small */
 
   }
   
@@ -193,6 +193,7 @@
     margin: 0;
     color: #1e3a8a;
     margin: 10px 0;
+    font-size: 15px;
   }
 
   .collapse-btn:hover {
@@ -211,4 +212,7 @@
   position: relative;
 }
 
-  
+.selected-car button {
+  font-size: 15px;
+
+} 

@@ -92,10 +92,12 @@ const handleCheckboxChange = (carId, type, index) => {
       let carCost = car.vehicleCost * car.units; // Instead of multiplying by savedCars.length
   
       const optionalChecks = checkedItems[car.id]?.optional;
+      console.log(optionalChecks)
       if (optionalChecks) {
         car.selectedOptionalItems.forEach((item, index) => {
+          console.log('item', item)
           if (optionalChecks[index] === false && item.price) {
-            carCost -= Number(item.price);
+            carCost -= Number(item.price) *item.units;
           }
         });
       }
@@ -109,10 +111,10 @@ const handleCheckboxChange = (carId, type, index) => {
   
   const handleSubmit = async () => {
     const orderId = uuidv4();
-
+    
     const formattedData = savedCars.map((car) => {
       const carCheckedState = checkedItems[car.id] || { included: [], optional: [] };
-
+      console.log(car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true))
       return {
         orderId,
         carId: car.id,
@@ -244,7 +246,7 @@ const handleCheckboxChange = (carId, type, index) => {
                       const isChecked = checkedItems[selectedCar.id]?.included[index] ?? true;
                       return (
                         <tr key={`included-${index}`} className={isChecked ? "" : "unchecked-item"}>
-                          <td>{item.name || item}</td>
+                          <td>{item.name || item} (x{selectedCar.units})</td>
                           <td>
                             <input
                               type="checkbox"
@@ -272,7 +274,7 @@ const handleCheckboxChange = (carId, type, index) => {
                       const isChecked = checkedItems[selectedCar.id]?.optional[index] ?? true;
                       return (
                         <tr key={`optional-${index}`} className={isChecked ? "" : "unchecked-item"}>
-                          <td>{item.name || item} ({selectedCar.units})</td>
+                          <td>{item.name || item} (x{selectedCar.units})</td>
                           <td>
                             <input
                               type="checkbox"
@@ -309,25 +311,34 @@ const handleCheckboxChange = (carId, type, index) => {
           <tr>
             <th>Total items (half cut)</th>
             <td>
-              {savedCars.reduce(
-                (acc, car) => acc + (car.includedItems ? car.includedItems.length : 0),
-                0
-              )}
+              {savedCars.reduce((acc, car) => {
+                // Get the check state for included items for this car
+                const includedChecks = checkedItems[car.id]?.included;
+                // Count how many included items are checked;
+                // If no check state is present, count all items.
+                const count = includedChecks
+                  ? includedChecks.filter((isChecked) => isChecked).length
+                  : (car.includedItems ? car.includedItems.length : 0);
+                return acc + count * car.units;
+              }, 0)}
             </td>
+
           </tr>
           <tr>
             <th>Total optional items</th>
             <td>
-            {savedCars.reduce(
-              (acc, car) =>
-                acc +
-                (car.selectedOptionalItems
-                  ? car.selectedOptionalItems.length * car.units
-                  : 0),
-              0
-            )}
-
+              {savedCars.reduce((acc, car) => {
+                // Get the check state for optional items for this car
+                const optionalChecks = checkedItems[car.id]?.optional;
+                // Count how many optional items are checked.
+                const count = optionalChecks
+                  ? optionalChecks.filter((isChecked) => isChecked).length
+                  : (car.selectedOptionalItems ? car.selectedOptionalItems.length : 0);
+                // Multiply by the number of car units.
+                return acc + count * car.units;
+              }, 0)}
             </td>
+
           </tr>
           <tr>
             <th>Total Investment</th>

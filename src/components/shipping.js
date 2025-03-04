@@ -4,6 +4,8 @@ import '../css/shipping.css';
 import useCheckScreenSize from './screenSize';
 import AfricaShippingTable from "./africaContainer";
 import AfricaRoroShippingTable from "./africaRoroContainer";
+import europeRoroShippingTable from "./europeRoro";
+import EuropeRoroShippingTable from "./europeRoro";
 
 const Shipping = () => {
   const location = useLocation();
@@ -49,6 +51,10 @@ const Shipping = () => {
     setShowTable(2);
   };
 
+  const handleEuropeContainerClick = () => {
+    setShowTable(2);
+  };
+
   return (
     <div 
       className="shipping-container"
@@ -74,10 +80,18 @@ const Shipping = () => {
         >
           AFRICA (CONTAINER)
         </button>
+
+        <button 
+          onClick={handleEuropeContainerClick}
+          className={showTable === 3 ? 'active' : ''}
+        >
+          europe (RO-RO)
+        </button>
       </div>
       {/* Render only the selected table */}
       {showTable === 1 && <AfricaRoroShippingTable />}
       {showTable === 2 && <AfricaShippingTable />}
+      {showTable === 3 && <EuropeRoroShippingTable />}
         {!showTable &&
          <div className="image-container">
          <img

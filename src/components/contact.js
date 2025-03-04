@@ -18,6 +18,12 @@ const Contact = ({ sell, japanExports }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [phoneCode, setPhoneCode] = useState("");
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const fromConsulting = queryParams.get('from') === 'consulting';
+
+
+  //const fromConsulting = location.state?.fromConsulting || false;
   
   const [submitted, setSubmitted] = useState(false);
   const [userData, setUserData] = useState({
@@ -291,7 +297,7 @@ const Contact = ({ sell, japanExports }) => {
       }
         
 
-      {!sell && (
+        {!sell && (
         <div className="input-group">
           <select
             name="enquiry"
@@ -300,25 +306,44 @@ const Contact = ({ sell, japanExports }) => {
             className={formData.enquiry ? "not-empty" : ""}
             required
           >
-            {!japanExports ? ( 
+            {!japanExports ? (
+              fromConsulting ? (
+                <>
+                  {/* New Options */}
+                  <option value="">Select Enquiry Type</option>
+                  <option value="Solar panels">Solar Panels</option>
+                  <option value="Brand-new tires">Brand-New Tires</option>
+                  <option value="Brand-new cars">Brand-New Cars</option>
+                  <option value="Used cars">Used Cars</option>
+                  <option value="Home appliances">Home Appliances</option>
+                  <option value="Terrace roof mounts">Terrace Roof Mounts</option>
+                  <option value="EV charging stations">EV Charging Stations</option>
+                  <option value="Machinery">Machinery</option>
+                  <option value="Agricultural Machinery">Agricultural Machinery</option>
+                </>
+              ) : (
+                <>
+                  {/* Default Options */}
+                  <option value="">Select Enquiry Type</option>
+                  <option value="General">General Inquiry</option>
+                  <option value="Support">Support</option>
+                  <option value="Sales">Sales</option>
+                </>
+              )
+            ) : (
               <>
-              <option value="">Select Enquiry Type</option>
-              <option value="General">General Inquiry</option>
-              <option value="Support">Support</option>
-              <option value="Sales">Sales</option>
-            </>
-            ): (
-              <>
-                <option value={''}>件名</option>
-                <option value={'Looking for overseas customers'}>海外の顧客を探しています</option>
-                <option value={'I want to Invest'}>投資したい</option>
-                <option value={'others'}>その他</option>
+                {/* Japanese Options */}
+                <option value="">件名</option>
+                <option value="Looking for overseas customers">海外の顧客を探しています</option>
+                <option value="I want to Invest">投資したい</option>
+                <option value="others">その他</option>
               </>
-
-            )
-            }
+            )}
           </select>
-          <label>{japanExports ? '件名' : 'Enquiry type'}<span className="required">*</span></label>
+          <label>
+            {japanExports ? '件名' : 'Enquiry type'}
+            <span className="required">*</span>
+          </label>
         </div>
       )}
 

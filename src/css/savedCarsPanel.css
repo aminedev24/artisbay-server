@@ -7,6 +7,12 @@
     position: relative;
     margin: 20px 0;
     border: solid 1px #ccc;
+   
+  }
+
+  .saved-cars-panel {
+    position: relative;
+    height: 100vh;
   }
   
   /* Tabs */
@@ -35,6 +41,7 @@
     border-radius: 4px;
     transition: 0.3s;
     flex-shrink: 0; /* Prevent stretching */
+    font-size: 14px;
   }
   
   .tab-button.active {
@@ -75,7 +82,7 @@
   /* Collapsible Table Button */
   .collapse-button, .edit-button , .submit-button{
     display: block;
-    padding: 8px 12px;
+    padding: 6px 10px;
     background-color: #1e3a8a;
     color: white;
     border: none;
@@ -111,6 +118,11 @@
   
   .saved-cars-table td {
     background-color: #fff;
+    width: 67%;
+  }
+
+  .cut-selection-table td {
+    width: 75%;
   }
   
   /* Summary Section */

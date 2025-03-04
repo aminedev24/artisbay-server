@@ -1,7 +1,11 @@
 import React from "react";
 import "../../css/artisbayPromo.css"; // Corresponding CSS file for styling
+import { Link , useLocation} from "react-router-dom";
 
 const ArtisbayPromo = () => {
+
+  const location = useLocation();
+
   return (
     <div class="ab-consulting max-w-4xl mx-auto p-6">
       <h1 class="text-3xl font-bold text-center text-yellow-600 mb-6">
@@ -155,10 +159,12 @@ const ArtisbayPromo = () => {
             transformation.
           </p>
           <div className="cta">
-            <a href="#/contact" className="cta-link">
-              {" "}
-              <button>Contact us now</button>
-            </a>
+          <Link to="/contact?from=consulting" className="cta-link">
+            <button>Contact us now</button>
+          </Link>
+
+
+            
           </div>
         </div>
       </div>
@@ -289,10 +295,9 @@ const ArtisbayPromo = () => {
       </ul>
 
       <p className="cta">
-          <a href="#/contact" className="cta-link">
-            {" "}
+        <Link to="/contact?from=consulting"  className="cta-link">
             <button>Contact us now</button>
-          </a>
+        </Link>
         to schedule your free consultation and discover how we can help your
         business grow!
       </p>

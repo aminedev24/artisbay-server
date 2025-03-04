@@ -9,7 +9,7 @@ import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchMo
 const CarCostCalculator = () => {
   const [make, setMake] = useState("any");
   const [model, setModel] = useState("any");
-  const [units, setUnits] = useState(0);
+  const [units, setUnits] = useState(1);
   const [buyingPrice, setBuyingPrice] = useState(0);
   const [transportation, setTransportation] = useState(0);
   const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);
@@ -109,7 +109,7 @@ const CarCostCalculator = () => {
 
   const tax = subtotalForTax * 0.1;
   const optionalTotal = optionalItems.reduce(
-    (total, item) => total + (optionalRemovals[item.id] ? item.price : 0),
+    (total, item) => total + (optionalRemovals[item.id] ? (item.price * units) : 0),
     0,
   );
 
@@ -128,10 +128,11 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
     buyingPrice,
     transportation,
     units,
-    tax
+    tax,
+    
   } = car;
 
- // console.log(car)
+ console.log(car)
 
   // Convert values to numbers to avoid NaN issues
   const numBuyingPrice = Number(buyingPrice) || 0;
@@ -289,7 +290,7 @@ const resetInputs = () => {
   
       const selectedOptionalItems = optionalItems
       .filter((item) => optionalRemovals[item.id])
-      .map((item) => ({ name: item.name, price: item.price })); // Include both name and price
+      .map((item) => ({ name: item.name, price: item.price ,units: units })); // Include both name and price
   
     if (editingCarIndex !== null) {
       // Editing an existing car
@@ -320,7 +321,8 @@ const resetInputs = () => {
         includedItems,
         tax,
         selectedOptionalItems,
-        vehicleCost
+        vehicleCost,
+        cuttingFee
       };
   
       setSavedCars([...savedCars, newSelection]);
@@ -403,6 +405,9 @@ const resetInputs = () => {
 //console.log(savedCarsTotalCost)
 return (
     <div className="calculator-wrapper">
+
+      <div className="overlay overlay-filter"></div>
+      <div className="overlay overlay-image"></div>
       {showModal && (
       <Modal
         message={modalMessage}

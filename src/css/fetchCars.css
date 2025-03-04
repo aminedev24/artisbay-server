@@ -94,3 +94,8 @@
   cursor: pointer;
   border-radius: 4px;
 }
+
+.under-construction {
+  background-image: url('../../public/images/underconstructionstamp.jpeg'); 
+}
+
