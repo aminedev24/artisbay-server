@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/artisbay-server/static/css/main.43bcf510.css",
-    "main.js": "/artisbay-server/static/js/main.910bbf26.js",
+    "main.css": "/artisbay-server/static/css/main.58ff3a78.css",
+    "main.js": "/artisbay-server/static/js/main.4c8179ad.js",
     "static/js/213.809af65b.chunk.js": "/artisbay-server/static/js/213.809af65b.chunk.js",
     "static/js/455.0b60b48e.chunk.js": "/artisbay-server/static/js/455.0b60b48e.chunk.js",
     "static/js/453.aaf8b0ee.chunk.js": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js",
@@ -27,6 +27,7 @@
     "static/media/car-makes-icons.woff2?gtc92f": "/artisbay-server/static/media/car-makes-icons.bd9b9d280fdab147db37.woff2",
     "static/media/printwatermark.png": "/artisbay-server/static/media/printwatermark.4a63492b97b9694c05b9.png",
     "static/media/fa-regular-400.woff2": "/artisbay-server/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/underconstructionsmall.png": "/artisbay-server/static/media/underconstructionsmall.d54d1d9a64d745413e37.png",
     "static/media/fa-v4compatibility.ttf": "/artisbay-server/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fraction.cjs": "/artisbay-server/static/media/fraction.7992481f3d8339b77604.cjs",
     "static/media/fa-v4compatibility.woff2": "/artisbay-server/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
@@ -36,14 +37,14 @@
     "static/media/slick.woff": "/artisbay-server/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/artisbay-server/index.html",
     "static/media/index.cjs": "/artisbay-server/static/media/index.f6d03137e8c9dd0de04c.cjs",
-    "main.43bcf510.css.map": "/artisbay-server/static/css/main.43bcf510.css.map",
-    "main.910bbf26.js.map": "/artisbay-server/static/js/main.910bbf26.js.map",
+    "main.58ff3a78.css.map": "/artisbay-server/static/css/main.58ff3a78.css.map",
+    "main.4c8179ad.js.map": "/artisbay-server/static/js/main.4c8179ad.js.map",
     "213.809af65b.chunk.js.map": "/artisbay-server/static/js/213.809af65b.chunk.js.map",
     "455.0b60b48e.chunk.js.map": "/artisbay-server/static/js/455.0b60b48e.chunk.js.map",
     "453.aaf8b0ee.chunk.js.map": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.43bcf510.css",
-    "static/js/main.910bbf26.js"
+    "static/css/main.58ff3a78.css",
+    "static/js/main.4c8179ad.js"
   ]
 }
