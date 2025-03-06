@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const AgreementForm = ({ agreementType, agreementContent }) => {
-  const apiUrl = process.env.NODE_ENV === "development" ? "http://localhost/artisbay-server/server" : "/server";
+  const apiUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost/artisbay-server/server'
+      : '/server';
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -15,9 +18,11 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
   const [alreadyAgreed, setAlreadyAgreed] = useState(false);
   const [isFetched, setIsFetched] = useState(false);
 
+  // This ref helps ensure we only update state if the component is still mounted.
   const isMountedRef = useRef(true);
 
-  const fetchUserData = async () => {
+  // Fetch both user data and agreement status, using the provided AbortController signal.
+  const fetchUserData = async (signal) => {
     try {
       console.log('Fetching user data and agreement status for:', agreementType);
 
@@ -25,17 +30,15 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
       const response = await fetch(`${apiUrl}/profile.php`, {
         method: 'GET',
         credentials: 'include',
+        signal,
       });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
       if (isMountedRef.current) {
-        setFormData((prevFormData) => ({
-          ...prevFormData,
+        setFormData((prev) => ({
+          ...prev,
           fullName: data.full_name,
           email: data.email,
         }));
@@ -45,14 +48,20 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
       // Fetch agreement status
       const agreementResponse = await fetch(
         `${apiUrl}/checkAgreement.php?agreementType=${encodeURIComponent(agreementType)}`,
-        { method: 'GET', credentials: 'include' }
+        { method: 'GET', credentials: 'include', signal }
       );
       const agreementData = await agreementResponse.json();
       console.log('Agreement API response:', agreementData);
       if (isMountedRef.current) {
-        setAlreadyAgreed(agreementData.already_agreed || false);
+        // Ensure the API returns a boolean by checking for true
+        setAlreadyAgreed(agreementData.already_agreed === true);
       }
     } catch (error) {
+      // Ignore abort errors so we don't trigger an error state when cancelling.
+      if (error.name === 'AbortError') {
+        console.log('Fetch aborted');
+        return;
+      }
       if (isMountedRef.current) {
         console.error('Error fetching user data or agreement status:', error);
         setError(error.message);
@@ -67,8 +76,14 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
   useEffect(() => {
     isMountedRef.current = true;
     setLoading(true);
-    fetchUserData();
+
+    // Create an AbortController for this effect
+    const controller = new AbortController();
+    fetchUserData(controller.signal);
+
     return () => {
+      // Abort any pending fetches on cleanup and mark the component as unmounted.
+      controller.abort();
       isMountedRef.current = false;
     };
   }, [agreementType]);
@@ -85,8 +100,8 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     e.preventDefault();
     const submissionData = {
       ...formData,
-      agreementType: agreementType,
-      agreementContent: agreementContent,
+      agreementType,
+      agreementContent,
     };
 
     try {
@@ -151,11 +166,11 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
           I agree to the {agreementType}
         </label>
         {!alreadyAgreed && (
-          <button type="submit" disabled={isSubmitted}>Submit</button>
+          <button type="submit" disabled={isSubmitted}>
+            Submit
+          </button>
         )}
       </form>
-      {console.log(agreementType)}
-     
       {alreadyAgreed && (
         <p className="success">
           You have already agreed to the {agreementType}.
