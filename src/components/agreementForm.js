@@ -59,7 +59,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     } catch (error) {
       // Ignore abort errors so we don't trigger an error state when cancelling.
       if (error.name === 'AbortError') {
-        console.log('Fetch aborted');
+        console.log('Fetch Aborted');
         return;
       }
       if (isMountedRef.current) {
