@@ -414,6 +414,9 @@ const ProformaInvoiceForm = () => {
       depositDescription: invoiceData.depositDescription,
       depositPurpose: invoiceData.depositPurpose,
       address: invoiceData.customerAddress,
+      engineCapacity: invoiceData.engineCapacity,
+      chasisNumber: invoiceData.chasisNumber,
+      mileage: invoiceData.mileage
     });
 
     // Set the phone code based on the extracted code

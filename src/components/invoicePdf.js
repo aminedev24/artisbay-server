@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     invoiceContainer: {
       padding: '5px 10px',
       fontFamily: 'Roboto',
+      minHeight: '100%',
       
     },
     headerText: {
@@ -36,7 +37,8 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       borderBottom: '2px solid #000',
-      marginBottom: '3px',
+      marginBottom: '5px',
+      flexGrow: 1,
     },
     headerFullWidth: {
       display: 'flex',
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
       margin: 0,
       fontSize: '12px',
       lineHeight: 1.5, // Adjust line height for better readability
-      marginBottom: '3px',
+      marginBottom: '5px',
     },
     iconParagraph: {
       display: 'flex',
@@ -78,13 +80,13 @@ const styles = StyleSheet.create({
     },
     icon: {
       color: '#1e3a8a',
-      marginRight: '3px',
+      marginRight: '5px',
       display: 'inline-block',
     },
     companyName: {
       fontSize: '15px',
       fontWeight: 'bold',
-      marginBottom: '3px',
+      marginBottom: '5px',
       paddingBottom: '10px',
     },
     invoiceTitle: {
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
       display: 'table',
       width: '100%',
       borderCollapse: 'collapse',
-      marginBottom: '3px',
+      marginBottom: '5px',
     },
     tableRow: {
       display: 'table-row',
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
       display: 'table',
       width: '100%',
       borderCollapse: 'collapse',
-      marginBottom: '3px',
+      marginBottom: '5px',
     },
     amountTableRow: {
       display: 'flex',
@@ -227,7 +229,7 @@ const styles = StyleSheet.create({
       fontSize: '12px',
     },
     instructions: {
-      marginBottom: '3px',
+      marginBottom: '5px',
       maxWidth: '57%',
       border: ' 1px solid #000',
       hyphenationCallback: null, // Prevents hyphenation
@@ -241,7 +243,7 @@ const styles = StyleSheet.create({
     instructionsListItem: {
       fontSize: '12px',
       lineHeight: 1.5, // Consistent line height
-      marginBottom: '3px',
+      marginBottom: '5px',
     },
     invoiceFooterContainer: {
       display: 'flex',
@@ -316,10 +318,21 @@ const styles = StyleSheet.create({
     return str.replace(/\d+/g, (match) => Number(match).toLocaleString());
   }
 
+  const calculatePageHeight = (invoiceData) => {
+    // Base A4 height (842 points for 11.69 inches)
+    let baseHeight = 842; 
+    // Add extra space based on content conditions
+    if (invoiceData.depositPurpose === 'order vehicle') baseHeight += 50;
+    if (invoiceData.bankNote) baseHeight += 30;
+    return baseHeight;
+  };
+
   const MyPdfDocument = ({ invoiceData }) => (
     <Document>
-      <Page size="A4" style={styles.invoiceContainer}>
-        {/* Header Section */}
+      <Page 
+        style={styles.invoiceContainer}
+        size={[595.28, calculatePageHeight(invoiceData)]}
+      >
         <View style={styles.invoiceHeader}>
           <View style={styles.headerFullWidth}>
             <Text style={styles.headerFullWidthText}>{invoiceData.serialNumber}</Text>
@@ -359,7 +372,7 @@ const styles = StyleSheet.create({
         <View style={styles.invoiceInfo}>
           <View style={styles.left}>
             <Text style={styles.contactInfoText}><Text style={{ fontWeight: '600' }}>Full name:</Text> {invoiceData.customerFullName}</Text>
-            <Text style={styles.contactInfoText}><Text style={{ fontWeight: '600' }}>Company:</Text> {invoiceData.customerCompany}</Text>
+            <Text style={styles.contactInfoText}><Text style={{ fontWeight: '600' }}>Company:</Text> {invoiceData.customerCompany ? invoiceData.customerCompany : 'not specified'}</Text>
             <Text style={styles.contactInfoText}><Text style={{ fontWeight: '600' }}>Address:</Text> {invoiceData.customerAddress}</Text>
             <Text style={styles.contactInfoText}><Text style={{ fontWeight: '600' }}>Phone Number:</Text> {invoiceData.customerPhone}</Text>
             <Text style={styles.contactInfoText}><Text style={{ fontWeight: '600' }}>Email:</Text> {invoiceData.customerEmail}</Text>
@@ -550,7 +563,6 @@ const styles = StyleSheet.create({
                 <View
                   style={[
                     styles.invoiceFooter,
-                    { marginTop: invoiceData.depositPurpose === 'order vehicle' && !invoiceData.bankNote ? '-50px' : '5px' }
                   ]}
 >
                   <Text style={styles.contactInfoText}>Authorised Sales Signature</Text>
@@ -589,7 +601,7 @@ export const generatePdfBlob = async (invoiceData) => {
 const GeneratePdfButton = ({ invoiceData }) => {
   const handleGeneratePdf = async () => {
     const blob = await pdf(<MyPdfDocument invoiceData={invoiceData} />).toBlob();
-    saveAs(blob, 'AB-invoice.pdf');
+    saveAs(blob, `invoice-${invoiceData.invoiceNumber}.pdf`);
   };
 
   return (

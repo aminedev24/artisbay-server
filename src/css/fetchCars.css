@@ -1,11 +1,24 @@
 
-  .saved-car-details {
+  .saved-car-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
   }
+
+  .saved-cars-details {
+    /* Use CSS Grid to create a 2-column layout */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px; /* Adjust spacing between columns/rows as needed */
+  }
+  
+  .saved-cars-details p {
+    margin: 0; /* Remove default paragraph margins */
+    padding: 5px 0; /* Optional spacing within each item */
+  }
+  
   
   .car-info {
     margin-bottom: 30px;

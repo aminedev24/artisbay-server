@@ -154,6 +154,8 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
           <button type="submit" disabled={isSubmitted}>Submit</button>
         )}
       </form>
+      {console.log(agreementType)}
+     
       {alreadyAgreed && (
         <p className="success">
           You have already agreed to the {agreementType}.

@@ -16,6 +16,7 @@ import DepositsTable from './fetchDeposits';
 import AdminUserList from './getUsers';
 import { useUser } from "./userContext";
 import { Link } from 'react-router-dom';
+import AccountancyForm from './accountancyForm';
 
 const ProfilePage = () => {
   const [userr, setUserr] = useState(null);
@@ -56,9 +57,13 @@ const ProfilePage = () => {
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
     { key: 'cutting & dismantling logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
-    // Only include admin item if user is loaded and is admin
+
+    // Only include admin items if user is loaded and is admin
     ...(user && user.role === 'admin'
-      ? [{ key: 'users', label: 'Users list', component: AdminUserList }]
+      ? [
+          { key: 'users', label: 'Users list', component: AdminUserList },
+          { key: 'accountancy form', label: 'Accountancy Form', component: AccountancyForm }
+        ]
       : [])
   ], [user]);
 

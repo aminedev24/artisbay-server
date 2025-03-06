@@ -17,7 +17,7 @@ const FetchSavedCars = () => {
   const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [underConstruction, setUnderConstruction] = useState(true);
+  const [underConstruction, setUnderConstruction] = useState(process.env.NODE_ENV === "development" ? false : false);
 
   const auctionFees = 25000;
   const serviceFees = 20000;
@@ -106,9 +106,12 @@ const FetchSavedCars = () => {
           const tax = Number(car.tax) || 0;
       
           const carOptionalTotal = car.selectedOptionalItems.reduce((carTotal, selectedItem) => {
-            const item = optionalItems.find(opt => opt.id === selectedItem);
-            return item ? carTotal + item.price : carTotal;
+            console.log('selected item', selectedItem)
+            return carTotal + selectedItem.price * selectedItem.units
+            //const item = optionalItems.find(opt => opt.id === selectedItem);
+            //return item ? carTotal + item.price : carTotal;
           }, 0);
+          console.log('summary car optional total', carOptionalTotal)
       
           const feesPerVehicle = auctionFees + numTransportation + tax + cuttingFee + serviceFees + carOptionalTotal;
           const vehicleCost = numBuyingPrice + feesPerVehicle;
@@ -147,7 +150,7 @@ const FetchSavedCars = () => {
       transportation,
       units,
       tax,
-      cuttingFee
+      
     } = car;
 
     console.log('car', car)
@@ -158,10 +161,9 @@ const FetchSavedCars = () => {
     const numUnits = Number(units) || 1; // Default to 1 if missing
 
     // Calculate the optional total per car
-    const carOptionalTotal = car.selectedOptionalItems.reduce((carTotal, selectedItem) => {
-      const item = optionalItems.find(opt => opt.id === selectedItem); // Find item by ID
-      return item ? carTotal + item.price*item.units : carTotal; // Add price if item found
-    }, 0);
+    const carOptionalTotal = car.selectedOptionalItems.reduce((total, item) => total + (item.price * item.units || 0), 0);
+
+    console.log('car optional total', carOptionalTotal);
 
     // Fees per vehicle (excluding transportation)
     const feesPerVehicle = auctionFees + numTransportation + tax + cuttingFee + serviceFees + carOptionalTotal;
@@ -231,12 +233,15 @@ const FetchSavedCars = () => {
                   {/* Display Selected Car Details */}
                   {groupedOrders[activeOrder].map((car) =>
                     activeTab === car.id ? (
-                      <div key={car.id} className="saved-car-details">
-                        <h3>{car.make} {car.model}</h3>
+                      <div key={car.id} className="saved-car-container">
+                        <div className="saved-cars-details">
+                        <p><strong>Make:</strong> {car.make}</p>
+                        <p><strong>Model:</strong> {car.model}</p>
         
                         <p><strong>Buying Price:</strong> ¥{new Intl.NumberFormat().format(car.buying_price)}</p>
-                        <p><strong>Transportation:</strong> ¥{new Intl.NumberFormat().format(car.transportation)}</p>
+                        <p><strong>Transportation Price:</strong> ¥{new Intl.NumberFormat().format(car.transportation)}</p>
                         <p><strong>Units:</strong> {car.units}</p>
+                      </div>
         
                    <div className="items-section">
                     {/* Included Items Table */}
@@ -279,7 +284,7 @@ const FetchSavedCars = () => {
                       <tbody style={{ display: isOptionalTableCollapsed ? "none" : "table-row-group" }}>
                         {car.selectedOptionalItems.length > 0 ? (
                           car.selectedOptionalItems.map((item, index) => (
-                            <tr key={index}><td>{item}</td></tr>
+                            <tr key={index}><td>{item.name}</td></tr>
                           ))
                         ) : (
                           <tr><td>No optional items</td></tr>

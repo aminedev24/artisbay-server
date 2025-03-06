@@ -23,7 +23,7 @@ const CarCostCalculator = () => {
   const [models, setModels] = useState([]);
   const [editingCarIndex, setEditingCarIndex] = useState(null);
 
-
+  const [underConstuction,setUnderConstruction] = useState(process.env.NODE_ENV === "development" ? false : false);
 
 
 
@@ -119,8 +119,9 @@ const CarCostCalculator = () => {
 
   const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + optionalTotal;
   const vehicleCost = Number(buyingPrice) + feesPerVehicle
-  const totalFeesAllVehicles = feesPerVehicle * (units || 1);
-  const grandTotalCost = vehicleCost * (Number(units) || 1);
+  const totalFeesAllVehicles = feesPerVehicle * Number(units);
+  console.log('total fees', totalFeesAllVehicles);
+  const grandTotalCost = vehicleCost * (Number(units));
 
   // Calculate total cost for all cars
 const totalCostForAllCars = savedCars.reduce((total, car, index) => {
@@ -139,13 +140,10 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
   const numTransportation = Number(transportation) || 0;
   //console.log(`num transportation: ${numTransportation}`)
   const numUnits = Number(units) || 1; // Default to 1 if missing
+  console.log('num units', numUnits)
   const carOptionalTotal = car.selectedOptionalItems.reduce((total, item) => total + (item.price || 0), 0);
   //console.log('car ')
   
-  
-  
-  
-
   //console.log(`optional total ${carOptionalTotal}`)
 
   const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + carOptionalTotal;
@@ -156,7 +154,7 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
   const grandTotalCost = vehicleCost * numUnits;
 
   // Debugging output for each car
-  /*
+  
   console.log(
     `Car ${index + 1}:`,
     `Buying Price: ¥${numBuyingPrice.toLocaleString()},`,
@@ -166,7 +164,7 @@ const totalCostForAllCars = savedCars.reduce((total, car, index) => {
     `Units: ${numUnits},`,
     `Grand Total Cost: ¥${grandTotalCost.toLocaleString()}`
   );
-*/
+
   // Add to total
   return total + grandTotalCost;
 }, 0);
@@ -305,6 +303,8 @@ const resetInputs = () => {
         units: Number(units),
         includedItems,
         selectedOptionalItems, // Completely replace with new selection
+        vehicleCost,
+        tax
       };
   
       setSavedCars(updatedCars);
@@ -322,7 +322,7 @@ const resetInputs = () => {
         tax,
         selectedOptionalItems,
         vehicleCost,
-        cuttingFee
+        
       };
   
       setSavedCars([...savedCars, newSelection]);
@@ -364,10 +364,11 @@ const resetInputs = () => {
     const newOptionalRemovals = {};
     optionalItems.forEach((item) => {
       // Ensure removed items are not added back
-      newOptionalRemovals[item.id] = car.selectedOptionalItems?.includes(item.name) ?? false;
+      //console.log('optional item', item);
+      newOptionalRemovals[item.id] = car.selectedOptionalItems?.some(opt => opt.name === item.name) ?? false;
     });
     setOptionalRemovals(newOptionalRemovals);
-    
+    //console.log('newOptionalRemovals', newOptionalRemovals);
   
     setEditingCarIndex(index);
   };
@@ -406,8 +407,14 @@ const resetInputs = () => {
 return (
     <div className="calculator-wrapper">
 
-      <div className="overlay overlay-filter"></div>
-      <div className="overlay overlay-image"></div>
+      {underConstuction && 
+        <>
+          <div className="overlay overlay-filter"></div>
+          <div className="overlay overlay-image"></div>
+        </>
+      }
+
+
       {showModal && (
       <Modal
         message={modalMessage}

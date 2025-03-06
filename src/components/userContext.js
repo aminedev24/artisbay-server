@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  console.log(user)
+  //console.log(user)
   
 
   // Logout Function

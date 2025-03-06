@@ -1,0 +1,50 @@
+.accountancyForm {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.accountancyForm label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+}
+
+.accountancyForm input,
+.accountancyForm select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.accountancyForm button {
+  grid-column: 1 / -1;  /* Span both columns */
+  padding: 12px 20px;
+  background: var(--secondary-color);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.accountancyForm button:hover {
+  background: #0056b3;
+}
+
+/* Make fields that need full width span across both columns */
+.full-width {
+  grid-column: 1 / -1;
+}

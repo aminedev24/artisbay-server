@@ -19,26 +19,49 @@ const SavedCarsPanel = ({
   const [savedCarsTotalCost, setSavedCarsTotalCost] = useState(0);
   const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] = useState(false);  
   const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);
-  
-
+  const [totalIncludedItems,setTotalIncludedItems] = useState(0)
+  const [totalOptionalItems, setTotalOptionalItems] = useState(0);
   const apiUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost/artisbay-server/server'
       : '/server';
 
+
+
   // Initializes the checked state for a car if not already set
   const initializeCheckedState = useCallback((car) => {
     setCheckedItems((prev) => {
-      if (!prev[car.id]) {
+      const currentIncludedLength = car.includedItems?.length || 0;
+      const currentOptionalLength = car.selectedOptionalItems?.length || 0;
+  
+      const existing = prev[car.id];
+      if (existing) {
+        const existingIncludedLength = existing.included.length;
+        const existingOptionalLength = existing.optional.length;
+  
+        // Re-initialize if lengths differ
+        if (
+          existingIncludedLength !== currentIncludedLength ||
+          existingOptionalLength !== currentOptionalLength
+        ) {
+          const newChecked = {
+            included: new Array(currentIncludedLength).fill(true),
+            optional: new Array(currentOptionalLength).fill(true),
+          };
+          return { ...prev, [car.id]: newChecked };
+        }
+        return prev; // No change needed
+      } else {
+        // Initialize new entry
         const initialChecked = {
-          included: new Array(car.includedItems.length).fill(true),
-          optional: new Array(car.selectedOptionalItems.length).fill(true),
+          included: new Array(currentIncludedLength).fill(true),
+          optional: new Array(currentOptionalLength).fill(true),
         };
         return { ...prev, [car.id]: initialChecked };
       }
-      return prev;
     });
   }, []);
+  
 
   useEffect(() => {
     if (selectedCar) {
@@ -97,7 +120,7 @@ const handleCheckboxChange = (carId, type, index) => {
         car.selectedOptionalItems.forEach((item, index) => {
           console.log('item', item)
           if (optionalChecks[index] === false && item.price) {
-            carCost -= Number(item.price) *item.units;
+            carCost -= Number(item.price *item.units);
           }
         });
       }
@@ -107,7 +130,35 @@ const handleCheckboxChange = (carId, type, index) => {
     setSavedCarsTotalCost(newTotalCost);
   }, [savedCars, checkedItems]);
   
+  useEffect(() => {
+    const newTotalOptional = savedCars.reduce((acc, car) => {
+      // Get the check state for optional items for this car
+      const optionalChecks = checkedItems[car.id]?.optional;
+      // Count how many optional items are checked.
+      const count = optionalChecks
+        ? optionalChecks.filter((isChecked) => isChecked).length
+        : (car.selectedOptionalItems ? car.selectedOptionalItems.length : 0);
+      // Multiply by the number of car units.
+      return acc + count * car.units;
+    }, 0);
+    
+    setTotalOptionalItems(newTotalOptional);
+  }, [savedCars, checkedItems]);
+
+  useEffect(() => {
+    const newTotalIncluded = savedCars.reduce((acc, car) => {
+      // Get the check state for included items for this car
+      const includedChecks = checkedItems[car.id]?.included;
+      // Count how many included items are checked; if no check state is available, default to the full list length.
+      const count = includedChecks
+        ? includedChecks.filter((isChecked) => isChecked).length
+        : (car.includedItems ? car.includedItems.length : 0);
+      // Multiply by the number of units for that car
+      return acc + count * car.units;
+    }, 0);
   
+    setTotalIncludedItems(newTotalIncluded);
+  }, [savedCars, checkedItems]);
   
   const handleSubmit = async () => {
     const orderId = uuidv4();
@@ -126,7 +177,13 @@ const handleCheckboxChange = (carId, type, index) => {
         tax: car.tax,
         // Filter out unchecked items
         includedItems: car.includedItems.filter((_, index) => carCheckedState.included?.[index] ?? true),
-        selectedOptionalItems: car.selectedOptionalItems.filter((_, index) => carCheckedState.optional?.[index] ?? true),
+        selectedOptionalItems: car.selectedOptionalItems
+        .filter((_, index) => carCheckedState.optional?.[index] ?? true)
+        .map((item) => ({
+          name: item.name,
+          price: item.price,
+          units: item.units,
+        })),
       };
     });
 
@@ -311,32 +368,14 @@ const handleCheckboxChange = (carId, type, index) => {
           <tr>
             <th>Total items (half cut)</th>
             <td>
-              {savedCars.reduce((acc, car) => {
-                // Get the check state for included items for this car
-                const includedChecks = checkedItems[car.id]?.included;
-                // Count how many included items are checked;
-                // If no check state is present, count all items.
-                const count = includedChecks
-                  ? includedChecks.filter((isChecked) => isChecked).length
-                  : (car.includedItems ? car.includedItems.length : 0);
-                return acc + count * car.units;
-              }, 0)}
+              {totalIncludedItems}
             </td>
 
           </tr>
           <tr>
             <th>Total optional items</th>
             <td>
-              {savedCars.reduce((acc, car) => {
-                // Get the check state for optional items for this car
-                const optionalChecks = checkedItems[car.id]?.optional;
-                // Count how many optional items are checked.
-                const count = optionalChecks
-                  ? optionalChecks.filter((isChecked) => isChecked).length
-                  : (car.selectedOptionalItems ? car.selectedOptionalItems.length : 0);
-                // Multiply by the number of car units.
-                return acc + count * car.units;
-              }, 0)}
+              {totalOptionalItems}
             </td>
 
           </tr>

@@ -85,6 +85,17 @@ const agreementContent = (
         </p>
       </section>
       <section>
+        ${
+          agreementType === 'Anti-Social Forces Policy' 
+            ? `<h4 style="color: red;">Important Notice:</h4>
+              <p>
+                <span style="font-weight:bold;">I hereby confirm:</span><br />
+                I am not connected with any individuals or groups that can be determined as Anti-Social Forces (ASF).<br />
+                The goods will not be used for any prohibited purposes, as specified in these policies.<br />
+                I guarantee that my activities do not violate international law, and I am not engaged in nor do I plan to engage in any circumvention of sanctions.
+              </p>`
+            : ""
+        }
       </section>
 
   </div>
@@ -95,6 +106,7 @@ const agreementContent = (
       {userProfile ? <h1>Anti-Social Forces Policy</h1>: <h4>Anti-Social Forces Policy</h4>}
       <div dangerouslySetInnerHTML={{ __html: agreementContent }} />
       {userProfile && <AgreementForm agreementType={agreementType} agreementContent={agreementContent} />}
+      
     </div>
   );
 };
