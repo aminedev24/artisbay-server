@@ -9,7 +9,7 @@ import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchMo
 const CarCostCalculator = () => {
   const [make, setMake] = useState("any");
   const [model, setModel] = useState("any");
-  const [units, setUnits] = useState(1);
+  const [units, setUnits] = useState(0);
   const [buyingPrice, setBuyingPrice] = useState(0);
   const [transportation, setTransportation] = useState(0);
   const [isItemsTableCollapsed, setIsItemsTableCollapsed] = useState(false);

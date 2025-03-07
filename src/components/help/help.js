@@ -24,7 +24,7 @@ import AutomatedInvoice from './automatedInvoice';
 import WisePaymentInstructions from './wise';
 import BusinessConsulting from './businessConsulting';
 import PdfContent from './japanDealers';
-import ArtisbayPromo from './artisbayPromo';
+import ArtisbayPromo from './artisbayPromo2';
 import ImageWithLoader from '../imageWithLoader';
 // Define the topics
 const topics = {

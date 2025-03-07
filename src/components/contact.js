@@ -21,6 +21,8 @@ const Contact = ({ sell, japanExports }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const fromConsulting = queryParams.get('from') === 'consulting';
+  const lang = queryParams.get('lang');
+  console.log(lang)
 
 
   //const fromConsulting = location.state?.fromConsulting || false;
@@ -184,9 +186,9 @@ const Contact = ({ sell, japanExports }) => {
       }
      
 
-      {!sell && !japanExports && <h2>We like to hear from you!</h2>}
-      <h3>{japanExports ? " お問い合わせ" :  'Contact Us'}</h3>
-      {!japanExports &&
+      {!sell && !japanExports &&  lang == 'en' &&  lang == 'jp' && <h2>We like to hear from you!</h2>}
+      <h3>{japanExports || lang == 'jp' ? " お問い合わせ" :  'Contact Us'}</h3>
+      {!japanExports || lang == 'jp' || lang == 'en' && 
       <p className='contact-prompt'>
        If you have any questions or would like to learn more about our offerings, please don’t hesitate to reach out using the form below. We’re always eager to connect with our customers and will respond as promptly as possible.
       </p>
@@ -198,10 +200,10 @@ const Contact = ({ sell, japanExports }) => {
           value={formData.name}
           onChange={handleChange}
           name="name"
-          placeholder={japanExports ? '名前': 'your name'}
+          placeholder={japanExports || lang == 'jp' ? '名前': 'your name'}
           required
         />
-        <label> {japanExports ? '名前' : `Your Name ` } <span className="required">*</span></label>
+        <label> {japanExports || lang == 'jp' ? '名前' : `Your Name ` } <span className="required">*</span></label>
       </div>
 
       <div className="input-group">
@@ -210,10 +212,10 @@ const Contact = ({ sell, japanExports }) => {
           value={formData.email}
           onChange={handleChange}
           name="email"
-          placeholder={japanExports ? 'メールアドレス' : 'your email'}
+          placeholder={japanExports || lang == 'jp' ? 'メールアドレス' : 'your email'}
           required
         />
-        <label>{japanExports ? 'メールアドレス' : 'Email' } <span className="required">*</span></label>
+        <label>{japanExports || lang == 'jp' ? 'メールアドレス' : 'Email' } <span className="required">*</span></label>
       </div>
 
       <div className="input-group">
@@ -226,7 +228,7 @@ const Contact = ({ sell, japanExports }) => {
           className={formData.country ? "not-empty" : ""}
           required
         >
-          <option value={""}>{japanExports ? "国":  'Select Country'}</option>
+          <option value={""}>{japanExports || lang == 'jp' ? "国":  'Select Country'}</option>
           {sell || japanExports ? (
             <option value="Japan">Japan</option>
           ) : (
@@ -237,7 +239,7 @@ const Contact = ({ sell, japanExports }) => {
             ))
           )}
         </select>
-        <label>{japanExports ? '国' : 'Country'}<span className="required">*</span></label>
+        <label>{japanExports || lang == 'jp' ? '国' : 'Country'}<span className="required">*</span></label>
       </div>
 
       {japanExports &&
@@ -275,11 +277,11 @@ const Contact = ({ sell, japanExports }) => {
           className={phoneCode ? "shrink" : ''}
           value={formData.phone}
           onChange={handleChange}
-          placeholder={japanExports ? "電話番号":  "phone number"}
+          placeholder={japanExports || lang == 'jp' ? "電話番号":  "phone number"}
           readOnly={!!userData.phone}
           required
         />
-        <label>{japanExports ? '電話番号' : `Phone`}<span className="required">*</span></label>
+        <label>{japanExports || lang == 'jp' ? '電話番号' : `Phone`}<span className="required">*</span></label>
       </div>
       
 
@@ -310,16 +312,17 @@ const Contact = ({ sell, japanExports }) => {
               fromConsulting ? (
                 <>
                   {/* New Options */}
-                  <option value="">Select Enquiry Type</option>
-                  <option value="Solar panels">Solar Panels</option>
-                  <option value="Brand-new tires">Brand-New Tires</option>
-                  <option value="Brand-new cars">Brand-New Cars</option>
-                  <option value="Used cars">Used Cars</option>
-                  <option value="Home appliances">Home Appliances</option>
-                  <option value="Terrace roof mounts">Terrace Roof Mounts</option>
-                  <option value="EV charging stations">EV Charging Stations</option>
-                  <option value="Machinery">Machinery</option>
-                  <option value="Agricultural Machinery">Agricultural Machinery</option>
+                  <option value="">{lang == 'en' ? 'Select Enquiry Type': 'お問い合わせの種類を選択'}</option>
+                  <option value="Solar panels">{lang == 'en' ? 'Solar Panels' : 'ソーラーパネル'}</option>
+                  <option value="Brand-new tires">{lang === 'en' ? 'Brand-New Tires' : '新品タイヤ'}</option>
+                  <option value="Brand-new cars">{lang === 'en' ? 'Brand-New Cars' : '新車'}</option>
+                  <option value="Used cars">{lang === 'en' ? 'Used Cars' : '中古車'}</option>
+                  <option value="Home appliances">{lang === 'en' ? 'Home Appliances' : '家電製品'}</option>
+                  <option value="Terrace roof mounts">{lang === 'en' ? 'Terrace Roof Mounts' : 'テラス屋根マウント'}</option>
+                  <option value="EV charging stations">{lang === 'en' ? 'EV Charging Stations' : 'EV充電ステーション'}</option>
+                  <option value="Machinery">{lang === 'en' ? 'Machinery' : '機械'}</option>
+                  <option value="Agricultural Machinery">{lang === 'en' ? 'Agricultural Machinery' : '農業機械'}</option>
+                  <option value="General">{lang === 'en' ? 'General' : '一般'}</option>
                 </>
               ) : (
                 <>
@@ -341,30 +344,30 @@ const Contact = ({ sell, japanExports }) => {
             )}
           </select>
           <label>
-            {japanExports ? '件名' : 'Enquiry type'}
+            {japanExports || lang == 'jp' ? '件名' : 'Enquiry type'}
             <span className="required">*</span>
           </label>
         </div>
       )}
 
-      {sell || japanExports && (
+      {sell || japanExports || lang == 'jp' && (
         <div className="input-group">
           <input
             type="text"
             name="company"
             value={formData.company}
-            placeholder={japanExports ? '会社名（任意)' : 'company'}
+            placeholder={japanExports || lang == 'jp' ? '会社名（任意)' : 'company'}
             onChange={handleChange}
           />
-          <label>{japanExports ? "会社名（任意)" : "Company"}</label>
+          <label>{japanExports || lang == 'jp' ? "会社名（任意)" : "Company"}</label>
         </div>
       )}
 
       <div className="input-group">
-      <label>{japanExports ? 'メッセージ' : 'Message'}<span className="required">*</span></label>
+      <label>{japanExports || lang == 'jp' ? 'メッセージ' : 'Message'}<span className="required">*</span></label>
         <textarea
           name="message"
-          placeholder={japanExports ? "メッセージ" : 'your message'}
+          placeholder={japanExports || lang == 'jp' ? "メッセージ" : 'your message'}
           value={formData.message}
           onChange={handleChange}
           required
@@ -383,7 +386,7 @@ const Contact = ({ sell, japanExports }) => {
         type="submit" 
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Submitting...' : japanExports ? "送信" : 'SUBMIT'}
+        {isSubmitting ? 'Submitting...' : japanExports || lang == 'jp' ? "送信" : 'SUBMIT'}
       </button>
     </form>
   </div>
