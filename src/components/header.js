@@ -133,7 +133,7 @@ const Header = () => {
               }}
               title={"Japan"}
             />
-            <Link to={'/japan-exports'}>日本の輸出</Link>
+            <Link to={'/help?topic=Artisbay Consulting'}>Artisbay に相談する</Link>
             <div
               className="nav-item dropdown"
               ref={(el) => (dropdownRefs.current['localServices'] = el)}

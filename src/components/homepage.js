@@ -140,7 +140,7 @@ const links2 = [
                   className="banner"
                   alt="sell banner"
             />
-            <Link to="/japan-exports">
+            <Link to="/help?topic=Artisbay Consulting">
               <button className="sell-btn">Read more</button>
             </Link>
         </div>
