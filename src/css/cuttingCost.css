@@ -216,3 +216,11 @@
   font-size: 15px;
 
 } 
+
+.optional-table td {
+  width: 84%;
+}
+
+.checkbox-cell {
+  width: 10%;
+}

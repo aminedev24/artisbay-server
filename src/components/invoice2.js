@@ -392,29 +392,32 @@ const handleSendEmail = async () => {
           </div>
           {invoiceData.depositPurpose == 'order vehicle' && 
            <div className="items">
-               <table>
-               <thead>
-                 <tr>
-                   <th colSpan='4'>Vehicle Description</th>
-                 </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                    <td>{invoiceData.vehicleDescription}</td>
-                  </tr>
-                  <tr>
-                    <td>Engine Capacity {formatStringWithNumber(invoiceData.engineCapacity)|| 'not specified'}</td>
-                  </tr>
-                  <tr>
-                    <td>Mileage {formatStringWithNumber(invoiceData.mileage) || 'not specified'}</td>
-                  </tr>
-                  <tr>
-                    <td>Chassis No {invoiceData.chasisNumber || 'not specified'}</td>
+            <table>
+            <thead>
+         
+            <tr>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Engine Capacity</th>
+              <th>Mileage</th>
+              <th>Chassis Number</th>
+            </tr>
+            </thead>
+            <tbody>
+           
+            <tr>
+              <td>{invoiceData.make}</td>
+              <td>{invoiceData.model}</td>
+              <td>{formatStringWithNumber(invoiceData.engineCapacity)|| 'not specified'}</td>
+              <td>{formatStringWithNumber(invoiceData.mileage) || 'not specified'}</td>
+              <td>{invoiceData.chasisNumber || 'not specified'}</td>
 
-                  </tr>
-               </tbody>
-             </table>
-             </div>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+
+
           
           } 
         

@@ -61,8 +61,8 @@ const ProfilePage = () => {
     // Only include admin items if user is loaded and is admin
     ...(user && user.role === 'admin'
       ? [
-          { key: 'users', label: 'Users list', component: AdminUserList },
-          { key: 'accountancy form', label: 'Accountancy Form', component: AccountancyForm }
+          { key: 'customers', label: 'Customers', component: AdminUserList },
+          { key: 'income', label: 'Income', component: AccountancyForm }
         ]
       : [])
   ], [user]);

@@ -45,7 +45,7 @@ const AdminUserList = () => {
 
   return (
     <div style={{ padding: '2rem' }}>
-      <h1>Admin - User List</h1>
+      <h1>Customers</h1>
 
       <div 
         className='filter-container' 
@@ -110,6 +110,7 @@ const AdminUserList = () => {
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>ID</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Full Name</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
+                <th style={{ padding: '10px', border: '1px solid #ddd' }}>Phone number</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Date of Registration</th>
               </tr>
             </thead>
@@ -119,6 +120,7 @@ const AdminUserList = () => {
                   <tr key={user.id}>
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>{user.id}</td>
                     <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.full_name}</td>
+                    <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.phone}</td>
                     <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.email}</td>
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                       {user.joined_date ? user.joined_date.substring(0, 10) : ''}

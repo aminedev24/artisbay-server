@@ -5,6 +5,7 @@ import "../css/invoice.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "./userContext";
 import Tooltip from "./toolTip"; // Import the Tooltip component
+import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "./vehicleData";
 
 // Function to calculate expiry date (5 business days later)
 const calculateExpiryDate = (invoiceDate) => {
@@ -72,6 +73,8 @@ const ProformaInvoiceForm = () => {
     vehicleDescription: "", // New field
     engineCapacity: "", // New field
     mileage: "", // New field
+    make : 'any',
+    model: "any"
   });
 
   const [phoneCode, setPhoneCode] = useState("");
@@ -94,6 +97,10 @@ const ProformaInvoiceForm = () => {
   const [depositAmount, setDepositAmount] = useState("");
   const [engineCapacity, setEngineCapacity] = useState("");
   const [amount, setAmount] = useState("")
+  const [makes, setMakes] = useState([]);
+  const [selectedMake, setSelectedMake] = useState("any");
+  const [selectedModel, setSelectedModel] = useState('any');
+  const [models, setModels] = useState([]);
   // Function to get the next invoice number from the backend
   const fetchInvoiceNumber = async () => {
     setIsLoading(true);
@@ -113,6 +120,25 @@ const ProformaInvoiceForm = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+      const loadMakes = async () => {
+        const fetchedMakes = await fetchMakes();
+        setMakes(fetchedMakes);
+      };
+      loadMakes();
+    }, []);
+
+    const handleMakeChange = async (event) => {
+        const make = event.target.value;
+        setSelectedMake(make);
+        if (make) {
+          const fetchedModels = await fetchModelsForMake(make);
+          setModels(fetchedModels);
+        } else {
+          setModels([]);
+        }
+      };
 
   // Fetch invoice number when the component mounts
   useEffect(() => {
@@ -359,6 +385,8 @@ const ProformaInvoiceForm = () => {
           vehicleDescription: formData.vehicleDescription, // New field
           engineCapacity: formData.engineCapacity, // New field
           mileage: formData.mileage,
+          make: formData.make,
+          model: formData.model,
           serialNumber: generateSerialNumber(),
           expiryDate: expiryDate,
           ...selectedBankDetails,
@@ -416,7 +444,9 @@ const ProformaInvoiceForm = () => {
       address: invoiceData.customerAddress,
       engineCapacity: invoiceData.engineCapacity,
       chasisNumber: invoiceData.chasisNumber,
-      mileage: invoiceData.mileage
+      mileage: invoiceData.mileage,
+      make: invoiceData.make,
+      model: invoiceData.model
     });
 
     // Set the phone code based on the extracted code
@@ -701,25 +731,47 @@ const ProformaInvoiceForm = () => {
             )}
 
             {formData.depositPurpose === 'order vehicle' &&
+            <>
+            <div className="form-group">
+              <div className="half-width">
+                <label htmlFor="make">Make</label>
+                {<span className="required-star">*</span>}
+                <select required id="make" name="make" 
+                  onChange={(e) => {
+                    handleMakeChange(e);
+                    handleChange(e);
+                  }}
+                >
+                  <option value='any'>Make (any)</option>
+                  {makes.map((make, index) => (
+                    <option key={index} value={make}>
+                      {make.charAt(0).toUpperCase() + make.slice(1)}
+                    </option>
+                  ))}
+                </select>
             
-            <div className="form-group" style={{ flexDirection: "column" }}>
-            <label htmlFor="vehicleDescription">
-              Vehicle Description<span className="required-star">*</span>
-              <Tooltip
-                onTypingStart={handleTypingStart}
-                message="Please describe what you are paying for, e.g., Toyota Land Cruiser 2013"
-              />
-            </label>
-            <textarea
-              id="vehicleDescription"
-              name="vehicleDescription"
-              value={formData.vehicleDescription}
-              onChange={handleChange}
-              placeholder="Vehicle description"
-              required
-              rows="5"
-            ></textarea>
-          </div>}
+              </div>
+
+              <div className="half-width">
+                <label htmlFor="model">Model</label>
+                {<span className="required-star">*</span>}
+                <select required id="model" name="model" onChange={handleChange}>
+                  <option value='any'>Model (any)</option>
+                  {models.map((model, index) => (
+                    <option key={index} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+            </div>
+          
+            
+
+          </>
+          
+            }
 
             <div className="form-group" style={{ flexDirection: "column" }}>
               <label htmlFor="depositDescription">

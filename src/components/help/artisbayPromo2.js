@@ -547,7 +547,7 @@ const ArtisbayPromo = () => {
         ))}
       </ul>
       <p className="cta">
-        <Link to="/contact?from=consulting" className="cta-link">
+        <Link to={`/contact?from=consulting&lang=${language}`} className="cta-link">
           <button>{t.finalContactButton}</button>
         </Link>
         {t.finalContactText}

@@ -77,7 +77,7 @@ const AccountancyForm = () => {
 
   return (
     <div className="accountancy-container">
-      <h1>Accountancy Form</h1>
+      <h1>Income</h1>
       <form onSubmit={handleSubmit} className="accountancyForm">
         <label>
           Date:

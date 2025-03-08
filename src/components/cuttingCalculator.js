@@ -119,9 +119,9 @@ const CarCostCalculator = () => {
 
   const feesPerVehicle = auctionFees + Number(transportation) + tax + cuttingFee + serviceFees + optionalTotal;
   const vehicleCost = Number(buyingPrice) + feesPerVehicle
-  const totalFeesAllVehicles = feesPerVehicle * Number(units);
+  const totalFeesAllVehicles = feesPerVehicle * Number(units || 1);
   console.log('total fees', totalFeesAllVehicles);
-  const grandTotalCost = vehicleCost * (Number(units));
+  const grandTotalCost = vehicleCost * (Number(units) || 1);
 
   // Calculate total cost for all cars
 const totalCostForAllCars = savedCars.reduce((total, car, index) => {

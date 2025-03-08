@@ -3,7 +3,7 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import { StyleSheet, Document, Page, View, Text, Image, Font } from '@react-pdf/renderer';
 import { FaEnvelope, FaGlobe } from "react-icons/fa";
-
+import SalesAgreementPDF from './salesAgreementPdf';
 
 // Register Arial font
 Font.register({
@@ -37,8 +37,6 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       borderBottom: '2px solid #000',
-      marginBottom: '5px',
-      flexGrow: 1,
     },
     headerFullWidth: {
       display: 'flex',
@@ -311,6 +309,32 @@ const styles = StyleSheet.create({
       fontWeight: '600',
     },
 
+    /* new table layout header top cell bottom */
+    table: {
+      borderWidth: 1,
+      borderColor: '#000',
+      marginTop:10 ,
+      marginBottom:10 ,
+    },
+    row: {
+      flexDirection: 'row', // This displays cells horizontally
+    },
+    cell: {
+      flex: 1, // Each cell takes equal horizontal space
+      borderRightWidth: 1,
+      borderColor: '#000',
+      textAlign: 'center',
+      fontSize: '12px',
+      padding: '5px',
+    },
+    headerCell: {
+      fontWeight: 'bold',
+      color: '#fff',
+      fontSize: '12px',
+      backgroundColor: '#1da1f2',
+      padding: '5px',
+    },
+
   });
   function formatStringWithNumber(input) {
     // Convert the input to a string (handles numbers or other types)
@@ -322,8 +346,8 @@ const styles = StyleSheet.create({
     // Base A4 height (842 points for 11.69 inches)
     let baseHeight = 842; 
     // Add extra space based on content conditions
-    if (invoiceData.depositPurpose === 'order vehicle') baseHeight += 50;
-    if (invoiceData.bankNote) baseHeight += 30;
+    if (invoiceData.depositPurpose === 'order vehicle') baseHeight += 20;
+    if (invoiceData.bankNote) baseHeight += 10;
     return baseHeight;
   };
 
@@ -331,9 +355,9 @@ const styles = StyleSheet.create({
     <Document>
       <Page 
         style={styles.invoiceContainer}
-        size={[595.28, calculatePageHeight(invoiceData)]}
+    
       >
-        <View style={styles.invoiceHeader}>
+        <View wrap={false} style={styles.invoiceHeader}>
           <View style={styles.headerFullWidth}>
             <Text style={styles.headerFullWidthText}>{invoiceData.serialNumber}</Text>
           </View>
@@ -459,31 +483,31 @@ const styles = StyleSheet.create({
 
         {
           invoiceData.depositPurpose === 'order vehicle' && (
-            <View style={styles.itemsTable}>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableHeader}>Vehicle Description</Text>
-              </View>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableCell}>
-                  {invoiceData.vehicleDescription || 'not specified'}
-                </Text>
-              </View>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableCell}>
-                  Engine Capacity {formatStringWithNumber(invoiceData.engineCapacity) || 'not specified'}
-                </Text>
-              </View>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableCell}>
-                  Mileage {formatStringWithNumber(invoiceData.mileage) || 'not specified'}
-                </Text>
-              </View>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableCell}>
-                  Chassis No {invoiceData.chasisNumber || 'not specified'}
-                </Text>
-              </View>
+            <View style={styles.table}>
+            {/* Header Row */}
+            <View style={styles.row}>
+              <Text style={[styles.cell, styles.headerCell]}>Make</Text>
+              <Text style={[styles.cell, styles.headerCell]}>Model</Text>
+              <Text style={[styles.cell, styles.headerCell]}>Engine Capacity</Text>
+              <Text style={[styles.cell, styles.headerCell]}>Mileage</Text>
+              <Text style={[styles.cell, styles.headerCell]}>Chassis Number</Text>
             </View>
+            {/* Data Row */}
+            <View style={styles.row}>
+              <Text style={styles.cell}>{invoiceData.make}</Text>
+              <Text style={styles.cell}>{invoiceData.model}</Text>
+              <Text style={styles.cell}>
+                {invoiceData.engineCapacity || 'not specified'}
+              </Text>
+              <Text style={styles.cell}>
+                {invoiceData.mileage || 'not specified'}
+              </Text>
+              <Text style={styles.cell}>
+                {invoiceData.chasisNumber || 'not specified'}
+              </Text>
+            </View>
+          </View>
+         
           )
         
         }
@@ -587,6 +611,9 @@ const styles = StyleSheet.create({
             </View>
         )}
       </Page>
+     
+      
+
     </Document>
   );
 
