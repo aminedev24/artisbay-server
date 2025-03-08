@@ -111,6 +111,8 @@ const AdminUserList = () => {
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Full Name</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Phone number</th>
+                <th style={{ padding: '10px', border: '1px solid #ddd' }}>Country</th>
+                <th style={{ padding: '10px', border: '1px solid #ddd' }}>Address</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Date of Registration</th>
               </tr>
             </thead>
@@ -120,8 +122,10 @@ const AdminUserList = () => {
                   <tr key={user.id}>
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>{user.id}</td>
                     <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.full_name}</td>
-                    <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.phone}</td>
                     <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.email}</td>
+                    <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.phone}</td>
+                    <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.country}</td>
+                    <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.address}</td>
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                       {user.joined_date ? user.joined_date.substring(0, 10) : ''}
                     </td>

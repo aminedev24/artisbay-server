@@ -734,8 +734,8 @@ const ProformaInvoiceForm = () => {
             <>
             <div className="form-group">
               <div className="half-width">
-                <label htmlFor="make">Make</label>
-                {<span className="required-star">*</span>}
+                <label htmlFor="make">Make{<span className="required-star">*</span>}</label>
+                
                 <select required id="make" name="make" 
                   onChange={(e) => {
                     handleMakeChange(e);
@@ -753,8 +753,8 @@ const ProformaInvoiceForm = () => {
               </div>
 
               <div className="half-width">
-                <label htmlFor="model">Model</label>
-                {<span className="required-star">*</span>}
+                <label htmlFor="model">Model {<span className="required-star">*</span>}</label>
+                
                 <select required id="model" name="model" onChange={handleChange}>
                   <option value='any'>Model (any)</option>
                   {models.map((model, index) => (
