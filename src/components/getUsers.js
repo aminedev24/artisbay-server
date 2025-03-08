@@ -133,7 +133,7 @@ const AdminUserList = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
+                  <td colSpan="7" style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                     No users found.
                   </td>
                 </tr>
