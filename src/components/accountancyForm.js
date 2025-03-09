@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/accountancyForm.css';
+import Tooltip from './toolTip';
+import Modal from './alertModal';
 
 const AccountancyForm = () => {
   const [date, setDate] = useState('');
@@ -8,30 +10,42 @@ const AccountancyForm = () => {
   const [country, setCountry] = useState('');
   const [consumptionType, setConsumptionType] = useState('car');
   const [consumptionValue, setConsumptionValue] = useState('');
+  const [rate, setRate] = useState('');
+  const [swiftDetails, setSwiftDetails] = useState('');
+  const [note, setNote] = useState('');
+  const [staff, setStaff] = useState('');
   const [currencies, setCurrencies] = useState(['JPY', 'EUR', 'USD']);
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
-  // User selection state
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
   const [newUserName, setNewUserName] = useState('');
-      // API URL setup
-      const apiUrl =
-      process.env.NODE_ENV === 'development'
-          ? 'http://localhost/artisbay-server/server'
-          : '/server';
+  const [showSwiftNote, setShowSwiftNote] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
 
-  // Fetch users on mount
+  const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost/artisbay-server/server' : '/server';
+  
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const showAlert = (message, type = "alert") => {
+    setTimeout(() => {
+      setModalMessage(message);
+      setModalType(type);
+      setShowModal(true);
+    }, 1000); // Delay for 1 second
+  };
+
   useEffect(() => {
     fetch(`${apiUrl}/getUsers.php`)
       .then(response => response.json())
       .then(data => {
         setUsers(data.users);
-        console.log(data.users)
         if (data.users.length > 0) {
-          // Default to the first user (convert to string for select element)
           setSelectedUser(data.users[0].full_name.toString());
         } else {
-          // If no users available, default to "new"
           setSelectedUser('new');
         }
       })
@@ -49,7 +63,10 @@ const AccountancyForm = () => {
       consumptionType,
       consumptionValue,
       selectedCurrency,
-      // When "new" is selected, send null for user_id and the new name in new_user.
+      rate,
+      swiftDetails,
+      note,
+      staff,
       name: selectedUser !== 'new' ? selectedUser : null,
       new_user: selectedUser === 'new' ? newUserName : null,
     };
@@ -61,86 +78,104 @@ const AccountancyForm = () => {
         body: JSON.stringify(formData),
       });
       const result = await response.json();
-      alert(result.message);
+      showAlert(result.message);
+      resetForm();
+      //alert(result.message);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('An error occurred while submitting the form.');
+      showAlert('An error occurred while submitting the form.');
+      //alert('An error occurred while submitting the form.');
     }
   };
 
-  const getConsumptionLabel = () => {
-    if (consumptionType === 'car') return 'Stock ID';
-    if (consumptionType === 'guaranty') return 'Guaranty';
-    if (consumptionType === 'extra') return 'Extra Guaranty';
-    return 'Consumption';
+  const resetForm = () => {
+    setDate(''); setAmount(''); setRemitter(''); setCountry('');
+    setConsumptionType('car'); setConsumptionValue(''); setRate('');
+    setSwiftDetails(''); setNote(''); setStaff('');
+    setSelectedCurrency(currencies[0]); 
+    setSelectedUser(users.length ? users[0].full_name : 'new'); 
+    setNewUserName('');
   };
-
+  
   return (
     <div className="accountancy-container">
       <h1>Income</h1>
+
+      {showModal && (
+      <Modal
+        message={modalMessage}
+        onClose={handleCloseModal}
+        type={modalType}
+      />
+    )}
       <form onSubmit={handleSubmit} className="accountancyForm">
         <label>
           Date:
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
         </label>
 
         <label>
           Amount:
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
+          <input type="text" value={amount.toLocaleString()} 
+            onChange={(e) => {
+              const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
+              if (rawValue === "" || isNaN(rawValue)) {
+                setAmount(""); // Allow empty input
+              } else {
+                setAmount(Number(rawValue)); // Store as number
+              }
+            }}
+          required />
         </label>
 
         <label>
           Currency:
-          <select
-            value={selectedCurrency}
-            onChange={(e) => setSelectedCurrency(e.target.value)}
-            required
-          >
+          <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)} required>
             {currencies.map((currency, index) => (
-              <option key={index} value={currency}>
-                {currency}
-              </option>
+              <option key={index} value={currency}>{currency}</option>
             ))}
-            
           </select>
         </label>
 
         <label>
+          Rate:
+          <input type="text" value={rate.toLocaleString()} 
+              onChange={(e) => {
+                const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
+                if (rawValue === "" || isNaN(rawValue)) {
+                  setRate(""); // Allow empty input
+                } else {
+                  setRate(Number(rawValue)); // Store as number
+                }
+              }}
+            required />
+        </label>
+
+        <label>
+          Swift Details:{<Tooltip message="This might appear on the SWIFT payment as the description and nature of the payment" />}
+          <input type='text' value={swiftDetails} onChange={(e) => setSwiftDetails(e.target.value)} required />
+
+
+        </label>
+
+        <label>
+          Staff:
+          <input type="text" value={staff} onChange={(e) => setStaff(e.target.value)} required />
+        </label>
+
+        <label>
           Remitter:
-          <input
-            type="text"
-            value={remitter}
-            onChange={(e) => setRemitter(e.target.value)}
-            required
-          />
+          <input type="text" value={remitter} onChange={(e) => setRemitter(e.target.value)} required />
         </label>
 
         <label>
           Country:
-          <input
-            type="text"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          />
+          <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} required />
         </label>
 
         <label>
           Consumption Type:
-          <select
-            value={consumptionType}
-            onChange={(e) => setConsumptionType(e.target.value)}
-          >
+          <select value={consumptionType} onChange={(e) => setConsumptionType(e.target.value)}>
             <option value="car">Car</option>
             <option value="guaranty">Guaranty</option>
             <option value="extra">Extra Guaranty</option>
@@ -148,26 +183,38 @@ const AccountancyForm = () => {
         </label>
 
         <label>
-          {getConsumptionLabel()}:
+          {consumptionType === "car"
+            ? "Stock ID"
+            : consumptionType === "guaranty"
+            ? "Guaranty"
+            : "Extra Guaranty"}
+          :
           <input
             type="text"
             value={consumptionValue}
-            onChange={(e) => setConsumptionValue(e.target.value)}
+            onChange={(e) => {
+              const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
+
+              if (consumptionType === "car") {
+                setConsumptionValue(rawValue); // Allow text input for "car"
+              } else {
+                if (rawValue === "" || isNaN(rawValue)) {
+                  setConsumptionValue(""); // Allow empty input for numbers
+                } else {
+                  setConsumptionValue(Number(rawValue)); // Store as number
+                }
+              }
+            }}
             required
           />
         </label>
 
+        
         <label>
           Select User:
-          <select
-            value={selectedUser}
-            onChange={(e) => setSelectedUser(e.target.value)}
-            required
-          >
+          <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)} required>
             {users.map((user) => (
-              <option key={user.id} value={user.full_name}>
-                {user.full_name}
-              </option>
+              <option key={user.id} value={user.full_name}>{user.full_name}</option>
             ))}
             <option value="new">Other (New User)</option>
           </select>
@@ -176,14 +223,14 @@ const AccountancyForm = () => {
         {selectedUser === 'new' && (
           <label>
             New User Name:
-            <input
-              type="text"
-              value={newUserName}
-              onChange={(e) => setNewUserName(e.target.value)}
-              required
-            />
+            <input type="text" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} required />
           </label>
         )}
+
+        <label>
+          Note:
+          <textarea value={note} onChange={(e) => setNote(e.target.value)} />
+        </label>
 
         <button type="submit">Submit</button>
       </form>

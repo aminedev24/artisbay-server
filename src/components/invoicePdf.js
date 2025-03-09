@@ -355,9 +355,10 @@ const styles = StyleSheet.create({
     <Document>
       <Page 
         style={styles.invoiceContainer}
+        wrap={false}
     
       >
-        <View wrap={false} style={styles.invoiceHeader}>
+        <View style={styles.invoiceHeader}>
           <View style={styles.headerFullWidth}>
             <Text style={styles.headerFullWidthText}>{invoiceData.serialNumber}</Text>
           </View>
@@ -611,7 +612,9 @@ const styles = StyleSheet.create({
             </View>
         )}
       </Page>
-     
+      <Page wrap={false}>
+        <SalesAgreementPDF />
+      </Page>
       
 
     </Document>

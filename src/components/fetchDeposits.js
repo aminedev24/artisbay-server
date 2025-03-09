@@ -20,6 +20,7 @@ export default function DepositsTable() {
             .then((response) => response.json())
             .then((data) => {
                 setDeposits(data);
+                console.log(data)
                 setFilteredDeposits(data);
             })
             .catch((error) => console.error("Error fetching data:", error));
@@ -89,7 +90,12 @@ export default function DepositsTable() {
                         <th className="border p-2">Date</th>
                         <th className="border p-2">Amount</th>
                         <th className="border p-2">Consumption</th>
+                        <th className="border p-2">Staff</th>
+                        <th className="border p-2">Note</th>
+                        <th className="border p-2">Rate</th>
+                        <th className="border p-2">Swift Details</th>
                         <th className="border p-2">Balance</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -99,7 +105,7 @@ export default function DepositsTable() {
                                 <td className="border p-2">{deposit.date}</td>
                                 <td className="border p-2">{deposit.amount.toLocaleString()} {deposit.currency}<br/></td>
                                 <td className="border p-2">
-                                    {deposit.consumption_type}<br />
+                                    {deposit.consumption_type || 'not specified'}<br />
                                     {
                                     deposit.consumption_type == 'car' ? `(stock id: ${deposit.consumption_value})`: 
                                     deposit.consumption_type == 'guaranty' ? `(guaranty: ${deposit.consumption_value} ${deposit.currency})`:
@@ -107,7 +113,11 @@ export default function DepositsTable() {
                                     ''
                                     }
                                 </td>
-                                <td className="border p-2">{deposit.leftover.toLocaleString()} {deposit.currency}</td>
+                                <td className="border p-2">{deposit.staff || 'not specified'}</td>
+                                <td className="border p-2">{deposit.note || 'not specified'}</td>
+                                <td className="border p-2">{deposit.rate.toLocaleString() || 'not specified'}</td>
+                                <td className="border p-2">{deposit.swift_details || 'not specified'}</td>
+                                <td className="border p-2">{deposit.leftover} {deposit.currency || 'not specified'}</td>
 
 
 

@@ -5,7 +5,13 @@ import "../css/invoice.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "./userContext";
 import Tooltip from "./toolTip"; // Import the Tooltip component
-import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "./vehicleData";
+import {
+  popularMakes,
+  bodyTypeOptions,
+  transmissionOptions,
+  fetchMakes,
+  fetchModelsForMake,
+} from "./vehicleData";
 
 // Function to calculate expiry date (5 business days later)
 const calculateExpiryDate = (invoiceDate) => {
@@ -73,8 +79,8 @@ const ProformaInvoiceForm = () => {
     vehicleDescription: "", // New field
     engineCapacity: "", // New field
     mileage: "", // New field
-    make : 'any',
-    model: "any"
+    make: "any",
+    model: "any",
   });
 
   const [phoneCode, setPhoneCode] = useState("");
@@ -96,10 +102,10 @@ const ProformaInvoiceForm = () => {
   );
   const [depositAmount, setDepositAmount] = useState("");
   const [engineCapacity, setEngineCapacity] = useState("");
-  const [amount, setAmount] = useState("")
+  const [amount, setAmount] = useState("");
   const [makes, setMakes] = useState([]);
   const [selectedMake, setSelectedMake] = useState("any");
-  const [selectedModel, setSelectedModel] = useState('any');
+  const [selectedModel, setSelectedModel] = useState("any");
   const [models, setModels] = useState([]);
   // Function to get the next invoice number from the backend
   const fetchInvoiceNumber = async () => {
@@ -122,23 +128,23 @@ const ProformaInvoiceForm = () => {
   };
 
   useEffect(() => {
-      const loadMakes = async () => {
-        const fetchedMakes = await fetchMakes();
-        setMakes(fetchedMakes);
-      };
-      loadMakes();
-    }, []);
+    const loadMakes = async () => {
+      const fetchedMakes = await fetchMakes();
+      setMakes(fetchedMakes);
+    };
+    loadMakes();
+  }, []);
 
-    const handleMakeChange = async (event) => {
-        const make = event.target.value;
-        setSelectedMake(make);
-        if (make) {
-          const fetchedModels = await fetchModelsForMake(make);
-          setModels(fetchedModels);
-        } else {
-          setModels([]);
-        }
-      };
+  const handleMakeChange = async (event) => {
+    const make = event.target.value;
+    setSelectedMake(make);
+    if (make) {
+      const fetchedModels = await fetchModelsForMake(make);
+      setModels(fetchedModels);
+    } else {
+      setModels([]);
+    }
+  };
 
   // Fetch invoice number when the component mounts
   useEffect(() => {
@@ -243,17 +249,18 @@ const ProformaInvoiceForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const numericFields = ["depositAmount", "engineCapacity", "mileage"];
-  
+
     // Process numeric fields by stripping commas and converting to a number
     if (numericFields.includes(name)) {
       const rawValue = value.replace(/,/g, ""); // Remove commas
-      let valueToSet = rawValue === "" || isNaN(rawValue) ? "" : Number(rawValue);
-  
+      let valueToSet =
+        rawValue === "" || isNaN(rawValue) ? "" : Number(rawValue);
+
       // Only for engineCapacity, prevent exceeding 6000
       if (name === "engineCapacity" && valueToSet !== "" && valueToSet > 6000) {
         valueToSet = 6000;
       }
-  
+
       setFormData((prevState) => ({
         ...prevState,
         [name]: valueToSet,
@@ -262,7 +269,7 @@ const ProformaInvoiceForm = () => {
     // Process country field for phone code update
     else if (name === "country") {
       const selectedCountry = CountryList().find(
-        (country) => country.label === value
+        (country) => country.label === value,
       );
       setPhoneCode(selectedCountry?.countryCode || "");
       setFormData((prevState) => ({
@@ -279,13 +286,13 @@ const ProformaInvoiceForm = () => {
           depositPurpose: value,
           depositDescription: description,
         };
-  
+
         // Clear bankNote if depositPurpose is "order vehicle" or "tires order"
         updated.bankNote =
           value === "order vehicle" || value === "tires order"
             ? ""
             : prevState.bankNote;
-  
+
         return updated;
       });
     }
@@ -306,10 +313,6 @@ const ProformaInvoiceForm = () => {
       }));
     }
   };
-  
-  
-
-  
 
   console.log(currency);
   console.log(selectedBankDetails);
@@ -446,7 +449,7 @@ const ProformaInvoiceForm = () => {
       chasisNumber: invoiceData.chasisNumber,
       mileage: invoiceData.mileage,
       make: invoiceData.make,
-      model: invoiceData.model
+      model: invoiceData.model,
     });
 
     // Set the phone code based on the extracted code
@@ -581,7 +584,7 @@ const ProformaInvoiceForm = () => {
                     onChange={handleChange}
                     placeholder="Phone number"
                     required
-                    readOnly={isDataLoaded &&user && user.role != "admin"} // Set as read-only if data is loaded
+                    readOnly={isDataLoaded && user && user.role != "admin"} // Set as read-only if data is loaded
                   />
                 </div>
               </div>
@@ -619,7 +622,7 @@ const ProformaInvoiceForm = () => {
             </div>
           </div>
 
-          <div className="form-section">
+          <div style={{paddingBottom : formData.depositPurpose == 'order vehicle' ? '15px' : ''}} className="form-section">
             <h3>Payment Details</h3>
             <div className="form-group">
               <div className="half-width">
@@ -676,8 +679,7 @@ const ProformaInvoiceForm = () => {
                 {formData.depositPurpose == "order vehicle" && (
                   <>
                     <label htmlFor="engineCapacity">
-                      Engine Capacity{" "}
-                      {<span className="required-star">*</span>}
+                      Engine Capacity {<span className="required-star">*</span>}
                     </label>
                     <input
                       type="text"
@@ -691,8 +693,6 @@ const ProformaInvoiceForm = () => {
                     />
                   </>
                 )}
-
-              
               </div>
             </div>
 
@@ -730,67 +730,74 @@ const ProformaInvoiceForm = () => {
               </div>
             )}
 
-            {formData.depositPurpose === 'order vehicle' &&
-            <>
-            <div className="form-group">
-              <div className="half-width">
-                <label htmlFor="make">Make{<span className="required-star">*</span>}</label>
-                
-                <select required id="make" name="make" 
-                  onChange={(e) => {
-                    handleMakeChange(e);
-                    handleChange(e);
-                  }}
-                >
-                  <option value='any'>Make (any)</option>
-                  {makes.map((make, index) => (
-                    <option key={index} value={make}>
-                      {make.charAt(0).toUpperCase() + make.slice(1)}
-                    </option>
-                  ))}
-                </select>
-            
+            {formData.depositPurpose === "order vehicle" && (
+              <>
+                <div className="form-group">
+                  <div className="half-width">
+                    <label htmlFor="make">
+                      Make{<span className="required-star">*</span>}
+                    </label>
+
+                    <select
+                      required
+                      id="make"
+                      name="make"
+                      onChange={(e) => {
+                        handleMakeChange(e);
+                        handleChange(e);
+                      }}
+                    >
+                      <option value="any">Make (any)</option>
+                      {makes.map((make, index) => (
+                        <option key={index} value={make}>
+                          {make.charAt(0).toUpperCase() + make.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="half-width">
+                    <label htmlFor="model">
+                      Model {<span className="required-star">*</span>}
+                    </label>
+
+                    <select
+                      required
+                      id="model"
+                      name="model"
+                      onChange={handleChange}
+                    >
+                      <option value="any">Model (any)</option>
+                      {models.map((model, index) => (
+                        <option key={index} value={model}>
+                          {model}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </>
+            )}
+            {formData.depositPurpose !== "order vehicle" && (
+              <div className="form-group" style={{ flexDirection: "column" }}>
+                <label htmlFor="depositDescription">
+                  Payment Description<span className="required-star">*</span>
+                  <Tooltip
+                    onTypingStart={handleTypingStart}
+                    message="Please describe what you are paying for, e.g., Toyota Land Cruiser 2013"
+                  />
+                </label>
+                <textarea
+                  id="depositDescription"
+                  name="depositDescription"
+                  value={formData.depositDescription}
+                  onChange={handleChange}
+                  placeholder="Payment description"
+                  required
+                  rows="5"
+                ></textarea>
               </div>
-
-              <div className="half-width">
-                <label htmlFor="model">Model {<span className="required-star">*</span>}</label>
-                
-                <select required id="model" name="model" onChange={handleChange}>
-                  <option value='any'>Model (any)</option>
-                  {models.map((model, index) => (
-                    <option key={index} value={model}>
-                      {model}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-            </div>
-          
-            
-
-          </>
-          
-            }
-
-            <div className="form-group" style={{ flexDirection: "column" }}>
-              <label htmlFor="depositDescription">
-                Payment Description<span className="required-star">*</span>
-                <Tooltip
-                  onTypingStart={handleTypingStart}
-                  message="Please describe what you are paying for, e.g., Toyota Land Cruiser 2013"
-                />
-              </label>
-              <textarea
-                id="depositDescription"
-                name="depositDescription"
-                value={formData.depositDescription}
-                onChange={handleChange}
-                placeholder="Payment description"
-                required
-                rows="5"
-              ></textarea>
-            </div>
+            )}
           </div>
 
           <div className="input-group">

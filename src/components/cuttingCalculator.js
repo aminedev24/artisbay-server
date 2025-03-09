@@ -86,7 +86,7 @@ const CarCostCalculator = () => {
     { id: "dashboard", name: "Dashboard", price: 3000 },
     { id: "roof", name: "Roof Cut", price: 3500 },
     { id: "windshield", name: "Windshield Glass", price: 7000 },
-    { id: "harness", name: "Harness All Keep", price: 3500 },
+    { id: "harness", name: "Harness (keep all)", price: 3500 },
     { id: "tail", name: "Tail Cut", price: 3500 },
     { id: "muffler", name: "Muffler", price: 2500 },
     { id: "sunroof", name: "Sun-Roof Take", price: 1500 },
