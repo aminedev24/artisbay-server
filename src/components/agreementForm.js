@@ -118,7 +118,8 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
         setError(errorData.error || 'An error occurred while submitting the form.');
       }
     } catch (error) {
-      setError('Error: ' + error.message);
+      setError('An error occurred while submitting the form.');
+      console.log('Error: ' + error.message);
     }
   };
 

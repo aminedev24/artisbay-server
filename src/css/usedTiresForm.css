@@ -107,10 +107,7 @@
    
   }
 
-  select{
-    -webkit-appearance: none; /* Remove default styling on iOS */ 
-    -moz-appearance: none;/* Remove default styling on Firefox */
-  }
+
 
   
   button[type="submit"] {

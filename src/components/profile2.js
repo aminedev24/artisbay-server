@@ -16,7 +16,7 @@ import DepositsTable from './fetchDeposits';
 import AdminUserList from './getUsers';
 import { useUser } from "./userContext";
 import { Link } from 'react-router-dom';
-import AccountancyForm from './accountancyForm';
+import AccountancyForm from './accountancyForm2';
 
 const ProfilePage = () => {
   const [userr, setUserr] = useState(null);

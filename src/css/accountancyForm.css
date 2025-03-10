@@ -49,3 +49,41 @@
 .full-width {
   grid-column: 1 / -1;
 }
+
+.conversion-container {
+  margin: 20px 0;
+  padding: 12px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.conversion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+  gap: 5px;
+}
+
+.conversion-item:last-child {
+  border-bottom: none;
+}
+
+.conversion-item strong {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.conversion-item span {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+.conversion-container button{
+  font-size: 10px;
+}

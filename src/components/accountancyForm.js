@@ -23,6 +23,7 @@ const AccountancyForm = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
     const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
+  
 
   const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost/artisbay-server/server' : '/server';
   
@@ -186,15 +187,15 @@ const AccountancyForm = () => {
           {consumptionType === "car"
             ? "Stock ID"
             : consumptionType === "guaranty"
-            ? "Guaranty"
+            ? "guaranty"
             : "Extra Guaranty"}
           :
           <input
             type="text"
-            value={consumptionValue}
+            value={consumptionValue.toLocaleString()}
             onChange={(e) => {
               const rawValue = e.target.value.replace(/,/g, ""); // Remove commas
-
+             
               if (consumptionType === "car") {
                 setConsumptionValue(rawValue); // Allow text input for "car"
               } else {

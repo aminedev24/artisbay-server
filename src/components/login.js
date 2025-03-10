@@ -71,6 +71,7 @@ const Login = () => {
       }
     } catch (error) {
       setMessage(error.message);
+      console.log(error.message.includes('verification'))
       setMessageType('error');
       console.error('Login error:', error);
     }
