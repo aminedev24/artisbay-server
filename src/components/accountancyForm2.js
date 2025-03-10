@@ -34,11 +34,15 @@ const AccountancyForm = () => {
       : '/server';
 
   // Conversion rates with JPY as the base currency
-  const conversionRates = {
+  const [conversionRates, setConversionRates] = useState({
     JPY: 1,
     USD: 147.12,
     EUR: 159.83,
-  };
+  });
+
+  // State for editing conversion rates
+  const [editingRate, setEditingRate] = useState(null);
+  const [rateEdits, setRateEdits] = useState({});
 
   // Function to compute converted value for a target currency.
   // The formula is: amount * (conversionRates[selectedCurrency] / conversionRates[targetCurrency])
@@ -214,75 +218,6 @@ const formatDynamicNumber = (value) => {
           </select>
         </label>
 
-        <div className="conversion-container">
-        {currencies
-          .filter((currency) => currency !== selectedCurrency)
-          .map((targetCurrency, idx) => (
-            <div key={idx} className="conversion-item">
-              <strong>{targetCurrency}:</strong>
-              {editingCurrency === targetCurrency ? (
-                <>
-                  <input
-                    type="text"
-                    value={conversionEdits[targetCurrency].toLocaleString()}
-                    onChange={(e) =>
-                      setConversionEdits({
-                        ...conversionEdits,
-                        [targetCurrency]: e.target.value,
-                      })
-                    }
-                    className="conversion-edit-input"
-                  />
-                  <button
-                    type='button'
-                    className="conversion-edit-btn save"
-                    onClick={() => setEditingCurrency(null)}
-                  >
-                    Save
-                  </button>
-                  <button
-                    type='button'
-                    className="conversion-edit-btn cancel"
-                    onClick={() => {
-                      // Cancel editing: clear the override for this currency.
-                      setEditingCurrency(null);
-                      setConversionEdits((prev) => {
-                        const newEdits = { ...prev };
-                        delete newEdits[targetCurrency];
-                        return newEdits;
-                      });
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <span>
-                    {conversionEdits[targetCurrency] !== undefined
-                      ? formatDynamicNumber(Number(conversionEdits[targetCurrency]))
-                      : formatDynamicNumber(getConvertedAmount(targetCurrency))}
-                  </span>
-                  <button
-                    type='button'
-                    className="conversion-edit-btn"
-                    onClick={() => {
-                      // When starting edit, initialize the override with the computed value.
-                      setEditingCurrency(targetCurrency);
-                      setConversionEdits({
-                        ...conversionEdits,
-                        [targetCurrency]: getConvertedAmount(targetCurrency),
-                      });
-                    }}
-                  >
-                    Edit
-                  </button>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-
         <label>
           Bank Fees:
           <input
@@ -300,8 +235,160 @@ const formatDynamicNumber = (value) => {
           />
         </label>
 
+        <div className="conversion-container">
+        <label htmlFor='conversion-item'>Conversion Rate:</label>
+          {currencies
+            .filter((currency) => currency !== selectedCurrency)
+            .map((targetCurrency, idx) => (
+              <>
+              
+              <div key={idx} className="conversion-item">
+                <strong>{targetCurrency}:</strong>
+                
+                <div className="conversion-values">
+                  {/* Conversion Rate Section */}
+                  {editingRate === targetCurrency ? (
+                    <>
+                      <input
+                        type="text"
+                        value={rateEdits[targetCurrency]}
+                        onChange={(e) =>
+                          setRateEdits({
+                            ...rateEdits,
+                            [targetCurrency]: e.target.value,
+                          })
+                        }
+                        className="rate-edit-input"
+                      />
+                      <button
+                        type="button"
+                        className="conversion-edit-btn save"
+                        onClick={() => {
+                          const newRate = parseFloat(rateEdits[targetCurrency]);
+                          if (!isNaN(newRate)) {
+                            setConversionRates((prevRates) => ({
+                              ...prevRates,
+                              [targetCurrency]: newRate,
+                            }));
+                          }
+                          setEditingRate(null);
+                        }}
+                      >
+                        Save Rate
+                      </button>
+                      <button
+                        type="button"
+                        className="conversion-edit-btn cancel"
+                        onClick={() => {
+                          setEditingRate(null);
+                          setRateEdits((prev) => {
+                            const newEdits = { ...prev };
+                            delete newEdits[targetCurrency];
+                            return newEdits;
+                          });
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>{conversionRates[targetCurrency]}</span>
+                      <button
+                        type="button"
+                        className="conversion-edit-btn"
+                        onClick={() => {
+                          setEditingRate(targetCurrency);
+                          setRateEdits({
+                            ...rateEdits,
+                            [targetCurrency]: conversionRates[targetCurrency].toString(),
+                          });
+                        }}
+                      >
+                        Edit Rate
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
 
-  
+              </>
+            ))}
+        </div>
+
+        <div className="conversion-container">
+        <label htmlFor='conversion-item'>Conversion Value:</label>
+          {currencies
+            .filter((currency) => currency !== selectedCurrency)
+            .map((targetCurrency, idx) => (
+              <div key={idx} className="conversion-item">
+                <strong>{targetCurrency}:</strong>
+                <div className="conversion-values">
+                  {/* Conversion Value Section */}
+                  {editingCurrency === targetCurrency ? (
+                    <>
+                      <input
+                        type="text"
+                        value={conversionEdits[targetCurrency]}
+                        onChange={(e) =>
+                          setConversionEdits({
+                            ...conversionEdits,
+                            [targetCurrency]: e.target.value,
+                          })
+                        }
+                        className="conversion-edit-input"
+                      />
+                      <button
+                        type="button"
+                        className="conversion-edit-btn save"
+                        onClick={() => setEditingCurrency(null)}
+                      >
+                        Save Value
+                      </button>
+                      <button
+                        type="button"
+                        className="conversion-edit-btn cancel"
+                        onClick={() => {
+                          setEditingCurrency(null);
+                          setConversionEdits((prev) => {
+                            const newEdits = { ...prev };
+                            delete newEdits[targetCurrency];
+                            return newEdits;
+                          });
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        {conversionEdits[targetCurrency] !== undefined
+                          ? formatDynamicNumber(Number(conversionEdits[targetCurrency]))
+                          : formatDynamicNumber(getConvertedAmount(targetCurrency))}
+                      </span>
+                      <button
+                        type="button"
+                        className="conversion-edit-btn"
+                        onClick={() => {
+                          setEditingCurrency(targetCurrency);
+                          // Use toFixed(2) for editing if you want two decimals by default.
+                          setConversionEdits({
+                            ...conversionEdits,
+                            [targetCurrency]: getConvertedAmount(targetCurrency).toFixed(2),
+                          });
+                        }}
+                      >
+                        Edit Value
+                      </button>
+                    </>
+                  )}
+                </div>
+                
+              </div>
+            ))}
+        </div>
+
 
         <label>
           Swift Details:
