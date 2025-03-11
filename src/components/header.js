@@ -5,7 +5,7 @@ import '../css/header.css';
 import TopBar from './topbar';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ReactCountryFlag from "react-country-flag";
-
+import RevertImpersonationButton from './handleRevert';
 const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownRefs = useRef({}); // Object to hold refs for all dropdowns
@@ -104,6 +104,10 @@ const Header = () => {
                   <button onClick={logoutHandler} className="logout-btn">
                     Logout
                   </button>
+
+                  {user && user.isImpersonating	&&
+                    <RevertImpersonationButton />
+                  }
                 
                 </div>
               </div>

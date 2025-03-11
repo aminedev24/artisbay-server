@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useUser } from './userContext'; // adjust the path as needed
 
 const AdminUserList = () => {
+  const { setUser } = useUser();
   const [users, setUsers] = useState([]);
   const [searchId, setSearchId] = useState('');
   const [searchName, setSearchName] = useState('');
@@ -13,7 +15,6 @@ const AdminUserList = () => {
       ? 'http://localhost/artisbay-server/server'
       : '/server';
 
-  // Fetch user data when component mounts
   useEffect(() => {
     fetch(`${apiUrl}/getUsers.php`)
       .then((res) => res.json())
@@ -31,13 +32,38 @@ const AdminUserList = () => {
       });
   }, [apiUrl]);
 
-  // Filter users based on search criteria
+  // Function to impersonate a user
+  const handleImpersonate = async (userId) => {
+    try {
+      const response = await fetch(`${apiUrl}/impersonate.php`, {
+        method: 'POST',
+        credentials: 'include', // Ensures session cookies are sent
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: userId })
+      });
+      const data = await response.json();
+      if (response.ok && data.status === 'success') {
+        // Update the user context with the impersonated user's details
+        setUser(data.user);
+        //console.log(data)
+        window.location.reload()
+        // Optionally, redirect or update UI accordingly
+        //window.location.href = '/'; // or simply let your UI re-render based on context
+      } else {
+        alert(data.error || data.message);
+      }
+    } catch (error) {
+      console.error('Error during impersonation:', error);
+    }
+  };
+
   const filteredUsers = users.filter((user) => {
     const matchesId = searchId ? user.id.toString().includes(searchId) : true;
     const matchesName = searchName
       ? user.full_name.toLowerCase().includes(searchName.toLowerCase())
       : true;
-    // Extract the date portion (YYYY-MM-DD) from the registration_date
     const userDate = user.joined_date ? user.joined_date.substring(0, 10) : '';
     const matchesDate = searchDate ? userDate === searchDate : true;
     return matchesId && matchesName && matchesDate;
@@ -49,13 +75,7 @@ const AdminUserList = () => {
 
       <div 
         className='filter-container' 
-        style={{ 
-          marginBottom: '20px', 
-          display: 'flex', 
-          justifyContent: 'center', 
-          gap: '20px',
-          flexWrap: 'wrap'
-        }}
+        style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}
       >
         <div>
           <label style={{ fontWeight: 'bold' }}>Search by ID: </label>
@@ -64,11 +84,7 @@ const AdminUserList = () => {
             value={searchId}
             onChange={(e) => setSearchId(e.target.value)}
             placeholder="User ID"
-            style={{
-              padding: '5px',
-              border: '1px solid #ccc',
-              borderRadius: '4px'
-            }}
+            style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }}
           />
         </div>
         <div>
@@ -78,11 +94,7 @@ const AdminUserList = () => {
             value={searchName}
             onChange={(e) => setSearchName(e.target.value)}
             placeholder="User Name"
-            style={{
-              padding: '5px',
-              border: '1px solid #ccc',
-              borderRadius: '4px'
-            }}
+            style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }}
           />
         </div>
         <div>
@@ -91,11 +103,7 @@ const AdminUserList = () => {
             type="date"
             value={searchDate}
             onChange={(e) => setSearchDate(e.target.value)}
-            style={{
-              padding: '5px',
-              border: '1px solid #ccc',
-              borderRadius: '4px'
-            }}
+            style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }}
           />
         </div>
       </div>
@@ -104,7 +112,7 @@ const AdminUserList = () => {
         <p style={{ textAlign: 'center' }}>Loading users...</p>
       ) : (
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table className='users-table' style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ backgroundColor: '#f0f0f0' }}>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>ID</th>
@@ -114,6 +122,7 @@ const AdminUserList = () => {
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Country</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Address</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Date of Registration</th>
+                {<th style={{ padding: '10px', border: '1px solid #ddd' }}>Action</th>}
               </tr>
             </thead>
             <tbody>
@@ -129,11 +138,28 @@ const AdminUserList = () => {
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                       {user.joined_date ? user.joined_date.substring(0, 10) : ''}
                     </td>
+                    {
+                    <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
+                      <button
+                        onClick={() => handleImpersonate(user.id)}
+                        style={{
+                          padding: '5px 10px',
+                          cursor: 'pointer',
+                          background: 'var(--primary-color)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '5px'
+                        }}
+                      >
+                        Login as user
+                      </button>
+                    </td>
+                  }
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
+                  <td colSpan="8" style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                     No users found.
                   </td>
                 </tr>

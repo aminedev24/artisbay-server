@@ -263,3 +263,7 @@
   .btn-hidden {
     visibility: hidden;
   }
+
+  .users-table th ,.users-table td {
+    font-size: inherit;
+  }

@@ -57,8 +57,13 @@
 .car-card p {
  /* Smaller font size */
   color: #666; /* Gray color for description */
+  font-size: 16px;
+  margin: 5px 0;
 }
 
+.car-card h4 {
+  margin: 0;
+}
 /* Hover effect */
 .car-card:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow on hover */

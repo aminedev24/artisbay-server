@@ -338,8 +338,8 @@ const ArtisbayPromo = () => {
       <h3 className="text-lg font-bold mb-4">{t.testimonialsIntro}</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-14 mb-6">
         <div className="md:col-span-1">
-          <p className="italic">{t.testimonials[0].text}</p>
-          <p className="mt-2 font-bold">
+        <p className={`${language == 'en' ? `italic` : ''}`}>{t.testimonials[0].text}</p>
+        <p className="mt-2 font-bold">
             {t.testimonials[0].author}
             <br />
             {t.testimonials[0].company}
@@ -347,7 +347,7 @@ const ArtisbayPromo = () => {
         </div>
         <div className="md:col-span-2 space-y-6">
           <div>
-            <p className="italic">{t.testimonials[1].text}</p>
+            <p className={`${language == 'en' ? `italic` : ''}`}>{t.testimonials[1].text}</p>
             <p className="mt-2 font-bold">
               {t.testimonials[1].author}
               <br />
@@ -355,7 +355,7 @@ const ArtisbayPromo = () => {
             </p>
           </div>
           <div>
-            <p className="italic">{t.testimonials[2].text}</p>
+            <p className={`${language == 'en' ? `italic` : ''}`}>{t.testimonials[2].text}</p>
             <p className="mt-2 font-bold">
               {t.testimonials[2].author}
               <br />

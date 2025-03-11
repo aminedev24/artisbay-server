@@ -83,7 +83,7 @@ export default function DepositsTable() {
       </div>
 
       {/* Deposits Table */}
-      <table className="w-full border-collapse border border-gray-300">
+      <table className="deposits-table w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
             <th className="border p-2">Date</th>

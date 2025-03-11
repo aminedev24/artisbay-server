@@ -8,8 +8,7 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [shouldRefreshSession, setShouldRefreshSession] = useState(false);
-
-  
+  const [isImpersonating , setIsImpersonating] = useState(false);
 
   // API URL setup
   const apiUrl =
@@ -35,13 +34,15 @@ export const UserProvider = ({ children }) => {
       });
   
       const data = await response.json();
-  
+      //console.log(data)
       if (data.status === "success") {
+        /*
         Cookies.set("session_token", data.token, {
           expires: 7,
           secure: true,
           sameSite: "Strict",
         });
+        */
         setUser(data.user);
         //user.name[0].toUpperCase();
       }
@@ -54,6 +55,9 @@ export const UserProvider = ({ children }) => {
       setIsSubmitting(false);
     }
   };
+
+
+
 
   //console.log(user)
   
@@ -75,7 +79,7 @@ export const UserProvider = ({ children }) => {
       const data = await response.json();
       if (data.status === 'success') {
         setUser(null);
-        Cookies.remove('session_token'); // Remove the session token
+        //Cookies.remove('session_token'); // Remove the session token
         window.location.reload();
       } else {
         console.error(data.message);
@@ -99,10 +103,11 @@ export const UserProvider = ({ children }) => {
     
     if (data.status === 'success') {
       setUser(data.user);
+      //console.log(data)
       //user.name[0].toUpperCase();
       return data.user;
     } else {
-      Cookies.remove('session_token');
+      //Cookies.remove('session_token');
       setUser(null);
       return null;
     }
@@ -114,7 +119,7 @@ export const UserProvider = ({ children }) => {
   }
 };
 
-//console.log(user)
+console.log(user)
 // Initial session check on component mount
 useEffect(() => {
   checkSession();
@@ -135,7 +140,7 @@ const triggerSessionRefresh = () => {
 
 
   return (
-    <UserContext.Provider value={{ user, loading, login, logout, triggerSessionRefresh }}>
+    <UserContext.Provider value={{ user, loading, login, logout, triggerSessionRefresh, setUser }}>
       {children}
     </UserContext.Provider>
   );
