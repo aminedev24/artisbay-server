@@ -273,8 +273,8 @@ console.log(userr.total_by_currency)
               ))}
             </ul>
             <div className="amount">
-              <p><strong>Total Guaranty: </strong>{userr.total_by_currency.JPY.guaranty}</p>
-              <p><strong>Total Expensive Guaranty: </strong> {userr.total_by_currency.JPY.extra_guaranty}</p>
+              <p><strong>Total Guaranty: </strong>{userr.total_by_currency.JPY.guaranty || 0}</p>
+              <p><strong>Total Expensive Guaranty: </strong> {userr.total_by_currency.JPY.extra_guaranty || 0}</p>
               <p><strong>Spending Amount: </strong>{(userr.total_by_currency.JPY.spending) || 0}</p>
           
             </div>
