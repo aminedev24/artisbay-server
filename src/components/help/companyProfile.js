@@ -9,7 +9,7 @@ const CompanyProfile = (selectedTopic) => {
     mainBusiness: "An online-based platform for the sale and export of used vehicles and auto parts.",
     annualSales: "[To be confirmed in 2026]",
     url: "https://artisbay.com",
-    registeredinJapan: "Registered with the Miyagi Ken Legal Affairs Bureau",
+    registeredinJapan: "Registered under the Yokohama Legal Affairs Bureau",
     email: 'contact@artisbay.com'
   };
 

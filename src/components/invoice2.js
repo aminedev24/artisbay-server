@@ -257,8 +257,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
                     and auto parts
                   </p>
                   <p>
-                    Registered in Japan | Registered with the Miyagi Ken Legal
-                    Affairs Bureau
+                    Registered in Japan | Registered under the Yokohama Legal Affairs Bureau
                   </p>
                   <p className="icon-paragraph">
                     <FaEnvelope className="icon" />

@@ -48,7 +48,8 @@ const AdminUserList = () => {
         // Update the user context with the impersonated user's details
         setUser(data.user);
         //console.log(data)
-        window.location.reload()
+        window.open('/profile', '_blank');
+
         // Optionally, redirect or update UI accordingly
         //window.location.href = '/'; // or simply let your UI re-render based on context
       } else {

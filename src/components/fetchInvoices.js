@@ -81,7 +81,8 @@ const InvoiceList = () => {
       </tr>
     </thead>
     <tbody>
-      {currentInvoices.map((invoice) => (
+
+      {currentInvoices.length > 0 ? currentInvoices.map((invoice) => (
         <tr key={invoice.id}>
           <td>{invoice.invoice_number}</td>
           <td>{invoice.customer_name}</td>
@@ -99,7 +100,13 @@ const InvoiceList = () => {
           <td>{invoice.engine_capacity || 'not specified'}</td>
           
         </tr>
-      ))}
+      )):(
+        <td className="border p-2">
+            <td colSpan="8" className="text-center p-4">
+                No records found.
+            </td>
+        </td>
+      )}
     </tbody>
   </table>
 

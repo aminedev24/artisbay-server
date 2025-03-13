@@ -98,7 +98,6 @@
     margin-top: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: none;
 }
 
 .amount p {
@@ -265,5 +264,13 @@
   }
 
   .users-table th ,.users-table td {
-    font-size: inherit;
+    font-size: 14px;
+  }
+
+  .deposits-table th ,.deposits-table td , .order-list th , .order-list td{
+    font-size: 14px;
+  }
+
+  .text-center {
+    text-align: center;
   }

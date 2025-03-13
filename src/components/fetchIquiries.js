@@ -69,7 +69,7 @@ const InquiryList = () => {
           </tr>
         </thead>
         <tbody>
-          {currentVehicles.map((vehicle) => (
+          {currentVehicles.length > 0 ? currentVehicles.map((vehicle) => (
             <tr key={vehicle.id}>
               <td>{vehicle.make}</td>
               <td>{vehicle.model}</td>
@@ -84,7 +84,11 @@ const InquiryList = () => {
               <td>{vehicle.steering}</td>
               <td>{vehicle.created_at}</td>
             </tr>
-          ))}
+          )) :(
+            <td colSpan="8" className="text-center p-4 border p-2">
+                No records found.
+            </td>
+          )}
         </tbody>
       </table>
       <div className="pagination">

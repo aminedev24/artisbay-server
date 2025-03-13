@@ -17,7 +17,7 @@ const FetchSavedCars = () => {
   const [isOptionalTableCollapsed, setIsOptionalTableCollapsed] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [underConstruction, setUnderConstruction] = useState(process.env.NODE_ENV === "development" ? false : false);
+  const [underConstruction, setUnderConstruction] = useState(process.env.NODE_ENV === "development" ? true : true);
 
   const auctionFees = 25000;
   const serviceFees = 20000;

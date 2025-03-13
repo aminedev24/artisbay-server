@@ -1,0 +1,174 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.user-homepage-container .grid-cols-2 {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+
+}
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+.news-updates, .important-notice, .purchased-car-search, .car-listings, .sidebar {
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+}
+.news-updates h2, .important-notice h2, .purchased-car-search h2, .sidebar h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.important-notice h2 {
+    color: #dc2626;
+}
+.important-notice a {
+    color: #dc2626;
+    font-weight: bold;
+}
+.purchased-car-search label {
+    display: block;
+    margin-bottom: 4px;
+}
+.purchased-car-search select, .purchased-car-search input {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 8px;
+}
+.purchased-car-search .search-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.purchased-car-search .search-buttons button {
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+.purchased-car-search .search-buttons .search-btn {
+    background-color: #f59e0b;
+    color: #ffffff;
+}
+.purchased-car-search .search-buttons .clear-btn {
+    background-color: #d1d5db;
+    color: #000000;
+}
+.car-listings {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 24px;
+}
+.details {
+  flex: 1;
+}
+.details p {
+  margin: 4px 0;
+}
+.details .title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #1a202c;
+}
+.details .subtitle {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+.details .price {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+.details .price span {
+  font-weight: bold;
+  color: #1a202c;
+}
+.price-info {
+  text-align: right;
+}
+.buttons {
+  margin-top: 16px;
+  display: flex;
+}
+.buttons button {
+  background-color: #e2e8f0;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.buttons button:hover {
+  background-color: #cbd5e0;
+}
+.buttons .primary {
+  background-color: #2b6cb0;
+  color: #ffffff;
+  margin-left: auto;
+}
+.buttons .primary:hover {
+  background-color: #2c5282;
+}
+
+.price-info p {
+  font-size: inherit;
+  margin-bottom: 0;
+}
+  
+.sidebar .amount {
+    background-color: #f97316;
+    color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+.profile-sidebar .calendar {
+    background-color: #ffffff;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+.profile-sidebar .calendar table {
+    width: 100%;
+    text-align: center;
+}
+.profile-sidebar .calendar th, .profile-sidebar .calendar td {
+    padding: 4px;
+    font-size: 0.575rem;
+}
+.profile-sidebar .calendar .highlight {
+    background-color: #fbbf24;
+}
+.profile-sidebar .calendar .public-holiday {
+    color: #dc2626;
+    font-size: inherit;
+}
+
+.read-more-btn {
+  color: var(--secondary-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 5px;
+}
+
+.important-notice p, .news-updates li {
+  font-size: inherit;
+}

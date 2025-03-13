@@ -17,6 +17,7 @@ import AdminUserList from './getUsers';
 import { useUser } from "./userContext";
 import { Link } from 'react-router-dom';
 import AccountancyForm from './accountancyForm2';
+import UserHomepage from './userHomepage';
 
 const ProfilePage = () => {
   const [userr, setUserr] = useState(null);
@@ -47,6 +48,7 @@ const ProfilePage = () => {
 
   // Build the menuItems array using useMemo so it recalculates when user changes.
   const menuItems = useMemo(() => [
+    { key: 'my-page', label: 'My Page', component: UserHomepage },
     { key: 'settings', label: 'Settings', component: Settings },
     { key: 'vehicle inquiries', label: 'Vehice Inquiries', component: InquiryList },
     { key: 'submitted tire orders', label: 'Submitted tire orders', component: TireOrderList },
@@ -57,6 +59,7 @@ const ProfilePage = () => {
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
     { key: 'cutting & dismantling logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
+    
 
     // Only include admin items if user is loaded and is admin
     ...(user && user.role === 'admin'
@@ -71,7 +74,7 @@ const ProfilePage = () => {
   // Use lowercase for comparison.
   const initialActive = section && menuItems.some(item => item.key === section.toLowerCase())
     ? section.toLowerCase()
-    : 'settings';
+    : 'my-page';
   const [activeContent, setActiveContent] = useState(initialActive);
 
   // Set agreement type based on active content.
@@ -126,6 +129,7 @@ const ProfilePage = () => {
     fetchUserData();
   }, [apiUrl]);
 
+  //console.log(userr)
   // Redirect if not logged in.
   useEffect(() => {
     if (!loading && !userr) {
@@ -181,13 +185,75 @@ const ProfilePage = () => {
     activeContent === 'privacy' ||
     activeContent === 'sales-contract' ||
     activeContent === 'anti-social-policy'
+    
   );
 
   const style = {
     height: isSpecialContent ? '70vh' : '118vh',
-    padding: isSpecialContent2 ? '0' : '',
+    padding: isSpecialContent2 && activeContent != 'my-page' ? '0' : '',
+    height: isSpecialContent2 ? '118vh' : '',
+
   };
 
+  // Calendar header and rows
+const calendarHeader = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const calendarRows = [
+  [
+    { day: '1', className: 'text-red-500' },
+    { day: '2' },
+    { day: '3' },
+    { day: '4' },
+    { day: '5' },
+    { day: '6' },
+    { day: '7' }
+  ],
+  [
+    { day: '8' },
+    { day: '9' },
+    { day: '10'},
+    { day: '11' },
+    { day: '12',},
+    { day: '13' },
+    { day: '14' }
+  ],
+  [
+    { day: '15' },
+    { day: '16' },
+    { day: '17' },
+    { day: '18' },
+    { day: '19' },
+    { day: '20',},
+    { day: '21' }
+  ],
+  [
+    { day: '22' },
+    { day: '23' },
+    { day: '24' },
+    { day: '25' },
+    { day: '26' },
+    { day: '27' },
+    { day: '28' }
+  ],
+  [
+    { day: '29' },
+    { day: '30' },
+    { day: '31' },
+    { day: '' },
+    { day: '' },
+    { day: '' },
+    { day: '' }
+  ]
+];
+
+const date = new Date()
+
+calendarRows.forEach((row)=>{
+  row.map((day,index)=>{
+    Object.assign(day,{"className": date.getDate()-1 == day.day ? "highlight" : day.day == 20 ? 'red' : ''})
+  })
+}) 
+console.log(userr.total_by_currency)
   return (
     <div className="profile-wrapper">
       <div className="profile-container">
@@ -207,10 +273,36 @@ const ProfilePage = () => {
               ))}
             </ul>
             <div className="amount">
-              <p><strong>Total Guaranty:</strong> $2,014</p>
-              <p><strong>Total Expensive Guaranty:</strong> $2,014</p>
-              <p><strong>Spending Amount:</strong> ¥1,042,063</p>
+              <p><strong>Total Guaranty: </strong>{userr.total_by_currency.JPY.guaranty}</p>
+              <p><strong>Total Expensive Guaranty: </strong> {userr.total_by_currency.JPY.extra_guaranty}</p>
+              <p><strong>Spending Amount: </strong>{(userr.total_by_currency.JPY.spending) || 0}</p>
+          
             </div>
+
+            <div className="calendar">
+            <h2>March</h2>
+            <table>
+              <thead>
+                <tr>
+                  {calendarHeader.map((day, index) => (
+                    <th key={index}>{day}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {calendarRows.map((week, weekIndex) => (
+                  <tr key={weekIndex}>
+                    {week.map((dayItem, dayIndex) => (
+                      <td key={dayIndex} className={dayItem.className ? dayItem.className : ''}>
+                        {dayItem.day}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="public-holiday">PUBLIC HOLIDAY MAR 20TH</p>
+          </div>
           </div>
         </div>
         <div className="profile-content" style={style}>

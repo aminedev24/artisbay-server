@@ -68,7 +68,7 @@ const RevertImpersonationButton = () => {
       onClick={handleRevert}
       className='logout-btn'
       style={{
-        background: 'red',
+        background: 'var(--accent-color)',
         textTransform: 'unset',
         margin: '5px',
         padding: '10px 0'

@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
                 <Text style={styles.description}>
                   An online platform for the sale and export of used vehicles and auto parts
                 </Text>
-                <Text style={styles.headerText}>Registered in Japan | Registered with the Miyagi Ken Legal Affairs Bureau</Text>
+                <Text style={styles.headerText}>Registered in Japan | Registered under the Yokohama Legal Affairs Bureau</Text>
                 <Text style={styles.iconParagraph}>
                   <Text style={styles.icon}><FaEnvelope /></Text>
                   <Text>Email: contact@artisbay.com</Text>

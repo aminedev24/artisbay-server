@@ -78,7 +78,7 @@ const TireOrderList = () => {
           </tr>
         </thead>
         <tbody>
-          {currentOrders.map((order) => (
+          {currentOrders.length > 0 ? currentOrders.map((order) => (
             <tr key={order.id}>
               <td>{order.make}</td>
               <td>{order.type}</td>
@@ -88,7 +88,11 @@ const TireOrderList = () => {
               <td>{order.load_index || "N/A"}</td>
               <td>{order.order_date}</td>
             </tr>
-          ))}
+          )): (
+            <td colSpan="8" className="text-center p-4">
+                No records found.
+              </td>
+          )}
         </tbody>
       </table>
       <div className="pagination">
