@@ -1,0 +1,91 @@
+import React, { useState, useEffect } from "react";
+import "./styles.css"; // Ensure you have this CSS file or use a <style> tag
+
+export default function App() {
+  const [dayNames] = useState(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+  const [calendarDays, setCalendarDays] = useState([]);
+  const [month, setMonth] = useState(new Date().getMonth()); // Current month (0-11)
+  const [year, setYear] = useState(new Date().getFullYear()); // Current year
+  const today = new Date(); // Today's date
+
+  useEffect(() => {
+    generateCalendar();
+  }, [month, year]); // Update when month or year changes
+
+  const generateCalendar = () => {
+    const firstDay = new Date(year, month, 1).getDay(); // 0 = Sun, 6 = Sat
+    const totalDays = new Date(year, month + 1, 0).getDate(); // Get last day of month
+
+    let daysArray = Array(firstDay).fill(null); // Empty slots before first day
+    for (let i = 1; i <= totalDays; i++) {
+      daysArray.push(i);
+    }
+
+    setCalendarDays(daysArray);
+  };
+
+  // Handle Previous & Next Month Navigation
+  const changeMonth = (step) => {
+    let newMonth = month + step;
+    let newYear = year;
+
+    if (newMonth < 0) {
+      newMonth = 11; // December of previous year
+      newYear -= 1;
+    } else if (newMonth > 11) {
+      newMonth = 0; // January of next year
+      newYear += 1;
+    }
+
+    setMonth(newMonth);
+    setYear(newYear);
+  };
+
+  return (
+    <div className="calander">
+      <h1>
+        {new Date(year, month).toLocaleString("default", { month: "long" })} {year}
+      </h1>
+      <div className="controls">
+        <button onClick={() => changeMonth(-1)}>⬅ Previous</button>
+        <button onClick={() => changeMonth(1)}>Next ➡</button>
+      </div>
+      <table border="1">
+        <thead>
+          <tr>
+            {dayNames.map((day, index) => (
+              <th key={index}>{day}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: Math.ceil(calendarDays.length / 7) }).map((_, rowIndex) => (
+            <tr key={rowIndex}>
+              {dayNames.map((_, colIndex) => {
+                const dayIndex = rowIndex * 7 + colIndex;
+                const day = calendarDays[dayIndex];
+
+                return (
+                  <td
+                    key={colIndex}
+                    className={
+                      day === today.getDate() &&
+                      month === today.getMonth() &&
+                      year === today.getFullYear()
+                        ? "highlight"
+                        : day === 20 && month === 2 // March is index 2 (0 = Jan)
+                        ? "red"
+                        : ""
+                    }
+                  >
+                    {day || ""}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
