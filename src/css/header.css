@@ -190,3 +190,7 @@
   display: flex;
   justify-content: center;
 }
+
+.profile a, .profile button {
+  margin: 5px 0;
+}

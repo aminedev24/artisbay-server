@@ -16,7 +16,7 @@
 .news-updates, .important-notice, .purchased-car-search, .car-listings, .sidebar {
     background-color: #ffffff;
     padding: 5px 10px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #929393;
     margin-bottom: 16px;
 }
 .news-updates h2, .important-notice h2, .purchased-car-search h2, .sidebar h2 {
@@ -59,7 +59,7 @@
     color: #000000;
 }
 .car-listings {
-  background-color: #ffffff;
+  background-color: #c1bebe;
   border: 1px solid #d1d5db;
   padding: 24px;
   border-radius: 12px;

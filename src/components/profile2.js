@@ -48,7 +48,7 @@ const ProfilePage = () => {
 
   // Build the menuItems array using useMemo so it recalculates when user changes.
   const menuItems = useMemo(() => [
-    { key: 'my-page', label: 'My Page', component: UserHomepage },
+    { key: 'my-account', label: 'My Account', component: UserHomepage },
     { key: 'settings', label: 'Settings', component: Settings },
     { key: 'vehicle inquiries', label: 'Vehice Inquiries', component: InquiryList },
     { key: 'submitted tire orders', label: 'Submitted tire orders', component: TireOrderList },
@@ -74,7 +74,7 @@ const ProfilePage = () => {
   // Use lowercase for comparison.
   const initialActive = section && menuItems.some(item => item.key === section.toLowerCase())
     ? section.toLowerCase()
-    : 'my-page';
+    : 'my-account';
   const [activeContent, setActiveContent] = useState(initialActive);
 
   // Set agreement type based on active content.
@@ -190,8 +190,8 @@ const ProfilePage = () => {
 
   const style = {
     height: isSpecialContent ? '70vh' : '118vh',
-    padding: isSpecialContent2 && activeContent != 'my-page' ? '0' : '',
-    height: isSpecialContent2 ? '118vh' : '',
+    padding: isSpecialContent2 && activeContent != 'my-account' ? '0' : '',
+    height: isSpecialContent2 ? '170vh' : '',
 
   };
 
@@ -249,10 +249,18 @@ const calendarRows = [
 const date = new Date()
 
 calendarRows.forEach((row)=>{
-  row.map((day,index)=>{
-    Object.assign(day,{"className": date.getDate()-1 == day.day ? "highlight" : day.day == 20 ? 'red' : ''})
+  row.map((week,index)=>{
+    Object.assign(week,{"className": date.getDate() == week.day ? "highlight" : week.day == 20 ? 'red' : ''})
   })
 }) 
+
+const totalByCurrency = userr.total_by_currency || {}; 
+const jpyData = totalByCurrency.JPY || {}; 
+
+const totalGuaranty = jpyData.guaranty || "0 JPY"; 
+const totalExpensiveGuaranty = jpyData.extra_guaranty || "0 JPY"; 
+const spendingAmount = jpyData.spending || "0 JPY"; 
+
 console.log(userr.total_by_currency)
   return (
     <div className="profile-wrapper">
@@ -273,9 +281,9 @@ console.log(userr.total_by_currency)
               ))}
             </ul>
             <div className="amount">
-              <p><strong>Total Guaranty: </strong>{userr.total_by_currency.lengh > 0 ? userr.total_by_currency.JPY.guaranty : 0}</p>
-              <p><strong>Total Expensive Guaranty: </strong> {userr.total_by_currency.lengh > 0  ?userr.total_by_currency.JPY.extra_guaranty : 0}</p>
-              <p><strong>Spending Amount: </strong>{userr.total_by_currency.lengh > 0  ? userr.total_by_currency.JPY.spending : 0}</p>
+              <p><strong>Total Guaranty: </strong>{totalGuaranty}</p>
+              <p><strong>Total Expensive Guaranty: </strong>{totalExpensiveGuaranty}</p>
+              <p><strong>Spending Amount: </strong>{spendingAmount}</p>
           
             </div>
 
