@@ -5,11 +5,11 @@ const CompanyProfile = (selectedTopic) => {
   const companyDetails = {
     name: "Artisbay Inc.",
     founded: "November 2024",
-    address: "Miyagi Ken Sendai city",
+    address: "Cross Gate, 7th Floor, 1-101-1 Sakuragicho, Naka-ku, Yokohama, Kanagawa, Japan",
     mainBusiness: "An online-based platform for the sale and export of used vehicles and auto parts.",
     annualSales: "[To be confirmed in 2026]",
     url: "https://artisbay.com",
-    registeredinJapan: "Registered under the Yokohama Legal Affairs Bureau",
+    registeredinJapan: "Under the Yokohama Legal Affairs Bureau",
     email: 'contact@artisbay.com'
   };
 

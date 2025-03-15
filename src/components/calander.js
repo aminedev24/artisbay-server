@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./styles.css"; // Ensure you have this CSS file or use a <style> tag
 
-export default function App() {
+export default function Calander() {
   const [dayNames] = useState(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
   const [calendarDays, setCalendarDays] = useState([]);
   const [month, setMonth] = useState(new Date().getMonth()); // Current month (0-11)
@@ -42,10 +41,10 @@ export default function App() {
   };
 
   return (
-    <div className="calander">
-      <h1>
+    <div className="calendar">
+      <h2>
         {new Date(year, month).toLocaleString("default", { month: "long" })} {year}
-      </h1>
+      </h2>
       <div className="controls">
         <button onClick={() => changeMonth(-1)}>⬅ Previous</button>
         <button onClick={() => changeMonth(1)}>Next ➡</button>
@@ -86,6 +85,7 @@ export default function App() {
           ))}
         </tbody>
       </table>
+      <p className="public-holiday">PUBLIC HOLIDAY MAR 20TH</p>
     </div>
   );
 }

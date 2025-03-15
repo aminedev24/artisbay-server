@@ -18,6 +18,7 @@ import { useUser } from "./userContext";
 import { Link } from 'react-router-dom';
 import AccountancyForm from './accountancyForm2';
 import UserHomepage from './userHomepage';
+import Calander from './calander';
 
 const ProfilePage = () => {
   const [userr, setUserr] = useState(null);
@@ -192,7 +193,7 @@ const ProfilePage = () => {
     height: isSpecialContent ? '70vh' : '118vh',
     padding: isSpecialContent2 && activeContent != 'my-account' ? '0' : '',
     height: isSpecialContent2 ? '170vh' : '',
-
+    
   };
 
   // Calendar header and rows
@@ -287,30 +288,7 @@ console.log(userr.total_by_currency)
           
             </div>
 
-            <div className="calendar">
-            <h2>March</h2>
-            <table>
-              <thead>
-                <tr>
-                  {calendarHeader.map((day, index) => (
-                    <th key={index}>{day}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {calendarRows.map((week, weekIndex) => (
-                  <tr key={weekIndex}>
-                    {week.map((dayItem, dayIndex) => (
-                      <td key={dayIndex} className={dayItem.className ? dayItem.className : ''}>
-                        {dayItem.day}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="public-holiday">PUBLIC HOLIDAY MAR 20TH</p>
-          </div>
+            <Calander />
           </div>
         </div>
         <div className="profile-content" style={style}>

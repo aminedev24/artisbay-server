@@ -73,6 +73,7 @@
   object-fit: cover;
   border-radius: 8px;
   margin-right: 24px;
+  cursor: pointer;
 }
 .details {
   flex: 1;
@@ -147,6 +148,15 @@
 .profile-sidebar .calendar table {
     width: 100%;
     text-align: center;
+    height: 147px;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.controls button {
+  font-size: 10px;
 }
 .profile-sidebar .calendar th, .profile-sidebar .calendar td {
     padding: 4px;
