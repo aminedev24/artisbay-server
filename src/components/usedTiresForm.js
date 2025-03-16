@@ -15,6 +15,7 @@ const OrderForm = ({
   totalUnits,
   hasPromptedForDoubleLoading,
   setHasPromptedForDoubleLoading,
+  closeModal
 }) => {
   const [showForm, setShowForm] = useState(true);
   const [message, setMessage] = useState("");
@@ -547,6 +548,9 @@ const OrderForm = ({
 
   return (
     <div id="usedTiresForm" className="usedTiresForm-container">
+      <button className="close-btn" onClick={closeModal}>
+          &minus;
+      </button>
       {showModal && (
         <Modal
           message={modalMessage}

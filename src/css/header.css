@@ -44,7 +44,6 @@
 }
 
 .dropdown {
-  cursor: pointer;
   position: relative;
 }
 
@@ -101,8 +100,8 @@
 }
 
 .header-item {
-  cursor: pointer;
   position: relative;
+  cursor: pointer;
 }
 
 .header-item i {
@@ -193,4 +192,8 @@
 
 .profile a, .profile button {
   margin: 5px 0;
+}
+
+.profile button {
+  margin: 15px 0;
 }

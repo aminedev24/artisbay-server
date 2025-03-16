@@ -53,6 +53,7 @@
   text-align: center;
   text-shadow: 1px 1px 1px #333; /* Added text shadow */
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 .help-main-content {
@@ -77,6 +78,53 @@
   top: 20px; /* Sticks to the top with some spacing */
   background-color: rgba(255, 255, 255, 0.5); /* Original background color */
   width: 200px;
+  transition: width 0.3s ease;
+}
+
+
+.sidebar.collapsed {
+  width: 90px; /* Collapsed width */
+  overflow-y: unset;
+}
+
+/* Transition for the help header rotation */
+.help-header, .arrow-icon.vertical, .arrow-icon-text.vertical {
+  transition: transform 0.3s ease;
+}
+
+.help-header.vertical , .arrow-icon.vertical, .arrow-icon-text.vertical {
+  transform: rotate(-90deg);
+  /*transform-origin: right top;*/
+  margin: -15px;
+}
+
+
+
+.arrow-icon-container {
+  display: flex;
+  
+}
+
+.arrow-icon-text.vertical {
+  margin: -10px;
+  
+}
+.arrow-icon-text {
+  display: block;
+  font-weight: bold;
+
+}
+
+.arrow-icon {
+  cursor: pointer;
+}
+/* Ensure the sidebar header is vertically centered when collapsed */
+.sidebar.collapsed .sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  
 }
 
 .sidebar h1 {
@@ -133,4 +181,9 @@
 .content-area h2 {
   margin-top: 0; /* Original margin */
   text-transform: capitalize; /* Original text transform */
+}
+
+.sidebar.collapsed {
+  border: none;
+  background-color: unset;
 }

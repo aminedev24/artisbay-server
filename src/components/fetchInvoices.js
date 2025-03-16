@@ -101,11 +101,11 @@ const InvoiceList = () => {
           
         </tr>
       )):(
-        <td className="border p-2">
+        <tr className="border p-2">
             <td colSpan="8" className="text-center p-4">
                 No records found.
             </td>
-        </td>
+        </tr>
       )}
     </tbody>
   </table>

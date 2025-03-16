@@ -396,9 +396,7 @@ const UsedTires = () => {
                 className="modal-content"
                 onClick={(e) => e.stopPropagation()}
               >
-                <button className="close-btn" onClick={closeModal}>
-                  &minus;
-                </button>
+                
                 <OrderForm
                   formData={formData}
                   setFormData={updateFormData}
@@ -410,6 +408,7 @@ const UsedTires = () => {
                   setHasPromptedForDoubleLoading={
                     setHasPromptedForDoubleLoading
                   }
+                  closeModal={closeModal}
                 />
               </div>
             </div>

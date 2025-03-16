@@ -34,7 +34,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   if (loading) return <p>Loading...</p>;
   if (!car) return <p>No car data available.</p>;
 
-  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls } = selectedCar;
+  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id} = selectedCar;
 
   return (
     <div className='vehicle-info-wrapper'>
@@ -55,7 +55,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
             ) : (
               <p>No main image available.</p>
             )}
-            <p className="text-center">Artisbay Inc. - Ref No {chassis_number}</p>
+            <p className="text-center">Artisbay Inc. - Ref No {stock_id}</p>
           </div>
         
           <div className="thumbnail-grid">
@@ -71,12 +71,12 @@ const VehicleInfo = ({onClose, selectedCar}) => {
           </div>
         </div>
         <div className="right-panel">
-          <h2>Ref Number #{chassis_number}</h2>
+          <h2>Ref Number #{stock_id}</h2>
           <p className="price">{currency}{price.toLocaleString()}</p>
           <h3>Vehicle Information</h3>
           <table className="info-table">
             <tbody>
-              <tr><th>Make</th><td>{make}</td><th>Ref No</th><td>{chassis_number}</td></tr>
+              <tr><th>Make</th><td>{make}</td><th>Ref No</th><td>{stock_id}</td></tr>
               <tr><th>Model</th><td>{car_model}</td><th>Engine Capacity</th><td>{engine_capacity.toLocaleString()} cc</td></tr>
               <tr><th>Mileage</th><td>odo {mileage.toLocaleString()}km</td></tr>
             </tbody>

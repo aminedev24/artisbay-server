@@ -34,6 +34,10 @@
   border-collapse: collapse;
 }
 
+.orders-table td, .orders-table th {
+  font-size: 14px;
+}
+
 .orders {
   background-color: #34495e;
 }

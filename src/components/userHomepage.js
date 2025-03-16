@@ -8,7 +8,7 @@ const UserHomepage = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [showFullText, setShowFullText] = useState(false);
   const [filteredCars, setFilteredCars] = useState([]);
-  const [filters, setFilters] = useState({ make: "", chassis: "", model: "" });
+  const [filters, setFilters] = useState({ make: "", chassis: "", model: "" ,ref: ""});
   const [imageSrc, setImageSrc] = useState(
     process.env.NODE_ENV === "development" ? `${process.env.PUBLIC_URL}` : '/inventory'
   );
@@ -41,7 +41,8 @@ const UserHomepage = () => {
     let filtered = cars.filter(car =>
       (filters.make === "" || car.make.toLowerCase().includes(filters.make.toLowerCase())) &&
       (filters.chassis === "" || car.chassis_number.toLowerCase().includes(filters.chassis.toLowerCase())) &&
-      (filters.model === "" || car.car_model.toLowerCase().includes(filters.model.toLowerCase()))
+      (filters.model === "" || car.car_model.toLowerCase().includes(filters.model.toLowerCase()))&&
+      (filters.ref === "" || car.stock_id.toLowerCase().includes(filters.ref.toLowerCase()))
     );
     setFilteredCars(filtered);
   }, [filters, cars]);
@@ -143,6 +144,16 @@ const UserHomepage = () => {
               placeholder="Enter Model"
             />
           </div>
+          <div>
+            <label>Ref No</label>
+            <input
+              type="text"
+              name="ref"
+              value={filters.ref}
+              onChange={handleFilterChange}
+              placeholder="Enter Ref No"
+            />
+          </div>
         </div>
         <div className="search-buttons">
           <button className="search-btn">SEARCH</button>
@@ -167,7 +178,7 @@ const UserHomepage = () => {
               />
               <div className="details">
                 <div className="info">
-                  <p className="subtitle">{index + 1}.{car.chassis_number}</p>
+                  <p className="subtitle">{index + 1}.{car.stock_id}</p>
                   <p className="title">{car.make}</p>
                   <p className="subtitle">{car.car_model}</p>
                   <p className="subtitle">
@@ -182,6 +193,9 @@ const UserHomepage = () => {
                 </p>
                 <p className="price">
                   Mileage: <span>odo {car.mileage.toLocaleString()}km</span>
+                </p>
+                <p className="price">
+                  Chassis No: <span>{car.chassis_number}</span>
                 </p>
               </div>
             </div>
