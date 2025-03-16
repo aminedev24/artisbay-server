@@ -76,9 +76,9 @@ const VehicleInfo = ({onClose, selectedCar}) => {
           <h3>Vehicle Information</h3>
           <table className="info-table">
             <tbody>
-              <tr><td>Make</td><td>{make}</td><td>Ref No</td><td>{chassis_number}</td></tr>
-              <tr><td>Model</td><td>{car_model}</td><td>Engine Capacity</td><td>{engine_capacity.toLocaleString()} cc</td></tr>
-              <tr><td>Mileage</td><td>odo {mileage.toLocaleString()}km</td></tr>
+              <tr><th>Make</th><td>{make}</td><th>Ref No</th><td>{chassis_number}</td></tr>
+              <tr><th>Model</th><td>{car_model}</td><th>Engine Capacity</th><td>{engine_capacity.toLocaleString()} cc</td></tr>
+              <tr><th>Mileage</th><td>odo {mileage.toLocaleString()}km</td></tr>
             </tbody>
           </table>
           {/*

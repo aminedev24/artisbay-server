@@ -76,6 +76,7 @@
   position: sticky;
   top: 20px; /* Sticks to the top with some spacing */
   background-color: rgba(255, 255, 255, 0.5); /* Original background color */
+  width: 200px;
 }
 
 .sidebar h1 {
@@ -99,6 +100,7 @@
   text-shadow: 1px 1px 5px #ddd; /* Original text shadow */
   cursor: pointer; /* Adds pointer cursor for better UX */
   transition: background-color 0.3s ease; /* Smooth hover effect */
+
 }
 
 .sidebar button:hover {

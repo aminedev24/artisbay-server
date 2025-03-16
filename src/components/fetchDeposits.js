@@ -92,7 +92,9 @@ export default function DepositsTable() {
             <th className="border p-2">Staff</th>
             <th className="border p-2">Swift Details</th>
             <th className="border p-2">Rate</th>
+            <th className="border p-2">Note</th>
             <th className="border p-2">Balance</th>
+            
             
           </tr>
         </thead>
@@ -129,6 +131,7 @@ export default function DepositsTable() {
                     'N/A'
                   )}
                 </td>
+                <td style={{whiteSpace: 'pre-wrap'}}>{deposit.note}</td>
                 <td className="border p-2">
                   {deposit.leftover} {deposit.currency || 'not specified'}
                 </td>

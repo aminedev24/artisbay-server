@@ -192,7 +192,7 @@ const ProfilePage = () => {
   const style = {
     height: isSpecialContent ? '70vh' : '118vh',
     padding: isSpecialContent2 && activeContent != 'my-account' ? '0' : '',
-    height: isSpecialContent2 ? '170vh' : '',
+    height: isSpecialContent2 ? '185vh' : '',
     
   };
 
@@ -283,8 +283,8 @@ console.log(userr.total_by_currency)
             </ul>
             <div className="amount">
               <p><strong>Total Guaranty: </strong>{totalGuaranty}</p>
-              <p><strong>Total Expensive Guaranty: </strong>{totalExpensiveGuaranty}</p>
-              <p><strong>Spending Amount: </strong>{spendingAmount}</p>
+              <p><strong>Total Extra Guaranty: </strong>{totalExpensiveGuaranty}</p>
+              {/*<p><strong>Spending Amount: </strong>{spendingAmount}</p>*/}
           
             </div>
 

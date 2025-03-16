@@ -4,7 +4,6 @@ import '../css/shipping.css';
 import useCheckScreenSize from './screenSize';
 import AfricaShippingTable from "./africaContainer";
 import AfricaRoroShippingTable from "./africaRoroContainer";
-import europeRoroShippingTable from "./europeRoro";
 import EuropeRoroShippingTable from "./europeRoro";
 
 const Shipping = () => {
@@ -25,7 +24,7 @@ const Shipping = () => {
         const fontSize = (() => {
           if (isSmallScreen && isPortrait) return '15px';
           if (isSmallScreen && !isPortrait) return '15px';
-          return '14px';
+          return '12px';
         })();
   
         // Use a timeout to ensure the table is rendered
@@ -52,7 +51,7 @@ const Shipping = () => {
   };
 
   const handleEuropeContainerClick = () => {
-    setShowTable(2);
+    setShowTable(3);
   };
 
   return (

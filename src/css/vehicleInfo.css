@@ -27,7 +27,6 @@
 .main-image {
   width: 100%;
   max-width: 400px;
-  border-radius: 8px;
   margin-bottom: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease-in-out;
@@ -58,7 +57,7 @@
   border: 2px solid transparent;
 }
 
-.thumbnail:hover , .image:hover {
+.vehicle-info-container .thumbnail:hover , .vehicle-info-container .image:hover {
   transform: scale(1.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border-color: #007bff;
@@ -68,7 +67,13 @@
 .right-panel {
   flex: 1;
   padding: 20px;
-  background: #f9f9f9;
+  background: #eae9e5;
+}
+
+.right-panel th {
+  background-color: inherit;
+  font-size: 14px;
+  color: inherit;
 }
 
 h2 {
@@ -85,7 +90,7 @@ h2 {
 }
 
 /* Tables */
-h3 {
+.vehicle-info-container h3 {
   font-size: 18px;
   margin-top: 20px;
   margin-bottom: 10px;
