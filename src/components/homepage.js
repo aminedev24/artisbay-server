@@ -136,7 +136,7 @@ const links2 = [
 
         <div className="banner-header-container">
             <ImageWithLoader
-                  src={`${process.env.PUBLIC_URL}/images/consultwithabhomejp.jpeg`}
+                  src={`${process.env.PUBLIC_URL}/images/consultwithab.jpeg`}
                   className="banner"
                   alt="sell banner"
             />

@@ -51,7 +51,7 @@ const AdminVerifyEmail = () => {
   }, [query, apiUrl, navigate]);
 
   return (
-    <div style={{ textAlign: 'center', padding: '2rem' }}>
+    <div className='verification-wrapper' style={{ textAlign: 'center', padding: '2rem' }}>
       <h1>Email Verification</h1>
       <p>{message}</p>
     </div>

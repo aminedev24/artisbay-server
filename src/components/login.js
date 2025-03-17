@@ -13,6 +13,7 @@ const Login = () => {
   const location = useLocation(); // Get the current location
   const { isSmallScreen, isPortrait } = useCheckScreenSize();
   const { user, loading, login } = useUser();
+  const [method, setMethod] = useState('link');
 
   // Redirect if the user is already logged in when the component mounts
   useEffect(() => {

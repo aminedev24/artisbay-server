@@ -65,7 +65,7 @@
 
 /* Right Panel */
 .right-panel {
-  flex: 1;
+  flex: 1.5;
   padding: 20px;
   background: #eae9e5;
 }
@@ -76,7 +76,7 @@
   color: inherit;
 }
 
-h2 {
+.vehicle-info-wrapper h2 {
   font-size: 22px;
   margin-bottom: 10px;
   color: #333;
@@ -100,32 +100,6 @@ h2 {
   padding-bottom: 3px;
 }
 
-.info-table,
-.options-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.info-table td,
-.options-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-  font-size: 14px;
-}
-
-.info-table tr,
-.options-table tr {
-  background-color: #f8f8f8;
-}
-
-.info-table tr:hover,
-.options-table tr:hover {
-  background-color: #e0f0ff;
-}
-
 .vehicle-info-wrapper .btn {
   font-size: 17px;
   background-color: var(--secondary-color);
@@ -138,6 +112,47 @@ h2 {
 .img-container p {
   position: absolute;
   bottom: 0 ;
-  left: 8%;
+  left: 0;
   background-color: var(--background-color);
+}
+
+
+.title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.info-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info-column {
+  flex: 1;
+  min-width: 200px;
+  padding: 0 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center; /* Ensures alignment */
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #d7d6d2;
+}
+
+/* Fixed width for titles */
+.info-title {
+  font-weight: 600;
+  width: 150px;  /* Keeps titles the same width */
+  font-size: 14px;
+  flex-shrink: 0; /* Prevents shrinking */
+}
+
+/* Ensures all values align properly */
+.info-value {
+  flex-grow: 1; /* Makes all values align consistently */
+  font-size: 14px;
+  text-align: left; /* Aligns text properly */
+  white-space: normal; /* Allows wrapping */
+  word-break: break-word; /* Ensures long words wrap instead of overflowing */
 }

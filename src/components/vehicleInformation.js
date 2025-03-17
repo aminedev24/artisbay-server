@@ -36,6 +36,57 @@ const VehicleInfo = ({onClose, selectedCar}) => {
 
   const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id} = selectedCar;
 
+  const vehicleInfo = [
+    { title: "Ref No.", value: stock_id },
+    { title: "Make", value: make },
+    { title: "Model", value: car_model },
+    { title: "Price", value: `${price.toLocaleString()}${currency}` },
+    { title: "Category", value: "" },
+    { title: "Color", value: "BLACK" },
+    { title: "Year", value: "2013" },
+    { title: "Dimension (L*W*H)", value: "" },
+    { title: "M3", value: "" },
+  
+  ];
+
+  const engineInfo = [
+    { title: "Engine Capacity", value: `${engine_capacity.toLocaleString()}cc` },
+    { title: "Mileage", value: `odo ${mileage.toLocaleString()}km` },
+    { title: "Chassis No.", value: chassis_number },
+    { title: "Fuel", value: "" },
+    { title: "Door", value: "" },
+    { title: "Seat", value: "" },
+    { title: "Transmission", value: "" },
+    { title: "Drive", value: "" },
+    { title: "Stereo", value: "" }
+  ];
+
+
+  const shipInfoLeft = [
+    { title: "Ship Name", value: "" },
+    { title: "Ship Date", value: "" },
+    { title: "Departure Port", value: "" },
+    { title: "Tracking URL", value: "" }
+  ];
+  
+  const shipInfoRight = [
+    { title: "Voyage", value: "" },
+    { title: "N/A", value: "", hidden: true }, // Hidden title
+    { title: "Arrival Port", value: "" },
+    { title: "N/A", value: "", hidden: true } // Hidden title
+  ];
+
+  const InfoColumn = ({ data }) => (
+    <div className="info-column">
+      {data.map((item, index) => (
+        <div className="info-item" key={index}>
+          <div  style={item.hidden ? { visibility: "hidden" } : {}} className="info-title">{item.title}</div>
+          <div className="info-value">{item.value}</div>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className='vehicle-info-wrapper'>
     <button className="btn btn-secondary" onClick={onClose}>Go Back</button>
@@ -74,13 +125,14 @@ const VehicleInfo = ({onClose, selectedCar}) => {
           <h2>Ref Number #{stock_id}</h2>
           <p className="price">{currency}{price.toLocaleString()}</p>
           <h3>Vehicle Information</h3>
-          <table className="info-table">
-            <tbody>
-              <tr><th>Make</th><td>{make}</td><th>Ref No</th><td>{stock_id}</td></tr>
-              <tr><th>Model</th><td>{car_model}</td><th>Engine Capacity</th><td>{engine_capacity.toLocaleString()} cc</td></tr>
-              <tr><th>Mileage</th><td>odo {mileage.toLocaleString()}km</td></tr>
-            </tbody>
-          </table>
+
+      
+          <div className="vehicle-information-container">
+            <div className="info-container">
+              <InfoColumn data={vehicleInfo} />
+              <InfoColumn data={engineInfo} />
+            </div>
+          </div>
           {/*
              <h3>Options / Equipment</h3>
              <table className="options-table">
@@ -91,6 +143,13 @@ const VehicleInfo = ({onClose, selectedCar}) => {
              </table>
           */}
          
+         <div className='vehicle-information-container'>
+          <h3>Ship Information</h3>
+          <div className='info-container'>
+            <InfoColumn data={shipInfoLeft} />
+            <InfoColumn data={shipInfoRight} />
+          </div>
+         </div>
         </div>
       </div>
     </div>

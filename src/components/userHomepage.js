@@ -74,7 +74,7 @@ const UserHomepage = () => {
       ) : (
       <>     
 
-      <h1>My Page</h1>
+      <h1>My Account</h1>
 
       {/* News & Updates and Important Notice */}
       <div className="grid grid-cols-2 mb-4">
