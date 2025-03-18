@@ -180,6 +180,8 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
                 mileage: invoiceData.mileage,
                 chasisNumber: invoiceData.chasisNumber,
                 engineCapacity: invoiceData.engineCapacity,
+                make:invoiceData.make,
+                model:invoiceData.model,
               }
             : {}),
         }),
@@ -415,11 +417,11 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
                     <td>{invoiceData.model}</td>
                     <td>
                       {formatStringWithNumber(invoiceData.engineCapacity) ||
-                        "not specified"}
+                        "not specified"} cc
                     </td>
                     <td>
-                      {formatStringWithNumber(invoiceData.mileage) ||
-                        "not specified"}
+                      odo {formatStringWithNumber(invoiceData.mileage) ||
+                        "not specified"} km
                     </td>
                     <td>{invoiceData.chasisNumber || "not specified"}</td>
                   </tr>

@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
     },
     headerFullWidthText: {
       margin: 0,
-      fontSize: '11px',
-      marginRight: '6px',
+      fontSize: '10px',
       alignSelf: 'flex-end',
     },
     headers: {
@@ -498,10 +497,10 @@ const styles = StyleSheet.create({
               <Text style={styles.cell}>{invoiceData.make}</Text>
               <Text style={styles.cell}>{invoiceData.model}</Text>
               <Text style={styles.cell}>
-                {invoiceData.engineCapacity || 'not specified'}
+                {invoiceData.engineCapacity || 'not specified'} cc
               </Text>
               <Text style={styles.cell}>
-                {invoiceData.mileage || 'not specified'}
+               odo  {invoiceData.mileage || 'not specified'} km
               </Text>
               <Text style={styles.cell}>
                 {invoiceData.chasisNumber || 'not specified'}

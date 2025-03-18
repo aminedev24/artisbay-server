@@ -407,9 +407,10 @@ option {
 
 .bank-btn {
     position: absolute;
-    top: 34%;
-    left: 19%;
-    width: 10%;
+    top: 10%;
+    left: 2%;
+    width: 29%;
+    height: 33%;
 }
 
 .dismantling-btn {
@@ -422,9 +423,10 @@ option {
 
 .paypal-btn {
     position: absolute;
-    left: 19%;
-    bottom: 13%;
-    width: 11%;
+    top: 59%;
+    left: 3%;
+    width: 29%;
+    height: 33%;
 }
 .order-now {
     position: absolute;
@@ -437,10 +439,10 @@ option {
 
 .security-btn {
     position: absolute;
-    bottom: 16%;
-    right: 10%;
-    width: 14%;
-    height: 7%;
+    bottom: 7%;
+    right: 2%;
+    width: 29%;
+    height: 88%;
 }
 
 .ad-banner {

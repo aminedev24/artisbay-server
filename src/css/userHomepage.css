@@ -179,3 +179,8 @@
 .important-notice p, .news-updates li {
   font-size: inherit;
 }
+
+.purchased-car-search  label {
+  color: inherit;
+  font-weight: bold;
+}

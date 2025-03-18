@@ -197,3 +197,8 @@
 .profile button {
   margin: 15px 0;
 }
+
+.right-links a {
+  color: inherit;
+  text-decoration: none;
+}

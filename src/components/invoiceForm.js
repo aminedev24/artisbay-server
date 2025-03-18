@@ -5,6 +5,9 @@ import "../css/invoice.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "./userContext";
 import Tooltip from "./toolTip"; // Import the Tooltip component
+import CreatableSelect from 'react-select/creatable';
+import Modal from "./alertModal";
+
 import {
   popularMakes,
   bodyTypeOptions,
@@ -60,28 +63,7 @@ const ProformaInvoiceForm = () => {
 
   //console.log(bankDetails.JPY['swift/bic'])
 
-  const [formData, setFormData] = useState({
-    fullName: "",
-    company: "",
-    country: "",
-    phone: "",
-    email: "",
-    depositAmount: "",
-    depositCurrency: "JPY",
-    depositDescription:
-      "This payment is to order cars from the auctions in Japan",
-    depositPurpose: "vehicle purchase",
-    expiryDate: "",
-    bankNote:
-      "Car details, including chassis numbers, will be provided by the remitter upon completion of the car purchase.",
-    chasisNumber: "",
-    vehicleRef: "",
-    vehicleDescription: "", // New field
-    engineCapacity: "", // New field
-    mileage: "", // New field
-    make: "any",
-    model: "any",
-  });
+
 
   const [phoneCode, setPhoneCode] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,6 +89,64 @@ const ProformaInvoiceForm = () => {
   const [selectedMake, setSelectedMake] = useState("any");
   const [selectedModel, setSelectedModel] = useState("any");
   const [models, setModels] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
+
+  const [invoiceState, setInvoiceState] = useState(location.state || {});
+
+  // Destructure the needed values from our local state.
+  const { invoiceData, regenerate } = invoiceState;
+
+  const resetInvoiceState = () => {
+    setInvoiceState({});
+    // For HashRouter, use window.location.hash so that the current route is preserved.
+    window.history.replaceState({}, document.title, window.location.hash);
+  };
+  
+  
+
+
+  const showAlert = (message, type = "alert") => {
+    setTimeout(() => {
+      setModalMessage(message);
+      setModalType(type);
+      setShowModal(true);
+    }, 1000); // Delay for 1 second
+  };
+
+//console.log(invoiceData)
+  // Pre-populate form data using invoiceData if provided.
+  const [formData, setFormData] = useState({
+    fullName: invoiceData?.customer_name || "",
+    company: invoiceData?.company || "",
+    country: invoiceData?.country || "",
+    phone: invoiceData?.phone || "",
+    email: invoiceData?.email || "",
+    depositAmount: parseInt(invoiceData?.deposit_amount) || "",
+    depositCurrency: invoiceData?.deposit_currency || "JPY",
+    depositDescription: invoiceData?.description || "This payment is to order cars from the auctions in Japan",
+    depositPurpose: invoiceData?.deposit_purpose || "vehicle purchase",
+    expiryDate: invoiceData?.expiryDate || "",
+    bankNote:
+      invoiceData?.deposit_purpose === "order vehicle"
+        ? ""
+        : invoiceData?.bankNote ||
+          "Car details, including chassis numbers, will be provided by the remitter upon completion of the car purchase.",
+    chasisNumber: invoiceData?.chasis_number || "",
+    vehicleRef: invoiceData?.vehicle_ref || "",
+    vehicleDescription: invoiceData?.vehicle_description || "",
+    engineCapacity: invoiceData?.engine_capacity || "",
+    mileage: invoiceData?.mileage || "",
+    make: invoiceData?.make || "any",
+    model: invoiceData?.model || "any",
+    invoiceNumber: regenerate
+      ? `RE-${generateSerialNumber()}`
+      : invoiceData?.invoice_number || generateSerialNumber(),
+  });
+  
+
   // Function to get the next invoice number from the backend
   const fetchInvoiceNumber = async () => {
     setIsLoading(true);
@@ -155,9 +195,9 @@ const ProformaInvoiceForm = () => {
 
   const purposeDescriptions = {
     "vehicle purchase":
-      "This payment is to order cars from the auctions in Japan",
+    "This payment is to order cars from the auctions in Japan",
     "auto parts order": "This payment is to order auto parts",
-    dismantling: "This is a deposit to order dismantled cars",
+    "dismantling": "This is a deposit to order dismantled cars",
     "tires order": "This is a deposit to order used tires",
     "order vehicle": "I am paying for an existing order",
   };
@@ -247,6 +287,13 @@ const ProformaInvoiceForm = () => {
 
   const [savedBankNote, setSavedBankNote] = useState("");
   const handleChange = (e) => {
+
+     // If in regenerate mode, prevent changes and notify the user.
+    if (regenerate) {
+      showAlert("This invoice is in regenerate mode. To modify invoice details, please click reset invoice to start over.");
+      return;
+    }
+
     const { name, value } = e.target;
     const numericFields = ["depositAmount", "engineCapacity", "mileage"];
 
@@ -314,8 +361,8 @@ const ProformaInvoiceForm = () => {
     }
   };
 
-  console.log(currency);
-  console.log(selectedBankDetails);
+  //console.log(currency);
+  //console.log(selectedBankDetails);
 
   function generateSerialNumber() {
     // Get the current date and time
@@ -331,7 +378,7 @@ const ProformaInvoiceForm = () => {
     const randomNumber = Math.floor(1000 + Math.random() * 9000); // Random 4-digit number
 
     // Combine date/time with the random number
-    return `DOC-${year}${month}${day}${hours}${minutes}${seconds}`;
+    return `${regenerate ? 'RE-' : ''}DOC-${year}${month}${day}${hours}${minutes}${seconds}`;
   }
 
   const handleSubmit = async (e) => {
@@ -461,6 +508,7 @@ const ProformaInvoiceForm = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setShowModal(false);
     setSubmittedInvoiceData(null);
   };
 
@@ -471,8 +519,16 @@ const ProformaInvoiceForm = () => {
     }
   };
 
+
   return (
     <div className="enquiry-wrapper invoice-wrapper">
+      {showModal && (
+      <Modal
+        message={modalMessage}
+        onClose={handleCloseModal}
+        type={modalType}
+      />
+       )}
       <form onSubmit={handleSubmit}>
         <div className="enquiryContainer contact-container">
           <img
@@ -733,48 +789,62 @@ const ProformaInvoiceForm = () => {
             {formData.depositPurpose === "order vehicle" && (
               <>
                 <div className="form-group">
-                  <div className="half-width">
+                <div className="half-width">
                     <label htmlFor="make">
-                      Make{<span className="required-star">*</span>}
+                      Make<span className="required-star">*</span>
                     </label>
-
-                    <select
-                      required
+                    <CreatableSelect
                       id="make"
                       name="make"
-                      onChange={(e) => {
-                        handleMakeChange(e);
-                        handleChange(e);
+                      options={makes.map((make) => ({
+                        value: make,
+                        label: make.charAt(0).toUpperCase() + make.slice(1),
+                      }))}
+                      placeholder="Make (any)"
+                      // Pre-populate the field using formData.make if available.
+                      value={
+                        formData.make && formData.make !== "any"
+                          ? { value: formData.make, label: formData.make.charAt(0).toUpperCase() + formData.make.slice(1) }
+                          : null
+                      }
+                      onChange={(selectedOption) => {
+                        const value = selectedOption ? selectedOption.value : "any";
+                        // Create a synthetic event to update your form state.
+                        const event = { target: { name: "make", value } };
+                        handleMakeChange(event);
+                        handleChange(event);
                       }}
-                    >
-                      <option value="any">Make (any)</option>
-                      {makes.map((make, index) => (
-                        <option key={index} value={make}>
-                          {make.charAt(0).toUpperCase() + make.slice(1)}
-                        </option>
-                      ))}
-                    </select>
+                      isClearable
+                    />
                   </div>
 
                   <div className="half-width">
                     <label htmlFor="model">
-                      Model {<span className="required-star">*</span>}
+                      Model <span className="required-star">*</span>
                     </label>
-
-                    <select
-                      required
+                    <CreatableSelect
                       id="model"
                       name="model"
-                      onChange={handleChange}
-                    >
-                      <option value="any">Model (any)</option>
-                      {models.map((model, index) => (
-                        <option key={index} value={model}>
-                          {model}
-                        </option>
-                      ))}
-                    </select>
+                      options={models.map((model) => ({ value: model, label: model }))}
+                      placeholder="Model (any)"
+                      // Set the current value if available
+                      value={
+                        formData.model && formData.model !== "any"
+                          ? { value: formData.model, label: formData.model }
+                          : null
+                      }
+                      onChange={(selectedOption) =>
+                        handleChange({
+                          target: {
+                            name: 'model',
+                            value: selectedOption ? selectedOption.value : 'any',
+                          },
+                        })
+                      }
+                      isClearable
+                    />
                   </div>
+
                 </div>
               </>
             )}
@@ -815,7 +885,8 @@ const ProformaInvoiceForm = () => {
             {isBankNoteEditable ? (
               <textarea
                 name="bankNote"
-                value={formData.bankNote || ""}
+                
+                value={formData.bankNote}
                 onChange={handleChange}
                 placeholder="Leave Blank if not applicable"
                 id="bankNoteInput"
@@ -832,8 +903,14 @@ const ProformaInvoiceForm = () => {
 
           <div className="submit-section">
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Generating..." : "Generate Invoice"}
+              {isSubmitting ? "Generating..." : regenerate ? "Regenerate Invoice" : 'Generate Invoice'}
             </button>
+            {regenerate &&
+              <button onClick={resetInvoiceState} style={{background : 'var(--secondary-color)'}} type="button">
+                Reset Invoice
+              </button>
+            }
+            
           </div>
         </div>
       </form>

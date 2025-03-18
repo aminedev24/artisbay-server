@@ -65,7 +65,7 @@ const InquiryList = () => {
             <th>Mileage To</th>
             <th>Transmission</th>
             <th>Steering</th>
-            <th>Created At</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -85,9 +85,12 @@ const InquiryList = () => {
               <td>{vehicle.created_at}</td>
             </tr>
           )) :(
-            <td colSpan="8" className="text-center p-4 border p-2">
-                No records found.
-            </td>
+            <tr className="border p-2">
+              <td colSpan="12" className="text-center p-4">
+                  No records found.
+              </td>
+            </tr>
+         
           )}
         </tbody>
       </table>

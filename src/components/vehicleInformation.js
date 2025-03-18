@@ -34,7 +34,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   if (loading) return <p>Loading...</p>;
   if (!car) return <p>No car data available.</p>;
 
-  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id} = selectedCar;
+  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id, color, year} = selectedCar;
 
   const vehicleInfo = [
     { title: "Ref No.", value: stock_id },
@@ -42,8 +42,8 @@ const VehicleInfo = ({onClose, selectedCar}) => {
     { title: "Model", value: car_model },
     { title: "Price", value: `${price.toLocaleString()}${currency}` },
     { title: "Category", value: "" },
-    { title: "Color", value: "BLACK" },
-    { title: "Year", value: "2013" },
+    { title: "Color", value: color },
+    { title: "Year", value: year },
     { title: "Dimension (L*W*H)", value: "" },
     { title: "M3", value: "" },
   
