@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/artisbay-server/static/css/main.fb2c09ea.css",
-    "main.js": "/artisbay-server/static/js/main.4e88f446.js",
+    "main.css": "/artisbay-server/static/css/main.9507bda6.css",
+    "main.js": "/artisbay-server/static/js/main.b6e09926.js",
     "static/js/213.809af65b.chunk.js": "/artisbay-server/static/js/213.809af65b.chunk.js",
-    "static/js/455.0b60b48e.chunk.js": "/artisbay-server/static/js/455.0b60b48e.chunk.js",
+    "static/js/455.ab33c1b4.chunk.js": "/artisbay-server/static/js/455.ab33c1b4.chunk.js",
     "static/js/453.aaf8b0ee.chunk.js": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js",
     "static/media/congoagentrecent.png": "/artisbay-server/static/media/congoagentrecent.6444d7ff3a8e27c1b560.png",
     "static/media/eco1copy.jpeg": "/artisbay-server/static/media/eco1copy.a9c5e6c0fdb3459632c8.jpeg",
@@ -37,14 +37,14 @@
     "static/media/slick.woff": "/artisbay-server/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/artisbay-server/index.html",
     "static/media/index.cjs": "/artisbay-server/static/media/index.f6d03137e8c9dd0de04c.cjs",
-    "main.fb2c09ea.css.map": "/artisbay-server/static/css/main.fb2c09ea.css.map",
-    "main.4e88f446.js.map": "/artisbay-server/static/js/main.4e88f446.js.map",
+    "main.9507bda6.css.map": "/artisbay-server/static/css/main.9507bda6.css.map",
+    "main.b6e09926.js.map": "/artisbay-server/static/js/main.b6e09926.js.map",
     "213.809af65b.chunk.js.map": "/artisbay-server/static/js/213.809af65b.chunk.js.map",
-    "455.0b60b48e.chunk.js.map": "/artisbay-server/static/js/455.0b60b48e.chunk.js.map",
+    "455.ab33c1b4.chunk.js.map": "/artisbay-server/static/js/455.ab33c1b4.chunk.js.map",
     "453.aaf8b0ee.chunk.js.map": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb2c09ea.css",
-    "static/js/main.4e88f446.js"
+    "static/css/main.9507bda6.css",
+    "static/js/main.b6e09926.js"
   ]
 }
