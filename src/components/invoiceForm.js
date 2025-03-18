@@ -116,7 +116,7 @@ const ProformaInvoiceForm = () => {
     }, 1000); // Delay for 1 second
   };
 
-//console.log(invoiceData)
+console.log(invoiceData)
   // Pre-populate form data using invoiceData if provided.
   const [formData, setFormData] = useState({
     fullName: invoiceData?.customer_name || "",

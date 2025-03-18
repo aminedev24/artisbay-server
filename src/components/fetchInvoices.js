@@ -94,7 +94,7 @@ const InvoiceList = () => {
               <td>{invoice.invoice_number}</td>
               <td>{invoice.customer_name}</td>
               <td>{invoice.email}</td>
-              <td>{invoice.deposit_amount} {invoice.deposit_currency}</td>
+              <td>{invoice.deposit_amount.toLocaleString()}</td>
               <td>{invoice.description}</td>
               <td>{invoice.created_at}</td>
               <td>{invoice.deposit_purpose}</td>
@@ -103,7 +103,10 @@ const InvoiceList = () => {
               <td>{invoice.chasis_number || 'not specified'}</td>
               <td>{invoice.engine_capacity || 'not specified'}</td>
               <td>
-                <button onClick={() => handleRegenerate(invoice)}>
+                <button style={{
+                  backgroundColor: 'var(--accent-color)',
+                  color: "#fff"
+                }} onClick={() => handleRegenerate(invoice)}>
                   Regenerate Invoice
                 </button>
               </td>
