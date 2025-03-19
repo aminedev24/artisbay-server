@@ -137,7 +137,7 @@ const Header = () => {
               }}
               title={"Japan"}
             />
-            <Link to={'/help?artisbayInc#Artisbay Consulting'}>Artisbay に相談する</Link>
+            <Link to={'/help/artisbayInc/Artisbay Consulting'}>Artisbay に相談する</Link>
             <div
               className="nav-item dropdown"
               ref={(el) => (dropdownRefs.current['localServices'] = el)}
@@ -167,22 +167,22 @@ const Header = () => {
                   activeDropdown === 'overview' ? 'show' : ''
                 }`}
               >
-                <Link to={'/help?artisbayInc#help'}>Help</Link>
-                <Link to={'/help?artisbayInc#Company Profile'}>Company Profile</Link>
-                <Link to={'/help?artisbayInc#Bank%20Information'}>Bank Information</Link>
-                <Link to={'/help?artisbayInc#Why%20Artisbay%20Inc.'}>
+                <Link to={'/help/artisbayInc/help'}>Help</Link>
+                <Link to={'/help/artisbayInc/Company Profile'}>Company Profile</Link>
+                <Link to={'/help/artisbayInc/Bank%20Information'}>Bank Information</Link>
+                <Link to={'/help/artisbayInc/Why%20Artisbay%20Inc.'}>
                   Why Artisbay Inc.
                 </Link>
-                <Link to={'/help?artisbayInc#Terms%20%26%20Conditions'}>
+                <Link to={'/help/artisbayInc/Terms%20%26%20Conditions'}>
                   Terms & Conditions
                 </Link>
-                <Link to={'/help?artisbayInc#Anti-Social%20Force%20Policy'}>
+                <Link to={'/help/artisbayInc/Anti-Social%20Force%20Policy'}>
                   Anti-Social Force Policy
                 </Link>
-                <Link to={'/help?artisbayInc#How%20to%20Buy%20used%20cars'}>
+                <Link to={'/help/artisbayInc/How%20to%20Buy%20used%20cars'}>
                   How To Buy
                 </Link>
-                <Link to={'/help?artisbayInc#About%20payement'}>About Payment</Link>
+                <Link to={'/help/artisbayInc/About%20payement'}>About Payment</Link>
               </div>
             </div>
           </div>

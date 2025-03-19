@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import HowToBuy from './howtobuy';
 import CompanyProfile from './companyProfile';
 import '../../css/help.css';
@@ -31,75 +31,74 @@ import useCheckScreenSize from '../screenSize';
 // Define the topics
 const topics = {
   help: [
-    { name: "help", content: <h1 className='help-header'>All you need to know about us</h1>, image:`${process.env.PUBLIC_URL}/images/helpheader.png` },
-    { name: "Overview", component: <ArtisbayOverview />, image:`${process.env.PUBLIC_URL}/images/companyoverview.png`},
-    { name: "Company Profile", component: <CompanyProfile/>, image : `${process.env.PUBLIC_URL}/images/companyprofile.png`},
-    { name: "Bank Information", content: <BankInformation/>, image: `${process.env.PUBLIC_URL}/images/bankinfo.png`},
-    { name: "F&Q", content: <FAQComponent/>, image: `${process.env.PUBLIC_URL}/images/FAQ.png`},
-    { name: "Automated Invoice", content: <AutomatedInvoice/>, image: `${process.env.PUBLIC_URL}/images/invoicegenerator.png`},
+    { name: "help", content: <h1 className='help-header'>All you need to know about us</h1>, image: `${process.env.PUBLIC_URL}/images/helpheader.png` },
+    { name: "Overview", component: <ArtisbayOverview />, image: `${process.env.PUBLIC_URL}/images/companyoverview.png` },
+    { name: "Company Profile", component: <CompanyProfile />, image: `${process.env.PUBLIC_URL}/images/companyprofile.png` },
+    { name: "Bank Information", content: <BankInformation />, image: `${process.env.PUBLIC_URL}/images/bankinfo.png` },
+    { name: "F&Q", content: <FAQComponent />, image: `${process.env.PUBLIC_URL}/images/FAQ.png` },
+    { name: "Automated Invoice", content: <AutomatedInvoice />, image: `${process.env.PUBLIC_URL}/images/invoicegenerator.png` },
     { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
     { name: "Artisbay Consulting", content: <ArtisbayPromo />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
-    { name: "Terms & Conditions", content: <TermsAndConditions />, image:  `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
+    { name: "Terms & Conditions", content: <TermsAndConditions />, image: `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
     { name: "Anti-Social Force Policy", content: <AntiSocialForcesPolicy />, image: `${process.env.PUBLIC_URL}/images/asf.png` },
-    { name: "How to Buy used cars", component: <HowToBuy /> ,image:`${process.env.PUBLIC_URL}/images/howtobuyrecent2.jpeg`},
+    { name: "How to Buy used cars", component: <HowToBuy />, image: `${process.env.PUBLIC_URL}/images/howtobuyrecent2.jpeg` },
     { name: "auction", content: <AuctionLanding />, image: `${process.env.PUBLIC_URL}/images/auction.png` },
-    { name: "about used Tires", component: <UsedTiresFAQ />, image: `${process.env.PUBLIC_URL}/images/tiresfromjapanhelp.png`},
+    { name: "about used Tires", component: <UsedTiresFAQ />, image: `${process.env.PUBLIC_URL}/images/tiresfromjapanhelp.png` },
   ],
   buying: [
-    { name: "about Dismantled Cars", content: <CarDismantlingService />, image: `${process.env.PUBLIC_URL}/images/dismantling&cutting.jpeg`},
-    { name: "About payement", component: <PaymentMethods />, image:`${process.env.PUBLIC_URL}/images/aboutpaymentrecent.jpeg` },
-    { name: "Wise Banking", component: <WisePaymentInstructions />, image:`${process.env.PUBLIC_URL}/images/wisebanner.png` },
-    { name: "paypal", content: <PaypalInfo />, image:`${process.env.PUBLIC_URL}/images/paypalbannerrecent.jpeg` },
+    { name: "about Dismantled Cars", content: <CarDismantlingService />, image: `${process.env.PUBLIC_URL}/images/dismantling&cutting.jpeg` },
+    { name: "About payement", component: <PaymentMethods />, image: `${process.env.PUBLIC_URL}/images/aboutpaymentrecent.jpeg` },
+    { name: "Wise Banking", component: <WisePaymentInstructions />, image: `${process.env.PUBLIC_URL}/images/wisebanner.png` },
+    { name: "paypal", content: <PaypalInfo />, image: `${process.env.PUBLIC_URL}/images/paypalbannerrecent.jpeg` },
     { name: "telegraphic transfer", content: <TelegraphicTransfer />, image: `${process.env.PUBLIC_URL}/images/telegraphictransferrecent.jpeg` },
-    { name: "security", content: <PaymentPolicy />, image:  `${process.env.PUBLIC_URL}/images/securityalert.png`},
-    { name: "privacy policy", content: <PrivacyPolicy />, image:  `${process.env.PUBLIC_URL}/images/privacybanner.png`},
-    { name: "Machinery", content:'', image: `${process.env.PUBLIC_URL}/images/comingsoon.jpeg` },
+    { name: "security", content: <PaymentPolicy />, image: `${process.env.PUBLIC_URL}/images/securityalert.png` },
+    { name: "privacy policy", content: <PrivacyPolicy />, image: `${process.env.PUBLIC_URL}/images/privacybanner.png` },
+    { name: "Machinery", content: '', image: `${process.env.PUBLIC_URL}/images/comingsoon.jpeg` },
     { name: "Sustainability", content: <EnvironmentalMessage />, image: `${process.env.PUBLIC_URL}/images/eco3.png` },
   ]
 };
 
 const HelpPage = () => {
-  const location = useLocation();
+  const { topic: topicParam } = useParams(); // Extract the topic from the URL parameter
   const navigate = useNavigate();
+  const { isSmallScreen } = useCheckScreenSize();
   
-  // Extract topic from the hash fragment (if any)
-  const topicParam = location.hash ? decodeURIComponent(location.hash.substring(1)) : '';
-  
-  // Try to find the topic in both arrays (case insensitive)
+  // Find the topic in the help or buying arrays (case insensitive)
   const initialTopic = 
-    topics.help.find(topic => topic.name.toLowerCase() === topicParam.toLowerCase()) ||
-    topics.buying.find(topic => topic.name.toLowerCase() === topicParam.toLowerCase()) ||
+    topics.help.find(topic => topic.name.toLowerCase() === topicParam?.toLowerCase()) ||
+    topics.buying.find(topic => topic.name.toLowerCase() === topicParam?.toLowerCase()) ||
     topics.help[0];
     
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [isSidebarOpen, setSidebarOpen] = useState(true); // Sidebar toggle state
-  const { isSmallScreen } = useCheckScreenSize();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    // When the hash changes, update the selected topic
-    const topicFromHash = location.hash ? decodeURIComponent(location.hash.substring(1)) : '';
+    // When the URL parameter changes, update the selected topic
     const foundTopic = 
-      topics.help.find(topic => topic.name.toLowerCase() === topicFromHash.toLowerCase()) ||
-      topics.buying.find(topic => topic.name.toLowerCase() === topicFromHash.toLowerCase());
+      topics.help.find(topic => topic.name.toLowerCase() === topicParam?.toLowerCase()) ||
+      topics.buying.find(topic => topic.name.toLowerCase() === topicParam?.toLowerCase());
       
     if (foundTopic) {
       setSelectedTopic(foundTopic);
+    } else {
+      // If not found, fallback to default
+      setSelectedTopic(topics.help[0]);
     }
     setIsLoading(false);
-  }, [location.hash]);
+  }, [topicParam]);
 
   const handleTopicChange = (topic) => {
     setSelectedTopic(topic);
-    // Update the URL hash with the selected topic name
-    navigate(`/help?artisbayInc#${encodeURIComponent(topic.name)}`);
+    // Navigate to the new route using the topic name
+    navigate(`/help/artisbayInc/${encodeURIComponent(topic.name)}`);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [topicParam]);
 
-  console.log(selectedTopic.name);
+  console.log("Selected topic:", selectedTopic.name);
 
   return (
     <div className="help-page">
@@ -116,7 +115,10 @@ const HelpPage = () => {
         }`}>
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
           <div className="sidebar-header">
-            <h1 onClick={() => handleTopicChange(topics.help[0])} className={`help-header ${!isSidebarOpen ? 'vertical' : ''}`}>
+            <h1 
+              onClick={() => handleTopicChange(topics.help[0])} 
+              className={`help-header ${!isSidebarOpen ? 'vertical' : ''}`}
+            >
               HELP
             </h1>
             <div 
@@ -128,7 +130,7 @@ const HelpPage = () => {
               onClick={() => setSidebarOpen(!isSidebarOpen)}
               className='arrow-icon-container'
             >
-              <span className={`arrow-icon-text ${!isSidebarOpen ? "vertical" : ''}` }>
+              <span className={`arrow-icon-text ${!isSidebarOpen ? "vertical" : ''}`}>
                 {isSidebarOpen ? "Hide" : 'Show'}
               </span>
               <img 
@@ -168,7 +170,8 @@ const HelpPage = () => {
           style={{ height: !isSidebarOpen && selectedTopic.name === 'help' && !isSmallScreen ? '100vh' : '' }} 
           className="content-area"
         >
-          <h2 className={selectedTopic.name === 'our commitment to Sustainability'
+          <h2 className={
+              selectedTopic.name === 'our commitment to Sustainability'
                 ? 'content header help-header'
                 : 'content-header'
             }>

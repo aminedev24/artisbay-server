@@ -79,7 +79,8 @@ function App() {
         {/* More routes here */}
         <Route path="/car-dismantling" element={<CarDismantling />} />
         <Route path="/used-tires" element={<UsedTires />} />
-        <Route path="/help" element={<HelpPage />} />
+        {/*<Route path="/help" element={<HelpPage />} />*/}
+        <Route path="/help/artisbayInc/:topic" element={<HelpPage />} />
         <Route path="/vehicleInquiry" element={<InquiryForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterForm />} />
