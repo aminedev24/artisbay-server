@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import InvoiceModal from "./invoice2";
 import CountryList from "./countryList";
 import "../css/invoice.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation , useSearchParams} from "react-router-dom";
 import { useUser } from "./userContext";
 import Tooltip from "./toolTip"; // Import the Tooltip component
 import CreatableSelect from 'react-select/creatable';
@@ -94,18 +94,39 @@ const ProformaInvoiceForm = () => {
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
 
-  const [invoiceState, setInvoiceState] = useState(location.state || {});
+  const [searchParams] = useSearchParams();
+  const regenerateParam = searchParams.get("regenerate") === "true";
+  let invoiceDataFromQuery = {};
+  try {
+    invoiceDataFromQuery = JSON.parse(decodeURIComponent(searchParams.get("invoiceData") || "{}"));
+  } catch (error) {
+    console.error("Error parsing invoice data:", error);
+  }
+  
+  
+  // Initialize local state using the query parameters.
+  const [invoiceState, setInvoiceState] = useState({
+    invoiceData: invoiceDataFromQuery,
+    regenerate: regenerateParam,
+  });
 
-  // Destructure the needed values from our local state.
   const { invoiceData, regenerate } = invoiceState;
 
   const resetInvoiceState = () => {
-    setInvoiceState({});
-    // For HashRouter, use window.location.hash so that the current route is preserved.
+    setInvoiceState({
+      invoiceData: null, // Explicitly reset invoice data
+      regenerate: false, // Explicitly reset regenerate flag
+    });
+  
+    // Preserve the URL hash when resetting state
     window.history.replaceState({}, document.title, window.location.hash);
   };
   
-  
+
+  useEffect(() => {
+    // Optionally, if you want to log or adjust based on the parsed data.
+    console.log("Invoice data:", invoiceData, "Regenerate:", regenerate);
+  }, [invoiceData, regenerate]);
 
 
   const showAlert = (message, type = "alert") => {
@@ -145,6 +166,12 @@ console.log(invoiceData)
       ? `RE-${generateSerialNumber()}`
       : invoiceData?.invoice_number || generateSerialNumber(),
   });
+
+  useEffect(() => {
+    // Update bank details based on the current depositCurrency
+    setSelectedBankDetails(bankDetails[formData.depositCurrency] || bankDetails.JPY);
+  }, [formData.depositCurrency]);
+  
   
 
   // Function to get the next invoice number from the backend
@@ -155,7 +182,7 @@ console.log(invoiceData)
       const data = await response.json();
 
       if (data.invoiceNumber) {
-        setInvoiceCounter(data.invoiceNumber); // Set the invoice number to state
+        setInvoiceCounter(regenerate ? invoiceData?.invoice_number : data.invoiceNumber); // Set the invoice number to state
       } else {
         setError("Failed to fetch invoice number");
       }
@@ -336,7 +363,7 @@ console.log(invoiceData)
 
         // Clear bankNote if depositPurpose is "order vehicle" or "tires order"
         updated.bankNote =
-          value === "order vehicle" || value === "tires order"
+          value === "order vehicle" || value === "tires order" || value === 'dismantling'
             ? ""
             : prevState.bankNote;
 
@@ -366,7 +393,7 @@ console.log(invoiceData)
 
   function generateSerialNumber() {
     // Get the current date and time
-    const now = new Date();
+    const now = regenerate ? new Date(invoiceData.created_at) : new Date();
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, "0"); // Month is 0-based
     const day = String(now.getDate()).padStart(2, "0");
@@ -378,13 +405,13 @@ console.log(invoiceData)
     const randomNumber = Math.floor(1000 + Math.random() * 9000); // Random 4-digit number
 
     // Combine date/time with the random number
-    return `${regenerate ? 'RE-' : ''}DOC-${year}${month}${day}${hours}${minutes}${seconds}`;
+    return `${regenerate ? 'RE-' : 'DOC-'}${year}${month}${day}${hours}${minutes}${seconds}`;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const invoiceDate = new Date().toISOString().split("T")[0];
+    const invoiceDate = regenerate ? new Date(invoiceData?.created_at).toISOString().split("T")[0] :  new Date().toISOString().split("T")[0];
     const expiryDate = calculateExpiryDate(invoiceDate);
 
     try {
@@ -414,6 +441,13 @@ console.log(invoiceData)
           new Intl.NumberFormat().format(formData.depositAmount) +
           " " +
           formData.depositCurrency;
+        
+          const invoiceNumber = regenerate ? `RE-AB-${invoiceCounter}` : `AB-${invoiceCounter}`;
+          console.log('og invoicenum' , invoiceNumber)
+          // Replace all repeated words separated by hyphens globally
+          const formattedInvoiceNumber = invoiceNumber.replace(/^(?:(\w+-\w+))(?:(-\1)+)(-.*)/, "$1$3");          console.log(formattedInvoiceNumber); // Output: RE-AB-1002
+          
+        //const invoiceNumber = regenerate ? `RE-AB-${invoiceCounter}` : `AB-${invoiceCounter}`;
 
         // Generate invoice number automatically and set current date
         const newInvoiceData = {
@@ -423,9 +457,9 @@ console.log(invoiceData)
           customerPhone: fullPhoneNumber, // Use the full phone number
           customerEmail: formData.email,
           country: formData.country, // Include the country field
-          invoiceNumber: `AB-${invoiceCounter}`, // Use updated invoiceCounter
+          invoiceNumber: formattedInvoiceNumber, // Use updated invoiceCounter
           invoiceDate: invoiceDate,
-          depositAmount: formData.depositAmount.toLocaleString(), // Store formatted deposit amount
+          depositAmount: formData.depositAmount, // Store formatted deposit amount
           depositCurrency: formData.depositCurrency,
           depositDescription: formData.depositDescription,
           depositPurpose: formData.depositPurpose,
@@ -922,6 +956,8 @@ console.log(invoiceData)
           onClose={handleCloseModal}
           invoiceData={submittedInvoiceData}
           onEdit={handleEditInvoice} // Pass the onEdit callback
+          regenerateParam={regenerateParam}
+          setInvoiceState={setInvoiceState}
         />
       )}
     </div>

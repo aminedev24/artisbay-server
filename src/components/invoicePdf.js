@@ -350,7 +350,13 @@ const styles = StyleSheet.create({
     return baseHeight;
   };
 
-  const MyPdfDocument = ({ invoiceData }) => (
+
+
+  const MyPdfDocument = ({ invoiceData }) => { 
+    const invoiceNumber = invoiceData.invoiceNumber;
+    const formattedInvoiceNumber = invoiceNumber.replace(/(\b\w+\b)-\1-/, "$1-");
+    //console.log(formattedInvoiceNumber);
+    return (
     <Document>
       <Page 
         style={styles.invoiceContainer}
@@ -382,7 +388,7 @@ const styles = StyleSheet.create({
             <View style={styles.headerRight}>
               <Text style={styles.companyName}>Artisbay Inc</Text>
               <Text style={styles.rightText}><Text style={{ fontWeight: 'bold' }}>Date:</Text> {invoiceData.invoiceDate}</Text>
-              <Text style={styles.rightText}><Text style={{ fontWeight: 'bold' }}>Invoice Number:</Text> {invoiceData.invoiceNumber}</Text>
+              <Text style={styles.rightText}><Text style={{ fontWeight: 'bold' }}>Invoice Number:</Text> {formattedInvoiceNumber}</Text>
               <Text style={styles.rightText}><Text style={{ fontWeight: 'bold' }}>Expiry Date:</Text> {invoiceData.expiryDate}</Text>
               <Text style={styles.rightText}><Text style={{ fontWeight: 'bold' }}>Purpose:</Text> {invoiceData.depositPurpose}</Text>
             </View>
@@ -462,7 +468,7 @@ const styles = StyleSheet.create({
             <Text>Important</Text>
           </View>
           <View style={styles.invoiceNumber}>
-            <Text>Invoice number: {invoiceData.invoiceNumber}</Text>
+            <Text>Invoice number: {formattedInvoiceNumber}</Text>
           </View>
           <View style={styles.warning}>
             <Text><Text style={styles.red}>Be careful</Text>, avoid being scammed! Confirm our correct bank account before you send your money!</Text>
@@ -540,12 +546,12 @@ const styles = StyleSheet.create({
                     {/* Deposit Amount Row */}
                     <View style={styles.amountTableRow}>
                         <Text style={styles.amountTableHeader}>Deposit amount</Text>
-                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount} {invoiceData.depositCurrency}</Text>
+                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount.toLocaleString()} {invoiceData.depositCurrency}</Text>
                     </View>
                     {/* Grand Total Row */}
                     <View style={styles.amountTableRow}>
                         <Text style={styles.amountTableHeader}>Grand Total</Text>
-                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount} {invoiceData.depositCurrency}</Text>
+                        <Text style={styles.amountTableCell}>{invoiceData.depositAmount.toLocaleString()} {invoiceData.depositCurrency}</Text>
                     </View>
                 </View>
             </View>
@@ -618,6 +624,7 @@ const styles = StyleSheet.create({
 
     </Document>
   );
+}
 
 // Function to generate the PDF as a Blob
 export const generatePdfBlob = async (invoiceData) => {
@@ -630,7 +637,7 @@ export const generatePdfBlob = async (invoiceData) => {
 const GeneratePdfButton = ({ invoiceData }) => {
   const handleGeneratePdf = async () => {
     const blob = await pdf(<MyPdfDocument invoiceData={invoiceData} />).toBlob();
-    saveAs(blob, `invoice-${invoiceData.invoiceNumber}.pdf`);
+    saveAs(blob, `invoice-${invoiceData.invoiceNumber.replace(/(\b\w+\b)-\1-/, "$1-")}.pdf`);
   };
 
   return (

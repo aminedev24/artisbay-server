@@ -29,7 +29,7 @@ const calculateExpiryDate = (invoiceDate) => {
 };
 
 // Modal Component
-const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
+const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, regenerateParam }) => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false); // Loading state
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -47,46 +47,6 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
 
   const handlePrint = () => {
     window.print();
-  };
-
-  const handleSaveAsPDF = () => {
-    const modalContent = document.querySelector(".modal-content");
-    const buttons = modalContent.querySelectorAll(".no-print"); // Select elements with the 'no-print' class
-
-    // Backup original styles
-    const originalStyle = {
-      maxHeight: modalContent.style.maxHeight,
-      overflowY: modalContent.style.overflowY,
-    };
-
-    // Hide buttons
-    buttons.forEach((button) => {
-      button.style.display = "none";
-    });
-
-    // Temporarily remove height restrictions and scrolling
-    modalContent.style.maxHeight = "none";
-    modalContent.style.overflowY = "visible";
-
-    html2canvas(modalContent, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Artisbay_invoice.pdf`);
-
-      // Restore original styles
-      modalContent.style.maxHeight = originalStyle.maxHeight;
-      modalContent.style.overflowY = originalStyle.overflowY;
-
-      // Restore buttons
-      buttons.forEach((button) => {
-        button.style.display = "";
-      });
-    });
   };
 
   const handleCloseModal = () => {
@@ -166,13 +126,14 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
           subject: `Automated Deposit Invoice from Artisbay Inc.`,
           body: emailBody,
           attachment: base64Pdf,
-          invoiceNumber: invoiceData.invoiceNumber,
+          invoiceNumber: formattedInvoiceNumber,
           customerFullName: invoiceData.customerFullName,
           depositAmount: invoiceData.depositAmount,
           depositPurpose: invoiceData.depositPurpose,
           depositCurrency: invoiceData.depositCurrency,
           depositDescription: invoiceData.depositDescription,
           serialNumber: invoiceData.serialNumber,
+          invoiceDate: invoiceData.invoiceDate,
           // Conditionally add these properties if depositPurpose is 'order vehicle'
           ...(invoiceData.depositPurpose === "order vehicle"
             ? {
@@ -192,7 +153,11 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
 
       const data = await response.json();
       showAlert("Invoice sent successfully!");
+      regenerateParam = false;
+      setInvoiceState({});
+      window.history.replaceState({}, document.title, window.location.hash);
 
+      
       // Reload the page after 3 seconds (3000 milliseconds)
       setTimeout(() => {
         window.location.reload();
@@ -221,6 +186,13 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
     const str = input != null ? input.toString() : "";
     return str.replace(/\d+/g, (match) => Number(match).toLocaleString());
   }
+
+  const invoiceNumber = invoiceData.invoiceNumber;
+
+  // Replace all repeated words separated by hyphens globally
+  const formattedInvoiceNumber = invoiceNumber.replace(/(\b\w+\b)(-\1)+/, "$1");
+  console.log(formattedInvoiceNumber); // Output: RE-AB-1002
+
 
   return (
     <div className="invoice-modal-overlay">
@@ -279,7 +251,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
                   <strong>Date:</strong> {invoiceData.invoiceDate}
                 </p>
                 <p>
-                  <strong>Invoice:</strong> {invoiceData.invoiceNumber}
+                  <strong>Invoice:</strong> {formattedInvoiceNumber}
                 </p>
                 <p>
                   <strong>Expiry Date:</strong> {invoiceData.expiryDate}
@@ -375,7 +347,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
           <div className="important">
             <span className="notice">Important</span>
             <span className="invoice-number">
-              Invoice number: {invoiceData.invoiceNumber}
+              Invoice number: {formattedInvoiceNumber}
             </span>
             <span className="warning">
               <span className="red">Be careful</span>,avoid being scammed!
@@ -471,13 +443,13 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit }) => {
                   <tr>
                     <th>Payment amount</th>
                     <td>
-                      {invoiceData.depositAmount} {invoiceData.depositCurrency}
+                      {invoiceData.depositAmount.toLocaleString()} {invoiceData.depositCurrency}
                     </td>
                   </tr>
                   <tr>
                     <th>Grand Total</th>
                     <td>
-                      {invoiceData.depositAmount} {invoiceData.depositCurrency}
+                      {invoiceData.depositAmount.toLocaleString()} {invoiceData.depositCurrency}
                     </td>
                   </tr>
                 </tbody>

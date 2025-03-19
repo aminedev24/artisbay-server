@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import HowToBuy from './howtobuy';
 import CompanyProfile from './companyProfile';
 import '../../css/help.css';
@@ -27,6 +27,7 @@ import PdfContent from './japanDealers';
 import ArtisbayPromo from './artisbayPromo2';
 import ImageWithLoader from '../imageWithLoader';
 import useCheckScreenSize from '../screenSize';
+
 // Define the topics
 const topics = {
   help: [
@@ -58,35 +59,48 @@ const topics = {
 };
 
 const HelpPage = () => {
-  
   const location = useLocation();
   const navigate = useNavigate();
-  const query = new URLSearchParams(location.search);
-  const topicParam = query.get('topic');
-  const initialTopic = topics.help.find(topic => topic.name === topicParam) || topics.help[0];
+  
+  // Extract topic from the hash fragment (if any)
+  const topicParam = location.hash ? decodeURIComponent(location.hash.substring(1)) : '';
+  
+  // Try to find the topic in both arrays (case insensitive)
+  const initialTopic = 
+    topics.help.find(topic => topic.name.toLowerCase() === topicParam.toLowerCase()) ||
+    topics.buying.find(topic => topic.name.toLowerCase() === topicParam.toLowerCase()) ||
+    topics.help[0];
+    
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const [isSidebarOpen, setSidebarOpen] = useState(true); // Sidebar toggle state
   const { isSmallScreen } = useCheckScreenSize();
+
   useEffect(() => {
-    const foundTopic = topics.help.find(topic => topic.name === topicParam) || 
-                       topics.buying.find(topic => topic.name === topicParam);
+    // When the hash changes, update the selected topic
+    const topicFromHash = location.hash ? decodeURIComponent(location.hash.substring(1)) : '';
+    const foundTopic = 
+      topics.help.find(topic => topic.name.toLowerCase() === topicFromHash.toLowerCase()) ||
+      topics.buying.find(topic => topic.name.toLowerCase() === topicFromHash.toLowerCase());
+      
     if (foundTopic) {
       setSelectedTopic(foundTopic);
     }
-    setIsLoading(false); 
-  }, [topicParam]);
+    setIsLoading(false);
+  }, [location.hash]);
 
   const handleTopicChange = (topic) => {
     setSelectedTopic(topic);
-    navigate(`/help?topic=${encodeURIComponent(topic.name)}`); 
+    // Update the URL hash with the selected topic name
+    navigate(`/help?artisbayInc#${encodeURIComponent(topic.name)}`);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  console.log(selectedTopic.name)
+  console.log(selectedTopic.name);
+
   return (
     <div className="help-page">
       {selectedTopic.image && (
@@ -102,38 +116,28 @@ const HelpPage = () => {
         }`}>
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
           <div className="sidebar-header">
-            
-              <h1 onClick={() => handleTopicChange(topics.help[0])} className={`help-header ${!isSidebarOpen ? 'vertical' : ''}`}>
-                HELP
-              </h1>
-           
-            {/*
-               <button 
-               className="toggle-sidebar" 
-               onClick={() => setSidebarOpen(!isSidebarOpen)}
-             >
-               {isSidebarOpen ? 'Hide' : 'Show'}
-             </button>
- 
-            */}
-            <div style={{
+            <h1 onClick={() => handleTopicChange(topics.help[0])} className={`help-header ${!isSidebarOpen ? 'vertical' : ''}`}>
+              HELP
+            </h1>
+            <div 
+              style={{
                 width: isSidebarOpen ? '30%' : '',
                 alignItems: isSidebarOpen ? 'center' : '',
                 flexDirection: isSidebarOpen ? 'column': ''
-                }} 
-                onClick={() => setSidebarOpen(!isSidebarOpen)}
-                className='arrow-icon-container'>
-                  
-              <span className={`arrow-icon-text ${!isSidebarOpen ? "vertical" : ''}` }>{isSidebarOpen ? "Hide" : 'Show'}</span>
+              }} 
+              onClick={() => setSidebarOpen(!isSidebarOpen)}
+              className='arrow-icon-container'
+            >
+              <span className={`arrow-icon-text ${!isSidebarOpen ? "vertical" : ''}` }>
+                {isSidebarOpen ? "Hide" : 'Show'}
+              </span>
               <img 
-                  
-                  className={`arrow-icon ${!isSidebarOpen ? 'vertical' : ''}`}
-                  width={'50px'} 
-                  src={`${process.env.PUBLIC_URL}/images/arrows.png`} 
-                  alt="arrow" 
-                />
+                className={`arrow-icon ${!isSidebarOpen ? 'vertical' : ''}`}
+                width={'50px'} 
+                src={`${process.env.PUBLIC_URL}/images/arrows.png`} 
+                alt="arrow" 
+              />
             </div>
-          
           </div>
           {isSidebarOpen && (
             <div className="sidebar-menu">
@@ -160,9 +164,11 @@ const HelpPage = () => {
             </div>
           )}
         </div>
-        <div style={{height: !isSidebarOpen && selectedTopic.name == 'help' && !isSmallScreen ?  '100vh' : '' }} className="content-area">
-          <h2 className={
-              selectedTopic.name === 'our commitment to Sustainability'
+        <div 
+          style={{ height: !isSidebarOpen && selectedTopic.name === 'help' && !isSmallScreen ? '100vh' : '' }} 
+          className="content-area"
+        >
+          <h2 className={selectedTopic.name === 'our commitment to Sustainability'
                 ? 'content header help-header'
                 : 'content-header'
             }>

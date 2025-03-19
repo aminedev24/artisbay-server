@@ -34,18 +34,18 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   if (loading) return <p>Loading...</p>;
   if (!car) return <p>No car data available.</p>;
 
-  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id, color, year} = selectedCar;
+  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id, color, year, size, dimension} = selectedCar;
 
   const vehicleInfo = [
     { title: "Ref No.", value: stock_id },
     { title: "Make", value: make },
     { title: "Model", value: car_model },
-    { title: "Price", value: `${price.toLocaleString()}${currency}` },
+    { title: "Price", value: `FOB ${price.toLocaleString()}${currency}` },
     { title: "Category", value: "" },
     { title: "Color", value: color },
     { title: "Year", value: year },
-    { title: "Dimension (L*W*H)", value: "" },
-    { title: "M3", value: "" },
+    { title: "Dimension (L*W*H)", value: `${dimension} (cm)` },
+    { title: "M3", value: `${parseInt(size).toLocaleString()} m3` },
   
   ];
 
@@ -123,7 +123,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
         </div>
         <div className="right-panel">
           <h2>Ref Number #{stock_id}</h2>
-          <p className="price">{currency}{price.toLocaleString()}</p>
+          <p className="price">FOB {currency}{price.toLocaleString()}</p>
           <h3>Vehicle Information</h3>
 
       

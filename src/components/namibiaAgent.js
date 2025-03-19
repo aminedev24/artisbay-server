@@ -54,7 +54,7 @@ const NamibiaAgent = () => {
     },
     {
       question: "What if my question isn’t answered here?",
-      answer: "If you have any questions that were not answered here, feel free to <a href='#/contact' class='cta-link'> contact us</a> we’ll be happy to assist you!",
+      answer: "If you have any questions that were not answered here, feel free to <a href='/contact' class='cta-link'> contact us</a> we’ll be happy to assist you!",
       containsHtml: true
     }
   ];
@@ -117,7 +117,7 @@ const NamibiaAgent = () => {
         <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/stockicon.png`} alt='services icon'/>
 
         </a>
-        <a href='#/help?topic=auction'>
+        <a href='/help?topic=auction'>
           <img className="nav-icon" src={`${process.env.PUBLIC_URL}/images/localServices/auctionicon.png`} alt='services icon'/>
 
         </a>

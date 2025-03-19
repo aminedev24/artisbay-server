@@ -29,7 +29,7 @@ const PdfContent = () => {
         <li>Collectors and specialty vehicle businesses seeking international growth.</li>
       </ul>
       <p>Expand beyond Japan. Sell your sports cars to a worldwide audience. Join forces with Artisbay Inc. and unlock your global potential today.</p>
-      <p><a class='cta-link' href='#/contact'> Contact us </a> now to explore international opportunities!</p>
+      <p><a class='cta-link' href='/contact'> Contact us </a> now to explore international opportunities!</p>
       <div class='image-container'>
         <img src='${process.env.PUBLIC_URL}/images/consultwithabchart.png' alt='Consult with Artisbay' />
       </div>

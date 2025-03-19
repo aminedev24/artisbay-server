@@ -42,6 +42,7 @@ const InvoiceList = () => {
         setLoading(false);
       });
   }, [apiUrl]);
+  //invoices.forEach((invoiceData)=>{console.log(invoiceData)})
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -56,8 +57,14 @@ const InvoiceList = () => {
   // When "Regenerate Invoice" is clicked,
   // navigate to the invoice form generator route with the invoice data
   const handleRegenerate = (invoice) => {
-    navigate("/invoice-generator", { state: { invoiceData: invoice, regenerate: true } });
+    const queryString = new URLSearchParams({
+      invoiceData: JSON.stringify(invoice), 
+      regenerate: true
+    }).toString();
+  
+    window.open(`/invoice-generator?${queryString}`, "_blank");
   };
+  
 
   if (loading) {
     return (
@@ -67,6 +74,10 @@ const InvoiceList = () => {
     );
   }
   if (error) return <p>Error: {error}</p>;
+  const invoiceHeaders = ['Invoice Number', 'Customer Name', , 'Email', 'Payment Amount', 'Description', 'Date', 'Payment Purpose', 
+    'Vehicle Description', 'Mileage', 'Chassis Number', 'Engine Capacity', 'Actions' ]
+
+  const invoiceData = []
 
   return (
     <div className="order-list">
@@ -74,18 +85,9 @@ const InvoiceList = () => {
       <table className="invoice-table" border="1">
         <thead>
           <tr>
-            <th>Invoice Number</th>
-            <th>Customer Name</th>
-            <th>Email</th>
-            <th>Payment Amount</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Payment Purpose</th>
-            <th>Vehicle Description</th>
-            <th>Mileage</th>
-            <th>Chassis Number</th>
-            <th>Engine Capacity</th>
-            <th>Actions</th> {/* New column for actions */}
+            {invoiceHeaders.map((header)=>{
+              return <th key={header}>{header}</th>;
+            })}
           </tr>
         </thead>
         <tbody>
@@ -94,11 +96,11 @@ const InvoiceList = () => {
               <td>{invoice.invoice_number}</td>
               <td>{invoice.customer_name}</td>
               <td>{invoice.email}</td>
-              <td>{invoice.deposit_amount.toLocaleString()}</td>
+              <td>{parseInt(invoice.deposit_amount).toLocaleString()} {invoice.deposit_currency}</td>
               <td>{invoice.description}</td>
               <td>{invoice.created_at}</td>
               <td>{invoice.deposit_purpose}</td>
-              <td>{invoice.vehicle_description || 'not specified'}</td>
+              <td>{invoice.make && invoice.model ? `${invoice.make} ${invoice.model}` : 'not specified'}</td>
               <td>{invoice.mileage || 'not specified'}</td>
               <td>{invoice.chasis_number || 'not specified'}</td>
               <td>{invoice.engine_capacity || 'not specified'}</td>

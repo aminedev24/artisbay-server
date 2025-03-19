@@ -32,7 +32,10 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password-container">
+
       <form onSubmit={handleForgotPassword}>
+      <img src={`${process.env.PUBLIC_URL}/images/logo3new.png`} alt="Logo" className="logo-form" />
+
         <h2>Forgot Password</h2>
         <input
           type="email"

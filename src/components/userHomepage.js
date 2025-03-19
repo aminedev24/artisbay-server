@@ -300,7 +300,7 @@ const UserHomepage = () => {
                     <p className="title">{car.make}</p>
                     <p className="subtitle">{car.car_model}</p>
                     <p className="subtitle">
-                      {car.price.toLocaleString()} {car.currency}
+                     FOB {car.price.toLocaleString()} {car.currency}
                     </p>
                   </div>
                 </div>

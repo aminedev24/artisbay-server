@@ -98,7 +98,7 @@ const BusinessConsulting = () => {
         <li>EV charging stations</li>
       </ul>
 
-      <p className="cta"><a className='cta-link' href='#/contact'>Contact Us today</a> to schedule your free consultation and discover how we can help your business grow!</p>
+      <p className="cta"><a className='cta-link' href='/contact'>Contact Us today</a> to schedule your free consultation and discover how we can help your business grow!</p>
     </div>
   );
 };

@@ -31,9 +31,17 @@ def search_in_files(directory, search_terms):
                         print(f"Could not read {filepath} due to encoding issues.")
             except Exception as e:
                 print(f"Error opening {filepath}: {e}")
+# Get the current working directory
+current_dir = os.getcwd()
+print("Current Directory:", current_dir)
+parent_dir = os.path.dirname(current_dir)
+print("Parent Directory:", parent_dir)
+directory_to_search = parent_dir + '/server'
+#directory_to_search = os.getcwd() + '/components'  # Using the current working directory
 
-directory_to_search = os.getcwd() + '/components'  # Using the current working directory
-search_terms = ['#/invoice', "to='/invoice", "apiUrl"]
+
+#earch_terms = ['#/invoice', "to='/invoice", "apiUrl"]
+search_terms = ['useHistory', '#/']
 
 # List directories first
 list_directories_in_current_location()
