@@ -59,46 +59,46 @@ function HomePage() {
     {
       imgSrc: `${process.env.PUBLIC_URL}/images/howToBuy.png`,
 
-      link: "/help?topic=How%20to%20Buy%20used%20cars",
+      link: "/help?artisbayInc#How%20to%20Buy%20used%20cars",
     },
 
     {
       imgSrc: `${process.env.PUBLIC_URL}/images/howtopay.png`,
 
-      link: "/help?topic=About%20payement",
+      link: "/help?artisbayInc#About%20payement",
     },
     {
       imgSrc: `${process.env.PUBLIC_URL}/images/Thumbnails/security.png`,
 
-      link: "/help?topic=security",
+      link: "/help?artisbayInc#security",
     },
     {
       imgSrc: `${process.env.PUBLIC_URL}/images/Thumbnails/eco.png`,
 
-      link: "/help?topic=Sustainability",
+      link: "/help?artisbayInc#Sustainability",
     },
   ];
 
   const links1 = [
-    { text: "OVERVIEW", path: "/help?topic=Overview" },
-    { text: "COMPANY PROFILE", path: "/help?topic=Company%20Profile" },
-    { text: "BANK INFORMATION", path: "/help?topic=Bank%20Information" },
-    { text: "WHY ARTISBAY INC", path: "/help?topic=Why%20Artisbay%20Inc." },
-    { text: "TERMS AND CONDITIONS", path: "/help?topic=Terms%20%26%20Conditions" },
-    { text: "ANTI SOCIAL FORCES POLICY", path: "/help?topic=Anti-Social%20Force%20Policy" },
-    { text: "HOW TO BUY CARS ON ARTISBAY INC", path: "/help?topic=How%20to%20Buy%20used%20cars" },
+    { text: "OVERVIEW", path: "/help?artisbayInc#Overview" },
+    { text: "COMPANY PROFILE", path: "/help?artisbayInc#Company%20Profile" },
+    { text: "BANK INFORMATION", path: "/help?artisbayInc#Bank%20Information" },
+    { text: "WHY ARTISBAY INC", path: "/help?artisbayInc#Why%20Artisbay%20Inc." },
+    { text: "TERMS AND CONDITIONS", path: "/help?artisbayInc#Terms%20%26%20Conditions" },
+    { text: "ANTI SOCIAL FORCES POLICY", path: "/help?artisbayInc#Anti-Social%20Force%20Policy" },
+    { text: "HOW TO BUY CARS ON ARTISBAY INC", path: "/help?artisbayInc#How%20to%20Buy%20used%20cars" },
    
     
 ];
 
 const links2 = [
-    { text: "ABOUT USED TIRES", path: "/help?topic=about%20used%20Tires" },
-    { text: "ABOUT DISMANTLED CARS", path: "/help?topic=about%20Dismantled%20Cars" },
-    { text: "ABOUT PAYMENT", path: "/help?topic=About%20payement" },
-    { text: "SECURITY", path: "/help?topic=security" },
-    { text: "PRIVACY", path: "/help?topic=privacy%20policy" },
-    { text: "TELEGRAPHIC TRANSFER", path: "/help?topic=telegraphic%20transfer" },
-    { text: "ARTISBAY CONSULTING", path: "/help?topic=Artisbay%20Consulting" }
+    { text: "ABOUT USED TIRES", path: "/help?artisbayInc#about%20used%20Tires" },
+    { text: "ABOUT DISMANTLED CARS", path: "/help?artisbayInc#about%20Dismantled%20Cars" },
+    { text: "ABOUT PAYMENT", path: "/help?artisbayInc#About%20payement" },
+    { text: "SECURITY", path: "/help?artisbayInc#security" },
+    { text: "PRIVACY", path: "/help?artisbayInc#privacy%20policy" },
+    { text: "TELEGRAPHIC TRANSFER", path: "/help?artisbayInc#telegraphic%20transfer" },
+    { text: "ARTISBAY CONSULTING", path: "/help?artisbayInc#Artisbay%20Consulting" }
 ];
 
   return (
@@ -140,7 +140,7 @@ const links2 = [
                   className="banner"
                   alt="sell banner"
             />
-            <Link to="/help?topic=Artisbay Consulting">
+            <Link to="/help?artisbayInc#Artisbay Consulting">
               <button className="sell-btn">Read more</button>
             </Link>
         </div>
@@ -207,7 +207,7 @@ const links2 = [
             {/*<img className="banner" src={`${process.env.PUBLIC_URL}/images/tiresbannerhome2.jpeg`} alt="Tires banner" />*/}
           </picture>
 
-          <Link to="/help?topic=about%20used%20Tires">
+          <Link to="/help?artisbayInc#about%20used%20Tires">
               <button className="order-now">read more</button>
           </Link>
           {/* 
@@ -215,7 +215,7 @@ const links2 = [
               src={`${process.env.PUBLIC_URL}/images/tiresbannerhome.jpeg`}
               className="ad-banner"
             />
-            <Link to="/help?topic=about%20used%20Tires">
+            <Link to="/help?artisbayInc#about%20used%20Tires">
               <button className="order-now">read more</button>
             </Link>
           */}
@@ -252,13 +252,13 @@ const links2 = [
               className="banner"
             />
             */}
-            <Link to="/help?topic=security">
+            <Link to="/help?artisbayInc#security">
               <button className="security-btn">read more</button>
             </Link>
-            <Link to="/help?topic=paypal">
+            <Link to="/help?artisbayInc#paypal">
               <button className="paypal-btn">read more</button>
             </Link>
-            <Link to="/help?topic=telegraphic%20transfer">
+            <Link to="/help?artisbayInc#telegraphic%20transfer">
               <button className="bank-btn">read more</button>
             </Link>
             </div>
@@ -271,7 +271,7 @@ const links2 = [
               className="ad-banner"
               alt="sell banner"
             />
-            <Link to="/help?topic=sell%20on%20artisbay%20Inc.">
+            <Link to="/help?artisbayInc#sell%20on%20artisbay%20Inc.">
               <button className="sell-btn">Read more</button>
             </Link>
         </div>
@@ -315,7 +315,7 @@ const links2 = [
               alt="eco friendly banner"
             />
             */}
-            <Link to="/help?topic=Sustainability">
+            <Link to="/help?artisbayInc#Sustainability">
               <button className="small-banner-btn eco-btn">Read more</button>
             </Link>
         </div>
@@ -342,7 +342,7 @@ const links2 = [
             ensure confidence and trust in every transaction.{" "}
             <Link
               className="cta-link"
-              to="/help?topic=Why%20Artisbay%20Inc."
+              to="/help?artisbayInc#Why%20Artisbay%20Inc."
             >
               Read more
             </Link>
