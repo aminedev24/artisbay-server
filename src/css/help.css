@@ -72,7 +72,6 @@
 
 .sidebar {
   max-height: 100vh; /* Makes sidebar scrollable if needed */
-  height: 100vh;
   overflow-y: auto; /* Enables scrolling */
   padding: 0 20px; /* Original padding */
   position: sticky;
@@ -172,6 +171,7 @@
 .content-area {
   padding: 20px 0; /* Original padding */
   flex: 1;
+  overflow-y: auto;
 }
 
 .content-header {

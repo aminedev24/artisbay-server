@@ -137,7 +137,7 @@ const Header = () => {
               }}
               title={"Japan"}
             />
-            <Link to={'/help/artisbayInc/Artisbay_Consulting'}>Artisbay に相談する</Link>
+            <Link to={'/help/artisbayInc/Artisbay-Consulting'}>Artisbay に相談する</Link>
             <div
               className="nav-item dropdown"
               ref={(el) => (dropdownRefs.current['localServices'] = el)}
@@ -168,21 +168,21 @@ const Header = () => {
                 }`}
               >
                 <Link to={'/help/artisbayInc/help'}>Help</Link>
-                <Link to={'/help/artisbayInc/Company_Profile'}>Company Profile</Link>
-                <Link to={'/help/artisbayInc/Bank_information'}>Bank Information</Link>
-                <Link to={'/help/artisbayInc/Why_Artisbay_Inc.'}>
+                <Link to={'/help/artisbayInc/Company-Profile'}>Company Profile</Link>
+                <Link to={'/help/artisbayInc/Bank-information'}>Bank Information</Link>
+                <Link to={'/help/artisbayInc/Why-Artisbay-Inc.'}>
                   Why Artisbay Inc.
                 </Link>
-                <Link to={'/help/artisbayInc/Terms_and_Conditions'}>
+                <Link to={'/help/artisbayInc/Terms-and-Conditions'}>
                   Terms & Conditions
                 </Link>
-                <Link to={'/help/artisbayInc/Anti-Social_Force_Policy'}>
+                <Link to={'/help/artisbayInc/Anti-Social-Force-Policy'}>
                   Anti-Social Force Policy
                 </Link>
-                <Link to={'/help/artisbayInc/How_to_Buy_used_cars'}>
+                <Link to={'/help/artisbayInc/How-to-Buy-used-cars'}>
                   How To Buy
                 </Link>
-                <Link to={'/help/artisbayInc/About_payement'}>About Payment</Link>
+                <Link to={'/help/artisbayInc/About-payement'}>About Payment</Link>
               </div>
             </div>
           </div>

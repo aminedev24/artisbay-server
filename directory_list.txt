@@ -1,0 +1,252 @@
+
+Scanning Directory: C:/xampp/htdocs/artisbay-server/server
+
+Directory: C:/xampp/htdocs/artisbay-server/server
+ No subdirectories found.
+ Files:
+  - adminVerifyEmail.php
+  - checkAgreement.php
+  - check_session.php
+  - composer.json
+  - composer.lock
+  - db_connection.php
+  - delete_order.php
+  - edit_order.php
+  - error.log
+  - fetchCarsEstimation.php
+  - fetchDeposits.php
+  - fetchInvoices.php
+  - fetchTireOrders.php
+  - fetchTires.php
+  - forgotPassword.php
+  - getInqueries.php
+  - getInvoiceNumber.php
+  - getSoldCars.php
+  - getUserEmailVerification.php
+  - getUserInfo.php
+  - getUsers.php
+  - headers.php
+  - impersonate.php
+  - insertDeposit.php
+  - Invoice.pdf
+  - location.php
+  - login.php
+  - login2.php
+  - logout.php
+  - mail.php
+  - mailer.php
+  - profile.php
+  - rates.php
+  - reset_password.php
+  - saveCars.php
+  - saveOrder.php
+  - scrap.js
+  - scrap.php
+  - send-email-verification.php
+  - send-verification.php
+  - sendCostData.php
+  - sendInquiry.php
+  - sendInvoice.php
+  - sendTireOrder.php
+  - send_email.php
+  - signup.php
+  - stop_impersonation.php
+  - submitAgreement.php
+  - submitTireOrders.php
+  - update_profile.php
+  - verify-email.php
+
+Scanning Directory: C:/xampp/htdocs/artisbay-server/src
+
+Directory: C:/xampp/htdocs/artisbay-server/src
+ Subdirectories:
+  - components
+  - css
+  - css-minified
+ Files:
+  - App.js
+  - App.test.js
+  - cssutil.py
+  - fuck.py
+  - index.css
+  - index.js
+  - logo.svg
+  - reportWebVitals.js
+  - search.py
+  - setupTests.js
+
+Directory: C:/xampp/htdocs/artisbay-server/src\components
+ Subdirectories:
+  - api
+  - help
+ Files:
+  - accountancyForm.js
+  - accountancyForm2.js
+  - adminVerifyEmail.js
+  - africaContainer.js
+  - africaRoroContainer.js
+  - agreementForm.js
+  - agreementPdf.js
+  - alertModal.js
+  - calander.js
+  - carCard.js
+  - carData copy.js
+  - carData.js
+  - carDetails.js
+  - carDismantling.js
+  - carList.js
+  - congoAgent.js
+  - contact.js
+  - countries.js
+  - countryList.js
+  - cuttingCalculator.js
+  - cuttingCostList.js
+  - dismantling.js
+  - europeRoro.js
+  - faqData.json
+  - fetchDeposits.js
+  - fetchInvoices.js
+  - fetchIquiries.js
+  - fetchSavedCars.js
+  - footer.js
+  - forgotPassword.js
+  - getUsers.js
+  - handleRevert.js
+  - header.js
+  - homepage.js
+  - imageWithLoader.js
+  - invoice.js
+  - invoice2.js
+  - invoiceForm.js
+  - invoicePdf.js
+  - localServicesCountries.js
+  - login.js
+  - makestypes.js
+  - namibiaAgent.js
+  - ordersModal.js
+  - profile.js
+  - profile2.js
+  - register.js
+  - registerForm.js
+  - registerForm2.js
+  - resetPassword.js
+  - rightsidebar.js
+  - salesAgreement.js
+  - salesAgreementPdf.js
+  - savedCarsPanel.js
+  - screenSize.js
+  - searchContainer.js
+  - SendEmailVerification.js
+  - settings.js
+  - shipping.js
+  - sidebar.js
+  - slider.js
+  - stockList.js
+  - submittedTireOrders.js
+  - tanzaniaAgent.js
+  - temp.js
+  - tireSelection.js
+  - tireSizes.js
+  - toggletheme.js
+  - toolTip.js
+  - topbar.js
+  - usedTires.js
+  - usedTiresForm.js
+  - userContext.js
+  - userHomepage.js
+  - vehicleData.js
+  - vehicleInformation.js
+  - vehicleSelector.js
+  - vehiculeEnquiry.js
+  - verifyEmail.js
+  - verifyUserEmail.js
+
+Directory: C:/xampp/htdocs/artisbay-server/src\components\api
+ No subdirectories found.
+ Files:
+  - generate-pdf.js
+
+Directory: C:/xampp/htdocs/artisbay-server/src\components\help
+ No subdirectories found.
+ Files:
+  - aboutusedtires.js
+  - abPromo.txt
+  - artisbayPromo.js
+  - artisbayPromo2.js
+  - asf.js
+  - auction.js
+  - automatedInvoice.js
+  - bankInfo.js
+  - businessConsulting.js
+  - companyProfile.js
+  - envirementPolicy.js
+  - faq.js
+  - help.js
+  - howtobuy.js
+  - japanDealers.js
+  - overview.js
+  - paymentMethods.js
+  - paypal.js
+  - privacy.js
+  - securityNotice.js
+  - sellinartisbay.js
+  - telegraphicTransfer.js
+  - terms.js
+  - whyArtisbay.js
+  - whyChooseUs.js
+  - wise.js
+
+Directory: C:/xampp/htdocs/artisbay-server/src\css
+ No subdirectories found.
+ Files:
+  - accountancyForm.css
+  - App.css
+  - artisbayPromo.css
+  - bankInfo.css
+  - carCard.css
+  - carDetails.css
+  - carDismantling.css
+  - carList.css
+  - companyProfile.css
+  - congoAgent.css
+  - contact.css
+  - cuttingCost.css
+  - emailConfirmation.css
+  - faq.css
+  - fetchCars.css
+  - footer.css
+  - forgotPassword.css
+  - header.css
+  - help.css
+  - homepage.css
+  - howToBuy.css
+  - invoice.css
+  - japanExports.css
+  - login.css
+  - namibiaAgent copy.css
+  - namibiaAgent.css
+  - profile.css
+  - profilePage.css
+  - register.css
+  - RightSidebar.css
+  - savedCarsPanel.css
+  - searchForm.css
+  - shipping.css
+  - slider.css
+  - stockList.css
+  - tanzaniaAgent.css
+  - terms.css
+  - theme.css
+  - tireSelection.css
+  - toolTip.css
+  - topbar.css
+  - usedTires.css
+  - usedTiresForm.css
+  - userHomepage.css
+  - vehicleInfo.css
+  - vehiculeEquiry.css
+
+Directory: C:/xampp/htdocs/artisbay-server/src\css-minified
+ No subdirectories found.
+ Files:
+  - all.min.css

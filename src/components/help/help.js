@@ -40,7 +40,7 @@ const topics = {
     { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
     { name: "Artisbay Consulting", content: <ArtisbayPromo />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
     { name: "Terms and conditions", content: <TermsAndConditions />, image: `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
-    { name: "Anti-Social Force Policy", content: <AntiSocialForcesPolicy />, image: `${process.env.PUBLIC_URL}/images/asf.png` },
+    { name: "Anti Social Force Policy", content: <AntiSocialForcesPolicy />, image: `${process.env.PUBLIC_URL}/images/asf.png` },
     { name: "How to Buy used cars", component: <HowToBuy />, image: `${process.env.PUBLIC_URL}/images/howtobuyrecent2.jpeg` },
     { name: "auction", content: <AuctionLanding />, image: `${process.env.PUBLIC_URL}/images/auction.png` },
     { name: "about used Tires", component: <UsedTiresFAQ />, image: `${process.env.PUBLIC_URL}/images/tiresfromjapanhelp.png` },
@@ -77,8 +77,8 @@ const HelpPage = () => {
     // Convert underscores back to spaces for matching
     // Convert underscores back to spaces and ampersands
     const decodedTopic = topicParam
-      .replace(/_/g, " ")
-      .replace(/%26/g, "&");
+      .replace(/-/g, " ")
+     
       
     const foundTopic = 
       topics.help.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase()) ||
@@ -95,10 +95,36 @@ const HelpPage = () => {
 
   const handleTopicChange = (topic) => {
     setSelectedTopic(topic);
-    const formattedName = topic.name.replace(/[\s&]/g, "_"); // Replace spaces and '&' with '_'
+    const formattedName = topic.name.replace(/[\s]/g, "-"); // Replace spaces and '&' with '_'
     navigate(`/help/artisbayInc/${formattedName}`);
   };
   
+  const isSpecialContent = isSmallScreen && (
+    selectedTopic.name === 'Terms and conditions' ||
+    selectedTopic.name === 'privacy policy' ||
+    selectedTopic.name === 'Artisbay Consulting' ||
+    selectedTopic.name === 'Anti Social Force Policy' || 
+    selectedTopic.name === 'about used Tires' ||
+    selectedTopic.name === 'F&Q' || 
+    selectedTopic.name === 'About payement' 
+  );
+
+  console.log('isSpecialContent', isSpecialContent)
+  const isSpecialContent2 = (
+    selectedTopic.name === 'terms' ||
+    selectedTopic.name === 'privacy' ||
+    selectedTopic.name === 'sales-contract' ||
+    selectedTopic.name === 'Anti-Social Force Policy' ||
+    selectedTopic.name === 'F&Q'
+    
+  );
+
+  const style = {
+    height: isSpecialContent ? '60vh' : '',
+    //padding: isSpecialContent2 && selectedTopic.name != 'my-account' ? '0' : '',
+    //height: isSpecialContent2 ? '185vh' : '',
+    
+  };
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -173,8 +199,10 @@ const HelpPage = () => {
           )}
         </div>
         <div 
-          style={{ height: selectedTopic.name === 'help' && !isSmallScreen ? '100vh' : '' }} 
+          //style={{ height: selectedTopic.name === 'help' && !isSmallScreen ? '100vh' : '40vh' }} 
+          
           className="content-area"
+          style={style}
         >
           <h2 className={
               selectedTopic.name === 'our commitment to Sustainability'

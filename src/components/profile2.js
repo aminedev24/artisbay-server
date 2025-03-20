@@ -51,15 +51,15 @@ const ProfilePage = () => {
   const menuItems = useMemo(() => [
     { key: 'my-account', label: 'My Account', component: UserHomepage },
     { key: 'settings', label: 'Settings', component: Settings },
-    { key: 'vehicle_inquiries', label: 'Vehice Inquiries', component: InquiryList },
-    { key: 'submitted_tire_orders', label: 'Submitted tire orders', component: TireOrderList },
-    { key: 'invoices_list', label: 'Invoices List', component: InvoiceList },
+    { key: 'vehicle-inquiries', label: 'Vehice Inquiries', component: InquiryList },
+    { key: 'submitted-tire-orders', label: 'Submitted tire orders', component: TireOrderList },
+    { key: 'invoices-list', label: 'Invoices List', component: InvoiceList },
     { key: 'accountancy', label: 'Accountancy', component: DepositsTable },
     { key: 'privacy', label: 'Privacy', component: Privacy },
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
-    { key: 'cutting_and_dismantling_logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
+    { key: 'cutting-and-dismantling-logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
     
 
     // Only include admin items if user is loaded and is admin
