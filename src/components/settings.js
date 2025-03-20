@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-//import './Settings.css'; // Make sure to create this CSS file
 import { useUser } from './userContext';
 
 const Settings = ({ user, setUser }) => {
   const { triggerSessionRefresh } = useUser();
-  
 
+
+  
+  
   const [details, setDetails] = useState([
     {
       key: 'joined_date',
@@ -47,7 +48,8 @@ const Settings = ({ user, setUser }) => {
       label: 'Email',
       type: 'email',
       editable: false,
-      value: user?.email || ''
+      value: user?.email || '',
+      verified: user?.is_verified
     },
     {
       key: 'address',
@@ -67,65 +69,79 @@ const Settings = ({ user, setUser }) => {
       : "/server";
 
   const handleEditToggle = (key) => {
-    setIsEditing(prev => ({
+    setIsEditing((prev) => ({
       ...prev,
-      [key]: !prev[key]
+      [key]: !prev[key],
     }));
   };
 
   const handleInputChange = (key, value) => {
-    setDetails(prev => 
-      prev.map(detail => 
+    setDetails((prev) =>
+      prev.map((detail) =>
         detail.key === key ? { ...detail, value: value } : detail
       )
     );
   };
 
- const handleSave = async (key) => {
-  try {
-    const detail = details.find(d => d.key === key);
-    
-    const response = await fetch(`${apiUrl}/update_profile.php`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        [key]: detail.value
-      }),
-    });
+  const handleSave = async (key) => {
+    try {
+      const detail = details.find((d) => d.key === key);
 
-    triggerSessionRefresh();
+      const response = await fetch(`${apiUrl}/update_profile.php`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          [key]: detail.value,
+        }),
+      });
 
+      triggerSessionRefresh();
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      handleEditToggle(key);
+      setError(null);
+    } catch (error) {
+      setError(error.message);
+      console.error('Update failed:', error);
     }
+  };
 
-    const data = await response.json();
-    
-    if (data.error) {
-      throw new Error(data.error);
+  const handleVerifyEmail = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/send-email-verification.php`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: user?.email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send verification email');
+      }
+      alert('Verification email sent!');
+    } catch (error) {
+      setError(error.message);
     }
-
-    // Toggle editing off
-    handleEditToggle(key);
-    setError(null);
-  } catch (error) {
-    setError(error.message);
-    console.error('Update failed:', error);
-  }
-};
+  };
 
   return (
     <div className="settings-container">
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
-      <h1>settings</h1>
+      {error && <div className="error-message">{error}</div>}
+      <h1>Settings</h1>
       <table className="settings-table">
         <tbody>
           {details.map((detail) => (
@@ -134,20 +150,22 @@ const Settings = ({ user, setUser }) => {
               <td>
                 {isEditing[detail.key] && detail.editable ? (
                   <div className="edit-mode">
-                    <input 
+                    <input
                       className="settings-input"
                       type={detail.type}
                       value={detail.value}
-                      onChange={(e) => handleInputChange(detail.key, e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange(detail.key, e.target.value)
+                      }
                     />
                     <div className="edit-buttons">
-                      <button 
+                      <button
                         className="btn btn-save"
                         onClick={() => handleSave(detail.key)}
                       >
                         Save
                       </button>
-                      <button 
+                      <button
                         className="btn btn-cancel"
                         onClick={() => handleEditToggle(detail.key)}
                       >
@@ -158,18 +176,30 @@ const Settings = ({ user, setUser }) => {
                 ) : (
                   <div className="view-mode">
                     {detail.value}
+                    {detail.key === 'email' && (
+                      <>
+                        {detail.verified ? (
+                          <span className="verified-status"></span>
+                        ) : (
+                          <button
+                            className="btn btn-verify"
+                            onClick={handleVerifyEmail}
+                          >
+                            Verify
+                          </button>
+                        )}
+                      </>
+                    )}
                     {detail.editable ? (
-                      <button 
+                      <button
                         className="btn btn-edit"
                         onClick={() => handleEditToggle(detail.key)}
                       >
                         Edit
                       </button>
-                    ): (
-                      <button className='btn btn-hidden'>Edit</button>
-                    )
-                    
-                    }
+                    ) : (
+                      <button className="btn btn-hidden">Edit</button>
+                    )}
                   </div>
                 )}
               </td>

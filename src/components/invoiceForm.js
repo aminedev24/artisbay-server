@@ -442,12 +442,7 @@ console.log(invoiceData)
           " " +
           formData.depositCurrency;
         
-          const invoiceNumber = regenerate ? `RE-AB-${invoiceCounter}` : `AB-${invoiceCounter}`;
-          console.log('og invoicenum' , invoiceNumber)
-          // Replace all repeated words separated by hyphens globally
-          const formattedInvoiceNumber = invoiceNumber.replace(/^(?:(\w+-\w+))(?:(-\1)+)(-.*)/, "$1$3");          console.log(formattedInvoiceNumber); // Output: RE-AB-1002
-          
-        //const invoiceNumber = regenerate ? `RE-AB-${invoiceCounter}` : `AB-${invoiceCounter}`;
+    
 
         // Generate invoice number automatically and set current date
         const newInvoiceData = {
@@ -457,7 +452,7 @@ console.log(invoiceData)
           customerPhone: fullPhoneNumber, // Use the full phone number
           customerEmail: formData.email,
           country: formData.country, // Include the country field
-          invoiceNumber: formattedInvoiceNumber, // Use updated invoiceCounter
+          invoiceNumber: `AB-${invoiceCounter}`, // Use updated invoiceCounter
           invoiceDate: invoiceDate,
           depositAmount: formData.depositAmount, // Store formatted deposit amount
           depositCurrency: formData.depositCurrency,

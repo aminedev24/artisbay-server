@@ -91,7 +91,7 @@ export default function DepositsTable() {
             <th className="border p-2">Consumption</th>
             <th className="border p-2">Staff</th>
             <th className="border p-2">Swift Details</th>
-            <th className="border p-2">Rate</th>
+            <th className="border p-2">Exchange Currency</th>
             <th className="border p-2">Note</th>
             <th className="border p-2">Balance</th>
             

@@ -34,7 +34,7 @@ import SendEmailVerification from './components/SendEmailVerification';
 import VerifyEmail from './components/verifyEmail';
 import SignupForm from './components/registerForm2';
 import AdminVerifyEmail from './components/adminVerifyEmail';
-
+import UserEmailVerification from './components/verifyUserEmail';
 function App() {
   
   const [bodyWidth, setBodyWidth] = useState(window.screen.width);
@@ -97,6 +97,7 @@ function App() {
         <Route path='/send-email-verification' element={<SendEmailVerification />} />
         <Route path='/get-email-verification' element={<VerifyEmail />} />
         <Route path="/verify_email" element={<AdminVerifyEmail />}/>
+        <Route path="/get_user_email_verification" element={<UserEmailVerification />}/>
 
         
         {/* Catch-all route for undefined paths */}

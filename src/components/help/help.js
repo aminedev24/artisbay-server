@@ -39,7 +39,7 @@ const topics = {
     { name: "Automated Invoice", content: <AutomatedInvoice />, image: `${process.env.PUBLIC_URL}/images/invoicegenerator.png` },
     { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
     { name: "Artisbay Consulting", content: <ArtisbayPromo />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
-    { name: "Terms & Conditions", content: <TermsAndConditions />, image: `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
+    { name: "Terms and conditions", content: <TermsAndConditions />, image: `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
     { name: "Anti-Social Force Policy", content: <AntiSocialForcesPolicy />, image: `${process.env.PUBLIC_URL}/images/asf.png` },
     { name: "How to Buy used cars", component: <HowToBuy />, image: `${process.env.PUBLIC_URL}/images/howtobuyrecent2.jpeg` },
     { name: "auction", content: <AuctionLanding />, image: `${process.env.PUBLIC_URL}/images/auction.png` },
@@ -71,29 +71,35 @@ const HelpPage = () => {
     
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // When the URL parameter changes, update the selected topic
-    const foundTopic = 
-      topics.help.find(topic => topic.name.toLowerCase() === topicParam?.toLowerCase()) ||
-      topics.buying.find(topic => topic.name.toLowerCase() === topicParam?.toLowerCase());
+    // Convert underscores back to spaces for matching
+    // Convert underscores back to spaces and ampersands
+    const decodedTopic = topicParam
+      .replace(/_/g, " ")
+      .replace(/%26/g, "&");
       
+    const foundTopic = 
+      topics.help.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase()) ||
+      topics.buying.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase());
+        
     if (foundTopic) {
       setSelectedTopic(foundTopic);
     } else {
-      // If not found, fallback to default
       setSelectedTopic(topics.help[0]);
     }
     setIsLoading(false);
   }, [topicParam]);
+  
 
   const handleTopicChange = (topic) => {
     setSelectedTopic(topic);
-    // Navigate to the new route using the topic name
-    navigate(`/help/artisbayInc/${encodeURIComponent(topic.name)}`);
+    const formattedName = topic.name.replace(/[\s&]/g, "_"); // Replace spaces and '&' with '_'
+    navigate(`/help/artisbayInc/${formattedName}`);
   };
-
+  
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [topicParam]);
@@ -167,7 +173,7 @@ const HelpPage = () => {
           )}
         </div>
         <div 
-          style={{ height: !isSidebarOpen && selectedTopic.name === 'help' && !isSmallScreen ? '100vh' : '' }} 
+          style={{ height: selectedTopic.name === 'help' && !isSmallScreen ? '100vh' : '' }} 
           className="content-area"
         >
           <h2 className={

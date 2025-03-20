@@ -33,7 +33,8 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
       : "/server";
 
   // --- Step 1: Send Verification Email ---
-  const sendEmailConfirmation = async () => {
+  const sendEmailConfirmation = async (event) => {
+    event.preventDefault();
     try {
       // Call backend API to send a verification email with a unique code
       const response = await fetch(`${apiUrl}/send-verification.php`, {
@@ -59,7 +60,8 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
   };
 
   // --- Step 2: Verify the Email Code ---
-  const verifyEmail = async () => {
+  const verifyEmail = async (event) => {
+    event.preventDefault();
     try {
       // Call backend API to verify the code
       const response = await fetch(`${apiUrl}/verify-email.php`, {
@@ -164,6 +166,7 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
       const response = await fetch(`${apiUrl}/signup.php`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        credentials: 'include',
         body: new URLSearchParams(formData).toString(),
       });
       const result = await response.json();
@@ -183,16 +186,17 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
 
   return (
     <div className="signup-container">
-      <form className="signup-form" onSubmit={step === 3 ? handleSignup : undefined}>
+      <div className="signup-form">
         {/* Step 1: Enter Name and Email */}
         {step === 1 && (
           <div className="step1">
+          <form onSubmit={sendEmailConfirmation}>
             <div className="input-group">
               <input
                 type="text"
                 value={fullName}
-                onChange={(e) => handleInputChange(setFullName, e)}
                 required
+                onChange={(e) => handleInputChange(setFullName, e)}
                 placeholder="Your name"
               />
               <label>
@@ -204,16 +208,13 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
                 type="email"
                 value={email}
                 placeholder="Email"
-                onChange={(e) => handleInputChange(setEmail, e)}
                 required
+                onChange={(e) => handleInputChange(setEmail, e)}
               />
-              <label>
-                Email <span className="required">*</span>
-              </label>
             </div>
-            <button type="button" onClick={sendEmailConfirmation}>
-              Send Confirmation Email
-            </button>
+            <button type="submit">Submit</button>
+          </form>
+
             {message && (
               <div className={`message ${isError ? "error" : "success" }`}>
             {message}
@@ -225,32 +226,35 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
         {/* Step 2: Verify the Email */}
         {step === 2 && (
           <div className="step2">
-            <div className="input-group">
-              <input
-                type="text"
-                value={verificationCode}
-                placeholder="Enter Verification Code"
-                onChange={(e) => handleInputChange(setVerificationCode, e)}
-                required
-              />
-              <label>
-                Verification Code <span className="required">*</span>
-              </label>
-            </div>
-            <button type="button" onClick={verifyEmail}>
-              Verify Email
-            </button>
-            {message && (
-              <div className={`message ${isError ? "error" : "success"}`}>
-            {message}
+            <form onSubmit={verifyEmail}>
+              <div className="input-group">
+                <input
+                  type="text"
+                  value={verificationCode}
+                  placeholder="Enter Verification Code"
+                  onChange={(e) => handleInputChange(setVerificationCode, e)}
+                  required
+                />
+                <label>
+                  Verification Code <span className="required">*</span>
+                </label>
               </div>
+              <button type="submit">
+                Verify Email
+              </button>
+            </form>
+               
+                {message && (
+                  <div className={`message ${isError ? "error" : "success"}`}>
+                {message}
+                </div>
             )}
           </div>
         )}
 
         {/* Step 3: Complete the Signup Form */}
         {step === 3 && (
-          <>
+          <form onSubmit={handleSignup}>
             <div className="input-group phone-number-group">
               {phoneCode && <span className="phone-code">{phoneCode}</span>}
               <input
@@ -402,9 +406,9 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
             )}
 
             <button type="submit">Sign Up</button>
-          </>
+          </form>
         )}
-      </form>
+      </div>
     </div>
   );
 };

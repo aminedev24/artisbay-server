@@ -72,6 +72,7 @@
 
 .sidebar {
   max-height: 100vh; /* Makes sidebar scrollable if needed */
+  height: 100vh;
   overflow-y: auto; /* Enables scrolling */
   padding: 0 20px; /* Original padding */
   position: sticky;
