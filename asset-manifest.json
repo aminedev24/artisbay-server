@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/artisbay-server/static/css/main.ba5912a5.css",
-    "main.js": "/artisbay-server/static/js/main.ca63c471.js",
+    "main.css": "/artisbay-server/static/css/main.67a2f1fc.css",
+    "main.js": "/artisbay-server/static/js/main.c46c87ef.js",
     "static/js/213.809af65b.chunk.js": "/artisbay-server/static/js/213.809af65b.chunk.js",
     "static/js/455.ab33c1b4.chunk.js": "/artisbay-server/static/js/455.ab33c1b4.chunk.js",
     "static/js/453.aaf8b0ee.chunk.js": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js",
@@ -9,6 +9,7 @@
     "static/media/eco1copy.jpeg": "/artisbay-server/static/media/eco1copy.a9c5e6c0fdb3459632c8.jpeg",
     "static/media/tanzaniaagentrecent2.png": "/artisbay-server/static/media/tanzaniaagentrecent2.25fd17be195f050633d8.png",
     "static/media/TireBanner.jpg": "/artisbay-server/static/media/TireBanner.63bf7043e5d0a428858e.jpg",
+    "static/media/under_construction.png": "/artisbay-server/static/media/under_construction.795a1e282bb39a407e83.png",
     "static/media/namibiaagentrecent.png": "/artisbay-server/static/media/namibiaagentrecent.5a4027a4c2d23122afaa.png",
     "static/media/used-tires-banner.jpeg": "/artisbay-server/static/media/used-tires-banner.b4de323e8b0ae1a20a96.jpeg",
     "static/media/Help.jpeg": "/artisbay-server/static/media/Help.8b9170007596b4f409f3.jpeg",
@@ -27,7 +28,6 @@
     "static/media/car-makes-icons.woff2?gtc92f": "/artisbay-server/static/media/car-makes-icons.bd9b9d280fdab147db37.woff2",
     "static/media/printwatermark.png": "/artisbay-server/static/media/printwatermark.4a63492b97b9694c05b9.png",
     "static/media/fa-regular-400.woff2": "/artisbay-server/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
-    "static/media/underconstructionsmall.png": "/artisbay-server/static/media/underconstructionsmall.d54d1d9a64d745413e37.png",
     "static/media/fa-v4compatibility.ttf": "/artisbay-server/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fraction.cjs": "/artisbay-server/static/media/fraction.7992481f3d8339b77604.cjs",
     "static/media/fa-v4compatibility.woff2": "/artisbay-server/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
@@ -37,14 +37,14 @@
     "static/media/slick.woff": "/artisbay-server/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/artisbay-server/index.html",
     "static/media/index.cjs": "/artisbay-server/static/media/index.f6d03137e8c9dd0de04c.cjs",
-    "main.ba5912a5.css.map": "/artisbay-server/static/css/main.ba5912a5.css.map",
-    "main.ca63c471.js.map": "/artisbay-server/static/js/main.ca63c471.js.map",
+    "main.67a2f1fc.css.map": "/artisbay-server/static/css/main.67a2f1fc.css.map",
+    "main.c46c87ef.js.map": "/artisbay-server/static/js/main.c46c87ef.js.map",
     "213.809af65b.chunk.js.map": "/artisbay-server/static/js/213.809af65b.chunk.js.map",
     "455.ab33c1b4.chunk.js.map": "/artisbay-server/static/js/455.ab33c1b4.chunk.js.map",
     "453.aaf8b0ee.chunk.js.map": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba5912a5.css",
-    "static/js/main.ca63c471.js"
+    "static/css/main.67a2f1fc.css",
+    "static/js/main.c46c87ef.js"
   ]
 }
