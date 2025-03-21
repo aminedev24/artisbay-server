@@ -12,7 +12,7 @@
 
   .saved-cars-panel {
     position: relative;
-    height: 100vh;
+    height: 100%;
   }
   
   /* Tabs */

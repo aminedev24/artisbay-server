@@ -112,7 +112,7 @@
 .arrow-icon-text {
   display: block;
   font-weight: bold;
-
+  cursor: pointer;
 }
 
 .arrow-icon {
@@ -172,6 +172,7 @@
   padding: 20px 0; /* Original padding */
   flex: 1;
   overflow-y: auto;
+  
 }
 
 .content-header {

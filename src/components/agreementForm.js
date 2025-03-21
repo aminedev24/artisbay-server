@@ -1,6 +1,8 @@
+// AgreementForm.jsx
 import React, { useState, useEffect, useRef } from 'react';
+import useAgreementStatus from './agreementStatus';
 
-const AgreementForm = ({ agreementType, agreementContent }) => {
+const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight }) => {
   const apiUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost/artisbay-server/server'
@@ -10,31 +12,25 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
     fullName: '',
     email: '',
     terms: false,
-    agreementType: agreementType,
+    agreementType,
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [alreadyAgreed, setAlreadyAgreed] = useState(false);
   const [isFetched, setIsFetched] = useState(false);
+  const [error, setError] = useState(null);
 
-  // This ref helps ensure we only update state if the component is still mounted.
+  // Use our custom hook to get the agreement status.
+  const { alreadyAgreed, loading } = useAgreementStatus(agreementType, apiUrl);
+
+  // You can still fetch user profile data separately if needed.
   const isMountedRef = useRef(true);
-
-  // Fetch both user data and agreement status, using the provided AbortController signal.
   const fetchUserData = async (signal) => {
     try {
-      console.log('Fetching user data and agreement status for:', agreementType);
-
-      // Fetch user profile data
       const response = await fetch(`${apiUrl}/profile.php`, {
         method: 'GET',
         credentials: 'include',
         signal,
       });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       if (isMountedRef.current) {
         setFormData((prev) => ({
@@ -44,49 +40,22 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
         }));
         setIsFetched(true);
       }
-
-      // Fetch agreement status
-      const agreementResponse = await fetch(
-        `${apiUrl}/checkAgreement.php?agreementType=${encodeURIComponent(agreementType)}`,
-        { method: 'GET', credentials: 'include', signal }
-      );
-      const agreementData = await agreementResponse.json();
-      console.log('Agreement API response:', agreementData);
-      if (isMountedRef.current) {
-        // Ensure the API returns a boolean by checking for true
-        setAlreadyAgreed(agreementData.already_agreed === true);
-      }
-    } catch (error) {
-      // Ignore abort errors so we don't trigger an error state when cancelling.
-      if (error.name === 'AbortError') {
-        console.log('Fetch Aborted');
-        return;
-      }
-      if (isMountedRef.current) {
-        console.error('Error fetching user data or agreement status:', error);
-        setError(error.message);
-      }
-    } finally {
-      if (isMountedRef.current) {
-        setLoading(false);
+    } catch (err) {
+      if (err.name !== 'AbortError' && isMountedRef.current) {
+        setError(err.message);
       }
     }
   };
 
   useEffect(() => {
     isMountedRef.current = true;
-    setLoading(true);
-
-    // Create an AbortController for this effect
     const controller = new AbortController();
     fetchUserData(controller.signal);
-
     return () => {
-      // Abort any pending fetches on cleanup and mark the component as unmounted.
       controller.abort();
       isMountedRef.current = false;
     };
-  }, [agreementType]);
+  }, [apiUrl]);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -98,11 +67,7 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const submissionData = {
-      ...formData,
-      agreementType,
-      agreementContent,
-    };
+    const submissionData = { ...formData, agreementType, agreementContent };
 
     try {
       const response = await fetch(`${apiUrl}/submitAgreement.php`, {
@@ -117,18 +82,15 @@ const AgreementForm = ({ agreementType, agreementContent }) => {
         const errorData = await response.json();
         setError(errorData.error || 'An error occurred while submitting the form.');
       }
-    } catch (error) {
+    } catch (err) {
       setError('An error occurred while submitting the form.');
-      console.log('Error: ' + error.message);
     }
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  //console.log(agreementType)
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="user-agreement-container">

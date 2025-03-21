@@ -349,7 +349,7 @@ const FetchSavedCars = () => {
            
       ): (
         <>
-          <div className="overlay overlay-filter"></div>
+          {/*<div className="overlay overlay-filter"></div>*/}
           <div className="overlay overlay-image"></div>
         </>
 

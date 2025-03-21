@@ -320,3 +320,11 @@
   .btn-verify:active {
     background-color: #004080;
   }
+
+  .menu-item.highlight {
+    border: 2px solid red;
+    /* other styles */
+    color: #fff;
+    background-color: #f44336 !important;
+  }
+  

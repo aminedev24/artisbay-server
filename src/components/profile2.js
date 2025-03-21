@@ -19,19 +19,63 @@ import { Link } from 'react-router-dom';
 import AccountancyForm from './accountancyForm2';
 import UserHomepage from './userHomepage';
 import Calander from './calander';
+import useAgreementStatus from './agreementStatus';
+import Modal from "./alertModal";
+
+const apiUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost/artisbay-server/server'
+    : '/server';
 
 const ProfilePage = () => {
   const [userr, setUserr] = useState(null);
-  const { user } = useUser(); // Accessing the user from context
+  const { user } = useUser();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [userProfile, setUserProfile] = useState(true);
   const [agreementType, setAgreementType] = useState('');
-
   const navigate = useNavigate();
   const { section } = useParams();
   const { isSmallScreen } = useCheckScreenSize();
+
+  // Modal states for alerting the user.
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");  // e.g., 'alert', 'confirmation'
+  
+  // Suppression state to temporarily hide highlight even if status remains false.
+  // For each menu key, we will mark it as suppressed if needed.
+  const [suppressHighlight, setSuppressHighlight] = useState({});
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const showAlert = (message, type = "alert") => {
+    setTimeout(() => {
+      setModalMessage(message);
+      setModalType(type);
+      setShowModal(true);
+    }, 1000); // Delay for 1 second
+  };
+
+  // Define a mapping between menu keys and agreement names.
+  const agreementMapping = useMemo(() => ({
+    terms: 'Terms & Conditions',
+    privacy: 'Privacy Policy',
+    'anti-social-policy': 'Anti-Social Forces Policy',
+  }), []);
+
+  // We'll use an array of the agreement names for our hook.
+  const agreementNames = useMemo(() => Object.values(agreementMapping), [agreementMapping]);
+
+  // Get the statuses for all required agreements.
+  const { statuses, loading: statusLoading, error: statusError } = useAgreementStatus(agreementNames, apiUrl);
+  const allAgreed = Object.values(statuses).every(status => status === true);
+
+  // Allowed menu keys when agreements are not complete.
+  const allowedKeys = ['terms', 'privacy', 'anti-social-policy'];
 
   const [formData, setFormData] = useState({
     name: "",
@@ -42,27 +86,20 @@ const ProfilePage = () => {
     address: ''
   });
 
-  const apiUrl =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
-      : "/server";
-
-  // Build the menuItems array using useMemo so it recalculates when user changes.
+  // Build menu items.
   const menuItems = useMemo(() => [
     { key: 'my-account', label: 'My Account', component: UserHomepage },
     { key: 'settings', label: 'Settings', component: Settings },
-    { key: 'vehicle-inquiries', label: 'Vehice Inquiries', component: InquiryList },
-    { key: 'submitted-tire-orders', label: 'Submitted tire orders', component: TireOrderList },
+    { key: 'vehicle-inquiries', label: 'Vehicle Inquiries', component: InquiryList },
+    { key: 'submitted-tire-orders', label: 'Submitted Tire Orders', component: TireOrderList },
     { key: 'invoices-list', label: 'Invoices List', component: InvoiceList },
     { key: 'accountancy', label: 'Accountancy', component: DepositsTable },
     { key: 'privacy', label: 'Privacy', component: Privacy },
     { key: 'terms', label: 'Terms & Conditions', component: TermsConditions },
     { key: 'anti-social-policy', label: 'Anti-Social Forces Policy', component: AntiSocialPolicy },
     { key: 'sales-contract', label: 'Sales Contract', component: SalesAgreement },
-    { key: 'cutting-and-dismantling-logs', label: 'Cutting & dismantling logs', component: FetchSavedCars },
-    
-
-    // Only include admin items if user is loaded and is admin
+    { key: 'cutting-and-dismantling-logs', label: 'Cutting & Dismantling Logs', component: FetchSavedCars },
+    // Only include admin items if the user is loaded and is admin.
     ...(user && user.role === 'admin'
       ? [
           { key: 'customers', label: 'Customers', component: AdminUserList },
@@ -71,14 +108,22 @@ const ProfilePage = () => {
       : [])
   ], [user]);
 
-  // Determine active content based on URL or default to settings.
-  // Use lowercase for comparison.
+  // Determine active content based on URL or default to "my-account".
   const initialActive = section && menuItems.some(item => item.key === section.toLowerCase())
     ? section.toLowerCase()
     : 'my-account';
   const [activeContent, setActiveContent] = useState(initialActive);
 
-  // Set agreement type based on active content.
+  // If not all agreements are accepted, force navigation to an agreement route.
+  useEffect(() => {
+    const allowedRoutes = ['terms', 'privacy', 'anti-social-policy'];
+    if (!allAgreed && !allowedRoutes.includes(activeContent)) {
+      navigate(`/profile/anti-social-policy`, { replace: true });
+      setActiveContent('anti-social-policy');
+    }
+  }, [allAgreed, activeContent, navigate]);
+
+  // Set agreementType based on activeContent.
   useEffect(() => {
     switch (activeContent) {
       case 'terms':
@@ -106,13 +151,9 @@ const ProfilePage = () => {
           method: "GET",
           credentials: "include",
         });
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+        if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
-        if (data.error) {
-          throw new Error(data.error);
-        }
+        if (data.error) throw new Error(data.error);
         setUserr(data);
         setFormData({
           name: data.full_name,
@@ -130,7 +171,6 @@ const ProfilePage = () => {
     fetchUserData();
   }, [apiUrl]);
 
-  //console.log(userr)
   // Redirect if not logged in.
   useEffect(() => {
     if (!loading && !userr) {
@@ -148,10 +188,32 @@ const ProfilePage = () => {
       }
     }
   }, [section, navigate, user, menuItems]);
-  
 
-  // Handle menu item selection.
   const handleMenuClick = (item) => {
+    // If not all agreements are accepted and the clicked menu is not allowed…
+    if (!allAgreed && !allowedKeys.includes(item.key)) {
+      showAlert('Please accept all required agreements first.');
+      
+      // Set suppression for all agreement-related items with false status.
+      const newSuppress = {};
+      menuItems.forEach(menuItem => {
+        const agreementName = agreementMapping[menuItem.key];
+        if (agreementName && statuses[agreementName] === false) {
+          newSuppress[menuItem.key] = true;
+        }
+      });
+      setSuppressHighlight(newSuppress);
+      
+      // Clear the suppression after 3 seconds.
+      setTimeout(() => {
+        setSuppressHighlight({});
+      }, 3000);
+      
+      navigate(`/profile/anti-social-policy`, { replace: true });
+      setActiveContent('anti-social-policy');
+      return;
+    }
+    // Otherwise, proceed normally.
     setActiveContent(item.key);
     navigate(`/profile/${item.key}`, { replace: true });
   };
@@ -161,133 +223,76 @@ const ProfilePage = () => {
       <div className="profile-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
         <div className="spinner-container">
           <div className="spinner"></div>
-        </div>      
+        </div>
       </div>
     );
   }
 
-  if (!userr) {
-    return null;
-  }
+  if (!userr) return null;
 
-  const ActiveComponent = menuItems.find(
-    item => item.key === activeContent
-  )?.component || Settings;
-
+  const ActiveComponent = menuItems.find(item => item.key === activeContent)?.component || Settings;
   const isSpecialContent = isSmallScreen && (
     activeContent === 'terms' ||
     activeContent === 'privacy' ||
     activeContent === 'sales-contract' ||
     activeContent === 'anti-social-policy'
   );
-
   const isSpecialContent2 = (
     activeContent === 'terms' ||
     activeContent === 'privacy' ||
     activeContent === 'sales-contract' ||
     activeContent === 'anti-social-policy'
-    
   );
 
   const style = {
     height: isSpecialContent ? '70vh' : '118vh',
-    padding: isSpecialContent2 && activeContent != 'my-account' ? '0' : '',
-    height: isSpecialContent2 ? '185vh' : '',
-    
+    padding: isSpecialContent2 && activeContent !== 'my-account' ? '0' : '',
+    height: isSpecialContent2 ? '185vh' : ''
   };
 
-  // Calendar header and rows
-const calendarHeader = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-const calendarRows = [
-  [
-    { day: '1', className: 'text-red-500' },
-    { day: '2' },
-    { day: '3' },
-    { day: '4' },
-    { day: '5' },
-    { day: '6' },
-    { day: '7' }
-  ],
-  [
-    { day: '8' },
-    { day: '9' },
-    { day: '10'},
-    { day: '11' },
-    { day: '12',},
-    { day: '13' },
-    { day: '14' }
-  ],
-  [
-    { day: '15' },
-    { day: '16' },
-    { day: '17' },
-    { day: '18' },
-    { day: '19' },
-    { day: '20',},
-    { day: '21' }
-  ],
-  [
-    { day: '22' },
-    { day: '23' },
-    { day: '24' },
-    { day: '25' },
-    { day: '26' },
-    { day: '27' },
-    { day: '28' }
-  ],
-  [
-    { day: '29' },
-    { day: '30' },
-    { day: '31' },
-    { day: '' },
-    { day: '' },
-    { day: '' },
-    { day: '' }
-  ]
-];
-
-const date = new Date()
-
-calendarRows.forEach((row)=>{
-  row.map((week,index)=>{
-    Object.assign(week,{"className": date.getDate() == week.day ? "highlight" : week.day == 20 ? 'red' : ''})
-  })
-}) 
-
-const totalByCurrency = userr.total_by_currency || {}; 
-const jpyData = totalByCurrency.JPY || {}; 
-
-const totalGuaranty = jpyData.guaranty || "0 JPY"; 
-const totalExpensiveGuaranty = jpyData.extra_guaranty || "0 JPY"; 
-const spendingAmount = jpyData.spending || "0 JPY"; 
-
-console.log(userr.total_by_currency)
+  // Render the component.
   return (
     <div className="profile-wrapper">
+      {showModal && (
+        <Modal
+          message={modalMessage}
+          onClose={handleCloseModal}
+          type={modalType}
+        />
+      )}
       <div className="profile-container">
         <div className="profile-sidebar">
           <div className="profile-sidebar-menus">
             <h2>MENU</h2>
             <ul>
-              {menuItems.map((item) => (
-                <li
-                  key={item.key}
-                  onClick={() => handleMenuClick(item)}
-                  className={activeContent === item.key ? 'active' : ''}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {item.label}
-                </li>
-              ))}
+              {menuItems.map((item) => {
+                // Check if this menu item corresponds to an agreement.
+                const agreementName = agreementMapping[item.key];
+                // Apply highlight only if:
+                // - There is an agreement for this item
+                // - The status is false
+                // - And it is NOT currently suppressed
+                const highlight =
+                  agreementName &&
+                  statuses[agreementName] === false &&
+                  !suppressHighlight[item.key];
+                
+                return (
+                  <li
+                    key={item.key}
+                    onClick={() => handleMenuClick(item)}
+                    className={`menu-item ${activeContent === item.key ? 'active' : ''} ${highlight ? 'highlight' : ''}`}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {item.label}
+                  </li>
+                );
+              })}
             </ul>
             <div className="amount">
-              <p><strong>Total Guaranty: </strong>{totalGuaranty}</p>
-              <p><strong>Total Extra Guaranty: </strong>{totalExpensiveGuaranty}</p>
-              {/*<p><strong>Spending Amount: </strong>{spendingAmount}</p>*/}
-          
+              <p><strong>Total Guaranty: </strong>{userr.total_by_currency?.JPY?.guaranty || "0 JPY"}</p>
+              <p><strong>Total Extra Guaranty: </strong>{userr.total_by_currency?.JPY?.extra_guaranty || "0 JPY"}</p>
             </div>
-
             <Calander />
           </div>
         </div>
@@ -301,6 +306,7 @@ console.log(userr.total_by_currency)
             setIsEditing={setIsEditing}
             userProfile={userProfile}
             agreementType={agreementType}
+            setSuppressHighlight={setSuppressHighlight}
           />
         </div>
       </div>

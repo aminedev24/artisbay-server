@@ -35,9 +35,9 @@ const topics = {
     { name: "Overview", component: <ArtisbayOverview />, image: `${process.env.PUBLIC_URL}/images/companyoverview.png` },
     { name: "Company Profile", component: <CompanyProfile />, image: `${process.env.PUBLIC_URL}/images/companyprofile.png` },
     { name: "Bank Information", content: <BankInformation />, image: `${process.env.PUBLIC_URL}/images/bankinfo.png` },
-    { name: "F&Q", content: <FAQComponent />, image: `${process.env.PUBLIC_URL}/images/FAQ.png` },
+    { name: "Frequently Asked Questions", content: <FAQComponent />, image: `${process.env.PUBLIC_URL}/images/FAQ.png` },
     { name: "Automated Invoice", content: <AutomatedInvoice />, image: `${process.env.PUBLIC_URL}/images/invoicegenerator.png` },
-    { name: "Why Artisbay Inc.", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
+    { name: "Why Artisbay Inc", content: <ArtisbayInfo />, image: `${process.env.PUBLIC_URL}/images/whychooseusrecent.jpeg` },
     { name: "Artisbay Consulting", content: <ArtisbayPromo />, image: `${process.env.PUBLIC_URL}/images/artisbayconsultingheader.png` },
     { name: "Terms and conditions", content: <TermsAndConditions />, image: `${process.env.PUBLIC_URL}/images/terms&conditions.png` },
     { name: "Anti Social Force Policy", content: <AntiSocialForcesPolicy />, image: `${process.env.PUBLIC_URL}/images/asf.png` },
@@ -99,31 +99,36 @@ const HelpPage = () => {
     navigate(`/help/artisbayInc/${formattedName}`);
   };
   
-  const isSpecialContent = isSmallScreen && (
+  const isSpecialContent = isSmallScreen  && (
     selectedTopic.name === 'Terms and conditions' ||
     selectedTopic.name === 'privacy policy' ||
     selectedTopic.name === 'Artisbay Consulting' ||
     selectedTopic.name === 'Anti Social Force Policy' || 
     selectedTopic.name === 'about used Tires' ||
     selectedTopic.name === 'F&Q' || 
-    selectedTopic.name === 'About payement' 
+    selectedTopic.name === 'About payement' || 
+    !isSidebarOpen
   );
 
   console.log('isSpecialContent', isSpecialContent)
-  const isSpecialContent2 = (
-    selectedTopic.name === 'terms' ||
-    selectedTopic.name === 'privacy' ||
-    selectedTopic.name === 'sales-contract' ||
-    selectedTopic.name === 'Anti-Social Force Policy' ||
-    selectedTopic.name === 'F&Q'
+  const isSpecialContent2 = !isSmallScreen &&  (
+    selectedTopic.name === 'Terms and conditions' ||
+    selectedTopic.name === 'privacy policy' ||
+    selectedTopic.name === 'Artisbay Consulting' ||
+    selectedTopic.name === 'Anti Social Force Policy' || 
+    selectedTopic.name === 'about used Tires' ||
+    selectedTopic.name === 'F&Q' || 
+    selectedTopic.name === 'About payement' ||
+    !isSidebarOpen
     
   );
 
   const style = {
-    height: isSpecialContent ? '60vh' : '',
-    //padding: isSpecialContent2 && selectedTopic.name != 'my-account' ? '0' : '',
-    //height: isSpecialContent2 ? '185vh' : '',
-    
+    height: isSpecialContent
+      ? '60vh'
+      : isSpecialContent2
+      ? '100vh'
+      : '', // Use a single conditional statement for height
   };
   
   useEffect(() => {
@@ -148,7 +153,9 @@ const HelpPage = () => {
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
           <div className="sidebar-header">
             <h1 
-              onClick={() => handleTopicChange(topics.help[0])} 
+              onClick={() => 
+                !isSidebarOpen ? setSidebarOpen(!isSidebarOpen) : handleTopicChange(topics.help[0])
+              } 
               className={`help-header ${!isSidebarOpen ? 'vertical' : ''}`}
             >
               HELP

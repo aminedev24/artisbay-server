@@ -1,10 +1,26 @@
 import React, { useState } from 'react';
 import { useUser } from './userContext';
+import Modal from "./alertModal";
 
 const Settings = ({ user, setUser }) => {
   const { triggerSessionRefresh } = useUser();
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
 
 
+  
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const showAlert = (message, type = "alert") => {
+    setTimeout(() => {
+      setModalMessage(message);
+      setModalType(type);
+      setShowModal(true);
+    }, 1000); // Delay for 1 second
+  };
   
   
   const [details, setDetails] = useState([
@@ -132,7 +148,7 @@ const Settings = ({ user, setUser }) => {
       if (!response.ok) {
         throw new Error('Failed to send verification email');
       }
-      alert('Verification email sent!');
+      showAlert('Verification email sent!');
     } catch (error) {
       setError(error.message);
     }
@@ -140,6 +156,14 @@ const Settings = ({ user, setUser }) => {
 
   return (
     <div className="settings-container">
+
+    {showModal && (
+          <Modal
+            message={modalMessage}
+            onClose={handleCloseModal}
+            type={modalType}
+          />
+      )}
       {error && <div className="error-message">{error}</div>}
       <h1>Settings</h1>
       <table className="settings-table">
