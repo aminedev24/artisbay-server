@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import HowToBuy from './howtobuy';
 import CompanyProfile from './companyProfile';
-import '../../css/help.css';
+import '../../css/help/help.css';
 import TermsAndConditions from './terms';
 import AntiSocialForcesPolicy from './asf';
 import WhyChooseUs from './whyChooseUs';
-import CarDismantlingService from '../dismantling';
+import CarDismantlingService from '../vehicles/dismantling';
 import ArtisbayOverview from './overview';
 import EnvironmentalMessage from './envirementPolicy';
 import PaymentPolicy from './securityNotice';
@@ -25,8 +25,8 @@ import WisePaymentInstructions from './wise';
 import BusinessConsulting from './businessConsulting';
 import PdfContent from './japanDealers';
 import ArtisbayPromo from './artisbayPromo2';
-import ImageWithLoader from '../imageWithLoader';
-import useCheckScreenSize from '../screenSize';
+import ImageWithLoader from '../misc/imageWithLoader';
+import useCheckScreenSize from '../utilities/screenSize';
 
 // Define the topics
 const topics = {

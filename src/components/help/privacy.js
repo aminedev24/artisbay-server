@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AgreementForm from '../agreementForm';
-import ProfilePage from '../profile2';
+import AgreementForm from '../forms/agreementForm';
+import ProfilePage from '../user/profile2';
 
 const PrivacyPolicy = ({ userProfile, agreementType }) => {
 

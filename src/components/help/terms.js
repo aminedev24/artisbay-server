@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../../css/terms.css';
+import '../../css/help/terms.css';
 import { Link } from 'react-router-dom';
-import AgreementForm from '../agreementForm';
+import AgreementForm from '../forms/agreementForm';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import DynamicAgreementPDF from '../agreementPdf';
+import DynamicAgreementPDF from '../sales/agreementPdf';
 
 
 const TermsAndConditions = ({ userProfile, agreementType }) => {

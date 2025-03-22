@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../css/terms.css';
-import AgreementForm from '../agreementForm';
+import '../../css/help/terms.css';
+import AgreementForm from '../forms/agreementForm';
 const AntiSocialForcesPolicy = ({userProfile,agreementType}) => {
 const agreementContent = (
   `

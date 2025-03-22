@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/japanExports.css'; // Import the CSS file
-import Contact from '../contact';
-import ImageWithLoader from '../imageWithLoader';
+import '../../css/agents/japanExports.css'; // Import the CSS file
+import Contact from '../forms/contact';
+import ImageWithLoader from '../misc/imageWithLoader';
 const PdfContent = () => {
   const [language, setLanguage] = useState('ja');
   const [japanExports,setJapanExports] = useState(true);

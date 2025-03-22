@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/artisbayPromo.css";
+import "../../css/help/artisbayPromo.css";
 import { Link, useLocation } from "react-router-dom";
 
 const translations = {

@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Header from './components/header';
-import Footer from './components/footer';
-import CarDetails from './components/carDetails';
-import Stocklist from './components/stockList';
-import carData from './components/carData'; // Import car data
-import HomePage from './components/homepage';
-import Contact from './components/contact';
+import Header from './components/common/header';
+import Footer from './components/common/footer';
+import CarDetails from './components/vehicles/carDetails';
+import Stocklist from './components/misc/stockList';
+import carData from './components/vehicles/carData'; // Import car data
+import HomePage from './components/pages/homepage';
+import Contact from './components/forms/contact';
 //import HowToBuy from './components/howtobuy';
-import LeftSidebar from './components/sidebar'; // Import the LeftSidebar
-import './css/App.css';
+import LeftSidebar from './components/common/sidebar'; // Import the LeftSidebar
+import './css/global/App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CarDismantling from './components/carDismantling';
-import UsedTires from './components/usedTires';
+import CarDismantling from './components/vehicles/carDismantling';
+import UsedTires from './components/vehicles/usedTires';
 import HelpPage from './components/help/help';
-import InquiryForm from './components/vehiculeEnquiry';
-import RegisterForm from './components/register';
-import { UserProvider } from './components/userContext';
-import Login from './components/login';
+import InquiryForm from './components/vehicles/vehiculeEnquiry';
+import RegisterForm from './components/pages/register';
+import { UserProvider } from './components/user/userContext';
+import Login from './components/pages/login';
 import { useLocation } from 'react-router-dom';
-import ResetPassword from './components/resetPassword';
-import ForgotPassword from './components/forgotPassword';
-import ProfilePage from './components/profile2';
-import Shipping from './components/shipping';
-import ProformaInvoiceForm from './components/invoiceForm';
-import NamibiaAgent from './components/namibiaAgent';
-import CongoAgent from './components/congoAgent';
-import TanzainaAgent from './components/tanzaniaAgent';
-import CarCostCalculator from './components/cuttingCalculator';
+import ResetPassword from './components/forms/resetPassword';
+import ForgotPassword from './components/forms/forgotPassword';
+import ProfilePage from './components/user/profile2';
+import Shipping from './components/shipping/shipping';
+import ProformaInvoiceForm from './components/forms/invoiceForm';
+import NamibiaAgent from './components/agents/namibiaAgent';
+import CongoAgent from './components/agents/congoAgent';
+import TanzainaAgent from './components/agents/tanzaniaAgent';
+import CarCostCalculator from './components/utilities/cuttingCalculator';
 import PdfContent from './components/help/japanDealers';
-import SendEmailVerification from './components/SendEmailVerification';
-import VerifyEmail from './components/verifyEmail';
-import SignupForm from './components/registerForm2';
-import AdminVerifyEmail from './components/adminVerifyEmail';
-import UserEmailVerification from './components/verifyUserEmail';
+import SendEmailVerification from './components/misc/SendEmailVerification';
+import VerifyEmail from './components/user/verifyEmail';
+import SignupForm from './components/forms/registerForm2';
+import AdminVerifyEmail from './components/utilities/adminVerifyEmail';
+import UserEmailVerification from './components/user/verifyUserEmail';
 function App() {
   
   const [bodyWidth, setBodyWidth] = useState(window.screen.width);

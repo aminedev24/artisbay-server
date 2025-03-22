@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 //import './Artisbay.css'; // Import the CSS file
-import Contact from '../contact';
+import Contact from '../forms/contact';
 function SellInArtisbay() {
   const [sell, setSell] = useState(true)
   return (

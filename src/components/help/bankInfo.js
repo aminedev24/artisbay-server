@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../css/bankInfo.css'; // Import the CSS file
+import '../../css/help/bankInfo.css'; // Import the CSS file
 import {Link} from 'react-router-dom'; 
-import Tooltip from "../toolTip";
+import Tooltip from "../utilities/toolTip";
 
 const BankInformation = () => {
   const bankInfo = {

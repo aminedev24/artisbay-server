@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/howToBuy.css';
+import '../../css/help/howToBuy.css';
 import {Link} from 'react-router-dom';
 
 const HowToBuy = () => {

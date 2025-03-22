@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/artisbayPromo.css"; // Corresponding CSS file for styling
+import "../../css/components/artisbayPromo.css"; // Corresponding CSS file for styling
 import { Link , useLocation} from "react-router-dom";
 
 const translations = {

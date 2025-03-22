@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import faqData from '../faqData.json';
-import '../../css/faq.css'; // Import the CSS file
+import faqData from '../utilities/faqData.json';
+import '../../css/help/faq.css'; // Import the CSS file
 
 const FAQComponent = () => {
   const [language, setLanguage] = useState('en'); // Default language is English
