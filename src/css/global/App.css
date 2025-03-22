@@ -10,6 +10,12 @@ p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link,
   font-size: clamp(1.1rem, 1.8vw, 1.2rem); /* Reduced */
 }
 
+@media  (min-width: 1400px) {
+  p, ul li, ol li, .list-item, .services-text, .logistics-agent-info, .cta-link, 
+  .bank-info-table td, .footer-inner a, .paypay-link {
+    font-size: clamp(1.1rem, 1.5vw, 1.2rem); /* Reduced */
+  }
+}
 .links a {
   font-size: clamp(0.9rem, 1vw, 1.1rem);
 }

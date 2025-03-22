@@ -106,29 +106,33 @@ const HelpPage = () => {
     selectedTopic.name === 'Anti Social Force Policy' || 
     selectedTopic.name === 'about used Tires' ||
     selectedTopic.name === 'F&Q' || 
-    selectedTopic.name === 'About payement' || 
-    !isSidebarOpen
+    selectedTopic.name === 'About payement'
+   
   );
 
-  console.log('isSpecialContent', isSpecialContent)
-  const isSpecialContent2 = !isSmallScreen &&  (
+  const isSpecialContent2 =  (
     selectedTopic.name === 'Terms and conditions' ||
     selectedTopic.name === 'privacy policy' ||
     selectedTopic.name === 'Artisbay Consulting' ||
     selectedTopic.name === 'Anti Social Force Policy' || 
     selectedTopic.name === 'about used Tires' ||
     selectedTopic.name === 'F&Q' || 
-    selectedTopic.name === 'About payement' ||
-    !isSidebarOpen
+    selectedTopic.name === 'About payement'
     
   );
 
+  console.log('isSpecialContent2', isSpecialContent2)
+  //console.log('isSpecialContent', isSpecialContent)
+
   const style = {
-    height: isSpecialContent
-      ? '60vh'
-      : isSpecialContent2
+    height: isSpecialContent2 && isSmallScreen
       ? '100vh'
-      : '', // Use a single conditional statement for height
+      : isSpecialContent2 && !isSmallScreen 
+      ? ''
+      : isSmallScreen && !isSpecialContent2 ?
+      '60vh': 
+      !isSmallScreen && !isSpecialContent2 && !isSidebarOpen ? '100vh':
+      '' , 
   };
   
   useEffect(() => {

@@ -92,7 +92,7 @@ function App() {
         <Route path='/local-services/Namibia/Walvisbay' element={<NamibiaAgent />} />
         <Route path='/local-services/DR-Congo/Matadi' element={<CongoAgent />} />
         <Route path='/local-services/Tanzania/Dar-Essalam' element={<TanzainaAgent />} />
-        <Route path='/car-cost-calculator' element={<CarCostCalculator />} />
+        <Route path='/car-dismantilng-cost-calculator' element={<CarCostCalculator />} />
         <Route path='/japan-exports' element={<PdfContent />} />
         <Route path='/send-email-verification' element={<SendEmailVerification />} />
         <Route path='/get-email-verification' element={<VerifyEmail />} />

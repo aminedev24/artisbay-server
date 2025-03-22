@@ -153,8 +153,12 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
 
       const data = await response.json();
       showAlert("Invoice sent successfully!");
-      regenerateParam = false;
-      setInvoiceState({});
+        // Update the URL query to set regenerate=false
+      const searchParams = new URLSearchParams(location.search);
+      searchParams.set('regenerate', 'false');
+ 
+      // Navigate with the updated query parameters without adding to history
+      navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
       window.history.replaceState({}, document.title, window.location.hash);
 
       

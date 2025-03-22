@@ -26,7 +26,7 @@ const CarDismantling = () => {
             className="image"
           />
           */}
-          <Link to='/car-cost-calculator'><button className="dismantling-shipping-btn">Click here</button></Link>
+          <Link to='/car-dismantilng-cost-calculator'><button className="dismantling-shipping-btn">Click here</button></Link>
         </div>
         <div className="image-container cutting">
           <ImageWithLoader

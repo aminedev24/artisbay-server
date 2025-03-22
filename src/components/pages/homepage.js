@@ -290,7 +290,7 @@ const links2 = [
             <div className="news-items">
             <p className="news-item">2024/11/15 Artisbay Inc was born</p>
             <p className="news-item">2024/12/02 Artisbay Inc website published</p>
-            <p className="news-item">Holidays from 28 December to 5 January </p>
+            <p className="news-item">2025/01/03 Artisbay Inc. is a company registered under the Yokohama Legal Affairs Bureau</p>
 
             </div>
             <ImageWithLoader

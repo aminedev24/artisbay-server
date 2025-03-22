@@ -115,14 +115,22 @@ const ProformaInvoiceForm = () => {
 
  const { invoiceData, regenerate } = invoiceState;
 
+
  const resetInvoiceState = () => {
+   // Clear and reset the state
    setInvoiceState({
-     invoiceData: null, // Reset invoice data explicitly
-     regenerate: false, // Reset regenerate flag explicitly
+     invoiceData: null,
+     regenerate: false,
    });
-   // Preserve the URL hash when resetting state
-   window.history.replaceState({}, document.title, window.location.hash);
+ 
+   // Update the URL query to set regenerate=false
+   const searchParams = new URLSearchParams(location.search);
+   searchParams.set('regenerate', 'false');
+ 
+   // Navigate with the updated query parameters without adding to history
+   navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
  };
+ 
 
   useEffect(() => {
     // Optionally, if you want to log or adjust based on the parsed data.
