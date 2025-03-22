@@ -1,4 +1,4 @@
-// AgreementForm.jsx
+﻿// AgreementForm.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import useAgreementStatus from '../utilities/agreementStatus';
 import { useUser } from "../user/userContext";
@@ -7,7 +7,7 @@ import Modal from "../common/alertModal";
 const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight }) => {
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
   const [formData, setFormData] = useState({

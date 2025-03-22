@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import "../../css/components/emailConfirmation.css"; // Import CSS file
 
 const VerifyEmail = () => {
@@ -6,7 +6,7 @@ const VerifyEmail = () => {
 
   const apiUrl =
   process.env.NODE_ENV === "development"
-    ? "http://localhost/artisbay-server/server"
+    ? "http://localhost/artisbay-backup/server"
     : "/server";
 
     useEffect(() => {

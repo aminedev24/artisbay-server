@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { FaEnvelope, FaGlobe } from "react-icons/fa";
 import "../../css/components/invoice.css";
 import jsPDF from "jspdf";
@@ -42,7 +42,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   const handlePrint = () => {

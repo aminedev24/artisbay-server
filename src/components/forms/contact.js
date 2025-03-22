@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import '../../css/forms/contact.css';
 import CountryList from '../utilities/countryList';
 import useCheckScreenSize from '../utilities/screenSize';
@@ -48,7 +48,7 @@ const Contact = ({ sell, japanExports }) => {
   const { isSmallScreen, isPortrait } = useCheckScreenSize();
 
   const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-backup/server'
     : '/server';
 
     useEffect(() => {

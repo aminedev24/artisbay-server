@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import '../../css/forms/accountancyForm.css';
 import Tooltip from '../utilities/toolTip';
 import Modal from '../common/alertModal';
@@ -30,7 +30,7 @@ const AccountancyForm = () => {
 
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
   // Conversion rates with JPY as the base currency

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import "../../css/forms/usedTiresForm.css";
 import TireSelection from "../vehicles/tireSelection";
 import Modal from "../common/alertModal";
@@ -36,7 +36,7 @@ const OrderForm = ({
   // Dynamically set API URL based on environment
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server" // Development URL
+      ? "http://localhost/artisbay-backup/server" // Development URL
       : "/server"; // Production URL (relative path)
 
   // Define modal types

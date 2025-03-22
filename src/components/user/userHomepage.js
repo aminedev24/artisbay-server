@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+﻿import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from "react-router-dom";
 import CreatableSelect from 'react-select/creatable';
 import '../../css/user/userHomepage.css';
@@ -29,7 +29,7 @@ const UserHomepage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import '../../css/components/emailConfirmation.css';
 
 const SendEmailVerification = () => {
@@ -9,7 +9,7 @@ const SendEmailVerification = () => {
   
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   const sendVerificationEmail = async () => {

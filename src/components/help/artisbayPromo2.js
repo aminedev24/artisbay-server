@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import "../../css/help/artisbayPromo.css";
 import { Link, useLocation } from "react-router-dom";
 
@@ -372,7 +372,7 @@ const ArtisbayPromo = () => {
         <div className="section-image">
           <img
             alt={t.sectionImageAlt}
-            src="/artisbay-server/images/consulting/handshake.png"
+            src="/artisbay-backup/images/consulting/handshake.png"
             width="300"
             height="200"
           />

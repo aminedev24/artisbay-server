@@ -7,7 +7,7 @@ const PaymentMethods = () => {
       
       {/*<img style={{ maxHeight : 'unset' }} src={`${process.env.PUBLIC_URL}/images/aboutpayment.jpeg`} alt={'company-profile'} className="topic-image" />*/}
       <h4>Payment Methods at Artisbay Inc.</h4>
-      <p>At Artisbay Inc., we provide secure and reliable payment options to meet the needs of our global customers check out our<Link to='/help/artisbayInc/About-payement' className='cta-link'>bank information</Link>for more details.</p>
+      <p>At Artisbay Inc., we provide secure and reliable payment options to meet the needs of our global customers check out our<Link to='/help/artisbayInc/Bank-Information' className='cta-link'>bank information</Link>for more details.</p>
       
       <h4>1. Telegraphic Transfer (T/T)</h4>
       <p>Customers can make payments directly via T/T, a safe and widely recognized international transfer method.</p>

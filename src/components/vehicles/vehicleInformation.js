@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import "../../css/vehicle/vehicleInfo.css";
 
 const VehicleInfo = ({onClose, selectedCar}) => {
@@ -10,7 +10,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   );
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+﻿import React, {useState} from 'react';
 import { useUser } from '../user/userContext'; // adjust the path as needed
 import Modal from '../common/alertModal';
 
@@ -9,7 +9,7 @@ const RevertImpersonationButton = () => {
   const [modalType, setModalType] = useState("");  // e.g., 'alert', 'confirmation', etc.
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
 

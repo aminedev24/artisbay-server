@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import InvoiceModal from "../sales/invoice2";
 import CountryList from "../utilities/countryList";
 import "../../css/components/invoice.css";
@@ -240,7 +240,7 @@ console.log(invoiceData)
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   // Fetch user data from the backend and populate form fields

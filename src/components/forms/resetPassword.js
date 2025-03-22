@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../css/forms/forgotPassword.css';
 
@@ -44,7 +44,7 @@ const ResetPassword = () => {
   };
 
   const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-backup/server'
     : '/server';
 
   const handleResetPassword = async (e) => {

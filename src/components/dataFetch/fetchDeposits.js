@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 
 export default function DepositsTable() {
   const [deposits, setDeposits] = useState([]);
@@ -9,7 +9,7 @@ export default function DepositsTable() {
   // API URL setup
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
   useEffect(() => {

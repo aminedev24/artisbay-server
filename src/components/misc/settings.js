@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useUser } from '../user/userContext';
 import Modal from "../common/alertModal";
 
@@ -81,7 +81,7 @@ const Settings = ({ user, setUser }) => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   const handleEditToggle = (key) => {

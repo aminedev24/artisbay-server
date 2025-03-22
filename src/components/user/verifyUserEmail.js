@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useLocation , useNavigate} from 'react-router-dom';
 
 // Custom hook to parse URL query parameters
@@ -14,7 +14,7 @@ const UserEmailVerification = () => {
   
   const apiUrl =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-backup/server'
     : '/server';
   
   useEffect(() => {

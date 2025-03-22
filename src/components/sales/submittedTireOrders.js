@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 //import "./TireOrderList.css"; // Import CSS file for styling
 const LoadingSpinner = () => (
   <div className="spinner-container">
@@ -16,7 +16,7 @@ const TireOrderList = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
       useEffect(() => {

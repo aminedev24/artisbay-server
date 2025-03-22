@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import "../../css/components/artisbayPromo.css"; // Corresponding CSS file for styling
 import { Link , useLocation} from "react-router-dom";
 
@@ -306,7 +306,7 @@ const ArtisbayPromo = () => {
         <div className="section-image">
           <img
             alt="Two business professionals shaking hands in an office setting"
-            src="/artisbay-server/images/consulting/handshake.png"
+            src="/artisbay-backup/images/consulting/handshake.png"
             width="300"
             height="200"
           />

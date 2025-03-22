@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import "../../css/pages/profile.css"; // Import the CSS file
 import { useNavigate } from "react-router-dom";
 import useCheckScreenSize from '../utilities/screenSize';
@@ -23,7 +23,7 @@ const Profile = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   useEffect(() => {

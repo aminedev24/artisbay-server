@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useUser } from '../user/userContext'; // adjust the path as needed
 
 const AdminUserList = () => {
@@ -12,7 +12,7 @@ const AdminUserList = () => {
   // API URL configuration
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
   useEffect(() => {

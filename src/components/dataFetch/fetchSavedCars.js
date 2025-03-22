@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import '../../css/vehicle/fetchCars.css';
 import { use } from "react";
 const LoadingSpinner = () => (
@@ -36,7 +36,7 @@ const FetchSavedCars = () => {
 
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
       useEffect(() => {

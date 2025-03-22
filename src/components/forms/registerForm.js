@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import CountryList from "../utilities/countryList";
 import { useNavigate } from "react-router-dom";
 //import logo from `${process.env.PUBLIC_URL}/images/companyprofile.jpg`; // Import your logo image
@@ -22,7 +22,7 @@ const SignupForm = ({ setIsModalOpen , setModalType ,modalType }) => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   const handleCountryChange = (event) => {

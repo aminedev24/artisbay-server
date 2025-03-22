@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 //import '../../css/forgotPassword.css';
 import '../../css/forms/forgotPassword.css'
 const ForgotPassword = () => {
@@ -7,7 +7,7 @@ const ForgotPassword = () => {
   const [messageType, setMessageType] = useState('');
 
   const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-backup/server'
     : '/server';
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 // Helper to get query parameters from the URL
@@ -13,7 +13,7 @@ const AdminVerifyEmail = () => {
   const [message, setMessage] = useState('Verifying your email, please wait...');
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
   useEffect(() => {

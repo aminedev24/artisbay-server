@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import "../../css/forms/vehiculeEquiry.css";
 import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "./vehicleData";
 import CountryList from '../utilities/countryList';
@@ -21,7 +21,7 @@ const InquiryForm = () => {
 
 
   const apiUrl = process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-backup/server'
     : '/server';
 
   const [userData, setUserData] = useState({

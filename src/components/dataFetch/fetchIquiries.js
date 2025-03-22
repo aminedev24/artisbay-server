@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 
 const InquiryList = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -10,7 +10,7 @@ const InquiryList = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   useEffect(() => {

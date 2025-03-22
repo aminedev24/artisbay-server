@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+﻿import React, { useState , useEffect } from "react";
 import "../../css/vehicle/cuttingCost.css";
 import Tooltip from "./toolTip";
 import SavedCarsPanel from "../misc/savedCarsPanel";
@@ -193,7 +193,7 @@ useEffect(() => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   const handleSubmit = async () => {

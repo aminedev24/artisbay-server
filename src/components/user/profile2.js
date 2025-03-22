@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+﻿import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useCheckScreenSize from '../utilities/screenSize';
 import Settings from '../misc/settings';
@@ -24,7 +24,7 @@ import Modal from "../common/alertModal";
 
 const apiUrl =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost/artisbay-server/server'
+    ? 'http://localhost/artisbay-backup/server'
     : '/server';
 
 const ProfilePage = () => {

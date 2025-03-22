@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 //import "./InvoiceList.css"; // import the external CSS file
 
@@ -25,7 +25,7 @@ const InvoiceList = () => {
 
   const apiUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost/artisbay-server/server"
+      ? "http://localhost/artisbay-backup/server"
       : "/server";
 
   useEffect(() => {

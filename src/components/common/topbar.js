@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import '../../css/layout/topbar.css'; // Adjust your CSS file path accordingly
 import { useUser } from "../user/userContext";
 
@@ -11,7 +11,7 @@ const TopBar = () => {
 
   const apiUrl =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost/artisbay-server/server'
+      ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
   // Update Japan Standard Time every second
