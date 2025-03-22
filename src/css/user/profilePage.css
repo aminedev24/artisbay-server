@@ -327,4 +327,10 @@
     color: #fff;
     background-color: #f44336 !important;
   }
-  
+
+  .filter-container.invoice-list {
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #f3f3f3;
+    padding: 20px;
+  }

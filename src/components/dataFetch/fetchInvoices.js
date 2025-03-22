@@ -118,47 +118,67 @@ const InvoiceList = () => {
       <h1>Invoices List</h1>
 
       {/* Filter container */}
-      <div className="filter-container">
-        <input
-          type="text"
-          placeholder="Filter by Invoice Number"
-          value={invoiceNumberFilter}
-          onChange={(e) => {
-            setInvoiceNumberFilter(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="filter-input"
-        />
-        <input
-          type="text"
-          placeholder="Filter by Description"
-          value={descriptionFilter}
-          onChange={(e) => {
-            setDescriptionFilter(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="filter-input"
-        />
-        <input
-          type="text"
-          placeholder="Filter by Date"
-          value={dateFilter}
-          onChange={(e) => {
-            setDateFilter(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="filter-input"
-        />
-        <input
-          type="text"
-          placeholder="Filter by Payment Purpose"
-          value={paymentPurposeFilter}
-          onChange={(e) => {
-            setPaymentPurposeFilter(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="filter-input"
-        />
+      <div className="filter-container invoice-list">
+        <div className="form-group">
+          <label htmlFor="filterNumber">Filter by invoice number</label>
+          <input
+            type="text"
+            name='filterNumber'
+            placeholder="Filter by Invoice Number"
+            value={invoiceNumberFilter}
+            onChange={(e) => {
+              setInvoiceNumberFilter(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="filter-input"
+          />
+        </div>
+        
+        <div className='form-group'>
+          <label htmlFor="filterNumber">Filter by description</label>
+          <input
+            type="text"
+            name='byDescription'
+            placeholder="Filter by Description"
+            value={descriptionFilter}
+            onChange={(e) => {
+              setDescriptionFilter(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="filter-input"
+          />
+
+        </div>
+       <div className="form-group">
+        <label htmlFor="byDate">Filter by date</label>
+          <input
+            name="byDate"
+            type="text"
+            placeholder="Filter by Date"
+            value={dateFilter}
+            onChange={(e) => {
+              setDateFilter(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="filter-input"
+          />
+
+       </div>
+       <div className='form-group'>
+        <label htmlFor="byPurpose">Filter by purpose</label>
+          <input
+            name="byPurpose"
+            type="text"
+            placeholder="Filter by Payment Purpose"
+            value={paymentPurposeFilter}
+            onChange={(e) => {
+              setPaymentPurposeFilter(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="filter-input"
+          />
+       </div>
+       
       </div>
 
       <table className="invoice-table" border="1">
