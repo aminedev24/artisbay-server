@@ -1,6 +1,8 @@
 // AgreementForm.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import useAgreementStatus from '../utilities/agreementStatus';
+import { useUser } from "../user/userContext";
+import Modal from "../common/alertModal";
 
 const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight }) => {
   const apiUrl =
@@ -17,6 +19,26 @@ const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFetched, setIsFetched] = useState(false);
   const [error, setError] = useState(null);
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
+  
+  const showAlert = (message, type = "alert") => {
+    setTimeout(() => {
+      setModalMessage(message);
+      setModalType(type);
+      setShowModal(true);
+    }, 1000); // Delay for 1 second
+  };
+
+
+  
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const { user } = useUser();
 
   // Use our custom hook to get the agreement status.
   const { alreadyAgreed, loading } = useAgreementStatus(agreementType, apiUrl);
@@ -68,7 +90,10 @@ const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submissionData = { ...formData, agreementType, agreementContent };
-
+    if (user?.isImpersonating) {
+      showAlert(`you can\'t accepct the ${agreementType} on behalf the user.`)
+      return;
+    }
     try {
       const response = await fetch(`${apiUrl}/submitAgreement.php`, {
         method: 'POST',
@@ -78,6 +103,10 @@ const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight 
       });
       if (response.ok) {
         setIsSubmitted(true);
+        // Reload the page after 3 seconds (3000 milliseconds)
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'An error occurred while submitting the form.');
@@ -94,6 +123,14 @@ const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight 
 
   return (
     <div className="user-agreement-container">
+      {showModal && (
+      <Modal
+        message={modalMessage}
+        onClose={handleCloseModal}
+        type={modalType}
+      />
+       )}
+
       <form onSubmit={handleSubmit}>
         <label>
           Full Name:
@@ -123,7 +160,7 @@ const AgreementForm = ({ agreementType, agreementContent , setSuppressHighlight 
             name="terms"
             checked={alreadyAgreed || formData.terms}
             onChange={handleChange}
-            disabled={alreadyAgreed || isSubmitted}
+            disabled={alreadyAgreed || isSubmitted || user?.isImpersonating}
             required
           />
           I agree to the {agreementType}

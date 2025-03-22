@@ -94,34 +94,35 @@ const ProformaInvoiceForm = () => {
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState("");  // Could be 'alert', 'confirmation', or 'clear_all'
 
-  const [searchParams] = useSearchParams();
-  const regenerateParam = searchParams.get("regenerate") === "true";
-  let invoiceDataFromQuery = {};
-  try {
-    invoiceDataFromQuery = JSON.parse(decodeURIComponent(searchParams.get("invoiceData") || "{}"));
-  } catch (error) {
-    console.error("Error parsing invoice data:", error);
-  }
-  
-  
-  // Initialize local state using the query parameters.
-  const [invoiceState, setInvoiceState] = useState({
-    invoiceData: invoiceDataFromQuery,
-    regenerate: regenerateParam,
-  });
+ // Retrieve the 'regenerate' parameter from the URL
+ const [searchParams] = useSearchParams();
+ const regenerateParam = searchParams.get("regenerate") === "true";
 
-  const { invoiceData, regenerate } = invoiceState;
+ // Retrieve the invoice data from session storage
+ let invoiceDataFromStorage = {};
+ try {
+   const storedData = sessionStorage.getItem('invoiceData');
+   invoiceDataFromStorage = storedData ? JSON.parse(storedData) : {};
+ } catch (error) {
+   console.error("Error parsing invoice data from session storage:", error);
+ }
 
-  const resetInvoiceState = () => {
-    setInvoiceState({
-      invoiceData: null, // Explicitly reset invoice data
-      regenerate: false, // Explicitly reset regenerate flag
-    });
-  
-    // Preserve the URL hash when resetting state
-    window.history.replaceState({}, document.title, window.location.hash);
-  };
-  
+ // Initialize local state using the data from session storage and query parameter.
+ const [invoiceState, setInvoiceState] = useState({
+   invoiceData: invoiceDataFromStorage,
+   regenerate: regenerateParam,
+ });
+
+ const { invoiceData, regenerate } = invoiceState;
+
+ const resetInvoiceState = () => {
+   setInvoiceState({
+     invoiceData: null, // Reset invoice data explicitly
+     regenerate: false, // Reset regenerate flag explicitly
+   });
+   // Preserve the URL hash when resetting state
+   window.history.replaceState({}, document.title, window.location.hash);
+ };
 
   useEffect(() => {
     // Optionally, if you want to log or adjust based on the parsed data.

@@ -57,11 +57,6 @@ export const UserProvider = ({ children }) => {
   };
 
 
-
-
-  //console.log(user)
-  
-
   // Logout Function
   const logout = async () => {
     if (isSubmitting) return;
@@ -119,7 +114,7 @@ export const UserProvider = ({ children }) => {
   }
 };
 
-//console.log(user)
+console.log(user)
 // Initial session check on component mount
 useEffect(() => {
   checkSession();

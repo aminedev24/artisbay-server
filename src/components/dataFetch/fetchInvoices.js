@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-//import '../css/invoiceList.css';
+//import "./InvoiceList.css"; // import the external CSS file
 
 const LoadingSpinner = () => (
   <div className="spinner-container">
@@ -16,6 +16,12 @@ const InvoiceList = () => {
   const [itemsPerPage] = useState(10);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // New filter states (invoice number, description, date, payment purpose)
+  const [invoiceNumberFilter, setInvoiceNumberFilter] = useState("");
+  const [descriptionFilter, setDescriptionFilter] = useState("");
+  const [dateFilter, setDateFilter] = useState("");
+  const [paymentPurposeFilter, setPaymentPurposeFilter] = useState("");
 
   const apiUrl =
     process.env.NODE_ENV === "development"
@@ -34,7 +40,11 @@ const InvoiceList = () => {
         return response.json();
       })
       .then((data) => {
-        setInvoices(data);
+        // Sort invoices by created_at in descending order (recent to old)
+        const sortedData = data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        setInvoices(sortedData);
         setLoading(false);
       })
       .catch((err) => {
@@ -42,80 +52,160 @@ const InvoiceList = () => {
         setLoading(false);
       });
   }, [apiUrl]);
-  //invoices.forEach((invoiceData)=>{console.log(invoiceData)})
 
-  // Pagination logic
+  // Filter invoices using multiple filters (excluding customer name and email)
+  const filteredInvoices = invoices.filter((invoice) => {
+    const invoiceNumberMatch = invoice.invoice_number
+      .toLowerCase()
+      .includes(invoiceNumberFilter.toLowerCase());
+    const descriptionMatch = invoice.description
+      .toLowerCase()
+      .includes(descriptionFilter.toLowerCase());
+    const dateMatch = invoice.created_at
+      .toLowerCase()
+      .includes(dateFilter.toLowerCase());
+    const paymentPurposeMatch = invoice.deposit_purpose
+      .toLowerCase()
+      .includes(paymentPurposeFilter.toLowerCase());
+    return invoiceNumberMatch && descriptionMatch && dateMatch && paymentPurposeMatch;
+  });
+
+  // Pagination logic: Slice filtered invoices array
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentInvoices = invoices.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(invoices.length / itemsPerPage);
+  const currentInvoices = filteredInvoices.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredInvoices.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  // When "Regenerate Invoice" is clicked,
-  // navigate to the invoice form generator route with the invoice data
+  // When "Regenerate Invoice" is clicked, navigate to invoice generator route with invoice data
   const handleRegenerate = (invoice) => {
+    sessionStorage.setItem("invoiceData", JSON.stringify(invoice));
     const queryString = new URLSearchParams({
-      invoiceData: JSON.stringify(invoice), 
-      regenerate: true
+      regenerate: true,
     }).toString();
-  
     window.open(`/invoice-generator?${queryString}`, "_blank");
   };
-  
 
   if (loading) {
     return (
-      <div className="profile-wrapper" style={{ alignItems: 'center' }}>
-        <LoadingSpinner />      
+      <div className="profile-wrapper" style={{ alignItems: "center" }}>
+        <LoadingSpinner />
       </div>
     );
   }
   if (error) return <p>Error: {error}</p>;
-  const invoiceHeaders = ['Invoice Number', 'Customer Name', , 'Email', 'Payment Amount', 'Description', 'Date', 'Payment Purpose', 
-    'Vehicle Description', 'Mileage', 'Chassis Number', 'Engine Capacity', 'Actions' ]
 
-  const invoiceData = []
+  const invoiceHeaders = [
+    "Invoice Number",
+    "Customer Name",
+    "Email",
+    "Payment Amount",
+    "Description",
+    "Date",
+    "Payment Purpose",
+    "Vehicle Description",
+    "Mileage",
+    "Chassis Number",
+    "Engine Capacity",
+    "Actions",
+  ];
 
   return (
     <div className="order-list">
       <h1>Invoices List</h1>
+
+      {/* Filter container */}
+      <div className="filter-container">
+        <input
+          type="text"
+          placeholder="Filter by Invoice Number"
+          value={invoiceNumberFilter}
+          onChange={(e) => {
+            setInvoiceNumberFilter(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="filter-input"
+        />
+        <input
+          type="text"
+          placeholder="Filter by Description"
+          value={descriptionFilter}
+          onChange={(e) => {
+            setDescriptionFilter(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="filter-input"
+        />
+        <input
+          type="text"
+          placeholder="Filter by Date"
+          value={dateFilter}
+          onChange={(e) => {
+            setDateFilter(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="filter-input"
+        />
+        <input
+          type="text"
+          placeholder="Filter by Payment Purpose"
+          value={paymentPurposeFilter}
+          onChange={(e) => {
+            setPaymentPurposeFilter(e.target.value);
+            setCurrentPage(1);
+          }}
+          className="filter-input"
+        />
+      </div>
+
       <table className="invoice-table" border="1">
         <thead>
           <tr>
-            {invoiceHeaders.map((header)=>{
-              return <th key={header}>{header}</th>;
-            })}
+            {invoiceHeaders.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {currentInvoices.length > 0 ? currentInvoices.map((invoice) => (
-            <tr key={invoice.id}>
-              <td>{invoice.invoice_number}</td>
-              <td>{invoice.customer_name}</td>
-              <td>{invoice.email}</td>
-              <td>{parseInt(invoice.deposit_amount).toLocaleString()} {invoice.deposit_currency}</td>
-              <td>{invoice.description}</td>
-              <td>{invoice.created_at}</td>
-              <td>{invoice.deposit_purpose}</td>
-              <td>{invoice.make && invoice.model ? `${invoice.make} ${invoice.model}` : 'not specified'}</td>
-              <td>{invoice.mileage || 'not specified'}</td>
-              <td>{invoice.chasis_number || 'not specified'}</td>
-              <td>{invoice.engine_capacity || 'not specified'}</td>
-              <td>
-                <button style={{
-                  backgroundColor: 'var(--accent-color)',
-                  color: "#fff"
-                }} onClick={() => handleRegenerate(invoice)}>
-                  Regenerate Invoice
-                </button>
-              </td>
-            </tr>
-          )) : (
+          {currentInvoices.length > 0 ? (
+            currentInvoices.map((invoice) => (
+              <tr key={invoice.id}>
+                <td>{invoice.invoice_number}</td>
+                <td>{invoice.customer_name}</td>
+                <td>{invoice.email}</td>
+                <td>
+                  {parseInt(invoice.deposit_amount).toLocaleString()}{" "}
+                  {invoice.deposit_currency}
+                </td>
+                <td>{invoice.description}</td>
+                <td>{invoice.created_at}</td>
+                <td>{invoice.deposit_purpose}</td>
+                <td>
+                  {invoice.make && invoice.model
+                    ? `${invoice.make} ${invoice.model}`
+                    : "not specified"}
+                </td>
+                <td>{invoice.mileage || "not specified"}</td>
+                <td>{invoice.chasis_number || "not specified"}</td>
+                <td>{invoice.engine_capacity || "not specified"}</td>
+                <td>
+                  <button
+                    style={{ backgroundColor: "var(--accent-color)", color: "#fff" }}
+                    onClick={() => handleRegenerate(invoice)}
+                  >
+                    Regenerate Invoice
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
             <tr className="border p-2">
-              <td colSpan="12" className="text-center p-4">No records found.</td>
+              <td colSpan="12" className="text-center p-4">
+                No records found.
+              </td>
             </tr>
           )}
         </tbody>

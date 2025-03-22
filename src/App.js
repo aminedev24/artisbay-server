@@ -89,9 +89,9 @@ function App() {
         <Route path="/profile/:section?" element={<ProfilePage />} />
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/invoice-generator' element={<ProformaInvoiceForm />} />
-        <Route path='/local-services/namibia' element={<NamibiaAgent />} />
-        <Route path='/local-services/congo' element={<CongoAgent />} />
-        <Route path='/local-services/tanzania' element={<TanzainaAgent />} />
+        <Route path='/local-services/Namibia/Walvisbay' element={<NamibiaAgent />} />
+        <Route path='/local-services/DR-Congo/Matadi' element={<CongoAgent />} />
+        <Route path='/local-services/Tanzania/Dar-Essalam' element={<TanzainaAgent />} />
         <Route path='/car-cost-calculator' element={<CarCostCalculator />} />
         <Route path='/japan-exports' element={<PdfContent />} />
         <Route path='/send-email-verification' element={<SendEmailVerification />} />

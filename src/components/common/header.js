@@ -151,9 +151,9 @@ const Header = () => {
               >
                 
                 {/*<Link to='local-services/namibiaAgent'>Namibia</Link>*/}
-                <a href="/local-services/namibia">Namibia</a>
-                <a href="/local-services/congo">DR-Congo</a>
-                <a href="/local-services/tanzania">Tanzania</a>
+                <a href="/local-services/Namibia/Walvisbay">Namibia</a>
+                <a href="/local-services/Dr-Congo/Matadi">DR-Congo</a>
+                <a href="/local-services/tanzania/Dar-Essalam">Tanzania</a>
               </div>
             </div>
             <div
