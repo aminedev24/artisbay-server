@@ -29,7 +29,7 @@ const calculateExpiryDate = (invoiceDate) => {
 };
 
 // Modal Component
-const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, regenerateParam }) => {
+const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, regenerateParam , resetInvoiceState}) => {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false); // Loading state
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -154,12 +154,8 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
       const data = await response.json();
       showAlert("Invoice sent successfully!");
         // Update the URL query to set regenerate=false
-      const searchParams = new URLSearchParams(location.search);
-      searchParams.set('regenerate', 'false');
- 
-      // Navigate with the updated query parameters without adding to history
-      navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-      window.history.replaceState({}, document.title, window.location.hash);
+      // Update the URL query to set regenerate=false
+      resetInvoiceState();
 
       
       // Reload the page after 3 seconds (3000 milliseconds)

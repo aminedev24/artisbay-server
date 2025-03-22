@@ -961,7 +961,7 @@ console.log(invoiceData)
           invoiceData={submittedInvoiceData}
           onEdit={handleEditInvoice} // Pass the onEdit callback
           regenerateParam={regenerateParam}
-          setInvoiceState={setInvoiceState}
+          resetInvoiceState={resetInvoiceState}
         />
       )}
     </div>
