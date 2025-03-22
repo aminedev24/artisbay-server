@@ -174,7 +174,7 @@ const CarDismantling = () => {
         </div>
 
         <div className="order-call-to-action">
-          <p>Get an instant cost estimate for your custom dismantling needs! Use our<Link className="cta-link" target="_blank" to ='/car-cost-calculator'>calculator</Link>now and plan your shipment with confidence.</p>
+          <p>Get an instant cost estimate for your custom dismantling needs! Use our<Link className="cta-link" target="_blank" to ='/car-dismantilng-cost-calculator'>calculator</Link>now and plan your shipment with confidence.</p>
         </div>
 
         
