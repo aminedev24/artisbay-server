@@ -198,12 +198,12 @@ const Settings = ({ user, setUser }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="view-mode">
+                  <div style={{gap: '10px'}} className="view-mode">
                     {detail.value}
                     {detail.key === 'email' && (
                       <>
                         {detail.verified ? (
-                          <span className="verified-status"></span>
+                          <><span className="verified-status"></span><span style={{fontWeight: 'bold'}}>Verified</span></>
                         ) : (
                           <button
                             className="btn btn-verify"

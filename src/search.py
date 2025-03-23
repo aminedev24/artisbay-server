@@ -38,7 +38,7 @@ print("Current Directory:", current_dir)
 directory_to_search = os.path.join(current_dir, 'components')
 
 # Search terms to look for (case insensitive)
-search_terms = ['useHistory', '#/', 'hash', 'car-cost-calculator', 'artisbay-server']
+search_terms = ['vehicleInquiry']
 
 # Perform the search and replace
 search_and_replace_in_files(directory_to_search, search_terms, replace_term='artisbay-backup')

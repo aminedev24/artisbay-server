@@ -43,24 +43,39 @@ function App() {
   useEffect(() => {
     const pathname = location.pathname;
   
-    // If the path is '/' (homepage), set the default title
-    if (pathname === '/') {
-      document.title = "Artisbay Inc. | Used cars and used tires for sale";
+    // List of paths to exclude because they use React Helmet
+    const excludedPaths = [
+      '/',
+      '/contact',
+      '/help/artisbayInc/Company-Profile',
+      '/shipping',
+      '/invoice-generator',
+      '/used-tires',
+      '/local-services/Namibia/Walvisbay',
+      '/local-services/Dr-Congo/Matadi',
+      '/local-services/tanzania/Dar-Essalam',
+      '/car-dismantilng-cost-calculator'
+    ];
+  
+    // If the current path is excluded, do nothing
+    if (excludedPaths.includes(pathname)) {
+      console.log('Path is excluded from dynamic title update:', pathname);
       return;
     }
   
     // Otherwise, extract and format the path
     const pathSegments = pathname
-      .replace(/^\/|\/$/g, "") // Remove leading/trailing slashes
-      .split("/") // Split into segments
-      .map(segment => segment.replace(/-/g, " ")) // Replace dashes with spaces
+      .replace(/^\/|\/$/g, '') // Remove leading/trailing slashes
+      .split('/')
+      .map(segment => segment.replace(/-/g, ' ')) // Replace dashes with spaces
       .map(segment => segment.charAt(0).toUpperCase() + segment.slice(1)); // Capitalize first letter
   
-    const formattedTitle = `Artisbay Inc. | ${pathSegments.join(" ")}`;
-    console.log("Updated Path:", formattedTitle); // Debugging
+    const formattedTitle = `Artisbay Inc. | ${pathSegments.join(' ')}`;
+    console.log('Updated Path:', formattedTitle);
   
     document.title = formattedTitle;
   }, [location.pathname]); // Runs every time the path changes
+  
   
   const [cars, setCars] = useState([]);
   
@@ -81,7 +96,7 @@ function App() {
         <Route path="/used-tires" element={<UsedTires />} />
         {/*<Route path="/help" element={<HelpPage />} />*/}
         <Route path="/help/artisbayInc/:topic" element={<HelpPage />} />
-        <Route path="/vehicleInquiry" element={<InquiryForm />} />
+        <Route path="/vehicle-inquiry" element={<InquiryForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

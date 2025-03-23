@@ -88,7 +88,7 @@ const HowToBuy = () => {
           ))}
         </div>
         <div className="cta-container"> 
-          <button className="cta-button"><Link to='/vehicleInquiry'>Order Now</Link></button> 
+          <button className="cta-button"><Link to='/vehicle-inquiry'>Order Now</Link></button> 
         </div>
       </div>
     

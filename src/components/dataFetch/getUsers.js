@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useUser } from '../user/userContext'; // adjust the path as needed
+import AdminAddUser from '../forms/addUser';
 
 const AdminUserList = () => {
   const { setUser } = useUser();
@@ -8,6 +9,7 @@ const AdminUserList = () => {
   const [searchName, setSearchName] = useState('');
   const [searchDate, setSearchDate] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // API URL configuration
   const apiUrl =
@@ -15,7 +17,8 @@ const AdminUserList = () => {
       ? 'http://localhost/artisbay-backup/server'
       : '/server';
 
-  useEffect(() => {
+  const fetchUsers = () => {
+    setLoading(true);
     fetch(`${apiUrl}/getUsers.php`)
       .then((res) => res.json())
       .then((data) => {
@@ -30,6 +33,10 @@ const AdminUserList = () => {
         console.error('Error fetching users:', error);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchUsers();
   }, [apiUrl]);
 
   // Function to impersonate a user
@@ -45,19 +52,20 @@ const AdminUserList = () => {
       });
       const data = await response.json();
       if (response.ok && data.status === 'success') {
-        // Update the user context with the impersonated user's details
         setUser(data.user);
-        //console.log(data)
         window.location.href = '/profile/settings';
-
-        // Optionally, redirect or update UI accordingly
-        //window.location.href = '/'; // or simply let your UI re-render based on context
       } else {
         alert(data.error || data.message);
       }
     } catch (error) {
       console.error('Error during impersonation:', error);
     }
+  };
+
+  // Callback after a user is added successfully
+  const handleUserAdded = () => {
+    fetchUsers();
+    //setIsModalOpen(false);
   };
 
   const filteredUsers = users.filter((user) => {
@@ -74,6 +82,7 @@ const AdminUserList = () => {
     <div style={{ padding: '2rem' }}>
       <h1>Customers</h1>
 
+      {/* Filter Inputs */}
       <div 
         className='filter-container' 
         style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}
@@ -109,6 +118,24 @@ const AdminUserList = () => {
         </div>
       </div>
 
+      {/* Add User Button */}
+      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: 'var(--primary-color)',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Add User
+        </button>
+      </div>
+
+      {/* Users Table */}
       {loading ? (
         <p style={{ textAlign: 'center' }}>Loading users...</p>
       ) : (
@@ -123,7 +150,7 @@ const AdminUserList = () => {
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Country</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Address</th>
                 <th style={{ padding: '10px', border: '1px solid #ddd' }}>Date of Registration</th>
-                {<th style={{ padding: '10px', border: '1px solid #ddd' }}>Action</th>}
+                <th style={{ padding: '10px', border: '1px solid #ddd' }}>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -139,7 +166,6 @@ const AdminUserList = () => {
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                       {user.joined_date ? user.joined_date.substring(0, 10) : ''}
                     </td>
-                    {
                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
                       <button
                         onClick={() => handleImpersonate(user.id)}
@@ -155,7 +181,6 @@ const AdminUserList = () => {
                         Login as user
                       </button>
                     </td>
-                  }
                   </tr>
                 ))
               ) : (
@@ -169,8 +194,51 @@ const AdminUserList = () => {
           </table>
         </div>
       )}
+
+      {/* Modal for Adding a User */}
+      {isModalOpen && (
+        <div className='alert-modal-overlay'>
+          <div style={{position: 'relative'}}  className='alert-modal-content'>
+            <button style={modalStyles.closeButton} onClick={() => setIsModalOpen(false)}>
+              X
+            </button>
+            <AdminAddUser onUserAdded={handleUserAdded} />
+          </div>
+        </div>
+      )}
     </div>
   );
+};
+
+const modalStyles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modal: {
+    backgroundColor: '#fff',
+    padding: '20px',
+    borderRadius: '4px',
+    position: 'relative',
+    minWidth: '300px'
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    border: 'none',
+    background: 'var(--primary-color)',
+    fontSize: '16px',
+    cursor: 'pointer',
+    zIndex: 5
+  }
 };
 
 export default AdminUserList;

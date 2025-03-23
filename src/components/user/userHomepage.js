@@ -124,7 +124,6 @@ const UserHomepage = () => {
             <ul className="list-disc pl-5">
               <li>2024/11/15 Artisbay Inc was born</li>
               <li>2024/12/02 Artisbay Inc website published</li>
-              <li>2025/01/03 Artisbay Inc. is a company registered under the Yokohama Legal Affairs Bureau</li>
             </ul>
           </div>
           <div className="important-notice">

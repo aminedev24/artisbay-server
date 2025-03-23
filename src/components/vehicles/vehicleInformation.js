@@ -34,8 +34,10 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   if (loading) return <p>Loading...</p>;
   if (!car) return <p>No car data available.</p>;
 
-  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id, color, year, size, dimension} = selectedCar;
+  const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id,
+     color, year, size, dimension, consignee, address, phone} = selectedCar;
 
+  console.log(selectedCar)
   const vehicleInfo = [
     { title: "Ref No.", value: stock_id },
     { title: "Make", value: make },
@@ -75,6 +77,13 @@ const VehicleInfo = ({onClose, selectedCar}) => {
     { title: "Arrival Port", value: "" },
     { title: "N/A", value: "", hidden: true } // Hidden title
   ];
+
+  const consigneeInfoLeft = [
+    { title: "Consignee", value: consignee },
+    { title: "Adress", value: address }, // Hidden title
+    { title: "Telephone", value: phone },
+  ];
+
 
   const InfoColumn = ({ data }) => (
     <div className="info-column">
@@ -148,6 +157,13 @@ const VehicleInfo = ({onClose, selectedCar}) => {
           <div className='info-container'>
             <InfoColumn data={shipInfoLeft} />
             <InfoColumn data={shipInfoRight} />
+          </div>
+         </div>
+
+         <div className='vehicle-information-container'>
+          <h3>consignee Information</h3>
+          <div className='info-container'>
+            <InfoColumn data={consigneeInfoLeft} />
           </div>
          </div>
         </div>
