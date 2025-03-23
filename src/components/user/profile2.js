@@ -117,7 +117,7 @@ const ProfilePage = () => {
   // If not all agreements are accepted, force navigation to an agreement route.
   useEffect(() => {
     const allowedRoutes = ['terms', 'privacy', 'anti-social-policy'];
-    if (!allAgreed && !allowedRoutes.includes(activeContent)) {
+    if (!user?.isImpersonating && !allAgreed && !allowedRoutes.includes(activeContent)) {
       navigate(`/profile/anti-social-policy`, { replace: true });
       setActiveContent('anti-social-policy');
     }
@@ -191,7 +191,7 @@ const ProfilePage = () => {
 
   const handleMenuClick = (item) => {
     // If not all agreements are accepted and the clicked menu is not allowed…
-    if (!allAgreed && !allowedKeys.includes(item.key)) {
+    if (!user?.isImpersonating && !allAgreed && !allowedKeys.includes(item.key)) {
       showAlert('Please accept all required agreements first.');
       
       // Set suppression for all agreement-related items with false status.
