@@ -428,7 +428,7 @@ return (
       />
     )}
     <div className="calculator-container">
-      <h2>Cutting & Dismantling Cost Calculator</h2>
+      <h2 className='header'>Cutting & Dismantling Cost Calculator</h2>
 
       <div className="cutting-loading-fees">
         <table>

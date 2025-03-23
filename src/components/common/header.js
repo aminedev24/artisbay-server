@@ -58,7 +58,7 @@ const Header = () => {
   return (
     <div className="header-container">
       <TopBar />
-      <header className="main-header">
+      <header className="main-header header">
         <div className="header-top">
           <Link className="logo" to="/">
             <img src={`${process.env.PUBLIC_URL}/images/logo3.png`} alt="Logo" />

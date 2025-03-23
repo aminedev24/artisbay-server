@@ -580,7 +580,7 @@ console.log(invoiceData)
             className="logo-form"
           />
 
-          <h2>Proforma Invoice Generation</h2>
+          <h2 className='header'>Proforma Invoice Generation</h2>
 
           {/* Compatibility Message 
             <p className="compatibility-message">

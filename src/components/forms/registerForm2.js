@@ -1,6 +1,7 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
 import CountryList from "../utilities/countryList";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useUser } from '../user/userContext';
 
 const SignupForm = ({ setIsModalOpen, setModalType }) => {
   // Steps: 1 = initial form (name & email), 2 = email verification, 3 = full signup form
@@ -19,6 +20,8 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
   const [phoneCode, setPhoneCode] = useState("");
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [address, setAddress] = useState("");
+  const { user, loading, login } = useUser();
+  const location = useLocation();
 
   // General messages
   const [message, setMessage] = useState("");
@@ -184,6 +187,21 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
     }
   };
 
+       // Redirect if the user is already logged in when the component mounts
+       useEffect(() => {
+        if (!loading && user) {
+    
+          // Redirect to the previous location or homepage after 2 seconds
+          const from = location.state?.from || '/'; // Use the previous location or fallback to homepage
+          console.log('User already logged in, redirecting to:', from);
+          navigate(from);
+
+        
+        }
+      }, [loading, user, navigate, location.state]);
+ 
+  
+
   return (
     <div className="signup-container">
       <div className="signup-form">
@@ -211,6 +229,9 @@ const SignupForm = ({ setIsModalOpen, setModalType }) => {
                 required
                 onChange={(e) => handleInputChange(setEmail, e)}
               />
+               <label>
+                Email <span className="required">*</span>
+              </label>
             </div>
             <button type="submit">Submit</button>
           </form>

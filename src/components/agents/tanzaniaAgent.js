@@ -93,7 +93,7 @@ const TanzainaAgent = () => {
             alt="Header image with containers and trucks"
           />
       </div>
-      <h1 className="main-title">
+      <h1 className="main-title header">
         Streamlined Logistics, Trusted Expertise
       </h1>
       <section className="intro-container">

@@ -92,7 +92,7 @@ const UsedTires = () => {
         </header>
         <div className="usedTires-wrapper">
           <div className="reasons-wrapper">
-            <h1>Why Choose Artisbay Inc. for Your Used Tires</h1>
+            <h1 className="header">Why Choose Artisbay Inc. for Your Used Tires</h1>
             <section class="reasons">
               <div class="reason">
                 <h2>Premium Selection</h2>
