@@ -1,9 +1,10 @@
 ﻿import React, { useState , useEffect } from "react";
 import "../../css/vehicle/cuttingCost.css";
-import Tooltip from "./toolTip";
+import Tooltip from "../utilities/toolTip";
 import SavedCarsPanel from "../misc/savedCarsPanel";
 import Modal from "../common/alertModal";
 import { popularMakes, bodyTypeOptions, transmissionOptions, fetchMakes, fetchModelsForMake } from "../vehicles/vehicleData";
+import { Helmet } from 'react-helmet-async';
 
 
 const CarCostCalculator = () => {
@@ -406,6 +407,10 @@ const resetInputs = () => {
 //console.log(savedCarsTotalCost)
 return (
     <div className="calculator-wrapper">
+       <Helmet>
+        <title>Artisbay Inc. | Cutting Cost Calculator</title>
+        <meta name="description" content="Use our cutting cost calculator to estimate expenses for your car and tire purchases at Artisbay Inc." />
+      </Helmet>
 
       {underConstuction && 
         <>

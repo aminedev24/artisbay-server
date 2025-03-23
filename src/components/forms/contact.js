@@ -3,6 +3,7 @@ import '../../css/forms/contact.css';
 import CountryList from '../utilities/countryList';
 import useCheckScreenSize from '../utilities/screenSize';
 import { useLocation } from 'react-router-dom';
+import {Helmet} from 'react-helmet-async';
 
 const Contact = ({ sell, japanExports }) => {
   const [formData, setFormData] = useState({
@@ -174,7 +175,12 @@ const Contact = ({ sell, japanExports }) => {
   
 
   return (
-    <div className='form-wrapper contact-wrapper'>
+  <div className='form-wrapper contact-wrapper'>
+      <Helmet>
+        <title>Artisbay Inc. | Contact Us</title>
+        <meta name="description" content="Get in touch with Artisbay Inc. for inquiries about used cars, tires, shipping, and more." />
+      </Helmet>
+
   <div className="signup-container contact-container">
     <form className="signup-form contact-form" onSubmit={handleSubmit}>
       {!sell &&

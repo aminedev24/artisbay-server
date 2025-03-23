@@ -5,6 +5,7 @@ import useCheckScreenSize from '../utilities/screenSize';
 import AfricaShippingTable from "./africaContainer";
 import AfricaRoroShippingTable from "./africaRoroContainer";
 import EuropeRoroShippingTable from "./europeRoro";
+import {Helmet} from 'react-helmet-async';
 
 const Shipping = () => {
   const location = useLocation();
@@ -58,6 +59,10 @@ const Shipping = () => {
     <div 
       className="shipping-container"
     >
+       <Helmet>
+        <title>Artisbay Inc. | Shipping Schedule</title>
+        <meta name="description" content="Explore our shipping options and schedule for used cars and tires with Artisbay Inc." />
+      </Helmet>
       <div className="header">
         <img
           alt="Company Logo"

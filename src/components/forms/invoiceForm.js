@@ -7,6 +7,7 @@ import { useUser } from "../user/userContext";
 import Tooltip from "../utilities/toolTip"; // Import the Tooltip component
 import CreatableSelect from 'react-select/creatable';
 import Modal from "../common/alertModal";
+import {Helmet} from 'react-helmet-async';
 
 import {
   popularMakes,
@@ -560,6 +561,10 @@ console.log(invoiceData)
 
   return (
     <div className="enquiry-wrapper invoice-wrapper">
+      <Helmet>
+        <title>Artisbay Inc. | Invoice Generator</title>
+        <meta name="description" content="Easily generate invoices for your car and tire purchases with Artisbay Inc." />
+      </Helmet>
       {showModal && (
       <Modal
         message={modalMessage}

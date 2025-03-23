@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import "../../css/agents/namibiaAgent.css"; // Import the CSS file
 import ImageWithLoader from "../misc/imageWithLoader";
+import { Helmet } from 'react-helmet-async';
+
 const TanzainaAgent = () => {
 
 
@@ -80,6 +82,10 @@ const TanzainaAgent = () => {
 
   return (
     <div className="namibia-agent-container">
+        <Helmet>
+          <title>Tanzania Agent | Artisbay Inc.</title>
+          <meta name="description" content="Get in touch with our Tanzania agent for all your used car and tire needs." />
+      </Helmet>
       <div className="banner">
         <ImageWithLoader
             src={`${process.env.PUBLIC_URL}/images/localServices/tanzaniabanner.png`} 

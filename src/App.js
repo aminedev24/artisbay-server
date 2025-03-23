@@ -28,7 +28,7 @@ import ProformaInvoiceForm from './components/forms/invoiceForm';
 import NamibiaAgent from './components/agents/namibiaAgent';
 import CongoAgent from './components/agents/congoAgent';
 import TanzainaAgent from './components/agents/tanzaniaAgent';
-import CarCostCalculator from './components/utilities/cuttingCalculator';
+import CarCostCalculator from './components/forms/cuttingCalculator';
 import PdfContent from './components/help/japanDealers';
 import SendEmailVerification from './components/misc/SendEmailVerification';
 import VerifyEmail from './components/user/verifyEmail';

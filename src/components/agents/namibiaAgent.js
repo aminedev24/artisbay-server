@@ -1,6 +1,8 @@
 import React , {useState} from "react";
 import "../../css/agents/tanzaniaAgent.css"; // Import the CSS file
 import ImageWithLoader from "../misc/imageWithLoader";
+import { Helmet } from 'react-helmet-async';
+
 const NamibiaAgent = () => {
 
   const faqs = [

@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import "../../css/agents/congoAgent.css"; // Import the CSS file
 import ImageWithLoader from "../misc/imageWithLoader";
+import {Helmet} from 'react-helmet-async';
+
 const CongoAgent = () => {
 
 
@@ -63,7 +65,10 @@ const faqs = [
 
   return (
     <div className="congo-agent-container">
-      
+       <Helmet>
+        <title>Artisbay Inc. | Dr-Congo Agent</title>
+        <meta name="description" content="Connect with our agent in dr-Congo for inquiries about used cars and tires." />
+      </Helmet>
       {/* Banner Section */}
       <div className="banner">
       <ImageWithLoader

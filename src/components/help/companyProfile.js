@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../css/help/companyProfile.css';
+import { Helmet } from 'react-helmet-async';
 
 const CompanyProfile = (selectedTopic) => {
   const companyDetails = {
@@ -15,6 +16,7 @@ const CompanyProfile = (selectedTopic) => {
 
   return (
     <div className="company-profile-wrapper">
+        
       {/*<img src={`${process.env.PUBLIC_URL}/images/companyProfile.jpg`} alt={'company-profile'} className="topic-image" />*/}
 
       <div className="terms-container">

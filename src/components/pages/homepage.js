@@ -11,6 +11,7 @@ import { FaHandPointer } from "react-icons/fa";
 import useCheckScreenSize from "../utilities/screenSize";
 import { useLocation } from "react-router-dom";
 import ImageWithLoader from "../misc/imageWithLoader"; // import your new component
+import {Helmet} from 'react-helmet-async';
 
 // A simple spinner component (you can also extract this to its own file)
 const LoadingSpinner = () => (
@@ -103,6 +104,12 @@ const links2 = [
 
   return (
     <div className="layout">
+      <Helmet>
+        <title>Artisbay Inc. | Used Cars and Tires for Sale</title>
+        <meta name="description" content="Artisbay Inc. is an online-based platform for the sale and export of used vehicles and auto parts." />
+        <meta name="keywords" content="japanese used cars,used cars, used tires, car sales, affordable cars, car dealership,
+        japan used cars,japanese used car exporter,japanese used cars,japan used car for sale,buy japanese used cars,vehicle,toyota,Nissan,Honda,used tires,Artisbay Inc." />
+      </Helmet>
       <div className="container">
         <div className="main-content">
           <div className="homepage">

@@ -4,6 +4,8 @@ import LeftSidebar from "../common/sidebar";
 import OrderForm from "../forms/usedTiresForm";
 import { useLocation } from "react-router-dom";
 import ImageWithLoader from "../misc/imageWithLoader";
+import {Helmet} from 'react-helmet-async';
+
 const UsedTires = () => {
   const ratings = [
     {
@@ -72,6 +74,10 @@ const UsedTires = () => {
 
   return (
     <div>
+       <Helmet>
+        <title>Artisbay Inc. | Used Tires for Sale</title>
+        <meta name="description" content="Find quality used tires at affordable prices at Artisbay Inc." />
+      </Helmet>
       <div className="used-tires-page">
         <header class="hero-section">
           <div class="hero-content">
