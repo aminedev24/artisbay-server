@@ -124,6 +124,7 @@ const UserHomepage = () => {
             <ul className="list-disc pl-5">
               <li>2024/11/15 Artisbay Inc was born</li>
               <li>2024/12/02 Artisbay Inc website published</li>
+              <li>25/03/01 Artisbay Inc. moved to Yokohama</li>
             </ul>
           </div>
           <div className="important-notice">

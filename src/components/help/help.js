@@ -32,8 +32,8 @@ import useCheckScreenSize from '../utilities/screenSize';
 const topics = {
   help: [
     { name: "help", content: <h1 className='help-header'>All you need to know about us</h1>, image: `${process.env.PUBLIC_URL}/images/helpheader.png` },
-    { name: "Overview", component: <ArtisbayOverview />, image: `${process.env.PUBLIC_URL}/images/companyoverview.png` },
-    { name: "Company Profile", component: <CompanyProfile />, image: `${process.env.PUBLIC_URL}/images/companyprofile.png` },
+   // { name: "Overview", component: <ArtisbayOverview />, image: `${process.env.PUBLIC_URL}/images/companyoverview.png` },
+    { name: "About Us", component: <CompanyProfile />, image: `${process.env.PUBLIC_URL}/images/companyprofile.png` },
     { name: "Bank Information", content: <BankInformation />, image: `${process.env.PUBLIC_URL}/images/bankinfo.png` },
     { name: "Frequently Asked Questions", content: <FAQComponent />, image: `${process.env.PUBLIC_URL}/images/FAQ.png` },
     { name: "Automated Invoice", content: <AutomatedInvoice />, image: `${process.env.PUBLIC_URL}/images/invoicegenerator.png` },

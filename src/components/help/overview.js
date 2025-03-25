@@ -8,7 +8,7 @@ const ArtisbayOverview = () => {
         <title>About Artisbay Inc. | Overview</title>
         <meta name="description" content="Learn more about Artisbay Inc., our mission, values, and commitment to quality service in the used car and tire industry." />
       </Helmet>
-      <h2 className='header'>Artisbay Inc.</h2>
+      {<h2 className='header'>Overview</h2>}
       {/*<img src={`${process.env.PUBLIC_URL}/images/companyProfile2.jpg`} alt={'company-profile'} className="topic-image" />*/}
 
       <p>

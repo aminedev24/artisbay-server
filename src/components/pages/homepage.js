@@ -81,8 +81,7 @@ function HomePage() {
   ];
 
   const links1 = [
-    { text: "OVERVIEW", path: "/help/artisbayInc/Overview" },
-    { text: "COMPANY PROFILE", path: "/help/artisbayInc/Company-Profile" },
+    { text: "ABOUT US", path: "/help/artisbayInc/About-Us" },
     { text: "BANK INFORMATION", path: "/help/artisbayInc/Bank-Information" },
     { text: "WHY ARTISBAY INC", path: "/help/artisbayInc/Why-Artisbay-Inc" },
     { text: "TERMS AND CONDITIONS", path: "/help/artisbayInc/Terms-and-Conditions" },
@@ -297,6 +296,7 @@ const links2 = [
             <div className="news-items">
             <p className="news-item">2024/11/15 Artisbay Inc was born</p>
             <p className="news-item">2024/12/02 Artisbay Inc website published</p>
+            <p className="news-item">25/03/01 Artisbay Inc. moved to Yokohama</p>
 
             </div>
             <ImageWithLoader

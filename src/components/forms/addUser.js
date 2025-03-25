@@ -59,12 +59,12 @@ const AdminAddUser = ({ onUserAdded }) => {
   };
 
   return (
-    <div className={styles.adminAddUserContainer}>
-    <h2 className={styles.adminAddUserTitle}>Add New User</h2>
+    <div className={'signup-form'}>
+    <h2 className={styles.adminAddUserTitle}>Customer Registration</h2>
     {message && <p className={`${styles.adminAddUserMessage} ${messageType}`}>{message}</p>}
     <form className={styles.adminAddUserForm} onSubmit={handleSubmit}>
       {Object.entries(formData).map(([key, value]) => (
-        <div className={styles.adminAddUserInputGroup} key={key}>
+        <div className={`input-group `} key={key}>
           <label className={styles.adminAddUserLabel}>{key.replace('_', ' ').toUpperCase()}:</label>
           <input
             className={styles.adminAddUserInput}

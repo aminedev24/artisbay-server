@@ -35,9 +35,9 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   if (!car) return <p>No car data available.</p>;
 
   const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id,
-     color, year, size, dimension, consignee, address, phone} = selectedCar;
+     color, year, size, dimension, consignee, address, phone, company} = selectedCar;
 
-  console.log(selectedCar)
+  //console.log(selectedCar)
   const vehicleInfo = [
     { title: "Ref No.", value: stock_id },
     { title: "Make", value: make },
@@ -79,7 +79,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   ];
 
   const consigneeInfoLeft = [
-    { title: "Consignee", value: consignee },
+    { title: "Consignee", value: company },
     { title: "Adress", value: address }, // Hidden title
     { title: "Telephone", value: phone },
   ];

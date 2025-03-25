@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useUser } from '../user/userContext'; // adjust the path as needed
 import AdminAddUser from '../forms/addUser';
+import CustomerRegistrationForm from '../forms/addCustomer';
 
 const AdminUserList = () => {
   const { setUser } = useUser();
@@ -198,11 +199,11 @@ const AdminUserList = () => {
       {/* Modal for Adding a User */}
       {isModalOpen && (
         <div className='alert-modal-overlay'>
-          <div style={{position: 'relative'}}  className='alert-modal-content'>
+          <div style={{position: 'relative'}}  className='alert-modal-content add-customer'>
             <button style={modalStyles.closeButton} onClick={() => setIsModalOpen(false)}>
               X
             </button>
-            <AdminAddUser onUserAdded={handleUserAdded} />
+            <CustomerRegistrationForm onUserAdded={handleUserAdded} />
           </div>
         </div>
       )}

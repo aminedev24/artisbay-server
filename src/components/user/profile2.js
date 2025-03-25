@@ -9,7 +9,7 @@ import '../../css/user/profilePage.css';
 import BankInformation from '../help/bankInfo';
 import SalesAgreement from '../sales/salesAgreement';
 import InquiryList from '../dataFetch/fetchIquiries';
-import TireOrderList from '../sales/submittedTireOrders';
+import TireOrderList from '../dataFetch/submittedTireOrders';
 import InvoiceList from '../dataFetch/fetchInvoices';
 import FetchSavedCars from '../dataFetch/fetchSavedCars';
 import DepositsTable from '../dataFetch/fetchDeposits';

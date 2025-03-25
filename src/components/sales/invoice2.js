@@ -1,14 +1,12 @@
 ﻿import React, { useState, useEffect } from "react";
 import { FaEnvelope, FaGlobe } from "react-icons/fa";
 import "../../css/components/invoice.css";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import { PDFDocument } from "pdf-lib";
 import { useUser } from "../user/userContext"; // Importing the useUser hook to access user data
 import Modal from "../common/alertModal";
 import GeneratePdfButton from "./invoicePdf";
 import MyPdfDocument from "./invoicePdf"; // Ensure the correct path to your component
 import { pdf } from "@react-pdf/renderer";
+import { invoiceHeaders } from "./invoicePdf";
 
 import { generatePdfBlob } from "./invoicePdf"; // Import the generatePdfBlob function
 
@@ -35,6 +33,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState(""); // Could be 'alert', 'confirmation', or 'clear_all'
   const { user } = useUser(); // Accessing user data from the context
+  
 
   if (!isOpen) return null;
 
@@ -543,6 +542,7 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
               <GeneratePdfButton invoiceData={invoiceData} />
             */}
             {user && user.role == "admin" && (
+
               <GeneratePdfButton invoiceData={invoiceData} />
             )}
             <button
