@@ -122,8 +122,9 @@
     max-width: unset;
     background-color: #f3f3f3;
   }
-  
-  @media  (min-width: 900px){
+
+
+  @media screen and  (min-width: 900px){
     .alert-modal-content.add-customer {
         height: 100vh;
     }

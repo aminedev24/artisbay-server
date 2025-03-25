@@ -366,9 +366,10 @@ const CustomerRegistrationForm = () => {
       <div className="buttonContainer">
         <button type="submit" className="button">Update</button>
         <button type="button" className="cancelButton" onClick={handleCancel}>Cancel</button>
-        {user && user?.role == 'admin' && (user?.name == 'jacob' || 'abdennour') &&
+        
+        {/*{user && user?.role == 'admin' && (user?.name == 'jacob' || 'abdennour') &&
          <button type="button" onClick={populateDummyData}>Fill with Dummy Data</button>
-         }
+         }*/}
         
       </div>
     </form>

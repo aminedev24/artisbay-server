@@ -10,12 +10,12 @@ const CompanyProfile = (selectedTopic) => {
     founded: "November 2024",
     address: "Cross Gate, 7th Floor, 1-101-1 Sakuragicho, Naka-ku, Yokohama, Kanagawa, Japan",
     mainBusiness: "An online-based platform for the sale and export of used vehicles and auto parts.",
-    annualSales: "3,720,706 JPY",
+    annualSales: "3,720,706 JPY As of March 2025",
     url: "https://artisbay.com",
     registeredinJapan: "Under the Yokohama Legal Affairs Bureau",
     email: 'contact@artisbay.com',
     business: 'Consulting in the export of used cars, automobile spare parts, agricultural equipment, etc.',
-    secondHandDelear: 'From Kanagawa Prefectural Public Safety Commission Exporting area:  Africa, Asia, Europe, Oceania',
+    secondHandDelear: 'From Kanagawa Prefectural Public Safety Commission ',
     exportingArea: 'Africa, Asia, Europe, Oceania',
     bankInformation: 'SUMISHIN SBI NET BANK'
   };
@@ -50,11 +50,7 @@ const CompanyProfile = (selectedTopic) => {
                 <td>{companyDetails.business}</td>
             </tr>
             <tr>
-                <th>Main Business Activity</th>
-                <td>{companyDetails.mainBusiness}</td>
-            </tr>
-            <tr>
-                <th>annual Sales</th>
+                <th>Annual Sales</th>
                 <td>{companyDetails.annualSales}</td>
             </tr>
             <tr>
@@ -70,6 +66,10 @@ const CompanyProfile = (selectedTopic) => {
                 <td>{companyDetails.secondHandDelear}</td>
             </tr>
             <tr>
+                <th>Exporting Area</th>
+                <td>{companyDetails.exportingArea}</td>
+            </tr>
+            <tr>
                 <th>Email</th>
                 <td>{companyDetails.email}</td>
             </tr>
@@ -79,7 +79,7 @@ const CompanyProfile = (selectedTopic) => {
       <h2>Location</h2>
       <iframe
         allowFullScreen=""
-        className="w-full h-96"
+        className="w-full map"
         loading="lazy"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.997013509073!2d139.631673!3d35.451537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c18c56d842b%3A0x38c3b299d8b3c18f!2sCross%20Gate%2C%207th%20Floor%2C%201-101-1%20Sakuragicho%2C%20Naka-ku%2C%20Yokohama%2C%20Kanagawa%2C%20Japan!5e0!3m2!1sen!2sjp!4v1633072800000!5m2!1sen!2sjp"
       >

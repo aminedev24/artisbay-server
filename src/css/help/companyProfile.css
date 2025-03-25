@@ -49,5 +49,9 @@
   .location-container {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    height: 50vh;
+   
+  }
+
+  .map {
+    max-height: 50vh;
   }
