@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import '../../css/forms/addCustomer.css';
 import Modal from '../common/alertModal';
+import { useUser } from "../user/userContext";
 
 const CustomerRegistrationForm = () => {
+  const { user } = useUser();
   const [formData, setFormData] = useState({
     customerId: '',
     registrationDate: '',
@@ -122,8 +124,8 @@ const CustomerRegistrationForm = () => {
     { label: "Other", name: "other", type: "text" }
   ];
 
-console.log(rightFields.length);
-console.log(leftFields.length);  
+//console.log(rightFields.length);
+//console.log(leftFields.length);  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -364,7 +366,10 @@ console.log(leftFields.length);
       <div className="buttonContainer">
         <button type="submit" className="button">Update</button>
         <button type="button" className="cancelButton" onClick={handleCancel}>Cancel</button>
-        <button type="button" onClick={populateDummyData}>Fill with Dummy Data</button>
+        {user && user?.role == 'admin' && (user?.name == 'jacob' || 'abdennour') &&
+         <button type="button" onClick={populateDummyData}>Fill with Dummy Data</button>
+         }
+        
       </div>
     </form>
   );
