@@ -103,7 +103,7 @@ const InvoiceList = () => {
     "Customer Name",
     "Email",
     "Payment Amount",
-    "Description",
+   // "Description",
     "Date",
     "Payment Purpose",
     "Vehicle Description",
@@ -200,7 +200,7 @@ const InvoiceList = () => {
                   {parseInt(invoice.deposit_amount).toLocaleString()}{" "}
                   {invoice.deposit_currency}
                 </td>
-                <td>{invoice.description}</td>
+                {/*<td>{invoice.description}</td>*/}
                 <td>{invoice.created_at}</td>
                 <td>{invoice.deposit_purpose}</td>
                 <td>

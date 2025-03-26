@@ -247,7 +247,6 @@ const ProfilePage = () => {
   const style = {
     height: isSpecialContent ? '70vh' : '118vh',
     padding: isSpecialContent2 && activeContent !== 'my-account' ? '0' : '',
-    height: isSpecialContent2 ? '185vh' : ''
   };
 
   // Render the component.

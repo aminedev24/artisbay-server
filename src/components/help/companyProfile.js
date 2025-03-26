@@ -75,6 +75,26 @@ const CompanyProfile = (selectedTopic) => {
             </tr>
         </tbody>
     </table>
+
+    <div id='whyChooseArtisbay' className="why-choose-container">
+      <h2 className="content-title">Why Choose Artisbay Inc.?</h2>
+      <p className="text-content">
+        Artisbay Inc. combines over <strong>40 years</strong> of customer
+        service expertise with a passion for the automotive industry and modern
+        technology.
+      </p>
+      <p className="text-content">
+        We also provide business consulting services related to import/export
+        operations, logistics, and industry-specific strategies—empowering our
+        clients to make informed decisions and grow with confidence.
+      </p>
+      <p className="text-content">
+        With Artisbay Inc., you receive reliable, professional service built on
+        trust, integrity, and attention to detail.
+      </p>
+    </div>
+
+
     <div className="location-container w-full">
       <h2>Location</h2>
       <iframe

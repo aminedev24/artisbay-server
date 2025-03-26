@@ -7,7 +7,7 @@ import GeneratePdfButton from "./invoicePdf";
 import MyPdfDocument from "./invoicePdf"; // Ensure the correct path to your component
 import { pdf } from "@react-pdf/renderer";
 import { invoiceHeaders } from "./invoicePdf";
-
+import AdminInvoicePdf from "./invoicePdf"; // Ensure the correct path to your component
 import { generatePdfBlob } from "./invoicePdf"; // Import the generatePdfBlob function
 
 // Function to calculate expiry date (5 business days later)

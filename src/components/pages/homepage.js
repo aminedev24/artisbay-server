@@ -83,11 +83,12 @@ function HomePage() {
   const links1 = [
     { text: "ABOUT US", path: "/help/artisbayInc/About-Us" },
     { text: "BANK INFORMATION", path: "/help/artisbayInc/Bank-Information" },
-    { text: "WHY ARTISBAY INC", path: "/help/artisbayInc/Why-Artisbay-Inc" },
+    { text: "WHY ARTISBAY INC", path: "/help/artisbayInc/About-Us/#whyChooseArtisbay"},
     { text: "TERMS AND CONDITIONS", path: "/help/artisbayInc/Terms-and-Conditions" },
     { text: "ANTI SOCIAL FORCES POLICY", path: "/help/artisbayInc/Anti-Social-Force-Policy" },
     { text: "HOW TO BUY CARS ON ARTISBAY INC", path: "/help/artisbayInc/How-to-Buy-used-cars" },
-   
+    { text: "ARTISBAY CONSULTING", path: "/help/artisbayInc/Artisbay-Consulting" }
+
     
 ];
 
@@ -98,7 +99,6 @@ const links2 = [
     { text: "SECURITY", path: "/help/artisbayInc/security" },
     { text: "PRIVACY", path: "/help/artisbayInc/privacy-policy" },
     { text: "TELEGRAPHIC TRANSFER", path: "/help/artisbayInc/telegraphic-transfer" },
-    { text: "ARTISBAY CONSULTING", path: "/help/artisbayInc/Artisbay-Consulting" }
 ];
 
   return (
@@ -167,7 +167,10 @@ const links2 = [
             <ul>
                 {links1.map((link, index) => (
                     <li key={index}>
-                        <Link to={link.path}>{link.text}</Link>
+                        {/*<Link to={link.path}>{link.text}</Link>*/}
+                        <a href={link.path}>{link.text}</a>
+
+
                     </li>
                 ))}
             </ul>
@@ -346,12 +349,12 @@ const links2 = [
             deliver high-standard used vehicles, tires, and parts tailored to
             your needs. Our transparent processes and detailed documentation
             ensure confidence and trust in every transaction.{" "}
-            <Link
-              className="cta-link"
-              to="/help/artisbayInc/Why-Artisbay-Inc."
-            >
+           
+            <a className="cta-link" href="/help/artisbayInc/About-US/#whyChooseArtisbay">
               Read more
-            </Link>
+            </a>
+            
+            
           </p>
         </section>
 
