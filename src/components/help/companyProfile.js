@@ -3,8 +3,12 @@ import '../../css/help/companyProfile.css';
 import { Helmet } from 'react-helmet-async';
 import ArtisbayOverview from './overview';
 import { Link } from 'react-router-dom';
+import useCheckScreenSize from '../utilities/screenSize';
+import ImageWithLoader from '../misc/imageWithLoader';
 
 const CompanyProfile = (selectedTopic) => {
+  const { isSmallScreen } = useCheckScreenSize();
+  
   const companyDetails = {
     name: "Artisbay Inc.",
     founded: "November 2024",
@@ -73,8 +77,14 @@ const CompanyProfile = (selectedTopic) => {
                 <th>Email</th>
                 <td>{companyDetails.email}</td>
             </tr>
+      
         </tbody>
     </table>
+
+    {/* Banner Section */}
+    <div className='location-banner'>
+      
+    </div>
 
     <div id='whyChooseArtisbay' className="why-choose-container">
       <h2 className="content-title">Why Choose Artisbay Inc.?</h2>
@@ -99,12 +109,16 @@ const CompanyProfile = (selectedTopic) => {
       <h2>Location</h2>
       <iframe
         allowFullScreen=""
-        className="w-full map"
+        width="100%"
+        height="450"
         loading="lazy"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.997013509073!2d139.631673!3d35.451537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c18c56d842b%3A0x38c3b299d8b3c18f!2sCross%20Gate%2C%207th%20Floor%2C%201-101-1%20Sakuragicho%2C%20Naka-ku%2C%20Yokohama%2C%20Kanagawa%2C%20Japan!5e0!3m2!1sen!2sjp!4v1633072800000!5m2!1sen!2sjp"
+        referrerpolicy="no-referrer-when-downgrade"
+        className="w-full map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.9924179146467!2d139.63034839999998!3d35.450845099999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c5f01732dd3%3A0xaf83a870969f2375!2z5riL6LC35biC44OH44O844Or!5e0!3m2!1sen!2sjp!4v1616149200000!5m2!1sen!2sjp"
       >
       </iframe>
-    </div>
+    </div>      
+        
 
 
       </div>

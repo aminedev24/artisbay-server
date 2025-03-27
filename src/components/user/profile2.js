@@ -245,7 +245,7 @@ const ProfilePage = () => {
   );
 
   const style = {
-    height: isSpecialContent ? '70vh' : '118vh',
+    height: isSpecialContent ? '70vh' : '',
     padding: isSpecialContent2 && activeContent !== 'my-account' ? '0' : '',
   };
 

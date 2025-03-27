@@ -441,7 +441,7 @@ console.log(invoiceData)
       ];
 
       const isFormValid = requiredFields.every((field) => formData[field]);
-      console.log(formData);
+      //console.log(formData);
       if (isFormValid) {
         // Combine the phone code and phone number
         const fullPhoneNumber = phoneCode + formData.phone;

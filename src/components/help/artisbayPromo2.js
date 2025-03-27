@@ -372,8 +372,8 @@ const ArtisbayPromo = () => {
         <div className="section-image">
           <img
             alt={t.sectionImageAlt}
-            src="/artisbay-backup/images/consulting/handshake.png"
-            width="300"
+            src={`${process.env.PUBLIC_URL}/images/consulting/handshake.png`}
+            width="350"
             height="200"
           />
         </div>

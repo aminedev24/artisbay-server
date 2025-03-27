@@ -76,13 +76,6 @@ const faqs = [
           className="banner-image"
           alt="Congo Agent Banner"
         />
-        {/*
-        <img
-          src={`${process.env.PUBLIC_URL}/images/localServices/congoBanner.png`}
-          alt="Congo Agent Banner"
-          className="banner-image"
-        />
-        */}
       </div>
 
       <h1 class="main-title">

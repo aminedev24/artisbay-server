@@ -191,7 +191,8 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
   // Replace all repeated words separated by hyphens globally
   const formattedInvoiceNumber = invoiceNumber.replace(/(\b\w+\b)(-\1)+/, "$1");
   console.log(formattedInvoiceNumber); // Output: RE-AB-1002
-
+  window.scrollTo(1,0);
+  console.log(user?.role == "admin" || process.env.NODE_ENV === "development" && 'show pdf button')
 
   return (
     <div className="invoice-modal-overlay">
@@ -541,10 +542,10 @@ const InvoiceModal = ({ isOpen, onClose, invoiceData, onEdit, setInvoiceState, r
               <button className='no-print' onClick={handleSaveAsPDF}>Save as PDF</button>
               <GeneratePdfButton invoiceData={invoiceData} />
             */}
-            {user && user.role == "admin" && (
+          
+          
 
-              <GeneratePdfButton invoiceData={invoiceData} />
-            )}
+            {user?.role == 'admin' || process.env.NODE_ENV === "development"  ? <GeneratePdfButton invoiceData={invoiceData} /> :'' }
             <button
               className="no-print"
               onClick={handleSendEmail}

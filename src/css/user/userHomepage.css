@@ -125,8 +125,12 @@
 }
 
 .price-info p {
-  font-size: inherit;
+  font-size: 14px;
   margin-bottom: 0;
+  border-bottom: 1px solid;
+  padding-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
 }
   
 .sidebar .amount {
@@ -174,10 +178,12 @@
   cursor: pointer;
   text-decoration: underline;
   margin-top: 5px;
+  font-weight: bold;
 }
 
 .important-notice p, .news-updates li {
   font-size: inherit;
+  line-height: 1.6;
 }
 
 .purchased-car-search  label {

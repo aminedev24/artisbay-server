@@ -22,6 +22,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
         if (data && data.length > 0) {
           setCar(data[0]); // display the first car from the results
           setMainImage(`${imageSrc}${data[0].image_urls[0]}`);
+          
         }
         setLoading(false);
       })
@@ -29,13 +30,15 @@ const VehicleInfo = ({onClose, selectedCar}) => {
         console.error("Error fetching car data:", error);
         setLoading(false);
       });
+      window.scrollTo(1,0);
   }, [apiUrl, imageSrc]);
 
   if (loading) return <p>Loading...</p>;
   if (!car) return <p>No car data available.</p>;
 
   const { chassis_number, make, car_model, engine_capacity, mileage, price, currency, image_urls , stock_id,
-     color, year, size, dimension, consignee, address, phone, company} = selectedCar;
+     color, year, size, dimension, consignee, address, phone, company, engine_type, fuel,doors,destination,seats,port,
+    departure_port, amount} = selectedCar;
 
   //console.log(selectedCar)
   const vehicleInfo = [
@@ -43,6 +46,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
     { title: "Make", value: make },
     { title: "Model", value: car_model },
     { title: "Price", value: `FOB ${price.toLocaleString()}${currency}` },
+
     { title: "Category", value: "" },
     { title: "Color", value: color },
     { title: "Year", value: year },
@@ -55,9 +59,9 @@ const VehicleInfo = ({onClose, selectedCar}) => {
     { title: "Engine Capacity", value: `${engine_capacity.toLocaleString()}cc` },
     { title: "Mileage", value: `odo ${mileage.toLocaleString()}km` },
     { title: "Chassis No.", value: chassis_number },
-    { title: "Fuel", value: "" },
-    { title: "Door", value: "" },
-    { title: "Seat", value: "" },
+    { title: "Fuel", value: fuel },
+    { title: "Door", value: doors },
+    { title: "Seat", value: seats },
     { title: "Transmission", value: "" },
     { title: "Drive", value: "" },
     { title: "Stereo", value: "" }
@@ -67,7 +71,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
   const shipInfoLeft = [
     { title: "Ship Name", value: "" },
     { title: "Ship Date", value: "" },
-    { title: "Departure Port", value: "" },
+    { title: "Departure Port", value: departure_port },
     { title: "Tracking URL", value: "" }
   ];
   
@@ -132,7 +136,9 @@ const VehicleInfo = ({onClose, selectedCar}) => {
         </div>
         <div className="right-panel">
           <h2>Ref Number #{stock_id}</h2>
-          <p className="price">FOB {currency}{price.toLocaleString()}</p>
+          <p style={{fontWeight: 'bold'}}>Price</p>
+          <p className="price"><span style={{ minWidth: '120px', display: 'inline-block' }}>FOB</span>{currency}{price.toLocaleString()}</p>
+          <p className="price"><span style={{minWidth: '120px',  display: 'inline-block'} }>Payment</span> {currency}{amount.toLocaleString()}</p>
           <h3>Vehicle Information</h3>
 
       

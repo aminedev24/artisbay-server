@@ -296,7 +296,7 @@ const UserHomepage = () => {
                 />
                 <div className="details">
                   <div className="info">
-                    <p className="subtitle">{index + 1}.{car.stock_id}</p>
+                    <p className="title">{index + 1}.{car.stock_id}</p>
                     <p className="title">{car.make}</p>
                     <p className="subtitle">{car.car_model}</p>
                     <p className="subtitle">
@@ -310,9 +310,6 @@ const UserHomepage = () => {
                   </p>
                   <p className="price">
                     Mileage: <span>odo {car.mileage.toLocaleString()}km</span>
-                  </p>
-                  <p className="price">
-                    Chassis No: <span>{car.chassis_number}</span>
                   </p>
                   <p className="price">
                     Year: <span>{car.year}</span>

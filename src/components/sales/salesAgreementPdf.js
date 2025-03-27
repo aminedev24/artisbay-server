@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 5, // Minimal spacing
-    marginTop: 5,
+    marginBottom: 2, // Minimal spacing
+    marginTop: 2,
     alignSelf: 'center',
   },
   sectionHeader: {
     fontSize: 10,
     fontWeight: 'bold',
-    marginBottom: 2,
+    marginBottom: 0,
     borderBottom: '1 solid #000',
     textAlign: 'left',
   },
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     textAlign: 'left',
-    marginBottom: 1, // Minimal spacing after title
+    marginBottom: 0, // Minimal spacing after title
   },
   paragraphContainer: {
     width: '100%',
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     margin: 0,      // Remove any default margin
     padding: 0,     // Remove any default padding
     marginLeft: 10,
-    marginBottom: 1 // Adjust to reduce vertical gap between paragraphs; set to 0 if needed
+    marginBottom: 0 // Adjust to reduce vertical gap between paragraphs; set to 0 if needed
   },
   listItemText: {
     fontSize: 10, // Adjusted font size for list item text
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     marginLeft: 10,
-    marginBottom: 1,
   },
   
   invoiceHeader : {
@@ -76,10 +75,11 @@ const SalesAgreementPDF = ({invoiceData}) => {
   const formattedInvoiceNumber = invoiceNumber.replace(/(\b\w+\b)-\1-/, "$1-");
 return(
   <View style={styles.container}>
+    {/*
      <InvoiceHeaders 
       invoiceData={invoiceData} 
       formattedInvoiceNumber={formattedInvoiceNumber} 
-    />
+    />*/}
             
     <Text style={styles.title}>Purchase Agreement</Text>
     <Text style={styles.sectionHeader}>Terms and Conditions</Text>
