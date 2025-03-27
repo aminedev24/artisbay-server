@@ -35,10 +35,10 @@ current_dir = os.getcwd()
 print("Current Directory:", current_dir)
 
 # Specify the exact directory to search
-directory_to_search = os.path.join(current_dir, 'components')
+directory_to_search = os.path.join(current_dir, 'src/components')
 
 # Search terms to look for (case insensitive)
-search_terms = ['vehicleInquiry']
+search_terms = ['vehicleInquiry', 'header']
 
 # Perform the search and replace
 search_and_replace_in_files(directory_to_search, search_terms, replace_term='artisbay-backup')

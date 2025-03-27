@@ -306,7 +306,7 @@ const UserHomepage = () => {
                 </div>
                 <div className="price-info">
                   <p className="price">
-                    Engine Capacity: <span>{car.engine_capacity.toLocaleString()}cc</span>
+                    Engine Capacity: <span> {car.engine_capacity.toLocaleString()}cc</span>
                   </p>
                   <p className="price">
                     Mileage: <span>odo {car.mileage.toLocaleString()}km</span>

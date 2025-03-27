@@ -131,7 +131,7 @@ const HelpPage = () => {
       ? ''
       : isSmallScreen && !isSpecialContent2 ?
       '60vh': 
-      !isSmallScreen && !isSidebarOpen ? '100vh':
+      !isSmallScreen && !isSidebarOpen ? '60vh':
       '' , 
   };
   
