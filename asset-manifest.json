@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/artisbay-server/static/css/main.eec5c7a5.css",
-    "main.js": "/artisbay-server/static/js/main.828d0f51.js",
+    "main.css": "/artisbay-server/static/css/main.28c607ee.css",
+    "main.js": "/artisbay-server/static/js/main.a1b04cd3.js",
     "static/js/453.aaf8b0ee.chunk.js": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js",
     "static/media/congoagentrecent.png": "/artisbay-server/static/media/congoagentrecent.6444d7ff3a8e27c1b560.png",
     "static/media/eco1copy.jpeg": "/artisbay-server/static/media/eco1copy.a9c5e6c0fdb3459632c8.jpeg",
@@ -17,6 +17,7 @@
     "static/media/logisticstransparent.png": "/artisbay-server/static/media/logisticstransparent.c71c4fab1c5cdcdf091e.png",
     "static/media/fa-brands-400.ttf": "/artisbay-server/static/media/fa-brands-400.1815e00441357e01619e.ttf",
     "static/media/fa-solid-900.woff2": "/artisbay-server/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/head-office.jpg": "/artisbay-server/static/media/head-office.c5c251d470ad7894b241.jpg",
     "static/media/underconstructionstamp.jpeg": "/artisbay-server/static/media/underconstructionstamp.6158dc6c2fc87ba523c3.jpeg",
     "static/media/fa-brands-400.woff2": "/artisbay-server/static/media/fa-brands-400.c210719e60948b211a12.woff2",
     "static/media/car-makes-icons.eot?gtc92f": "/artisbay-server/static/media/car-makes-icons.bf967c12a6e7e4d8b65b.eot",
@@ -35,12 +36,12 @@
     "static/media/slick.woff": "/artisbay-server/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/artisbay-server/index.html",
     "static/media/index.cjs": "/artisbay-server/static/media/index.f6d03137e8c9dd0de04c.cjs",
-    "main.eec5c7a5.css.map": "/artisbay-server/static/css/main.eec5c7a5.css.map",
-    "main.828d0f51.js.map": "/artisbay-server/static/js/main.828d0f51.js.map",
+    "main.28c607ee.css.map": "/artisbay-server/static/css/main.28c607ee.css.map",
+    "main.a1b04cd3.js.map": "/artisbay-server/static/js/main.a1b04cd3.js.map",
     "453.aaf8b0ee.chunk.js.map": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eec5c7a5.css",
-    "static/js/main.828d0f51.js"
+    "static/css/main.28c607ee.css",
+    "static/js/main.a1b04cd3.js"
   ]
 }
