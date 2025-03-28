@@ -122,6 +122,7 @@
 
 .arrow-icon {
   cursor: pointer;
+  align-self: flex-end;
 }
 /* Ensure the sidebar header is vertically centered when collapsed */
 .sidebar.collapsed .sidebar-header {
