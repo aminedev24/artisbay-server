@@ -98,11 +98,16 @@
   margin: -15px;
 }
 
+.sidebar-header.vertical {
+  transform: rotate(-90deg);
+}
+
 
 
 .arrow-icon-container {
   display: flex;
-  
+  align-items: center;
+  padding: 5px 10px;
 }
 
 .arrow-icon-text.vertical {

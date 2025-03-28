@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import HowToBuy from './howtobuy';
 import CompanyProfile from './companyProfile';
@@ -27,6 +27,7 @@ import PdfContent from './japanDealers';
 import ArtisbayPromo from './artisbayPromo2';
 import ImageWithLoader from '../misc/imageWithLoader';
 import useCheckScreenSize from '../utilities/screenSize';
+import { SidebarOpen } from 'lucide-react';
 
 // Define the topics
 const topics = {
@@ -74,23 +75,13 @@ const HelpPage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // Convert underscores back to spaces for matching
-    // Convert underscores back to spaces and ampersands
-    const decodedTopic = topicParam
-      .replace(/-/g, " ")
-     
-      
-    const foundTopic = 
-      topics.help.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase()) ||
+    const decodedTopic = topicParam.replace(/-/g, " ");
+    const foundTopic = topics.help.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase()) ||
       topics.buying.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase());
-        
-    if (foundTopic) {
-      setSelectedTopic(foundTopic);
-    } else {
-      setSelectedTopic(topics.help[0]);
-    }
-    setIsLoading(false);
+
+    setSelectedTopic(foundTopic || topics.help[0]);
   }, [topicParam]);
+
   
 
   const handleTopicChange = (topic) => {
@@ -98,17 +89,6 @@ const HelpPage = () => {
     const formattedName = topic.name.replace(/[\s]/g, "-"); // Replace spaces and '&' with '_'
     navigate(`/help/artisbayInc/${formattedName}`);
   };
-  
-  const isSpecialContent = isSmallScreen  && (
-    selectedTopic.name === 'Terms and conditions' ||
-    selectedTopic.name === 'privacy policy' ||
-    selectedTopic.name === 'Artisbay Consulting' ||
-    selectedTopic.name === 'Anti Social Force Policy' || 
-    selectedTopic.name === 'about used Tires' ||
-    selectedTopic.name === 'F&Q' || 
-    selectedTopic.name === 'About payement'
-   
-  );
 
   const isSpecialContent2 =  (
     selectedTopic.name === 'Terms and conditions' ||
@@ -125,15 +105,10 @@ const HelpPage = () => {
   //console.log('isSpecialContent', isSpecialContent)
 
   const style = {
-    height: isSpecialContent2 && isSmallScreen
-      ? '100vh'
-      : isSpecialContent2 && !isSmallScreen 
-      ? ''
-      : isSmallScreen && !isSpecialContent2 ?
-      '60vh': 
-      !isSmallScreen && !isSidebarOpen ? '60vh':
-      '' , 
-  };
+    height: !isSidebarOpen && isSmallScreen && selectedTopic.name == 'help' ? '60vh' :
+    !isSidebarOpen && !isSmallScreen && selectedTopic.name == 'help' ? '80vh' : 
+    isSmallScreen && SidebarOpen && selectedTopic.name != 'help' ? '60vh' : ''
+  }
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -155,32 +130,38 @@ const HelpPage = () => {
             selectedTopic.name === 'Sustainability' ? 'commitment-topic-lp' : ''
         }`}>
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
-          <div className="sidebar-header">
-            <h1 
-              onClick={() => 
-                !isSidebarOpen ? setSidebarOpen(!isSidebarOpen) : handleTopicChange(topics.help[0])
-              } 
-              className={`help-header ${!isSidebarOpen ? 'vertical' : ''}`}
-            >
-              HELP
-            </h1>
+          <div className={`sidebar-header  ${!isSidebarOpen ? 'vertical' : ''}`}>
+            
+           
             <div 
               style={{
-                width: isSidebarOpen ? '30%' : '',
+                width: isSidebarOpen ? '70%' : '',
                 alignItems: isSidebarOpen ? 'center' : '',
-                flexDirection: isSidebarOpen ? 'column': ''
+                flexDirection: isSidebarOpen ? 'column': '',
+                backgroundColor: !isSidebarOpen ? 'var(--primary-color)' : ''
               }} 
               onClick={() => setSidebarOpen(!isSidebarOpen)}
               className='arrow-icon-container'
             >
+               <h1 
+              onClick={() => 
+                !isSidebarOpen ? setSidebarOpen(!isSidebarOpen) : handleTopicChange(topics.help[0])
+              } 
+              className={`help-header`}
+              style={{color: !isSidebarOpen ? '#fff': '#1da1f2'}}
+            >
+              HELP
+            </h1>
+              {/*
               <span className={`arrow-icon-text ${!isSidebarOpen ? "vertical" : ''}`}>
                 {isSidebarOpen ? "Hide" : 'Show'}
-              </span>
+              </span>*/}
               <img 
-                className={`arrow-icon ${!isSidebarOpen ? 'vertical' : ''}`}
+                className={`arrow-icon`}
                 width={'50px'} 
                 src={`${process.env.PUBLIC_URL}/images/arrows.png`} 
                 alt="arrow" 
+                style={{alignSelf: isSidebarOpen ? 'flex-start' : ''}}
               />
             </div>
           </div>

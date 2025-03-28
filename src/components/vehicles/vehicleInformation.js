@@ -138,7 +138,7 @@ const VehicleInfo = ({onClose, selectedCar}) => {
           <h2>Ref Number #{stock_id}</h2>
           <p style={{fontWeight: 'bold'}}>Price</p>
           <p className="price"><span style={{ minWidth: '120px', display: 'inline-block' }}>FOB</span>{currency}{price.toLocaleString()}</p>
-          <p className="price"><span style={{minWidth: '120px',  display: 'inline-block'} }>Payment</span> {currency}{amount.toLocaleString()}</p>
+          <p className="price"><span style={{minWidth: '120px',  display: 'inline-block'} }>Payment</span> {currency}{amount?.toLocaleString()}</p>
           <h3>Vehicle Information</h3>
 
       
