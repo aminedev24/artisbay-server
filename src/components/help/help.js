@@ -72,12 +72,13 @@ const HelpPage = () => {
     
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     const decodedTopic = topicParam.replace(/-/g, " ");
     const foundTopic = topics.help.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase()) ||
       topics.buying.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase());
+      setSidebarOpen(!isSidebarOpen)
 
     setSelectedTopic(foundTopic || topics.help[0]);
   }, [topicParam]);
@@ -106,16 +107,31 @@ const HelpPage = () => {
 
   const [styles, setStyles] = useState({});
 
-  useEffect(() => {
+  
+useEffect(() => {
+  if (isSidebarOpen) {
+    const timer = setTimeout(() => {
+      setSidebarOpen(false);
+    }, 9000);
+
+    return () => clearTimeout(timer); // Cleanup timer if sidebar closes earlier
+  }
+}, [isSidebarOpen]); // Runs when sidebar state changes
+
+useEffect(() => {
+  setTimeout(() => {
     setStyles({
       width: isSidebarOpen ? "70%" : "auto",
       alignItems: isSidebarOpen ? "center" : "stretch",
-      flexDirection: isSidebarOpen ? "column" : "row",
+      flexDirection: isSidebarOpen ? "column" : "column",
       backgroundColor: !isSidebarOpen ? "var(--primary-color)" : "transparent",
       padding: !isSidebarOpen ? "10px" : "0px",
       display: "flex",
+      transformOrigin: "left center",
     });
-  }, [isSidebarOpen]);
+  }, 10); // Small delay to ensure styles are applied properly
+}, [isSidebarOpen]);
+
 
 
   const style = {
@@ -128,7 +144,8 @@ const HelpPage = () => {
     window.scrollTo(0, 0);
   }, [topicParam]);
 
-  console.log("Selected topic:", selectedTopic.name);
+//  console.log("Selected topic:", selectedTopic.name);
+
 
   return (
     <div className="help-page">
