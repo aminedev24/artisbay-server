@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/artisbay-server/static/css/main.aede3fa9.css",
-    "main.js": "/artisbay-server/static/js/main.c9f4cd1d.js",
+    "main.css": "/artisbay-server/static/css/main.9fb898b7.css",
+    "main.js": "/artisbay-server/static/js/main.1a7dc130.js",
     "static/js/453.aaf8b0ee.chunk.js": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js",
     "static/media/congoagentrecent.png": "/artisbay-server/static/media/congoagentrecent.6444d7ff3a8e27c1b560.png",
     "static/media/eco1copy.jpeg": "/artisbay-server/static/media/eco1copy.a9c5e6c0fdb3459632c8.jpeg",
@@ -36,12 +36,12 @@
     "static/media/slick.woff": "/artisbay-server/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/artisbay-server/index.html",
     "static/media/index.cjs": "/artisbay-server/static/media/index.f6d03137e8c9dd0de04c.cjs",
-    "main.aede3fa9.css.map": "/artisbay-server/static/css/main.aede3fa9.css.map",
-    "main.c9f4cd1d.js.map": "/artisbay-server/static/js/main.c9f4cd1d.js.map",
+    "main.9fb898b7.css.map": "/artisbay-server/static/css/main.9fb898b7.css.map",
+    "main.1a7dc130.js.map": "/artisbay-server/static/js/main.1a7dc130.js.map",
     "453.aaf8b0ee.chunk.js.map": "/artisbay-server/static/js/453.aaf8b0ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.aede3fa9.css",
-    "static/js/main.c9f4cd1d.js"
+    "static/css/main.9fb898b7.css",
+    "static/js/main.1a7dc130.js"
   ]
 }
