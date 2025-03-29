@@ -78,7 +78,7 @@ const HelpPage = () => {
     const decodedTopic = topicParam.replace(/-/g, " ");
     const foundTopic = topics.help.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase()) ||
       topics.buying.find(topic => topic.name.toLowerCase() === decodedTopic?.toLowerCase());
-      setSidebarOpen(!isSidebarOpen)
+      //setSidebarOpen(!isSidebarOpen)
 
     setSelectedTopic(foundTopic || topics.help[0]);
   }, [topicParam]);
