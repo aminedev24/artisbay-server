@@ -28,7 +28,7 @@ import ArtisbayPromo from './artisbayPromo2';
 import ImageWithLoader from '../misc/imageWithLoader';
 import useCheckScreenSize from '../utilities/screenSize';
 import { SidebarOpen } from 'lucide-react';
-
+import { ChevronsDownIcon } from 'lucide-react';
 // Define the topics
 const topics = {
   help: [
@@ -101,8 +101,22 @@ const HelpPage = () => {
     
   );
 
-  console.log('isSpecialContent2', isSpecialContent2)
+  //console.log('isSpecialContent2', isSpecialContent2)
   //console.log('isSpecialContent', isSpecialContent)
+
+  const [styles, setStyles] = useState({});
+
+  useEffect(() => {
+    setStyles({
+      width: isSidebarOpen ? "70%" : "auto",
+      alignItems: isSidebarOpen ? "center" : "stretch",
+      flexDirection: isSidebarOpen ? "column" : "row",
+      backgroundColor: !isSidebarOpen ? "var(--primary-color)" : "transparent",
+      padding: !isSidebarOpen ? "10px" : "0px",
+      display: "flex",
+    });
+  }, [isSidebarOpen]);
+
 
   const style = {
     height: !isSidebarOpen && isSmallScreen && selectedTopic.name == 'help' ? '60vh' :
@@ -130,43 +144,47 @@ const HelpPage = () => {
             selectedTopic.name === 'Sustainability' ? 'commitment-topic-lp' : ''
         }`}>
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
-          <div className={`sidebar-header  ${!isSidebarOpen ? 'vertical' : ''}`}>
+          <div className={`sidebar-header  ${!isSidebarOpen ? '' : ''}`}>
             
            
             <div 
-              style={{
-                width: isSidebarOpen ? '70%' : '',
-                alignItems: isSidebarOpen ? 'center' : '',
-                flexDirection: isSidebarOpen ? 'column': '',
-                backgroundColor: !isSidebarOpen ? 'var(--primary-color)' : ''
-              }} 
+              style={styles} 
               onClick={() => setSidebarOpen(!isSidebarOpen)}
               className='arrow-icon-container'
+              
             >
                <h1 
               onClick={() => 
                 !isSidebarOpen ? setSidebarOpen(!isSidebarOpen) : handleTopicChange(topics.help[0])
+                
               } 
-              className={`help-header`}
-              style={{color: !isSidebarOpen ? '#fff': '#1da1f2'}}
+              className={`help-header ${!isSidebarOpen ? 'oriented': ''}`}
+              style={{color: !isSidebarOpen ? '#fff': '#1da1f2',
+                writingMode: !isSidebarOpen ? 'tb-rl' : '',
+                letterSpacing: !isSidebarOpen ? '10px': ''
+              
+              }}
+              
             >
               HELP
+              {!isSidebarOpen ? <ChevronsDownIcon style={{rotate: '', color: 'var(--accent-color)'}} /> : ''}
             </h1>
               {/*
               <span className={`arrow-icon-text ${!isSidebarOpen ? "vertical" : ''}`}>
                 {isSidebarOpen ? "Hide" : 'Show'}
               </span>*/}
+           
+            </div>
+          </div>
+          {isSidebarOpen && (
+            <div className="sidebar-menu">
               <img 
                 className={`arrow-icon`}
                 width={'50px'} 
                 src={`${process.env.PUBLIC_URL}/images/arrows.png`} 
                 alt="arrow" 
-                style={{alignSelf: isSidebarOpen ? 'flex-start' : ''}}
+                onClick={()=>{setSidebarOpen(!SidebarOpen)}}
               />
-            </div>
-          </div>
-          {isSidebarOpen && (
-            <div className="sidebar-menu">
               {topics.help.map((topic, index) => (
                 topic.name !== 'help' && (
                   <button

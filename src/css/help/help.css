@@ -54,6 +54,12 @@
   text-shadow: 1px 1px 1px #333; /* Added text shadow */
   text-transform: capitalize;
   cursor: pointer;
+  margin: 0;
+}
+
+.help-header.oriented {
+  text-orientation: upright;
+  writing-mode: vertical-rl;
 }
 
 .help-main-content {
@@ -134,7 +140,6 @@
 }
 
 .sidebar h1 {
-  margin-bottom: 10px; /* Original margin */
   text-align: center; /* Center the header */
   text-shadow: 1px 1px 5px #ddd; /* Original text shadow */
 }

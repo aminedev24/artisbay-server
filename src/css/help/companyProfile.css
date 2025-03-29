@@ -83,4 +83,5 @@
     background-repeat: no-repeat; /* Prevents repeating of the image */
     width: 100%; /* Full width */
     height: 400px; /* Controls the height */
+    margin: 10px 0;
   }

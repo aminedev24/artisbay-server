@@ -16,6 +16,12 @@
     color: #fff;
   }
 
+  @media (min-width: 1400px) {
+    .usedTiresForm-container {
+      height: 140vh;
+    }
+  }
+
   .login-prompt, .welcome-message {
     z-index: 5;
   }
