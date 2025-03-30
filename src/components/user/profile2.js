@@ -220,7 +220,7 @@ const ProfilePage = () => {
 
   if (loading) {
     return (
-      <div className="profile-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+      <div className="profile-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100dvh' }}>
         <div className="spinner-container">
           <div className="spinner"></div>
         </div>
@@ -245,7 +245,7 @@ const ProfilePage = () => {
   );
 
   const style = {
-    height: isSpecialContent ? '70vh' : '',
+    height: isSpecialContent ? '70dvh' : '',
     padding: isSpecialContent2 && activeContent !== 'my-account' ? '0' : '',
   };
 

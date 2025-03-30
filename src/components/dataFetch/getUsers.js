@@ -204,7 +204,7 @@ const AdminUserList = () => {
         <div className='alert-modal-overlay'>
           <div  style={{
             position: 'relative',
-            height: isSmallScreen ? '65vh': ''
+            height: isSmallScreen ? '65dvh': ''
           }}  className='alert-modal-content add-customer'>
             <button style={modalStyles.closeButton} onClick={() => setIsModalOpen(false)}>
               X

@@ -100,7 +100,7 @@ const Shipping = () => {
          <div className="image-container">
          <img
            style={{
-            height: isSmallScreen && isPortrait ? '60vh' : '',
+            height: isSmallScreen && isPortrait ? '60dvh' : '',
            }} 
            alt="freighter sailing"
            src={`${process.env.PUBLIC_URL}/images/freightersailing.jpeg`} 

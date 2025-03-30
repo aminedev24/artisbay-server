@@ -170,7 +170,7 @@ const Header = () => {
                 <Link to={'/help/artisbayInc/help'}>Help</Link>
                 <Link to={'/help/artisbayInc/About-Us'}>About Us</Link>
                 <Link to={'/help/artisbayInc/Bank-information'}>Bank Information</Link>
-                <Link to={'/help/artisbayInc/Why-Artisbay-Inc.'}>
+                <Link to={'/help/artisbayInc/About-Us#whyChooseArtisbay'}>
                   Why Artisbay Inc.
                 </Link>
                 <Link to={'/help/artisbayInc/Terms-and-Conditions'}>

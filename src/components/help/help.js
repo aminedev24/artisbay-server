@@ -73,6 +73,7 @@ const HelpPage = () => {
   const [selectedTopic, setSelectedTopic] = useState(initialTopic);
   const [isLoading, setIsLoading] = useState(true);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const decodedTopic = topicParam.replace(/-/g, " ");
@@ -108,15 +109,16 @@ const HelpPage = () => {
   const [styles, setStyles] = useState({});
 
   
-useEffect(() => {
-  if (isSidebarOpen) {
-    const timer = setTimeout(() => {
-      setSidebarOpen(false);
-    }, 9000);
 
-    return () => clearTimeout(timer); // Cleanup timer if sidebar closes earlier
-  }
-}, [isSidebarOpen]); // Runs when sidebar state changes
+  useEffect(() => {
+    if (isSidebarOpen && !isHovered) {
+      const timer = setTimeout(() => {
+        setSidebarOpen(false); // Ensure it closes properly
+      }, 7000);
+
+      return () => clearTimeout(timer); // Cleanup timer if sidebar closes earlier
+    }
+  }, [isSidebarOpen, isHovered]); // Watch both dependencies
 
 useEffect(() => {
   setTimeout(() => {
@@ -128,6 +130,7 @@ useEffect(() => {
       padding: !isSidebarOpen ? "10px" : "0px",
       display: "flex",
       transformOrigin: "left center",
+      flex: isSidebarOpen ? '1' : ''
     });
   }, 10); // Small delay to ensure styles are applied properly
 }, [isSidebarOpen]);
@@ -135,9 +138,9 @@ useEffect(() => {
 
 
   const style = {
-    height: !isSidebarOpen && isSmallScreen && selectedTopic.name == 'help' ? '60vh' :
-    !isSidebarOpen && !isSmallScreen && selectedTopic.name == 'help' ? '80vh' : 
-    isSmallScreen && SidebarOpen && selectedTopic.name != 'help' ? '60vh' : ''
+    height: !isSidebarOpen && isSmallScreen && selectedTopic.name == 'help' ? '60dvh' :
+    !isSidebarOpen && !isSmallScreen && selectedTopic.name == 'help' ? '80dvh' : 
+    isSmallScreen && SidebarOpen && selectedTopic.name != 'help' ? '60dvh' : ''
   }
   
   useEffect(() => {
@@ -145,7 +148,7 @@ useEffect(() => {
   }, [topicParam]);
 
 //  console.log("Selected topic:", selectedTopic.name);
-
+//console.log(isHovered)
 
   return (
     <div className="help-page">
@@ -160,7 +163,9 @@ useEffect(() => {
             selectedTopic.name === 'help' ? 'help-lp' : 
             selectedTopic.name === 'Sustainability' ? 'commitment-topic-lp' : ''
         }`}>
-        <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
+        <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}
+             onMouseEnter={() => setIsHovered(true)}
+             onMouseLeave={() => setIsHovered(false)}>
           <div className={`sidebar-header  ${!isSidebarOpen ? '' : ''}`}>
             
            
